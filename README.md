@@ -1,0 +1,2 @@
+# MediLogger
+Course project
