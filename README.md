@@ -1,2 +1,2 @@
-# MediLogger
+# SymptoLogger
 Course project
