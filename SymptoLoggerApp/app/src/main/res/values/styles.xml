@@ -1,0 +1,17 @@
+<resources>
+
+    <!-- Base application theme. -->
+
+    <!-- Base.Theme ...
+        Stackoverflow: https://stackoverflow.com/questions/44223687/render-error-in-android-studio-3-0-layout-editor#45002903
+        User: https://stackoverflow.com/users/8281081/alex-z
+        Date: 2018-09-14-->
+
+    <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+</resources>
