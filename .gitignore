@@ -9,13 +9,13 @@
 *.class
 
 # Generated files
-bin/
-gen/
-out/
+SymptoLoggerApp/bin/
+SymptoLoggerApp/gen/
+SymptoLoggerApp/out/
 
 # Gradle files
-.gradle/
-build/
+SymptoLoggerApp/.gradle/
+SymptoLoggerApp/build/
 
 # Local configuration file (sdk path, etc)
 local.properties
