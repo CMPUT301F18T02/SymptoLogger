@@ -82,4 +82,14 @@ public class ConcernTest {
 
         assertEquals(description,newDes);
     }
+
+    //To come later once Record and RecordList classes have been tested and developed.
+
+    @Test
+    public void testAddRecord(){
+    }
+
+    @Test
+    public void testRemoveRecord(){
+    }
 }
