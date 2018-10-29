@@ -117,6 +117,21 @@ public class ConcernTest {
     }
 
     @Test
+    public void testRecordCount(){
+        Concern myConcern = new Concern();
+
+        int num = 10;
+
+        for (int i=1;i<=num;i++){
+            myConcern.addRecord(new Record());
+        }
+
+        int total = myConcern.findRecordCount();
+
+        assertEquals(total,num);
+    }
+
+    @Test
     public void testAddPhoto(){
         //When photo functionality is established
     }

@@ -65,4 +65,8 @@ class Concern {
     public void removeRecord(Record record) {
         this.myRecords.deleteRecord(record);
     }
+
+    public int findRecordCount() {
+        return this.myRecords.findCount();
+    }
 }
