@@ -85,13 +85,34 @@ public class ConcernTest {
 
     //To come later once Record and RecordList classes have been tested and developed.
 
+    //Right now, just testing general record class
+
     @Test
     public void testAddRecord(){
+        Concern myConcern = new Concern();
+
+        Record record = new Record();
+
+        myConcern.addRecord(record);
+
+        assertTrue(myConcern.recordListContains(record));
 
     }
 
     @Test
     public void testRemoveRecord(){
+
+        Concern myConcern = new Concern();
+
+        Record record = new Record();
+
+        myConcern.addRecord(record);
+
+        assertTrue(myConcern.recordListContains(record));
+
+        myConcern.removeRecord(record);
+
+        assertFalse(myConcern.recordListContains(record));
 
     }
 
