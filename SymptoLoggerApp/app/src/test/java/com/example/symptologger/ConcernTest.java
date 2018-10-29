@@ -87,9 +87,21 @@ public class ConcernTest {
 
     @Test
     public void testAddRecord(){
+
     }
 
     @Test
     public void testRemoveRecord(){
+
+    }
+
+    @Test
+    public void testAddPhoto(){
+        //When photo functionality is established
+    }
+
+    @Test
+    public void testAddGeoLocation(){
+        //When location services are established
     }
 }

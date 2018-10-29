@@ -42,4 +42,13 @@ class Concern {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public void addPhoto(){
+        //When photo functionality established
+    }
+
+    public void addGeoLocation(){
+        //When location services established and enabled
+    }
+
 }
