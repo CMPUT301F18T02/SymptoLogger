@@ -83,8 +83,6 @@ public class ConcernTest {
         assertEquals(description,newDes);
     }
 
-    //To come later once Record and RecordList classes have been tested and developed.
-
     //Right now, just testing general record class
 
     @Test
