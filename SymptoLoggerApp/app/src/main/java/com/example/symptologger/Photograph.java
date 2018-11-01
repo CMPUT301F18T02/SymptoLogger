@@ -2,31 +2,26 @@ package com.example.symptologger;
 
 import android.media.Image;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Date;
 
 //https://stackoverflow.com/questions/29208007/what-is-the-data-type-for-images-in-java
 
 public class Photograph {
-    private String img;
+    private String url;
     private Date date;
 
 
     Photograph(Date date, String image){
         setDate(date);
-        setImage(image);
+        setURL(image);
     }
 
-
-
-
-    public void setImage(String image) {
-        this.img = image;
+    public void setURL(String url) {
+        this.url = url;
     }
 
-    public String getImage(){
-        return this.img;
+    public String getURL(){
+        return this.url;
     }
 
     public Date getDate() {
