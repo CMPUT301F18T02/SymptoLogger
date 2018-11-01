@@ -38,7 +38,7 @@ public class PhotographTest {
         String url = "http://example.ca";
         Photograph photo = new Photograph(null, url);
 
-        String testurl = photo.getImage();
+        String testurl = photo.getURL();
 
         assertEquals(url, testurl);
     }
@@ -49,9 +49,9 @@ public class PhotographTest {
 
         String url = "http://example.ca";
 
-        photo.setImage(url);
+        photo.setURL(url);
 
-        String testurl = photo.getImage();
+        String testurl = photo.getURL();
 
         assertEquals(url, testurl);
     }
