@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 
 public class RecordTest {
 
-    @Test
+    /*@Test
     public void testGetComment(){
         String newComment = "I am a record comment";
 
@@ -20,9 +20,9 @@ public class RecordTest {
         String test = testRecord.getComment();
 
         assertEquals(newComment,test);
-    }
+    }*/
 
-    @Test
+    /*@Test
     public void testSetComment(){
         String newComment = "Testing set comment";
 
@@ -33,7 +33,7 @@ public class RecordTest {
         record.setComment(newComment);
 
         assertEquals(newComment,record.getComment());
-    }
+    }*/
 
     @Test
     public void testGetDate(){
@@ -54,7 +54,5 @@ public class RecordTest {
 
         assertEquals(testDate,myDate);
     }
-
-
 
 }
