@@ -1,30 +1,32 @@
 package com.example.symptologger;
 
+import android.media.Image;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Date;
 
-class Photograph {
-    private URL photo;
+//https://stackoverflow.com/questions/29208007/what-is-the-data-type-for-images-in-java
+
+public class Photograph {
+    private String img;
     private Date date;
-    private String description;
 
-    Photograph(){
-        setDate(new Date());
-	setImage(new URL(""));
-	setDescription("");
+
+    Photograph(Date date, String image){
+        setDate(date);
+        setImage(image);
     }
 
-    Photograph(Date date, URL photo, String description){
-	setDate(date);
-	setImage(photo);
-	setDescription(description);        
+
+
+
+    public void setImage(String image) {
+        this.img = image;
     }
 
-    public void setImage(URL url) {
-        this.photo = url;
-    }
-
-    public URL getImage(){
-        return this.photo;
+    public String getImage(){
+        return this.img;
     }
 
     public Date getDate() {
@@ -35,12 +37,5 @@ class Photograph {
         this.date = date;
     }
 
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }
 
