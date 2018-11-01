@@ -54,5 +54,5 @@ public class RecordTest {
 
         assertEquals(testDate,myDate);
     }
-    
+
 }
