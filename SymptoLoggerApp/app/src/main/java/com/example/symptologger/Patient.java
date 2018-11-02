@@ -22,6 +22,7 @@ public class Patient extends User {
     }
 
     protected void createUserID(String userPrompt) {
+        // TODO:
         if (userPrompt.length() < 8) {
             throw new RuntimeException("User ID must be at least 8 characters.");
         }
