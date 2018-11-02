@@ -6,8 +6,8 @@ public class Patient extends User {
     private ArrayList<Concern> concerns;
     private CareProviderList careProviderList;
 
-    public Patient() {
-        super();
+    public Patient(String id, String firstName, String lastName, String email, String cell) {
+        super(id, firstName, lastName, email, cell);
     }
 
     protected void createUserID(String userPrompt) {
