@@ -22,7 +22,7 @@ public class BodyModel {
 
     }
 
-    public void setPhoto(int bodyPartId){
+    public void setPhoto(int bodyPartId, Photograph photo){
         return;
     }
 
