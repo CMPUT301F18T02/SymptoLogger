@@ -128,14 +128,4 @@ public class ConcernTest {
 
         assertEquals(total,num);
     }
-
-    @Test
-    public void testAddPhoto(){
-        //When photo functionality is established
-    }
-
-    @Test
-    public void testAddGeoLocation(){
-        //When location services are established
-    }
 }

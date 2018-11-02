@@ -47,22 +47,6 @@ class Concern {
 
     //The below may or may not be needed: have to wait to see how adding photos/geolocations will be handled.
 
-/*    public void addPhoto(){
-        //When photo functionality established
-    }
-
-    public void addGeoLocation(){
-        //When location services established and enabled
-    }
-
-    public void addCareProviderComment(){
-        //When CareProviderComment is ready
-    }
-
-    public void addPatientComment(){
-        //When patient comment is ready
-    }*/
-
     //A general "record" until we have the specifics of photo, geo-location and comments ironed out.
     public void addRecord(Record record) {
         this.myRecords.addRecord(record);

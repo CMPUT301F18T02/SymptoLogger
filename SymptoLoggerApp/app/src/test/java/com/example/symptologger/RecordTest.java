@@ -55,4 +55,14 @@ public class RecordTest {
         assertEquals(testDate,myDate);
     }
 
+    @Test
+    public void testAddPhoto(){
+        //When photo functionality is established
+    }
+
+    @Test
+    public void testAddGeoLocation(){
+        //When location services are established
+    }
+
 }
