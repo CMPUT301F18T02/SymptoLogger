@@ -14,7 +14,7 @@ public class CareProviderListTest {
         CareProviderList careProviderList = new CareProviderList();
         CareProvider cp = new CareProvider();
 
-        assertFalse(careProviderList.getCareProvider().contains(cp));
+        assertFalse(careProviderList.getCareProviders().contains(cp));
 
         careProviderList.addCareProviders(cp);
         assertTrue(careProviderList.getCareProviders().contains(cp));
@@ -29,7 +29,7 @@ public class CareProviderListTest {
         assertTrue(careProviderList.getCareProviders().contains(cp));
 
         careProviderList.removeCareProviders(cp);
-        assertFalse(careProviderList.getCareProvider().contains(cp));
+        assertFalse(careProviderList.getCareProviders().contains(cp));
     }
 
     @Test

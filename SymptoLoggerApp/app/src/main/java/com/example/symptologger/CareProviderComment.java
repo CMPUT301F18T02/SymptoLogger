@@ -28,7 +28,7 @@ public class CareProviderComment {
     }
 
     public User getUser(){
-        return this.User;
+        return this.user;
     }
 
     public void setUser(User user){

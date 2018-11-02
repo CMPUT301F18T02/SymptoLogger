@@ -5,11 +5,11 @@ import java.util.ArrayList;
 public class CareProviderList {
     private ArrayList<CareProvider> careProviders;
 
-    public void addCareProviders(Patient p) {
+    public void addCareProviders(CareProvider careProvider) {
 
     }
 
-    public void removeCareProviders(Patient p) {}
+    public void removeCareProviders(CareProvider careProvider) {}
 
     public int getCareProvidersCount() {
         return careProviders.size();

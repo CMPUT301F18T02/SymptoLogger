@@ -1,11 +1,22 @@
 package com.example.symptologger;
 
 public class User {
-    String firstName;
-    String lastName;
-    private String userID;
+    private String firstName;
+    private String lastName;
+    private String id;
+    private String email;
+    private String cell;
+
 
     public User() {}
+
+    public User(String id, String firstName, String lastName, String email, String cell) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.cell = cell;
+    }
 
     public void setFirstName(String first) {}
 
@@ -19,13 +30,27 @@ public class User {
         return lastName;
     }
 
-    protected void createUserID(String userPrompt) {}
-
-    void setUserID(String validID) {
-        userID = validID;
+    public String getId() {
+        return id;
     }
 
-    String getUserID() {
-        return userID;
+    public String getEmail() {
+        return email;
+    }
+
+    public String getCell() {
+        return cell;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setCell(String cell) {
+        this.cell = cell;
     }
 }

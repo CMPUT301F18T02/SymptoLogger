@@ -13,5 +13,7 @@ public class UserList {
         return userList;
     }
 
-    public User getUserByPos(int pos) {}
+    public User getUserByPos(int pos) {
+        return new User();
+    }
 }

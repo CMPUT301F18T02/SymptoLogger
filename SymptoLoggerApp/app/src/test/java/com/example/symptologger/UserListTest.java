@@ -47,6 +47,15 @@ public class UserListTest {
 
     @Test
     public void testGetUserByPos() {
-        // TODO
+        UserList userList = new UserList();
+        User user = new User();
+        userList.addUser(user);
+
+        int pos = 5;
+
+        User result;
+        result = userList.getUserByPos(pos);
+
+        assertEquals(user, result);
     }
 }

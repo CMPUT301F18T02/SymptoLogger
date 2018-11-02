@@ -11,7 +11,7 @@ public class UserTest {
         String expectedName = "FisrtName";
         patient.setFirstName(expectedName);
 
-        assertEquals(expectedName, patient.firstName);
+        assertEquals(expectedName, patient.getFirstName());
     }
 
     @Test
@@ -20,7 +20,7 @@ public class UserTest {
         String expectedName = "LastName";
         patient.setLastName(expectedName);
 
-        assertEquals(expectedName, patient.lastName);
+        assertEquals(expectedName, patient.getLastName());
     }
 
     @Test
@@ -44,11 +44,42 @@ public class UserTest {
     }
 
     @Test
-    public void testSetUserID() {
+    public void testSetID() {
         Patient patient = new Patient();
         String expected = "validID";
-        patient.setUserID(expected);
+        patient.setId(expected);
 
-        assertEquals(expected, patient.getUserID());
+        assertEquals(expected, patient.getId());
+    }
+
+    @Test
+    public void testGetId(){
+        User user = new User();
+
+        String id = "9999";
+        user.setId(id);
+
+        assertEquals(user.getId(), id);
+    }
+
+    @Test
+    public void testGetEmail(){
+        User user = new User();
+
+        String email = "John@ualberta.ca";
+        user.setEmail(email);
+
+        assertEquals(user.getEmail(), email);
+
+    }
+
+    @Test
+    public void testGetCell(){
+        User user = new User();
+
+        String cell = "7800000000";
+        user.setCell(cell);
+
+        assertEquals(user.getCell(), cell);
     }
 }
