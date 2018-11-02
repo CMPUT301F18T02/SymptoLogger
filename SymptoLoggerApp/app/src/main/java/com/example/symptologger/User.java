@@ -1,21 +1,25 @@
 package com.example.symptologger;
 
-public abstract class User {
+public class User {
     String firstName;
     String lastName;
     private String userID;
 
     public User() {}
 
-    public abstract void setFirstName(String first);
+    public void setFirstName(String first) {}
 
-    public abstract String getFirstName();
+    public String getFirstName() {
+        return firstName;
+    }
 
-    public abstract void setLastName(String last);
+    public void setLastName(String last) {}
 
-    public abstract String getLastName();
+    public String getLastName() {
+        return lastName;
+    }
 
-    protected abstract void createUserID(String userPrompt);
+    protected void createUserID(String userPrompt) {}
 
     void setUserID(String validID) {
         userID = validID;
@@ -24,6 +28,4 @@ public abstract class User {
     String getUserID() {
         return userID;
     }
-
-
 }

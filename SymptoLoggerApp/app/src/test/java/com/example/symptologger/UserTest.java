@@ -3,9 +3,8 @@ package com.example.symptologger;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
-public class PatientClassTest {
+public class UserTest {
     @Test
     public void testSetFirstName() {
         Patient patient = new Patient();
@@ -42,31 +41,6 @@ public class PatientClassTest {
         String result = patient.getLastName();
 
         assertEquals(expectedName, result);
-    }
-
-    @Test
-    public void testCreateValidUserID() {
-        Patient patient = new Patient();
-        String expected = "validName";
-        patient.createUserID(expected);
-
-        assertEquals(expected, patient.getUserID());
-    }
-
-    @Test
-    public void testCreateInvalidUserID() {
-        Patient patient = new Patient();
-        boolean thrown = false;
-        String expected = "short";
-
-        try {
-            patient.createUserID(expected);
-        } catch(RuntimeException e) {
-            thrown = true;
-        }
-
-        assertTrue(thrown);
-
     }
 
     @Test

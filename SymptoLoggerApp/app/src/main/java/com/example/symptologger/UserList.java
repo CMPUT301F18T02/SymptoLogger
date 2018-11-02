@@ -1,19 +1,17 @@
 package com.example.symptologger;
 
-import java.util.Collection;
+import java.util.ArrayList;
 
 public class UserList {
-    private Collection<User> userList;
+    private ArrayList<User> userList;
 
     public void addUser(User user) {}
 
     public void removeUser(User user) {}
 
-    public Collection<User> getUserlist() {
+    public ArrayList<User> getUserList() {
         return userList;
     }
 
-    public User getUserByPos(User user) {
-        return user;
-    }
+    public User getUserByPos(int pos) {}
 }
