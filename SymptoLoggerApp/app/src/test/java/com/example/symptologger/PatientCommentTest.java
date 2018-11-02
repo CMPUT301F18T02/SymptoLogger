@@ -6,14 +6,13 @@ import java.util.Date;
 
 import static org.junit.Assert.*;
 
-public class CareProviderCommentTest {
-
+public class PatientCommentTest {
 
     @Test
     public void testGetUser(){
         User user = new User();
         String problem = "Problem";
-        CareProviderComment comment = new CareProviderComment(user, problem);
+        PatientComment comment = new PatientComment(user, problem);
 
         User testuser = comment.getUser();
 
@@ -24,7 +23,7 @@ public class CareProviderCommentTest {
     public void testGetDate(){
         Date date = new Date();
         String problem = "Problem";
-        CareProviderComment comment = new CareProviderComment(null, problem,date);
+        PatientComment comment = new PatientComment(null, problem,date);
 
         Date testDate = comment.getDate();
 
@@ -33,7 +32,7 @@ public class CareProviderCommentTest {
 
     @Test
     public void testSetDate(){
-        CareProviderComment comment = new CareProviderComment(null, "Problem2");
+        PatientComment comment = new PatientComment(null, "Problem2");
 
         Date myDate = new Date();
 
@@ -48,24 +47,23 @@ public class CareProviderCommentTest {
     @Test
     public void testgetComment(){
         String comment = "Problem3";
-        CareProviderComment cpc = new CareProviderComment(null, comment);
+        PatientComment pc = new PatientComment(null, comment);
 
-        String testComment = cpc.getComment();
+        String testComment = pc.getComment();
 
         assertEquals(comment, testComment);
     }
 
     @Test
     public void testSetComment(){
-        CareProviderComment cpc = new CareProviderComment(null, "");
+        PatientComment pc = new PatientComment(null, "");
 
         String comment = "Problem4";
 
-        cpc.setComment(comment);
+        pc.setComment(comment);
 
-        String testcomment = cpc.getComment();
+        String testcomment = pc.getComment();
 
         assertEquals(comment, testcomment);
     }
-
 }
