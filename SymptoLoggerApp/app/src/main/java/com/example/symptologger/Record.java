@@ -31,4 +31,20 @@ class Record {
     public void setDate(Date date) {
         this.date = date;
     }
+
+    public void addPhoto(){
+        //When photo functionality established
+    }
+
+    public void addGeoLocation(){
+        //When location services established and enabled
+    }
+
+    public void addCareProviderComment(){
+        //When CareProviderComment is ready
+    }
+
+    public void addPatientComment(){
+        //When patient comment is ready
+    }
 }
