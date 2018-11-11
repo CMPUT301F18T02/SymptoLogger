@@ -23,6 +23,7 @@ public class ListConcernActivity extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
 
-
+        concernListView = (ListView) findViewById(R.id.listConcernsView);
+        concernListAdapter = new ArrayAdapter<Concern>(this, android.R.layout.simple_list_item_1, concernList);
     }
 }

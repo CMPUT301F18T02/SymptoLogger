@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SymptoLogger</string>
+    <string name="addNewConcernButton">Add Concern</string>
+    <string name="logOutButton">Log Out</string>
 </resources>
