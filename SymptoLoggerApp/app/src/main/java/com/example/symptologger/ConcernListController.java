@@ -18,7 +18,7 @@ public class ConcernListController {
         return getConcernList().containsConcern(concern);
     }
 
-    public void deleteCocnern(Concern concern){
+    public void deleteConcern(Concern concern){
         getConcernList().deleteConcern(concern);
     }
 
