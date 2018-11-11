@@ -23,6 +23,6 @@ public class ListConcernActivity extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
 
-        
+
     }
 }
