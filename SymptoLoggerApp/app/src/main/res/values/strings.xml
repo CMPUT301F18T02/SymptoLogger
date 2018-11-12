@@ -3,4 +3,8 @@
     <string name="addNewConcernButton">Add Concern</string>
     <string name="logOutButton">Log Out</string>
     <string name="concernTitleHint">Enter Concern Title</string>
+    <string name="concernDescriptionHint">Enter Description</string>
+    <string name="concernDateHint">Enter Date</string>
+    <string name="buttonSaveNewConcern">Save</string>
+    <string name="buttonCancelNewConcern">Cancel</string>
 </resources>
