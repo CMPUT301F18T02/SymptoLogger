@@ -1,5 +1,7 @@
 package com.example.symptologger;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 class Concern {
@@ -8,6 +10,8 @@ class Concern {
     private String description;
     private RecordList myRecords;
     private int recordCount;
+
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     Concern(){
         this.title = "No title given";
@@ -34,7 +38,12 @@ class Concern {
     }
 
     public String toString(){
-        return getTitle()+"\n"+getDescription()+"\n"+getDate();
+        try {
+            return getTitle()+"\n"+getDescription()+"\n"+getDate();
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return getTitle()+"\n"+getDescription()+"\n"+sdf.format(this.date);
+        }
     }
 
     public void setTitle(String title) {
@@ -45,8 +54,8 @@ class Concern {
         return this.title;
     }
 
-    public Date getDate() {
-        return this.date;
+    public Date getDate() throws ParseException {
+        return sdf.parse(this.date.toString());
     }
 
     public void setDate(Date date) {

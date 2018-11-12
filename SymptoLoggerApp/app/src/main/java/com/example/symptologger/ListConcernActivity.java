@@ -1,9 +1,12 @@
 package com.example.symptologger;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -33,6 +36,34 @@ public class ListConcernActivity extends AppCompatActivity {
         concernList = new ArrayList<Concern>(concerns);
         concernListAdapter = new ArrayAdapter<Concern>(this, android.R.layout.simple_list_item_1, concernList);
         concernListView.setAdapter(concernListAdapter);
+
+        concernListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id){
+                final int pos = position;
+
+                AlertDialog.Builder modifyAlert = new AlertDialog.Builder(ListConcernActivity.this);
+
+                modifyAlert.setTitle("Alter "+concernList.get(pos));
+                modifyAlert.setCancelable(true);
+
+                CharSequence[] options = {"Modify",
+                                          "Cancel"};
+
+                modifyAlert.setItems(options, new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which){
+                        if (which == 0){
+                            Toast.makeText(ListConcernActivity.this,"Modify ...",Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(ListConcernActivity.this,"Cancel",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                modifyAlert.show();
+                return false;
+            }
+        });
     }
 
     @Override

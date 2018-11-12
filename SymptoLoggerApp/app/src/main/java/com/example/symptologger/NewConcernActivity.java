@@ -26,6 +26,7 @@ public class NewConcernActivity extends AppCompatActivity {
         ConcernListController clc = new ConcernListController();
 
         Concern newConcern; //New concern variable declared ...
+        Date blankDate;
 
         Toast.makeText(this,"Saving ...", Toast.LENGTH_SHORT).show();
 
@@ -35,13 +36,22 @@ public class NewConcernActivity extends AppCompatActivity {
 
         String concernTitle = editTitle.getText().toString();
         String concernDescription = editDescription.getText().toString();
-        Date concernDate = sdf.parse(editDate.getText().toString());
+        String concernDate = editDate.getText().toString();
 
-        if (concernDate == null){
-            newConcern = new Concern(concernTitle, concernDescription);
+        /*
+        That EditText.getText() does not return null, but empty string ...
+        https://stackoverflow.com/questions/19590472/does-edittext-gettext-ever-returns-null
+        User: https://stackoverflow.com/users/603742/stinepike
+        Date: 2018-11-11
+        */
+
+        if (concernDate.equals("")){
+            blankDate = new Date();
         } else {
-            newConcern = new Concern(concernTitle, concernDate, concernDescription);
+            blankDate = sdf.parse(concernDate);
         }
+
+        newConcern = new Concern (concernTitle,blankDate,concernDescription);
 
         clc.addConcern(newConcern);
 
