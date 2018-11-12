@@ -19,6 +19,14 @@ class Concern {
         this.title = title;
         this.date = date;
         this.description = description;
+        this.myRecords = new RecordList();
+    }
+
+    Concern(String title, String description){
+        this.title = title;
+        this.date = new Date();
+        this.description = description;
+        this.myRecords = new RecordList();
     }
 
     public void setTitle(String title) {
