@@ -7,12 +7,14 @@ class Concern {
     private Date date;
     private String description;
     private RecordList myRecords;
+    private int recordCount;
 
     Concern(){
         this.title = "No title given";
         this.date = new Date();
         this.description = "No description given";
         this.myRecords = new RecordList();
+        this.recordCount = 0;
     }
 
     Concern(String title, Date date, String description){
@@ -20,6 +22,7 @@ class Concern {
         this.date = date;
         this.description = description;
         this.myRecords = new RecordList();
+        this.recordCount = 0;
     }
 
     Concern(String title, String description){
@@ -27,6 +30,11 @@ class Concern {
         this.date = new Date();
         this.description = description;
         this.myRecords = new RecordList();
+        this.recordCount = 0;
+    }
+
+    public String toString(){
+        return getTitle()+"\n"+getDescription()+"\n"+getDate();
     }
 
     public void setTitle(String title) {

@@ -1,6 +1,7 @@
 package com.example.symptologger;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 class ConcernList {
 
@@ -10,6 +11,10 @@ class ConcernList {
         this.myConcerns = new ArrayList<Concern>();
     }
 
+
+    public Collection<Concern> getConcerns(){
+        return this.myConcerns;
+    }
 
     public void addConcern(Concern concern) {
         this.myConcerns.add(concern);

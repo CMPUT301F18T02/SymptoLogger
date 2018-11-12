@@ -9,12 +9,14 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class ListConcernActivity extends AppCompatActivity {
 
     ListView concernListView;
     ArrayList<Concern> concernList;
     ArrayAdapter<Concern> concernListAdapter;
+    Collection<Concern> concerns;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +29,17 @@ public class ListConcernActivity extends AppCompatActivity {
         super.onStart();
 
         concernListView = (ListView) findViewById(R.id.listConcernsView);
+        concerns = ConcernListController.getConcernList().getConcerns();
+        concernList = new ArrayList<Concern>(concerns);
         concernListAdapter = new ArrayAdapter<Concern>(this, android.R.layout.simple_list_item_1, concernList);
+        concernListView.setAdapter(concernListAdapter);
+    }
+
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+
+        concernListAdapter.notifyDataSetChanged();
     }
 
     public void addConcern(View view){
