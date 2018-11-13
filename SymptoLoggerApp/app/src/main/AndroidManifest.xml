@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ListConcernActivity" />
-        <activity android:name=".NewConcernActivity"></activity>
+        <activity android:name=".NewConcernActivity" />
+        <activity android:name=".ModifyConcernActivity"></activity>
     </application>
 
 </manifest>

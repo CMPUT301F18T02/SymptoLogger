@@ -16,6 +16,10 @@ import java.util.Collection;
 
 public class ListConcernActivity extends AppCompatActivity {
 
+    //https://developer.android.com/training/basics/firstapp/starting-activity#java
+    //2018-11-12
+    public static final String EXTRA_MESSAGE = "com.example.symptologger.MESSAGE";
+
     ListView concernListView;
     ArrayList<Concern> concernList;
     ArrayAdapter<Concern> concernListAdapter;
@@ -48,6 +52,7 @@ public class ListConcernActivity extends AppCompatActivity {
                 modifyAlert.setCancelable(true);
 
                 CharSequence[] options = {"Modify",
+                                          "Delete",
                                           "Cancel"};
 
                 modifyAlert.setItems(options, new DialogInterface.OnClickListener(){
@@ -55,6 +60,11 @@ public class ListConcernActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which){
                         if (which == 0){
                             Toast.makeText(ListConcernActivity.this,"Modify ...",Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ListConcernActivity.this, ModifyConcernActivity.class);
+                            intent.putExtra(EXTRA_MESSAGE, concernList.get(pos).getTitle());
+                            startActivity(intent);
+                        } else if (which == 1){
+                            Toast.makeText(ListConcernActivity.this,"Delete",Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(ListConcernActivity.this,"Cancel",Toast.LENGTH_SHORT).show();
                         }
