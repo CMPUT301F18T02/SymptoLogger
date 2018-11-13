@@ -6,9 +6,11 @@ import java.util.Collection;
 class ConcernList {
 
     private ArrayList<Concern> myConcerns;
+    private ArrayList<ConcernListener> concernListeners;
 
     ConcernList(){
         this.myConcerns = new ArrayList<Concern>();
+        this.concernListeners = new ArrayList<ConcernListener>();
     }
 
 
@@ -26,9 +28,20 @@ class ConcernList {
 
     public void deleteConcern(Concern concern) {
         this.myConcerns.remove(concern);
+        notifyListeners();
     }
 
     public int findCount() {
         return this.myConcerns.size();
+    }
+
+    public void notifyListeners(){
+        for (ConcernListener cl : concernListeners){
+            cl.updateListener();
+        }
+    }
+
+    public void addListener(ConcernListener cl){
+        concernListeners.add(cl);
     }
 }

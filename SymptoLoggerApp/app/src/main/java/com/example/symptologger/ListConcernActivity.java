@@ -41,6 +41,16 @@ public class ListConcernActivity extends AppCompatActivity {
         concernListAdapter = new ArrayAdapter<Concern>(this, android.R.layout.simple_list_item_1, concernList);
         concernListView.setAdapter(concernListAdapter);
 
+        ConcernListController.getConcernList().addListener(new ConcernListener() {
+            @Override
+            public void updateListener() {
+                concernList.clear();
+                Collection<Concern> c = ConcernListController.getConcernList().getConcerns();
+                concernList.addAll(c);
+                concernListAdapter.notifyDataSetChanged();
+            }
+        });
+
         concernListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id){
@@ -64,6 +74,7 @@ public class ListConcernActivity extends AppCompatActivity {
                             startActivity(viewIntent);
                         } else if (which == 1){
                             Toast.makeText(ListConcernActivity.this,"Delete",Toast.LENGTH_SHORT).show();
+                            ConcernListController.getConcernList().deleteConcern(concernList.get(pos));
                         } else {
                             Toast.makeText(ListConcernActivity.this,"Cancel",Toast.LENGTH_SHORT).show();
                         }
