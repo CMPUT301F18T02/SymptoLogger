@@ -7,4 +7,8 @@
     <string name="concernDateHint">Enter Date</string>
     <string name="buttonSaveNewConcern">Save</string>
     <string name="buttonCancelNewConcern">Cancel</string>
+    <string name="modifyConcernTitle">Enter New Title</string>
+    <string name="modifyConcernDate">Enter New Date</string>
+    <string name="modifyConcernDescription">Enter New Description</string>
+    <string name="modifyConcernButton">Modify</string>
 </resources>
