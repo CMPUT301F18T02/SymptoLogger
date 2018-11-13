@@ -4,12 +4,17 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import io.searchbox.annotations.JestId;
+
 class Concern {
     private String title;
     private Date date;
     private String description;
     private RecordList myRecords;
     private int recordCount;
+
+    @JestId
+    private String id;
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -82,5 +87,13 @@ class Concern {
 
     public int findRecordCount() {
         return this.myRecords.findCount();
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
     }
 }
