@@ -7,114 +7,134 @@
     android:layout_height="match_parent"
     tools:layout_editor_absoluteY="25dp">
 
-    <EditText
-        android:id="@+id/editText_user_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="130dp"
-        android:layout_marginLeft="68dp"
-        android:layout_marginRight="130dp"
-        android:layout_marginStart="68dp"
+    <TextView
+        android:id="@+id/textView_user_id"
+        android:layout_width="175dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="96dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="96dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="40dp"
-        android:ems="10"
         android:hint="@string/user_id"
+        android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup_user_type" />
 
     <EditText
         android:id="@+id/editText_first_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="99dp"
+        android:layout_marginLeft="99dp"
+        android:layout_marginRight="99dp"
+        android:layout_marginStart="99dp"
+        android:layout_marginTop="11dp"
         android:ems="10"
         android:hint="@string/first_name"
         android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/editText_user_id"
-        app:layout_constraintTop_toBottomOf="@+id/editText_user_id" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_user_id" />
 
     <EditText
         android:id="@+id/editText_last_name"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="99dp"
+        android:layout_marginLeft="99dp"
+        android:layout_marginRight="99dp"
+        android:layout_marginStart="99dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="@string/last_name"
         android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/editText_first_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_first_name" />
 
     <EditText
         android:id="@+id/editText_phone_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
+        android:layout_marginEnd="99dp"
+        android:layout_marginLeft="99dp"
+        android:layout_marginRight="99dp"
+        android:layout_marginStart="99dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/phone_number"
         android:inputType="phone"
-        app:layout_constraintStart_toStartOf="@+id/editText_last_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_last_name" />
 
     <EditText
         android:id="@+id/editText_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="99dp"
+        android:layout_marginLeft="99dp"
+        android:layout_marginRight="99dp"
+        android:layout_marginStart="99dp"
+        android:layout_marginTop="7dp"
         android:ems="10"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
-        app:layout_constraintStart_toStartOf="@+id/editText_phone_number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_phone_number" />
 
     <!--<TextView-->
-        <!--android:id="@+id/textView_add_profile"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="38dp"-->
-        <!--android:layout_marginBottom="15dp"-->
-        <!--android:layout_marginEnd="30dp"-->
-        <!--android:layout_marginLeft="60dp"-->
-        <!--android:layout_marginRight="30dp"-->
-        <!--android:layout_marginStart="60dp"-->
-        <!--android:layout_marginTop="19dp"-->
-        <!--android:text="Add Profile Picture"-->
-        <!--app:layout_constraintBottom_toTopOf="@+id/radioGroup_user_type"-->
-        <!--app:layout_constraintEnd_toStartOf="@+id/imageButton"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="@+id/imageButton" />-->
+    <!--android:id="@+id/textView_add_profile"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="38dp"-->
+    <!--android:layout_marginBottom="15dp"-->
+    <!--android:layout_marginEnd="30dp"-->
+    <!--android:layout_marginLeft="60dp"-->
+    <!--android:layout_marginRight="30dp"-->
+    <!--android:layout_marginStart="60dp"-->
+    <!--android:layout_marginTop="19dp"-->
+    <!--android:text="Add Profile Picture"-->
+    <!--app:layout_constraintBottom_toTopOf="@+id/radioGroup_user_type"-->
+    <!--app:layout_constraintEnd_toStartOf="@+id/imageButton"-->
+    <!--app:layout_constraintStart_toStartOf="parent"-->
+    <!--app:layout_constraintTop_toTopOf="@+id/imageButton" />-->
 
     <TextView
         android:id="@+id/textView_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="48dp"
-        android:layout_marginRight="48dp"
-        android:layout_marginTop="125dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="82dp"
         android:text="I am a"
         app:layout_constraintEnd_toStartOf="@+id/radioGroup_user_type"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <!--<ImageButton-->
-        <!--android:id="@+id/imageButton"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="65dp"-->
-        <!--android:layout_marginBottom="47dp"-->
-        <!--android:layout_marginEnd="89dp"-->
-        <!--android:layout_marginRight="89dp"-->
-        <!--android:layout_marginTop="50dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="@+id/textView_temp"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toEndOf="@+id/textView_add_profile"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:srcCompat="@android:drawable/ic_input_add" />-->
+    <!--android:id="@+id/imageButton"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="65dp"-->
+    <!--android:layout_marginBottom="47dp"-->
+    <!--android:layout_marginEnd="89dp"-->
+    <!--android:layout_marginRight="89dp"-->
+    <!--android:layout_marginTop="50dp"-->
+    <!--app:layout_constraintBottom_toBottomOf="@+id/textView_temp"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintStart_toEndOf="@+id/textView_add_profile"-->
+    <!--app:layout_constraintTop_toTopOf="parent"-->
+    <!--app:srcCompat="@android:drawable/ic_input_add" />-->
 
     <RadioGroup
         android:id="@+id/radioGroup_user_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="130dp"
-        android:layout_marginRight="130dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginEnd="129dp"
+        android:layout_marginRight="129dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -144,11 +164,27 @@
         android:id="@+id/button_sign_up"
         android:layout_width="308dp"
         android:layout_height="51dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginLeft="51dp"
+        android:layout_marginRight="52dp"
+        android:layout_marginStart="51dp"
+        android:layout_marginTop="16dp"
         android:text="Sign Up"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_email" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="81dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="81dp"
+        android:text="User ID: "
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView_user_id"
+        app:layout_constraintEnd_toStartOf="@+id/textView_user_id"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

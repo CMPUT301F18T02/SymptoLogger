@@ -8,7 +8,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Random;
 
 public class CreateProfileActivity extends AppCompatActivity{
 
@@ -29,14 +32,20 @@ public class CreateProfileActivity extends AppCompatActivity{
         setContentView(R.layout.view_create_profile);
         mView = findViewById(R.id.view_create_profile);
 
-        final EditText editText_user_id = (EditText) mView.findViewById(R.id.editText_user_id);
-        final EditText editText_first_name = (EditText) mView.findViewById(R.id.editText_user_id);
-        final EditText editText_last_name = (EditText) mView.findViewById(R.id.editText_user_id);
-        final EditText editText_phone= (EditText) mView.findViewById(R.id.editText_user_id);
-        final EditText editText_email= (EditText) mView.findViewById(R.id.editText_user_id);
-        Button button_sign_up = (Button) mView.findViewById(R.id.button_sign_up);
 
+        generateUserId();
         addListenerOnRadioGroup();
+        addButtonSignUpListener();
+
+    }
+
+
+    public void addButtonSignUpListener() {
+        Button button_sign_up = (Button) mView.findViewById(R.id.button_sign_up);
+        final EditText editText_first_name = (EditText) mView.findViewById(R.id.editText_first_name);
+        final EditText editText_last_name = (EditText) mView.findViewById(R.id.editText_last_name);
+        final EditText editText_phone= (EditText) mView.findViewById(R.id.editText_phone_number);
+        final EditText editText_email= (EditText) mView.findViewById(R.id.editText_email);
 
         button_sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,7 +55,6 @@ public class CreateProfileActivity extends AppCompatActivity{
                     Toast.makeText(CreateProfileActivity.this,
                             "Please select user type", Toast.LENGTH_SHORT).show();
                 } else {
-                    user_id = String.valueOf(editText_user_id.getText());
                     first_name = String.valueOf(editText_first_name.getText());
                     last_name = String.valueOf(editText_last_name.getText());
                     phone = String.valueOf(editText_phone.getText());
@@ -56,6 +64,7 @@ public class CreateProfileActivity extends AppCompatActivity{
             }
         });
     }
+
 
     public void addListenerOnRadioGroup() {
         RadioGroup radioGroup_user = (RadioGroup) mView.findViewById(R.id.radioGroup_user_type);
@@ -68,6 +77,7 @@ public class CreateProfileActivity extends AppCompatActivity{
             }
         });
     }
+
 
     public void createUser() {
         // TODO: load database
@@ -83,8 +93,17 @@ public class CreateProfileActivity extends AppCompatActivity{
         }
 
 //        Log.d("user", String.valueOf(userList.getUserList().get(0)));
-
         // TODO: save to database
+    }
+
+
+    /* Generate user id from 1000 ~ 9999 */
+    public void generateUserId() {
+        Random rand = new Random();
+        int random_id = rand.nextInt((9999) + 1000);
+        user_id = String.valueOf(random_id);
+        TextView textView_user_id = mView.findViewById(R.id.textView_user_id);
+        textView_user_id.setText(user_id);
     }
 
 }
