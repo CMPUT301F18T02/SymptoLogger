@@ -60,4 +60,11 @@ public class ViewConcernActivity extends AppCompatActivity {
         Intent backIntent = new Intent(ViewConcernActivity.this, ListConcernActivity.class);
         startActivity(backIntent);
     }
+
+    public void modify(View view){
+        Toast.makeText(this,"Modify ...", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(ViewConcernActivity.this,ModifyConcernActivity.class);
+        intent.putExtra("pos",pos);
+        startActivity(intent);
+    }
 }

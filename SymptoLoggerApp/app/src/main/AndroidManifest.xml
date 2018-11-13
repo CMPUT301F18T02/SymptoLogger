@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".ListConcernActivity" />
         <activity android:name=".NewConcernActivity" />
-        <activity android:name=".ViewConcernActivity"></activity>
+        <activity android:name=".ViewConcernActivity" />
+        <activity android:name=".ModifyConcernActivity"></activity>
     </application>
 
 </manifest>

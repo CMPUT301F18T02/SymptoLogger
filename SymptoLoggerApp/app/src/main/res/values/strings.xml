@@ -12,4 +12,5 @@
     <string name="modifyConcernDescription">Enter New Description</string>
     <string name="modifyConcernButton">Modify</string>
     <string name="buttonBack">Back</string>
+    <string name="buttonAddRecord">Add Record</string>
 </resources>
