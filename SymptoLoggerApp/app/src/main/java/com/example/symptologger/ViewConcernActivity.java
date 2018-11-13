@@ -38,7 +38,7 @@ public class ViewConcernActivity extends AppCompatActivity {
         concerns = ConcernListController.getConcernList().getConcerns();
         concernList = new ArrayList<Concern>(concerns);
 
-        Toast.makeText(this,"View Concern! "+concernList.get(pos).getTitle(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"View "+concernList.get(pos).getTitle(),Toast.LENGTH_SHORT).show();
     }
 
     @Override
