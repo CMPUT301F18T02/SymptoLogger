@@ -48,7 +48,7 @@ public class ListConcernActivity extends AppCompatActivity {
 
                 AlertDialog.Builder modifyAlert = new AlertDialog.Builder(ListConcernActivity.this);
 
-                modifyAlert.setTitle("Alter "+concernList.get(pos));
+                modifyAlert.setTitle(concernList.get(pos).getTitle());
                 modifyAlert.setCancelable(true);
 
                 CharSequence[] options = {"View",

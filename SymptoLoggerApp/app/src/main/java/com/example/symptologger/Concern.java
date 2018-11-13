@@ -38,12 +38,7 @@ class Concern {
     }
 
     public String toString(){
-        try {
-            return getTitle()+"\n"+getDescription()+"\n"+getDate();
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return getTitle()+"\n"+getDescription()+"\n"+sdf.format(this.date);
-        }
+        return getTitle()+"\n"+getDescription()+"\n"+getDate();
     }
 
     public void setTitle(String title) {
@@ -54,8 +49,8 @@ class Concern {
         return this.title;
     }
 
-    public Date getDate() throws ParseException {
-        return sdf.parse(this.date.toString());
+    public Date getDate() {
+        return this.date;
     }
 
     public void setDate(Date date) {

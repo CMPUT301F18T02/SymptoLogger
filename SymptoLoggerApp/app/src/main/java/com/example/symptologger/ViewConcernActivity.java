@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -37,6 +39,20 @@ public class ViewConcernActivity extends AppCompatActivity {
         concernList = new ArrayList<Concern>(concerns);
 
         Toast.makeText(this,"View Concern! "+concernList.get(pos).getTitle(),Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+
+        TextView concernTitleView = (TextView) findViewById(R.id.concernTitleView);
+        concernTitleView.setText(concernList.get(pos).getTitle());
+
+        TextView concernDateView = (TextView) findViewById(R.id.concernDateView);
+        concernDateView.setText(concernList.get(pos).getDate().toString());
+
+        TextView concernDescriptionView = (TextView) findViewById(R.id.concernDescriptionView);
+        concernDescriptionView.setText(concernList.get(pos).getDescription());
     }
 
     public void backButton(View view) {
