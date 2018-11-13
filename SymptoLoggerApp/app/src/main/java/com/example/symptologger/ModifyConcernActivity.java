@@ -35,7 +35,7 @@ public class ModifyConcernActivity extends AppCompatActivity {
 
         concerns = ConcernListController.getConcernList().getConcerns();
         concernList = new ArrayList<Concern>(concerns);
-        
+
         Concern modConcern = concernList.get(posToModify);
 
         Toast.makeText(this,"Modifying ...", Toast.LENGTH_SHORT).show();
