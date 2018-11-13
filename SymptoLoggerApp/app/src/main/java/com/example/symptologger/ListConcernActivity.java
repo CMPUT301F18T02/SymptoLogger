@@ -61,7 +61,7 @@ public class ListConcernActivity extends AppCompatActivity {
                         if (which == 0){
                             Toast.makeText(ListConcernActivity.this,"Modify ...",Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(ListConcernActivity.this, ModifyConcernActivity.class);
-                            intent.putExtra(EXTRA_MESSAGE, concernList.get(pos).getTitle());
+                            intent.putExtra(EXTRA_MESSAGE, pos);
                             startActivity(intent);
                         } else if (which == 1){
                             Toast.makeText(ListConcernActivity.this,"Delete",Toast.LENGTH_SHORT).show();
