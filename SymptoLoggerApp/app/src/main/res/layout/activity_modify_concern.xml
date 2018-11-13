@@ -7,6 +7,18 @@
     tools:context=".ModifyConcernActivity">
 
     <Button
+        android:id="@+id/buttonCancelModifyConcern"
+        android:layout_width="152dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:onClick="cancel"
+        android:text="@string/buttonCancelNewConcern"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/modifyConcernDescription" />
+
+    <Button
         android:id="@+id/buttonSaveNewConcern2"
         android:layout_width="152dp"
         android:layout_height="wrap_content"
