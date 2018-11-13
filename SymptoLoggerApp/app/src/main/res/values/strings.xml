@@ -11,4 +11,5 @@
     <string name="modifyConcernDate">Enter New Date</string>
     <string name="modifyConcernDescription">Enter New Description</string>
     <string name="modifyConcernButton">Modify</string>
+    <string name="buttonBack">Back</string>
 </resources>

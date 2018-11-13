@@ -18,7 +18,7 @@ public class ListConcernActivity extends AppCompatActivity {
 
     //https://developer.android.com/training/basics/firstapp/starting-activity#java
     //2018-11-12
-    public static final String EXTRA_MESSAGE = "com.example.symptologger.MESSAGE";
+//    public static final String EXTRA_MESSAGE = "com.example.symptologger.MESSAGE";
 
     ListView concernListView;
     ArrayList<Concern> concernList;
@@ -51,7 +51,7 @@ public class ListConcernActivity extends AppCompatActivity {
                 modifyAlert.setTitle("Alter "+concernList.get(pos));
                 modifyAlert.setCancelable(true);
 
-                CharSequence[] options = {"Modify",
+                CharSequence[] options = {"View",
                                           "Delete",
                                           "Cancel"};
 
@@ -59,10 +59,9 @@ public class ListConcernActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which){
                         if (which == 0){
-                            Toast.makeText(ListConcernActivity.this,"Modify ...",Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(ListConcernActivity.this, ModifyConcernActivity.class);
-                            intent.putExtra(EXTRA_MESSAGE, pos);
-                            startActivity(intent);
+                            Intent viewIntent = new Intent(ListConcernActivity.this, ViewConcernActivity.class);
+                            viewIntent.putExtra("pos",pos);
+                            startActivity(viewIntent);
                         } else if (which == 1){
                             Toast.makeText(ListConcernActivity.this,"Delete",Toast.LENGTH_SHORT).show();
                         } else {
@@ -82,6 +81,7 @@ public class ListConcernActivity extends AppCompatActivity {
 
         concernListAdapter.notifyDataSetChanged();
     }
+
 
     public void addConcern(View view){
         Toast.makeText(this,"Add New Concern", Toast.LENGTH_SHORT).show();
