@@ -14,8 +14,10 @@ import static org.junit.Assert.assertTrue;
 public class CareProviderTest {
     @Test
     public void testAddPatient() {
-        CareProvider careProvider = new CareProvider();
-        Patient patient = new Patient();
+        CareProvider careProvider = new CareProvider("testCareProvider", "First", "Last",
+                "test@test.com", "123456789");
+        Patient patient = new Patient("testPatient", "First", "Last",
+                "test@test.com", "123456789");
 
         assertFalse(careProvider.getAssignedPatients().contains(patient));
 
@@ -25,9 +27,12 @@ public class CareProviderTest {
 
     @Test
     public void testGetAssignedPatients() {
-        CareProvider careProvider = new CareProvider();
-        Patient patient1 = new Patient();
-        Patient patient2 = new Patient();
+        CareProvider careProvider = new CareProvider("testCareProvider", "First", "Last",
+                "test@test.com", "123456789");
+        Patient patient1 = new Patient("testPatient1", "First", "Last",
+                "test@test.com", "123456789");
+        Patient patient2 = new Patient("testPatient2", "First", "Last",
+                "test@test.com", "123456789");
 
         careProvider.addPatient(patient1);
         careProvider.addPatient(patient2);
@@ -40,7 +45,8 @@ public class CareProviderTest {
 
     @Test
     public void testSearchConcerns() {
-        CareProvider careProvider = new CareProvider();
+        CareProvider careProvider = new CareProvider("testCareProvider", "First", "Last",
+                "test@test.com", "123456789");
         ArrayList<Concern> concerns = new ArrayList<>();
         Concern concern1 = new Concern();
         concern1.setTitle("Testing");

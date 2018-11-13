@@ -21,25 +21,25 @@ public class User {
     public void setFirstName(String first) {}
 
     public String getFirstName() {
-        return firstName;
+        return this.firstName;
     }
 
     public void setLastName(String last) {}
 
     public String getLastName() {
-        return lastName;
+        return this.lastName;
     }
 
     public String getId() {
-        return id;
+        return this.id;
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public String getCell() {
-        return cell;
+        return this.cell;
     }
 
     public void setId(String id) {

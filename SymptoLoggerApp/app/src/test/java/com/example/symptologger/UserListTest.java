@@ -13,7 +13,7 @@ public class UserListTest {
     @Test
     public void testAddUser() {
         UserList ulist = new UserList();
-        User user = new User();
+        User user = new User("0001", "FirstName", "LastName", "test@test.com", "123456789");
 
         assertFalse(ulist.getUserList().contains(user));
 
@@ -24,7 +24,7 @@ public class UserListTest {
     @Test
     public void testRemoveUser() {
         UserList ulist = new UserList();
-        User user = new User();
+        User user = new User("0001", "FirstName", "LastName", "test@test.com", "123456789");
         ulist.addUser(user);
         assertTrue(ulist.getUserList().contains(user));
 
@@ -35,8 +35,8 @@ public class UserListTest {
     @Test
     public void testGetUserList() {
         UserList userList = new UserList();
-        User user1 = new User();
-        User user2 = new User();
+        User user1 = new User("0001", "FirstName", "LastName", "test@test.com", "123456789");
+        User user2 = new User("0002", "Tom", "Tye", "test@test.com", "123456789");
 
         ArrayList<User> expected = new ArrayList<>();
         expected.add(user1);
@@ -48,7 +48,7 @@ public class UserListTest {
     @Test
     public void testGetUserByPos() {
         UserList userList = new UserList();
-        User user = new User();
+        User user = new User("0001", "FirstName", "LastName", "test@test.com", "123456789");
         userList.addUser(user);
 
         int pos = 5;

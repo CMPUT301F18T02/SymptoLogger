@@ -13,16 +13,18 @@ import static org.junit.Assert.assertTrue;
 public class PatientTest {
     @Test
     public void testCreateValidUserID() {
-        Patient patient = new Patient();
+        Patient patient = new Patient("testCarePatient", "First", "Last",
+                "test@test.com", "123456789");
         String expected = "validName";
         patient.createUserID(expected);
 
-        assertEquals(expected, patient.getUserID());
+        assertEquals(expected, patient.getId());
     }
 
     @Test
     public void testCreateInvalidUserID() {
-        Patient patient = new Patient();
+        Patient patient = new Patient("testCarePatient", "First", "Last",
+                "test@test.com", "123456789");
         boolean thrown = false;
         String expected = "short";
 
@@ -38,7 +40,8 @@ public class PatientTest {
 
     @Test
     public void testGetConcerns() {
-        Patient patient = new Patient();
+        Patient patient = new Patient("testCarePatient", "First", "Last",
+                "test@test.com", "123456789");
         Concern concern1 = new Concern();
         Concern concern2 = new Concern();
 
@@ -55,7 +58,8 @@ public class PatientTest {
 
     @Test
     public void testAddConcern() {
-        Patient patient = new Patient();
+        Patient patient = new Patient("testCarePatient", "First", "Last",
+                "test@test.com", "123456789");
         Concern concern = new Concern();
 
         assertFalse(patient.getConcerns().contains(concern));
@@ -66,7 +70,8 @@ public class PatientTest {
 
     @Test
     public void testUpdateConcern() {
-        Patient patient = new Patient();
+        Patient patient = new Patient("testCarePatient", "First", "Last",
+                "test@test.com", "123456789");
         Concern concern = new Concern();
         patient.addConcern(concern);
 
@@ -79,7 +84,8 @@ public class PatientTest {
 
     @Test
     public void testDeleteConcern() {
-        Patient patient = new Patient();
+        Patient patient = new Patient("testCarePatient", "First", "Last",
+                "test@test.com", "123456789");
         Concern concern = new Concern();
 
         assertFalse(patient.getConcerns().contains(concern));

@@ -7,12 +7,13 @@ public class CareProvider extends User {
 
     public CareProvider(String id, String firstName, String lastName, String email, String cell) {
         super(id, firstName, lastName, email, cell);
+        this.patients = new ArrayList<>();
     }
 
     private int assigneeCount;
 
     public ArrayList<Patient> getAssignedPatients() {
-        return patients;
+        return this.patients;
     }
 
     public void addPatient(Patient p) {

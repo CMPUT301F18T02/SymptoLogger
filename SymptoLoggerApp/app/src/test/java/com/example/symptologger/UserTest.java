@@ -7,7 +7,8 @@ import static org.junit.Assert.assertEquals;
 public class UserTest {
     @Test
     public void testSetFirstName() {
-        Patient patient = new Patient();
+        Patient patient = new Patient("testCarePatient", "First", "Last",
+                "test@test.com", "123456789");
         String expectedName = "FisrtName";
         patient.setFirstName(expectedName);
 
@@ -16,7 +17,8 @@ public class UserTest {
 
     @Test
     public void testSetLastName() {
-        Patient patient = new Patient();
+        Patient patient = new Patient("testCarePatient", "First", "Last",
+                "test@test.com", "123456789");
         String expectedName = "LastName";
         patient.setLastName(expectedName);
 
@@ -25,7 +27,8 @@ public class UserTest {
 
     @Test
     public void testGetFirstName() {
-        Patient patient = new Patient();
+        Patient patient = new Patient("testCarePatient", "First", "Last",
+                "test@test.com", "123456789");
         String expectedName = "FisrtName";
         patient.setFirstName(expectedName);
         String result = patient.getFirstName();
@@ -35,7 +38,8 @@ public class UserTest {
 
     @Test
     public void testGetLastName() {
-        Patient patient = new Patient();
+        Patient patient = new Patient("testCarePatient", "First", "Last",
+                "test@test.com", "123456789");
         String expectedName = "LastName";
         patient.setLastName(expectedName);
         String result = patient.getLastName();
@@ -45,7 +49,8 @@ public class UserTest {
 
     @Test
     public void testSetID() {
-        Patient patient = new Patient();
+        Patient patient = new Patient("testCarePatient", "First", "Last",
+                "test@test.com", "123456789");
         String expected = "validID";
         patient.setId(expected);
 

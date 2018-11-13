@@ -5,6 +5,10 @@ import java.util.ArrayList;
 public class CareProviderList {
     private ArrayList<CareProvider> careProviders;
 
+    public CareProviderList() {
+        this.careProviders = new ArrayList<>();
+    }
+
     public void addCareProviders(CareProvider careProvider) {
 
     }
@@ -12,10 +16,10 @@ public class CareProviderList {
     public void removeCareProviders(CareProvider careProvider) {}
 
     public int getCareProvidersCount() {
-        return careProviders.size();
+        return this.careProviders.size();
     }
 
     public ArrayList<CareProvider> getCareProviders() {
-        return careProviders;
+        return this.careProviders;
     }
 }

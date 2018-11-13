@@ -8,6 +8,8 @@ public class Patient extends User {
 
     public Patient(String id, String firstName, String lastName, String email, String cell) {
         super(id, firstName, lastName, email, cell);
+
+        this.concerns = new ArrayList<>();
     }
 
     protected void createUserID(String userPrompt) {
@@ -18,7 +20,7 @@ public class Patient extends User {
     }
 
     public ArrayList<Concern> getConcerns() {
-        return concerns;
+        return this.concerns;
     }
 
     public void addConcern(Concern concern) {
