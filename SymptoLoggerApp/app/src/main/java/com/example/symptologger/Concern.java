@@ -27,7 +27,11 @@ class Concern {
     }
 
     Concern(String title, Date date, String description) throws TitleTooLongException{
-        this.title = title;
+        if (title.length() <= 30){
+            this.title = title;
+        } else {
+            throw new TitleTooLongException();
+        }
         this.date = date;
         this.description = description;
         this.myRecords = new RecordList();
@@ -35,7 +39,11 @@ class Concern {
     }
 
     Concern(String title, String description) throws TitleTooLongException {
-        this.title = title;
+        if (title.length() > 30){
+            throw new TitleTooLongException();
+        } else {
+            this.title = title;
+        }
         this.date = new Date();
         this.description = description;
         this.myRecords = new RecordList();
@@ -47,8 +55,11 @@ class Concern {
     }
 
     public void setTitle(String title) throws TitleTooLongException{
-
-        this.title = title;
+        if (title.length() <= 30){
+            this.title = title;
+        } else{
+            throw new TitleTooLongException();
+        }
     }
 
     public String getTitle() {

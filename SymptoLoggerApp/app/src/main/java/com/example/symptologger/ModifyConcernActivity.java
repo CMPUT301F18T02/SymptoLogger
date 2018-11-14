@@ -55,7 +55,7 @@ public class ModifyConcernActivity extends AppCompatActivity {
                 concernList.get(pos).setTitle(title);
             } catch (TitleTooLongException e) {
                 e.printStackTrace();
-                Toast.makeText(this,"Title too long: 30 characters maximum",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Title too long: 30 characters maximum",Toast.LENGTH_LONG).show();
             }
         }
 

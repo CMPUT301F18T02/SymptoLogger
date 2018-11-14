@@ -53,10 +53,10 @@ public class NewConcernActivity extends AppCompatActivity {
         }
 
         try {
-            newConcern = new Concern (concernTitle,blankDate,concernDescription);
+            newConcern = new Concern(concernTitle,blankDate,concernDescription);
         } catch (TitleTooLongException e) {
             e.printStackTrace();
-            Toast.makeText(this, "Title too long: 30 characterss max.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Title too long: 30 characters max.",Toast.LENGTH_LONG).show();
         }
 
         clc.addConcern(newConcern);
