@@ -46,7 +46,8 @@ class Concern {
         return getTitle()+"\n"+getDescription()+"\n"+getDate();
     }
 
-    public void setTitle(String title) {
+    public void setTitle(String title) throws TitleTooLongException{
+
         this.title = title;
     }
 

@@ -51,7 +51,12 @@ public class ModifyConcernActivity extends AppCompatActivity {
         String date = newDate.getText().toString();
 
         if (!title.equals("")){
-            concernList.get(pos).setTitle(title);
+            try {
+                concernList.get(pos).setTitle(title);
+            } catch (TitleTooLongException e) {
+                e.printStackTrace();
+                Toast.makeText(this,"Title too long: 30 characters maximum",Toast.LENGTH_SHORT).show();
+            }
         }
 
         if (!description.equals("")){
