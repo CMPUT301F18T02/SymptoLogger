@@ -14,6 +14,8 @@ import java.util.Date;
 public class NewConcernActivity extends AppCompatActivity {
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    Concern newConcern; //New concern variable declared ...
+    Date blankDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +27,7 @@ public class NewConcernActivity extends AppCompatActivity {
 
         ConcernListController clc = new ConcernListController();
 
-        Concern newConcern; //New concern variable declared ...
-        Date blankDate;
+
 
         Toast.makeText(this,"Saving ...", Toast.LENGTH_SHORT).show();
 
@@ -51,7 +52,12 @@ public class NewConcernActivity extends AppCompatActivity {
             blankDate = sdf.parse(concernDate);
         }
 
-        newConcern = new Concern (concernTitle,blankDate,concernDescription);
+        try {
+            newConcern = new Concern (concernTitle,blankDate,concernDescription);
+        } catch (TitleTooLongException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Title too long: 30 characterss max.",Toast.LENGTH_SHORT).show();
+        }
 
         clc.addConcern(newConcern);
 

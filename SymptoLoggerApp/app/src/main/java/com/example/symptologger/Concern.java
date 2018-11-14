@@ -26,7 +26,7 @@ class Concern {
         this.recordCount = 0;
     }
 
-    Concern(String title, Date date, String description){
+    Concern(String title, Date date, String description) throws TitleTooLongException{
         this.title = title;
         this.date = date;
         this.description = description;
@@ -34,7 +34,7 @@ class Concern {
         this.recordCount = 0;
     }
 
-    Concern(String title, String description){
+    Concern(String title, String description) throws TitleTooLongException {
         this.title = title;
         this.date = new Date();
         this.description = description;
