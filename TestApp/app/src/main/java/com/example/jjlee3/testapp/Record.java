@@ -1,9 +1,9 @@
-package com.example.symptologger;
+package com.example.jjlee3.testapp;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-class Record {
+public class Record {
     //private String comment;
     private Date date;
     private ArrayList<Photograph> photo = new ArrayList<Photograph>();
@@ -15,16 +15,16 @@ class Record {
     }
 
     public Record(String comment, Date date) {
-      //  this.comment = comment;
+        //  this.comment = comment;
         this.date = date;
     }
 
     //public String getComment() {
-      //  return this.comment;
+    //  return this.comment;
     //}
 
     //public void setComment(String comment) {
-      //  this.comment = comment;
+    //  this.comment = comment;
     //}
 
     public void addView(BodyPart bp){
@@ -37,6 +37,10 @@ class Record {
 
     public Date getDate() {
         return this.date;
+    }
+
+    public ArrayList<Photograph> getPhoto(){
+        return this.photo;
     }
 
     public void setDate(Date date) {
@@ -53,7 +57,10 @@ class Record {
         frame.add(mainPanel);
         frame.setVisible(true);
         */
-        photo.add(photograph);
+        //System.out.println("BOOPYETGGRRWFE");
+        if (photo.size() < 10) {
+            photo.add(photograph);
+        }
     }
 
     public void removePhoto(Integer index){
