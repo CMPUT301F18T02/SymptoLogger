@@ -60,7 +60,12 @@ public class ModifyConcernActivity extends AppCompatActivity {
         }
 
         if (!description.equals("")){
-            concernList.get(pos).setDescription(description);
+            try {
+                concernList.get(pos).setDescription(description);
+            } catch (DescriptionTooLongException e){
+                e.printStackTrace();
+                Toast.makeText(this,"Description too long: 300 characters maximum",Toast.LENGTH_SHORT).show();
+            }
         }
 
         if (!date.equals("")){
