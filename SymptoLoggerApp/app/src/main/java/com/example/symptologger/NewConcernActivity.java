@@ -62,6 +62,9 @@ public class NewConcernActivity extends AppCompatActivity {
         }
 
         clc.addConcern(newConcern);
+        ElasticSearchConcernController.AddConcernsTask addConcernsTask =
+                new ElasticSearchConcernController.AddConcernsTask();
+        addConcernsTask.execute(newConcern);
 
         Intent doneIntent = new Intent(NewConcernActivity.this, ListConcernActivity.class);
         startActivity(doneIntent);
