@@ -12,6 +12,11 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <!--Render issues with FAB style.
+        OP: https://stackoverflow.com/questions/51047246/failed-to-find-style-floatingactionbuttonstyle-in-current-theme
+        Answer By: https://stackoverflow.com/users/4157431/rami-alloush
+        Date: 2018-11-16-->
+        <item name="floatingActionButtonStyle">@style/Widget.Design.FloatingActionButton</item>
     </style>
 
 </resources>
