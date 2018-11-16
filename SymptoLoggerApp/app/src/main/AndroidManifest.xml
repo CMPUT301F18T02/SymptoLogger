@@ -2,6 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.symptologger">
 
+    <!-- Joshua Campbell
+    lonelyTwitter
+    2018-11-14
+    -->
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,10 +29,10 @@
             android:name=".ViewRecordActivity"
             android:exported="true"
             android:theme="@style/NoActionBarTheme"/>
-        <activity
-            android:name=".ViewConcernActivity"
-            android:label="@string/title_activity_view_concern"
-            android:exported="true" />
+        <activity android:name=".ListConcernActivity" />
+        <activity android:name=".NewConcernActivity" />
+        <activity android:name=".ViewConcernActivity" />
+        <activity android:name=".ModifyConcernActivity" />
     </application>
 
 </manifest>

@@ -1,28 +1,73 @@
 package com.example.symptologger;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import io.searchbox.annotations.JestId;
 
 class Concern {
     private String title;
     private Date date;
     private String description;
     private RecordList myRecords;
+    private int recordCount;
+
+    @JestId
+    private String id;
+
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     Concern(){
         this.title = "No title given";
         this.date = new Date();
         this.description = "No description given";
         this.myRecords = new RecordList();
+        this.recordCount = 0;
     }
 
-    Concern(String title, Date date, String description){
-        this.title = title;
+    Concern(String title, Date date, String description) throws TitleTooLongException, DescriptionTooLongException{
+        if (title.length() <= 30){
+            this.title = title;
+        } else {
+            throw new TitleTooLongException();
+        }
         this.date = date;
-        this.description = description;
+        if (description.length()<= 300){
+            this.description = description;
+        } else{
+            throw new DescriptionTooLongException();
+        }
+        this.myRecords = new RecordList();
+        this.recordCount = 0;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    Concern(String title, String description) throws TitleTooLongException, DescriptionTooLongException {
+        if (title.length() > 30){
+            throw new TitleTooLongException();
+        } else {
+            this.title = title;
+        }
+        this.date = new Date();
+        if (description.length() <= 300){
+            this.description = description;
+        } else {
+            throw new DescriptionTooLongException();
+        }
+        this.myRecords = new RecordList();
+        this.recordCount = 0;
+    }
+
+    public String toString(){
+        return getTitle()+"\n"+getDescription()+"\n"+getDate();
+    }
+
+    public void setTitle(String title) throws TitleTooLongException{
+        if (title.length() <= 30){
+            this.title = title;
+        } else{
+            throw new TitleTooLongException();
+        }
     }
 
     public String getTitle() {
@@ -41,8 +86,12 @@ class Concern {
         return this.description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescription(String description) throws DescriptionTooLongException{
+        if (description.length() <= 300){
+            this.description = description;
+        } else {
+            throw new DescriptionTooLongException();
+        }
     }
 
     //The below may or may not be needed: have to wait to see how adding photos/geolocations will be handled.
@@ -62,5 +111,13 @@ class Concern {
 
     public int findRecordCount() {
         return this.myRecords.findCount();
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
     }
 }
