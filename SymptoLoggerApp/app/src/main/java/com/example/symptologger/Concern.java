@@ -26,18 +26,34 @@ class Concern {
         this.recordCount = 0;
     }
 
-    Concern(String title, Date date, String description){
-        this.title = title;
+    Concern(String title, Date date, String description) throws TitleTooLongException, DescriptionTooLongException{
+        if (title.length() <= 30){
+            this.title = title;
+        } else {
+            throw new TitleTooLongException();
+        }
         this.date = date;
-        this.description = description;
+        if (description.length()<= 300){
+            this.description = description;
+        } else{
+            throw new DescriptionTooLongException();
+        }
         this.myRecords = new RecordList();
         this.recordCount = 0;
     }
 
-    Concern(String title, String description){
-        this.title = title;
+    Concern(String title, String description) throws TitleTooLongException, DescriptionTooLongException {
+        if (title.length() > 30){
+            throw new TitleTooLongException();
+        } else {
+            this.title = title;
+        }
         this.date = new Date();
-        this.description = description;
+        if (description.length() <= 300){
+            this.description = description;
+        } else {
+            throw new DescriptionTooLongException();
+        }
         this.myRecords = new RecordList();
         this.recordCount = 0;
     }
@@ -47,8 +63,11 @@ class Concern {
     }
 
     public void setTitle(String title) throws TitleTooLongException{
-
-        this.title = title;
+        if (title.length() <= 30){
+            this.title = title;
+        } else{
+            throw new TitleTooLongException();
+        }
     }
 
     public String getTitle() {
@@ -67,8 +86,12 @@ class Concern {
         return this.description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescription(String description) throws DescriptionTooLongException{
+        if (description.length() <= 300){
+            this.description = description;
+        } else {
+            throw new DescriptionTooLongException();
+        }
     }
 
     //The below may or may not be needed: have to wait to see how adding photos/geolocations will be handled.

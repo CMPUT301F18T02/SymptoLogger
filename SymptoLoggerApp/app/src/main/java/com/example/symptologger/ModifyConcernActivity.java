@@ -55,12 +55,17 @@ public class ModifyConcernActivity extends AppCompatActivity {
                 concernList.get(pos).setTitle(title);
             } catch (TitleTooLongException e) {
                 e.printStackTrace();
-                Toast.makeText(this,"Title too long: 30 characters maximum",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Title too long: 30 characters maximum",Toast.LENGTH_LONG).show();
             }
         }
 
         if (!description.equals("")){
-            concernList.get(pos).setDescription(description);
+            try {
+                concernList.get(pos).setDescription(description);
+            } catch (DescriptionTooLongException e){
+                e.printStackTrace();
+                Toast.makeText(this,"Description too long: 300 characters maximum",Toast.LENGTH_SHORT).show();
+            }
         }
 
         if (!date.equals("")){
