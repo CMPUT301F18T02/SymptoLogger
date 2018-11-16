@@ -1,7 +1,5 @@
 package com.example.symptologger;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -20,7 +17,7 @@ public class RecordCommentFragment extends Fragment {
 //    private OnFragmentInteractionListener mListener;
 
     private ArrayList<CareProviderComment> careProviderCommentList = new ArrayList<>();
-    private ArrayAdapter<CareProviderComment> careProviderCommentsAdapter;
+    private ArrayAdapter<CareProviderComment> adapter;
 
     public RecordCommentFragment() {
         // Required empty public constructor
@@ -39,17 +36,15 @@ public class RecordCommentFragment extends Fragment {
 
         // TODO: replace record
         Record record = new Record();
+        record.addCareProviderComment();
         careProviderCommentList = record.getCareProviderComment();
 
-        // TODO: for testing only
-        careProviderCommentList.add(new CareProviderComment(new User(), "aaaa"));
-
-        careProviderCommentsAdapter = new ArrayAdapter<CareProviderComment>(
+        adapter = new ArrayAdapter<CareProviderComment>(
                 getContext(),
                 R.layout.list_layout,
                 careProviderCommentList);
         ListView careProviderCommentsListView = view.findViewById(R.id.recordCommentList);
-        careProviderCommentsListView.setAdapter(careProviderCommentsAdapter);
+        careProviderCommentsListView.setAdapter(adapter);
 
         return view;
     }

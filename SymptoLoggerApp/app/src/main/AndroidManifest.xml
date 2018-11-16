@@ -18,7 +18,8 @@
         </activity>
         <activity
             android:name=".ViewRecordActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/NoActionBarTheme"/>
         <activity
             android:name=".ViewConcernActivity"
             android:label="@string/title_activity_view_concern"
