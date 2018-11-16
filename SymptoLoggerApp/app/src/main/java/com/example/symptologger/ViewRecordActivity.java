@@ -1,35 +1,56 @@
 package com.example.symptologger;
 
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
+import android.support.v7.widget.Toolbar;
+import android.view.Window;
 
 public class ViewRecordActivity extends AppCompatActivity {
 
-    private CareProvider careProvider = new CareProvider("002", "First", "Last", "test@test.com", "123456790");
-
-    private String careProviderName = "";
-    private String description = "";
-    private String datetime = "";
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_record);
 
-        Record record = new Record();
-        // TODO: choose logged in user
-        Patient patient = new Patient("001", "First", "Last", "test@test.com", "123456790");
+        viewPager = findViewById(R.id.viewpager);
+        addTabs(viewPager);
 
-        careProviderName = careProvider.getFullName();
-        datetime = record.getDate().toString();
-
-        TextView careProviderView = (TextView) findViewById(R.id.careProviderContent);
-        careProviderView.setText(careProviderName);
-
-        TextView datetimeView = (TextView) findViewById(R.id.dateTimeContent);
-        datetimeView.setText(datetime);
+        tabLayout = findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
     }
+
+    private void addTabs(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFrag(new RecordDetailsFragment(), "DETAILS");
+        adapter.addFrag(new RecordCommentFragment(), "COMMENTS");
+        viewPager.setAdapter(adapter);
+    }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 }
