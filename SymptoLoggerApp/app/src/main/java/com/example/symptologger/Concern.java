@@ -11,7 +11,7 @@ class Concern {
     private Date date;
     private String description;
     private RecordList myRecords;
-    private int recordCount;
+    private int recordCount = 0;
 
     @JestId
     private String id;
@@ -59,7 +59,11 @@ class Concern {
     }
 
     public String toString(){
-        return getTitle()+"\n"+getDescription()+"\n"+getDate();
+        return getTitle()+"\t\t\t\t\t"+getRecordCount()+"\n"+getDate();
+    }
+
+    public int getRecordCount() {
+        return this.recordCount;
     }
 
     public void setTitle(String title) throws TitleTooLongException{
