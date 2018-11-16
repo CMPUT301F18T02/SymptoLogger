@@ -15,7 +15,7 @@ import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 
-public class ElasticSearchConcernController {
+public class ElasticSearchController {
     private static JestDroidClient client;
 
     public static class AddConcernsTask extends AsyncTask<Concern, Void, Void> {
