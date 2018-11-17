@@ -1,6 +1,7 @@
 package com.example.symptologger;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class NewConcernActivity extends AppCompatActivity {
 
@@ -21,9 +23,31 @@ public class NewConcernActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_concern);
+
+        FloatingActionButton saveFAB = findViewById(R.id.saveNewFAB);
+        saveFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try{
+                    saveConcern();
+                } catch (ParseException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        FloatingActionButton cancelNewFAB = findViewById(R.id.cancelNewFAB);
+        cancelNewFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(NewConcernActivity.this,"Cancel ...", Toast.LENGTH_SHORT).show();
+                Intent cancelIntent = new Intent(NewConcernActivity.this,ListConcernActivity.class);
+                startActivity(cancelIntent);
+            }
+        });
     }
 
-    public void saveConcern(View view) throws ParseException {
+    public void saveConcern() throws ParseException {
 
         ConcernListController clc = new ConcernListController();
 
@@ -64,11 +88,5 @@ public class NewConcernActivity extends AppCompatActivity {
 
         Intent doneIntent = new Intent(NewConcernActivity.this, ListConcernActivity.class);
         startActivity(doneIntent);
-    }
-
-    public void cancel(View view){
-        Toast.makeText(this,"Cancel ...", Toast.LENGTH_SHORT).show();
-        Intent cancelIntent = new Intent(NewConcernActivity.this,ListConcernActivity.class);
-        startActivity(cancelIntent);
     }
 }
