@@ -16,13 +16,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginRight="28dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
         android:focusable="true"
+        android:src="@android:drawable/ic_input_add"
+        app:backgroundTint="@android:color/background_dark"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listConcernsView"
-        tools:onClick="addConcern" />
+        app:layout_constraintTop_toBottomOf="@+id/listConcernsView" />
 
     <Button
         android:id="@+id/logOutButton"
@@ -39,7 +40,7 @@
     <ListView
         android:id="@+id/listConcernsView"
         android:layout_width="0dp"
-        android:layout_height="433dp"
+        android:layout_height="424dp"
         android:layout_marginEnd="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
