@@ -1,6 +1,7 @@
 package com.example.symptologger;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -39,6 +40,23 @@ public class ViewConcernActivity extends AppCompatActivity {
         concernList = new ArrayList<Concern>(concerns);
 
         Toast.makeText(this,"View "+concernList.get(pos).getTitle(),Toast.LENGTH_SHORT).show();
+
+        FloatingActionButton modifyActivityFAB = findViewById(R.id.modifyActivityFAB);
+        modifyActivityFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                modify();
+            }
+        });
+
+        FloatingActionButton backFAB = findViewById(R.id.backFAB);
+        backFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                back();
+            }
+        });
+
     }
 
     @Override
@@ -55,13 +73,13 @@ public class ViewConcernActivity extends AppCompatActivity {
         concernDescriptionView.setText(concernList.get(pos).getDescription());
     }
 
-    public void backButton(View view) {
+    public void back() {
         Toast.makeText(this, "Back ...", Toast.LENGTH_SHORT).show();
         Intent backIntent = new Intent(ViewConcernActivity.this, ListConcernActivity.class);
         startActivity(backIntent);
     }
 
-    public void modify(View view){
+    public void modify(){
         Toast.makeText(this,"Modify ...", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(ViewConcernActivity.this,ModifyConcernActivity.class);
         intent.putExtra("pos",pos);
