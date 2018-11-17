@@ -1,6 +1,7 @@
 package com.example.symptologger;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -32,6 +33,30 @@ public class ModifyConcernActivity extends AppCompatActivity {
         concerns = ConcernListController.getConcernList().getConcerns();
         concernList = new ArrayList<Concern>(concerns);
 
+        FloatingActionButton modifyFAB = findViewById(R.id.modifyConcernFAB);
+        modifyFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    modifyConcern();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        FloatingActionButton cancelFAB = findViewById(R.id.cancelFAB);
+        cancelFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ModifyConcernActivity.this,"Cancel ...", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ModifyConcernActivity.this, ViewConcernActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
     }
 
     @Override
@@ -39,7 +64,7 @@ public class ModifyConcernActivity extends AppCompatActivity {
         super.onStart();
     }
 
-    public void modifyConcern(View view) throws ParseException {
+    public void modifyConcern() throws ParseException {
         Toast.makeText(this,"Modifying ...",Toast.LENGTH_SHORT).show();
 
         EditText newTitle = (EditText) findViewById(R.id.modifyConcernTitle);
@@ -82,9 +107,9 @@ public class ModifyConcernActivity extends AppCompatActivity {
         Toast.makeText(this,"Add record ...", Toast.LENGTH_SHORT).show();
     }
 
-    public void cancel(View view){
-        Toast.makeText(this,"Cancel ...", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(ModifyConcernActivity.this, ViewConcernActivity.class);
-        startActivity(intent);
-    }
+//    public void cancel(View view){
+//        Toast.makeText(this,"Cancel ...", Toast.LENGTH_SHORT).show();
+//        Intent intent = new Intent(ModifyConcernActivity.this, ViewConcernActivity.class);
+//        startActivity(intent);
+//    }
 }
