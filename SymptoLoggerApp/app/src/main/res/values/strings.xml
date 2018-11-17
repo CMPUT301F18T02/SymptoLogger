@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SymptoLogger</string>
+    <string name="title_activity_sign_in">sign_in</string>
 </resources>

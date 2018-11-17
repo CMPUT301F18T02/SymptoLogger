@@ -8,6 +8,7 @@ import com.searchly.jestdroid.JestClientFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
@@ -24,7 +25,8 @@ import io.searchbox.indices.mapping.PutMapping;
 public class ElasticSearchClient {
 
     private static JestClient client = null;
-    private static final String server = "http://cmput301.softwareprocess.es:8080/cmput301f18t02";
+    private static final String server = "http://cmput301.softwareprocess.es:8080";
+    private static final String index = "cmput301f18t02";
 
     static { // need static here since initClient is static
         initClient();
@@ -40,125 +42,106 @@ public class ElasticSearchClient {
         }
     }
 
-    //AsyncTask enables proper and easy use of the UI thread. This class allows you to perform
-    //background operations and publish results on the UI thread without having to manipulate threads and/or handlers.
-
+    //AVOID USING DeleteIndices FOR NOW!
     public static class DeleteIndices extends AsyncTask<String, Void, Void> { //use Void instead of void for AsyncTask as return type
         @Override
         protected Void doInBackground(String... indices) {
             for (String index : indices) {
                 try {
                     JestResult result = client.execute(new DeleteIndex.Builder(index).build());
-                    if (result.isSucceeded()) {
-                    } else {
+                    if (!result.isSucceeded()) {
                         Log.e("Error", "ElasticSearch was not able to delete some index.");
                     }
                 } catch (Exception e) {
-                    Log.i("Error", "The application failed to build and delete index.");
+                    Log.i("Error", "The application failed - reason: DeleteIndices.");
                 }
             }
             return null; //Void requires return, (it's not void)
         }
     }
 
-    public static class AddIndices extends AsyncTask<String, Void, Void> { //use Void instead of void for AsyncTask as return type
+    public static class AddTable extends AsyncTask<String[], Void, Void> { //use Void instead of void for AsyncTask as return type
         @Override
-        protected Void doInBackground(String... indices) {
+        protected Void doInBackground(String[]... indices) {
+
+            String type = "usersLogin";
+            String source = "{\"usersLogin\" : {\"properties\" : {\"userID\": {\"type\" : \"integer\"},\"userName\" : {\"type\" : \"string\", \"index\": \"not_analyzed\"},\"creationDate\": {\"type\" : \"string\"},\"userRole\": {\"type\" : \"string\"}}}}";
+
                 try {
-                    //JestResult result = client.execute(new CreateIndex.Builder("cmput301f18t02").build());
-                    JestResult result = client.execute(new Index.Builder("{ \"user\" : { \"properties\" : { \"message\" : {\"type\" : \"string\", \"store\" : \"yes\"} } } }").index("cmput301f18t02").type("user").id("100").build());
-                    //JestResult result = client.execute(new PutMapping.Builder(
-                    //        "cmput301f18t02",
-                    //        "user",
-                    //        "{ \"user\" : { \"properties\" : { \"message\" : {\"type\" : \"string\", \"store\" : \"yes\"} } } }"
-                    //).build());
-
-                    if (result.isSucceeded()) {
-
-                    } else {
-                        //Log.e("Error", "ElasticSearch was not able to delete some index.");
-
+                    JestResult result = client.execute(new PutMapping.Builder(index, type, source).build());
+                    if (!result.isSucceeded()) {
+                        Log.e("Error", "ElasticSearch was not able to add table.");
                     }
                 } catch (Exception e) {
-                    Log.i("Error", "The application failed to build and delete index.");
+                    Log.i("Error", "The application failed - reason: AddTable.");
                 }
             return null; //Void requires return, (it's not void)
         }
     }
 
+    public static class AddRecord extends AsyncTask<String[], Void, Void> { //use Void instead of void for AsyncTask as return type
+        @Override
+        protected Void doInBackground(String[]... indices) {
+
+            String type = "usersLogin";
+            String source = "{\"userName\": \"patrick\", \"creationDate\": \"2018-11-16\", \"userRole\": \"P\", \"userID\": 13 }";
+            //String id = "9";
+
+            try {
+                //JestResult result = client.execute( new Index.Builder(source).index(index).type(type).id(id).build() );
+                JestResult result = client.execute( new Index.Builder(source).index(index).type(type).build() );
+
+                if (!result.isSucceeded()) {
+                    Log.e("Error", "ElasticSearch was not able to add record.");
+                }
+            } catch (Exception e) {
+                Log.i("Error", "The application failed - reason: AddRecord.");
+            }
+            return null; //Void requires return, (it's not void)
+        }
+    }
+
+    public static class SearchRecord extends AsyncTask<String, Void, Void>{
+
+        @Override
+        protected Void doInBackground(String... search_parameters){
+
+            String type = "usersLogin";
+            String query =  String.format("{\"query\": {\"match\": {\"userName\": \"%s\"}}}", search_parameters[0]);
+            try {
+                JestResult result = client.execute(  new Search.Builder(query).addIndex(index).addType(type).build() );
+
+                if (result.isSucceeded()){
+                    List<SignUp> res = result.getSourceAsObjectList(SignUp.class);
+                    if (res.size() != 0){
+                        // res.get(0).getUserName();
+                    }
+                    else{Log.e("meh","nothing found.");}
+
+
+                } else {
+                    Log.e("Error","Some issues with query.");
+                }
+            } catch (Exception e){
+                Log.i("Error","Something went wrong when we tried to communicate with the elasticsearch server.");
+            }
+            return null;
+        }
+    }
 }
 
 
-//    public static class AddConcernsTask extends AsyncTask<String, Void, Void> { //use Void instead of void for AsyncTask as return type
-//        @Override
-//        protected Void doInBackground(String... strings) {
-//
-
-
-            //for (String string : strings) {
-                //Index index = new Index.Builder(string).index("testing").type("concern").build();
-//                PutMapping putMapping = new PutMapping.Builder(
-//                        "testing",
-//                        "my_type",
-//                        "{ \"my_type\" : { \"properties\" : { \"message\" : {\"type\" : \"string\", \"store\" : \"yes\"} } } }"
-//                ).build();
-//                try {
-//                    JestResult result = client.execute( new DeleteIndex.Builder("cmput301f18t02").build() );
-//                    System.out.println("YOOOOO");
-//                    if (result.isSucceeded()) {
-//                        //concern.setId(result.getId());
-//                        System.out.println(result);
-//                    } else {
-//                        System.out.println(result);
-//                        Log.e("Error", "ElasticSearch was not able to add the concern.");
-//                    }
-//                } catch (Exception e) {
-//                    Log.i("Error", "The application failed to build and send the concerns.");
-//                }
-//            //}
-//            return null;
-//        }
-//
-//    }
-//}
-
-//    public static class GetConcernsTask extends AsyncTask<String, Void, ArrayList<Concern>>{
-//        @Override
-//        protected ArrayList<Concern> doInBackground(String... search_parameters){
-//            initClient();
-//
-//            ArrayList<Concern> concerns = new ArrayList<Concern>();
-//
-//            Search search = new Search.Builder(search_parameters[0])
-//                    .addIndex("Testing")
-//                    .addType("concern").build();
-//
-//            try {
-//                SearchResult result = client.execute(search);
-//                if (result.isSucceeded()){
-//                    List<Concern> foundConcerns = result.getSourceAsObjectList(Concern.class);
-//                    concerns.addAll(foundConcerns);
-//                } else {
-//                    Log.e("Error","The search query failed to find any concerns.");
-//                }
-//            } catch (Exception e){
-//                Log.i("Error","Something went wrong when we tried to communicate with the elasticsearch server.");
-//            }
-//            return concerns;
-//        }
-//    }
-
-
-
-//
-//    String query = "{\"query\": {\"match\": {\"ingredients\": \"salmon\"}}}";
-//    Search search = new Search.Builder(query)
-//            .addIndex("recipes")
-//            .addType("recipe")
-//            .build();
-//try {
-//        SearchResult result = client.execute(search);
-//        Log.d(TAG, result.getJsonObject().toString());
-//        } catch (IOException e) {
-//        e.printStackTrace();
-//        }
+/*
+{
+  "fields": [
+    "userID"
+  ],
+  "query": {
+    "match_all": {}
+  },
+  "sort": {
+    "userID": "desc"
+  },
+  "size": 1
+}
+*/
