@@ -31,6 +31,8 @@ public class ListConcernActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_concern);
 
+        /*https://developer.android.com/guide/topics/ui/floating-action-button#java
+        * Date: 2018-11-17*/
         FloatingActionButton addNewFAB = findViewById(R.id.addConcernFAB);
         addNewFAB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +40,14 @@ public class ListConcernActivity extends AppCompatActivity {
                 Toast.makeText(ListConcernActivity.this,"Add New Concern", Toast.LENGTH_SHORT).show();
                 Intent newConcernIntent = new Intent(ListConcernActivity.this,NewConcernActivity.class);
                 startActivity(newConcernIntent);
+            }
+        });
+
+        FloatingActionButton logOutFAB = findViewById(R.id.logOutFAB);
+        logOutFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ListConcernActivity.this,"Good Bye", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -104,14 +114,4 @@ public class ListConcernActivity extends AppCompatActivity {
         concernListAdapter.notifyDataSetChanged();
     }
 
-
-    public void addConcern(View view){
-        Toast.makeText(this,"Add New Concern", Toast.LENGTH_SHORT).show();
-        Intent newConcernIntent = new Intent(ListConcernActivity.this,NewConcernActivity.class);
-        startActivity(newConcernIntent);
-    }
-
-    public void logOut(View view){
-        Toast.makeText(this,"Good Bye! ...", Toast.LENGTH_SHORT).show();
-    }
 }

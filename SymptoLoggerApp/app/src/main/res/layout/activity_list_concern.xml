@@ -11,6 +11,22 @@
     2018-11-16
     -->
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/logOutFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:focusable="true"
+        android:src="@android:drawable/ic_menu_revert"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listConcernsView"
+        tools:clickable="true" />
+
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/addConcernFAB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,20 +37,8 @@
         android:layout_marginTop="16dp"
         android:focusable="true"
         android:src="@android:drawable/ic_input_add"
-        app:backgroundTint="@android:color/background_dark"
+        app:backgroundTint="@color/colorPrimaryDark"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listConcernsView" />
-
-    <Button
-        android:id="@+id/logOutButton"
-        android:layout_width="167dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:onClick="logOut"
-        android:text="@string/logOutButton"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/listConcernsView" />
 
     <ListView
