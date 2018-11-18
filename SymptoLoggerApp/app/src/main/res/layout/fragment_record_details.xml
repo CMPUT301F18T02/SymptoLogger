@@ -47,7 +47,8 @@
             <TextView
                 android:id="@+id/careProviderContent"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="32dp"
+                android:paddingVertical="8dp"/>
 
             <TextView
                 android:id="@+id/dateTimeTitle"
@@ -59,7 +60,8 @@
             <TextView
                 android:id="@+id/dateTimeContent"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="32dp"
+                android:paddingVertical="8dp" />
 
             <TextView
                 android:id="@+id/locationTitle"
@@ -72,7 +74,8 @@
                 android:id="@+id/recordMapView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clickable="true" />
+                android:clickable="true"
+                android:paddingVertical="8dp" />
 
             <TextView
                 android:id="@+id/picturesTitle"
@@ -84,7 +87,7 @@
             <android.support.v7.widget.GridLayout
                 android:id="@+id/recordPictureGridLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="62dp">
 
                 <ImageButton
                     android:id="@+id/imageButton3"
