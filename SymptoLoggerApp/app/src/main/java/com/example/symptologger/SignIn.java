@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class SignIn extends AppCompatActivity {
 
@@ -26,8 +27,12 @@ public class SignIn extends AppCompatActivity {
     }
 
     public void LogIn(View v) {
-        verifyLogIn();
-
+        if (verifyLogIn()){
+            Intent intent = new Intent(SignIn.this, ListConcernActivity.class);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this,"Sorry, username "+userName2+" was not found. Please try again.", Toast.LENGTH_LONG).show();
+        }
     }
 }
 

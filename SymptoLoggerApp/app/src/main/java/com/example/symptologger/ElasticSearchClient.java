@@ -114,9 +114,9 @@ public class ElasticSearchClient {
                 if (result.isSucceeded()){
                     List<SignUp> res = result.getSourceAsObjectList(SignUp.class);
                     if (res.size() != 0){
-                        // res.get(0).getUserName();
+                         res.get(0).getUserName();
                     }
-                    else{Log.e("meh","nothing found.");}
+                    else{Log.e("Error","nothing found.");}
 
 
                 } else {
