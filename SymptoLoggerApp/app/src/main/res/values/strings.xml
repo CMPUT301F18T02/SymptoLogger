@@ -22,4 +22,5 @@
     <string name="modifyConcernButton">Modify</string>
     <string name="buttonBack">Back</string>
     <string name="buttonAddRecord">Add Record</string>
+    <string name="title_activity_new_record_avtivity">NewRecordAvtivity</string>
 </resources>
