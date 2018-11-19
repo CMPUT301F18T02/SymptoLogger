@@ -6,6 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".NewRecordActivity">
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/newRecordFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:focusable="true"
+        android:src="@android:drawable/ic_menu_save"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addBodyPartsButton" />
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/newRecordToolbar"
         android:layout_width="match_parent"
@@ -15,7 +30,7 @@
         android:theme="?attr/actionBarTheme" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/recordTitleText"
         android:layout_width="0dp"
         android:layout_height="86dp"
         android:layout_marginTop="16dp"
@@ -42,7 +57,7 @@
         app:layout_constraintEnd_toStartOf="@+id/timeField"
         app:layout_constraintHorizontal_bias="0.765"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/recordTitleText" />
 
     <Button
         android:id="@+id/timeField"
@@ -54,7 +69,7 @@
         android:inputType="time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dateField"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/recordTitleText" />
 
     <Button
         android:id="@+id/addLocationButton"

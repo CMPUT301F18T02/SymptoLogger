@@ -1,5 +1,7 @@
 package com.example.symptologger;
 
+import android.location.Location;
+
 import com.google.android.gms.maps.GoogleMap;
 
 import java.util.ArrayList;
@@ -8,16 +10,18 @@ import java.util.Date;
 class Record {
     //private String comment;
     private Date date;
-    private GoogleMap location;
+    private Location location;
+    private String title;
 
     public Record(){
         //this.comment = "";
         this.date = new Date();
     }
 
-    public Record(String comment, Date date) {
+    public Record(/*String comment,*/ Date date, String title) {
       //  this.comment = comment;
         this.date = date;
+        this.title = title;
     }
 
     //public String getComment() {
@@ -27,6 +31,10 @@ class Record {
     //public void setComment(String comment) {
       //  this.comment = comment;
     //}
+
+    public String toString(){
+        return this.title;
+    }
 
     public Date getDate() {
         return this.date;
@@ -50,7 +58,7 @@ class Record {
         //When location services established and enabled
     }
 
-    public GoogleMap getGeoLocation() {
+    public Location getGeoLocation() {
         //When location services is up
 
         return this.location;

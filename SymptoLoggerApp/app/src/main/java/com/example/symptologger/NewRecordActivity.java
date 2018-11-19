@@ -2,22 +2,32 @@ package com.example.symptologger;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Locale;
 
 public class NewRecordActivity extends AppCompatActivity {
     private static DateFormat dateFormat = new SimpleDateFormat("EEEE, MMM dd", Locale.CANADA);
     private static DateFormat timeFormat = new SimpleDateFormat("h:mm a", Locale.CANADA);
+
+    private int pos;
+    Collection<Concern> concerns;
+    ArrayList<Concern> concernList;
 
     Calendar c;
 
@@ -31,6 +41,12 @@ public class NewRecordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_record_avtivity);
+
+        Intent intent = getIntent();
+        pos = intent.getIntExtra("pos",0);
+
+        concerns = ConcernListController.getConcernList().getConcerns();
+        concernList = new ArrayList<Concern>(concerns);
 
         getCalendarInfo();
         Date now = c.getTime();
@@ -87,6 +103,27 @@ public class NewRecordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO: go to new body part view
+            }
+        });
+
+        FloatingActionButton newRecordFAB = findViewById(R.id.newRecordFAB);
+        newRecordFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RecordListController rlc = new RecordListController();
+
+                Toast.makeText(NewRecordActivity.this,"Saving Record", Toast.LENGTH_SHORT).show();
+
+                EditText recordTitle = (EditText) findViewById(R.id.recordTitleText);
+                String title = recordTitle.getText().toString();
+
+                Record newRecord = new Record(c.getTime(),title);
+
+                rlc.addRecord(newRecord);
+
+                Intent doneIntent = new Intent(NewRecordActivity.this, ViewConcernActivity.class);
+                intent.putExtra("pos",pos);
+                startActivity(doneIntent);
             }
         });
     }

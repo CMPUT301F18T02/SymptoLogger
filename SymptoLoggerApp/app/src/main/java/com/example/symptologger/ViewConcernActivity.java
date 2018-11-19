@@ -5,6 +5,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +19,11 @@ public class ViewConcernActivity extends AppCompatActivity {
     Collection<Concern> concerns;
     ArrayList<Concern> concernList;
     int pos;
+
+    ListView recordListView;
+    ArrayList<Record> recordList;
+    ArrayAdapter<Record> recordListAdapter;
+    Collection<Record> records;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +78,12 @@ public class ViewConcernActivity extends AppCompatActivity {
 
         TextView concernDescriptionView = (TextView) findViewById(R.id.concernDescriptionView);
         concernDescriptionView.setText(concernList.get(pos).getDescription());
+
+        recordListView = findViewById(R.id.recordListView);
+        records = RecordListController.getRecordList().getRecords();
+        recordList = new ArrayList<Record>(records);
+        recordListAdapter = new ArrayAdapter<Record>(this,android.R.layout.simple_list_item_1,recordList);
+        recordListView.setAdapter(recordListAdapter);
     }
 
     public void back() {

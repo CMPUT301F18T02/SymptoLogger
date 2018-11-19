@@ -1,5 +1,6 @@
 package com.example.symptologger;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -31,7 +32,7 @@ public class RecordDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_record_details, container, false);
 
         MapView mapView;
-        GoogleMap location;
+        Location location;
 
         // TODO: replace p, cp, record
         CareProvider careProvider = new CareProvider("002", "CPFirst", "CPLast", "test@test.com", "123456790");
