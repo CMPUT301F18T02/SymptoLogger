@@ -1,6 +1,7 @@
 package com.example.symptologger;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,30 +25,23 @@ public class SignIn extends AppCompatActivity {
 
     private Boolean verifyLogIn(){
         userName2 = typedUserName.getText().toString();
+        Boolean val = Boolean.FALSE;
 
         ElasticSearchClient.SearchRecord searchRecord = new ElasticSearchClient.SearchRecord();
         searchRecord.execute(userName2);
 
-        userNameTest = "no";
-
         try {
-            userNameTest = searchRecord.get();
-            Toast.makeText(this, userNameTest,Toast.LENGTH_SHORT).show();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            val = searchRecord.get();
         } catch (ExecutionException e) {
             e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-
-        if (userNameTest.equals(userName2)){
-            return Boolean.TRUE;
-        } else {
-            return Boolean.FALSE;
-        }
+        return val;
     }
 
     public void LogIn(View v) {
-        if (verifyLogIn()==Boolean.TRUE){
+        if (verifyLogIn()){
             Intent intent = new Intent(SignIn.this, ListConcernActivity.class);
             startActivity(intent);
         } else {

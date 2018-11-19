@@ -21,9 +21,9 @@ public class ElasticSearchClient {
     private static final String server = "http://cmput301.softwareprocess.es:8080";
     private static final String index = "cmput301f18t02";
 
-//    static { // need static here since initClient is static
-//        initClient();
-//    }
+    static { // need static here since initClient is static
+        initClient();
+    }
 
     public static void initClient() {
         // Construct a new Jest client according to configuration via factory
@@ -94,11 +94,10 @@ public class ElasticSearchClient {
         }
     }
 
-    public static class SearchRecord extends AsyncTask<String, Void, String>{
+    public static class SearchRecord extends AsyncTask<String, Void, Boolean>{
 
         @Override
-        protected String doInBackground(String... search_parameters){
-            initClient();
+        protected Boolean doInBackground(String... search_parameters){
 
             String type = "usersLogin";
             String query =  String.format("{\"query\": {\"match\": {\"userName\": \"%s\"}}}", search_parameters[0]);
@@ -108,10 +107,12 @@ public class ElasticSearchClient {
                 if (result.isSucceeded()){
                     List<SignUp> res = result.getSourceAsObjectList(SignUp.class);
                     if (res.size() != 0){
-                        System.out.println(res.get(0).getUserName());
-                        return res.get(0).getUserName();
+                        return Boolean.TRUE;
                     }
-                    else{Log.e("Error","nothing found.");}
+                    else{
+                        //Log.e("Error","nothing found.");
+                        return Boolean.FALSE;
+                    }
 
 
                 } else {
@@ -120,7 +121,7 @@ public class ElasticSearchClient {
             } catch (Exception e){
                 Log.i("Error","Something went wrong when we tried to communicate with the elasticsearch server.");
             }
-            return "";
+            return Boolean.FALSE;
         }
     }
 }
