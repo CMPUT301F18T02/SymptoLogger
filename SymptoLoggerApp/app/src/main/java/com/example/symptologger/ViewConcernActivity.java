@@ -81,7 +81,7 @@ public class ViewConcernActivity extends AppCompatActivity {
 
     public void modify(){
         Toast.makeText(this,"Modify ...", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(ViewConcernActivity.this,ModifyConcernActivity.class);
+        Intent intent = new Intent(ViewConcernActivity.this, ModifyConcernActivity.class);
         intent.putExtra("pos",pos);
         startActivity(intent);
     }

@@ -105,6 +105,8 @@ public class ModifyConcernActivity extends AppCompatActivity {
 
     public void addRecord(View view){
         Toast.makeText(this,"Add record ...", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(ModifyConcernActivity.this, NewRecordActivity.class);
+        startActivity(intent);
     }
 
 //    public void cancel(View view){

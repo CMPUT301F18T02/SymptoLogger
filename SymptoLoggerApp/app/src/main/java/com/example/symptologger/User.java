@@ -30,6 +30,8 @@ public class User {
         return this.lastName;
     }
 
+    public String getFullName() { return this.firstName + " " + this.lastName; }
+
     public String getId() {
         return this.id;
     }
