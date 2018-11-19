@@ -84,11 +84,11 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical">
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/targetimage1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    />
+                    android:onClick="ViewImage" />
 
             </LinearLayout>
 
@@ -115,11 +115,12 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical">
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/targetimage2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal" />
+                    android:layout_gravity="center_horizontal"
+                    android:onClick="ViewImage" />
 
             </LinearLayout>
 
@@ -146,11 +147,12 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical">
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/targetimage3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal" />
+                    android:layout_gravity="center_horizontal"
+                    android:onClick="ViewImage" />
 
             </LinearLayout>
 
@@ -177,11 +179,12 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical">
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/targetimage4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal" />
+                    android:layout_gravity="center_horizontal"
+                    android:onClick="ViewImage" />
 
             </LinearLayout>
 
@@ -208,11 +211,12 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical">
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/targetimage5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal" />
+                    android:layout_gravity="center_horizontal"
+                    android:onClick="ViewImage" />
 
             </LinearLayout>
 
@@ -243,11 +247,12 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical">
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/targetimage6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal" />
+                    android:layout_gravity="center_horizontal"
+                    android:onClick="ViewImage" />
 
             </LinearLayout>
 
@@ -274,11 +279,12 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical">
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/targetimage7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal" />
+                    android:layout_gravity="center_horizontal"
+                    android:onClick="ViewImage" />
 
             </LinearLayout>
 
@@ -305,11 +311,12 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical">
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/targetimage8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal" />
+                    android:layout_gravity="center_horizontal"
+                    android:onClick="ViewImage" />
 
             </LinearLayout>
 
@@ -336,11 +343,12 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical">
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/targetimage9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal" />
+                    android:layout_gravity="center_horizontal"
+                    android:onClick="ViewImage" />
 
             </LinearLayout>
 
@@ -367,11 +375,12 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical">
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/targetimage10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal" />
+                    android:layout_gravity="center_horizontal"
+                    android:onClick="ViewImage" />
 
             </LinearLayout>
 

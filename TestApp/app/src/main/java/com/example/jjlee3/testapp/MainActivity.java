@@ -4,15 +4,18 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -20,32 +23,32 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     Record record = new Record();
-    ArrayList<ImageView> views = new ArrayList<>();
-    ImageView targetImage;
+    ArrayList<ImageButton> views = new ArrayList<>();
+    ImageButton targetImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        targetImage = (ImageView)findViewById(R.id.targetimage1);
+        targetImage = (ImageButton)findViewById(R.id.targetimage1);
         views.add(targetImage);
-        targetImage = (ImageView)findViewById(R.id.targetimage2);
+        targetImage = (ImageButton)findViewById(R.id.targetimage2);
         views.add(targetImage);
-        targetImage = (ImageView)findViewById(R.id.targetimage3);
+        targetImage = (ImageButton)findViewById(R.id.targetimage3);
         views.add(targetImage);
-        targetImage = (ImageView)findViewById(R.id.targetimage4);
+        targetImage = (ImageButton)findViewById(R.id.targetimage4);
         views.add(targetImage);
-        targetImage = (ImageView)findViewById(R.id.targetimage5);
+        targetImage = (ImageButton)findViewById(R.id.targetimage5);
         views.add(targetImage);
-        targetImage = (ImageView)findViewById(R.id.targetimage6);
+        targetImage = (ImageButton)findViewById(R.id.targetimage6);
         views.add(targetImage);
-        targetImage = (ImageView)findViewById(R.id.targetimage7);
+        targetImage = (ImageButton)findViewById(R.id.targetimage7);
         views.add(targetImage);
-        targetImage = (ImageView)findViewById(R.id.targetimage8);
+        targetImage = (ImageButton)findViewById(R.id.targetimage8);
         views.add(targetImage);
-        targetImage = (ImageView)findViewById(R.id.targetimage9);
+        targetImage = (ImageButton)findViewById(R.id.targetimage9);
         views.add(targetImage);
-        targetImage = (ImageView)findViewById(R.id.targetimage10);
+        targetImage = (ImageButton)findViewById(R.id.targetimage10);
         views.add(targetImage);
 
 
@@ -63,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         /////
     }
 
-    public void setImage(Uri uri, ImageView image){
+    public void setImage(Uri uri, ImageButton image){
         Bitmap bitmap;
 
         try {
@@ -81,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
     public void DisplayPhotos(){
         ArrayList<Photograph> ALLPHOTOS = record.getPhoto();
         for (int i = 0; i < 10; i++){
-            ImageView theview = views.get(i);
+            ImageButton theview = views.get(i);
             if (ALLPHOTOS.size() >= i+1){
                 Photograph thephoto = ALLPHOTOS.get(i);
                 setImage(thephoto.getURL(), theview);
@@ -93,6 +96,24 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void ViewImage(View v){
+        ImageButton b = (ImageButton)v;
+        int index = views.indexOf(b);
+        ArrayList<Photograph> ALLPHOTOS = record.getPhoto();
+        System.out.println(index);
+        if(index >= ALLPHOTOS.size()){
+            //index not exists
+
+        }else{
+            // index exists
+
+            Photograph photo = ALLPHOTOS.get(index);
+            Intent intent = new Intent(MainActivity.this, ViewingPhotoActivity.class);
+
+            intent.putExtra("THE_PHOTO", photo);
+            startActivity(intent);
+        }
+    }
 
     @Override
     protected  void onResume() {
