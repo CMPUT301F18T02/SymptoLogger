@@ -1,5 +1,6 @@
 package com.example.symptologger;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -7,10 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-
-
+/**
+ * <p>
+ *     Fragment to display record details. App user should be able to see
+ *     1. assigned care provider if there is any
+ *     2. Date and time of the record
+ *     3. Geo location if recorded
+ *     4. Pictures if there are any
+ *     5. Body parts indicating where pictures are taken if there is any
+ * </p>
+ */
 public class RecordDetailsFragment extends Fragment {
 
 //    private OnFragmentInteractionListener mListener;
@@ -30,8 +37,7 @@ public class RecordDetailsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_record_details, container, false);
 
-        MapView mapView;
-        GoogleMap location;
+        Location location;
 
         // TODO: replace p, cp, record
         CareProvider careProvider = new CareProvider("002", "CPFirst", "CPLast", "test@test.com", "123456790");
@@ -40,15 +46,12 @@ public class RecordDetailsFragment extends Fragment {
 
         String careProviderName = careProvider.getFullName();
         String datetime = record.getDate().toString();
-        location = record.getGeoLocation();
 
         TextView careProviderView = view.findViewById(R.id.careProviderContent);
         careProviderView.setText(careProviderName);
 
         TextView datetimeView = view.findViewById(R.id.dateTimeContent);
         datetimeView.setText(datetime);
-
-
 
         // TODO: maybe map fragment?
 //        mapView = findViewById(R.id.recordMapView);

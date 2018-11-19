@@ -2,6 +2,9 @@ package com.example.symptologger;
 
 import java.util.ArrayList;
 
+/**
+ * Care Provider model. Extending User class.
+ */
 public class CareProvider extends User {
     private ArrayList<Patient> patients;
 
@@ -17,7 +20,7 @@ public class CareProvider extends User {
     }
 
     public void addPatient(Patient p) {
-
+        this.patients.add(p);
     }
 
     public ArrayList<Concern> searchConcerns(String typed) {

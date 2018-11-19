@@ -11,6 +11,11 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+/**
+ * <p>
+ *     Fragment to display list of Care Provider comments.
+ * </p>
+ */
 
 public class RecordCommentFragment extends Fragment {
 

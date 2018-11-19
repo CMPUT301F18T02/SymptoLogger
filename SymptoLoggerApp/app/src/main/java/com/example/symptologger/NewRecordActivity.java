@@ -15,6 +15,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+/**
+ * <p>
+ *     Activity to create a new record.
+ *     App user can set title, choose date and time, add geo location and add pictures for body parts
+ * </p>
+ */
 public class NewRecordActivity extends AppCompatActivity {
     private static DateFormat dateFormat = new SimpleDateFormat("EEEE, MMM dd", Locale.CANADA);
     private static DateFormat timeFormat = new SimpleDateFormat("h:mm a", Locale.CANADA);
@@ -91,6 +97,9 @@ public class NewRecordActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Get calendar information and update global variables
+     */
     private void getCalendarInfo() {
         c = Calendar.getInstance(Locale.CANADA);
         day = c.get(Calendar.DAY_OF_MONTH);
@@ -100,10 +109,21 @@ public class NewRecordActivity extends AppCompatActivity {
         minute = c.get(Calendar.MINUTE);
     }
 
+    /**
+     * Update calendar information after user chooses a date
+     * @param year
+     * @param month
+     * @param dayOfMonth
+     */
     private void updateCalendarDate(int year, int month, int dayOfMonth) {
         c.set(year, month, dayOfMonth);
     }
 
+    /**
+     * Update time after user selects a time
+     * @param hour
+     * @param minute
+     */
     private void updateCalendarTime(int hour, int minute) {
         c.set(year, month, day, hour, minute);
     }

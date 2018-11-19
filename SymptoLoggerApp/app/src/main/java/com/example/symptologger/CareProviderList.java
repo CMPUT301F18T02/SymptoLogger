@@ -2,6 +2,9 @@ package com.example.symptologger;
 
 import java.util.ArrayList;
 
+/**
+ * Controller for list of care providers
+ */
 public class CareProviderList {
     private ArrayList<CareProvider> careProviders;
 
@@ -10,10 +13,12 @@ public class CareProviderList {
     }
 
     public void addCareProviders(CareProvider careProvider) {
-
+        this.careProviders.add(careProvider);
     }
 
-    public void removeCareProviders(CareProvider careProvider) {}
+    public void removeCareProviders(CareProvider careProvider) {
+        this.careProviders.remove(careProvider);
+    }
 
     public int getCareProvidersCount() {
         return this.careProviders.size();
