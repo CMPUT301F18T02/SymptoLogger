@@ -28,6 +28,8 @@ public class ViewRecordActivity extends AppCompatActivity {
 
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+
     }
 
     private void addTabs(ViewPager viewPager) {

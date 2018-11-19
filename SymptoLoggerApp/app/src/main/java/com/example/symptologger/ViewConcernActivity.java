@@ -107,9 +107,12 @@ public class ViewConcernActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which){
                         if (which == 0){
                             Toast.makeText(ViewConcernActivity.this,recordList.get(recPos).getTitle(),Toast.LENGTH_SHORT).show();
-//                            Intent viewIntent = new Intent(ViewConcernActivity.this, ViewRecordActivity.class);
-//                            viewIntent.putExtra("pos",recPos);
-//                            startActivity(viewIntent);
+                            Intent viewIntent = new Intent(ViewConcernActivity.this, ViewRecordActivity.class);
+                            Bundle extras = new Bundle();
+                            extras.putInt("CONCERN",pos);
+                            extras.putInt("RECORD",recPos);
+                            viewIntent.putExtras(extras);
+                            startActivity(viewIntent);
                         } else if (which == 1){
                             Toast.makeText(ViewConcernActivity.this,"Delete",Toast.LENGTH_SHORT).show();
                             concernList.get(pos).removeRecord(recordList.get(recPos));
