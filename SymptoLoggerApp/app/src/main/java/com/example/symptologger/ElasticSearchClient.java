@@ -6,20 +6,13 @@ import android.util.Log;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
-import io.searchbox.core.Delete;
-import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
-import io.searchbox.core.SearchResult;
-import io.searchbox.indices.CreateIndex;
 import io.searchbox.indices.DeleteIndex;
-import io.searchbox.indices.IndicesExists;
 import io.searchbox.indices.mapping.PutMapping;
 
 public class ElasticSearchClient {
@@ -101,10 +94,10 @@ public class ElasticSearchClient {
         }
     }
 
-    public static class SearchRecord extends AsyncTask<String, Void, Void>{
+    public static class SearchRecord extends AsyncTask<String, Void, String>{
 
         @Override
-        protected Void doInBackground(String... search_parameters){
+        protected String doInBackground(String... search_parameters){
 
             String type = "usersLogin";
             String query =  String.format("{\"query\": {\"match\": {\"userName\": \"%s\"}}}", search_parameters[0]);
@@ -114,7 +107,8 @@ public class ElasticSearchClient {
                 if (result.isSucceeded()){
                     List<SignUp> res = result.getSourceAsObjectList(SignUp.class);
                     if (res.size() != 0){
-                         res.get(0).getUserName();
+                        System.out.println(res.get(0).getUserName());
+                        return res.get(0).getUserName();
                     }
                     else{Log.e("Error","nothing found.");}
 
@@ -125,7 +119,7 @@ public class ElasticSearchClient {
             } catch (Exception e){
                 Log.i("Error","Something went wrong when we tried to communicate with the elasticsearch server.");
             }
-            return null;
+            return "";
         }
     }
 }

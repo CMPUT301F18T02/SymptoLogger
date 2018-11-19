@@ -7,10 +7,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.concurrent.ExecutionException;
+
 public class SignIn extends AppCompatActivity {
 
     private String userName2;
     private EditText typedUserName;
+    private String userNameTest;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,13 +25,29 @@ public class SignIn extends AppCompatActivity {
     private Boolean verifyLogIn(){
         userName2 = typedUserName.getText().toString();
 
-        new ElasticSearchClient.SearchRecord().execute(userName2);
+        ElasticSearchClient.SearchRecord searchRecord = new ElasticSearchClient.SearchRecord();
+        //searchRecord.execute(userName2);
 
-        return Boolean.FALSE;
+        userNameTest = "no";
+
+//        try {
+//            userNameTest = searchRecord.get();
+//            Toast.makeText(this, userNameTest,Toast.LENGTH_SHORT).show();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        }
+
+        if (userNameTest.equals(userName2)){
+            return Boolean.TRUE;
+        } else {
+            return Boolean.FALSE;
+        }
     }
 
     public void LogIn(View v) {
-        if (verifyLogIn()){
+        if (verifyLogIn()==Boolean.TRUE){
             Intent intent = new Intent(SignIn.this, ListConcernActivity.class);
             startActivity(intent);
         } else {
