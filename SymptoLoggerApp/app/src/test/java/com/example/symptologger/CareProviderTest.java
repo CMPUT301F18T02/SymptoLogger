@@ -49,7 +49,12 @@ public class CareProviderTest {
                 "test@test.com", "123456789");
         ArrayList<Concern> concerns = new ArrayList<>();
         Concern concern1 = new Concern();
-        concern1.setTitle("Testing");
+
+        try {
+            concern1.setTitle("Testing");
+        } catch(TitleTooLongException e){
+            assertTrue(false);
+        }
         concerns.add(concern1);
 
         assertEquals(concerns, careProvider.searchConcerns("Testing"));
