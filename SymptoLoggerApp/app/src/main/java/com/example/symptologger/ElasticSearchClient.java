@@ -21,9 +21,9 @@ public class ElasticSearchClient {
     private static final String server = "http://cmput301.softwareprocess.es:8080";
     private static final String index = "cmput301f18t02";
 
-    static { // need static here since initClient is static
-        initClient();
-    }
+//    static { // need static here since initClient is static
+//        initClient();
+//    }
 
     public static void initClient() {
         // Construct a new Jest client according to configuration via factory
@@ -98,6 +98,7 @@ public class ElasticSearchClient {
 
         @Override
         protected String doInBackground(String... search_parameters){
+            initClient();
 
             String type = "usersLogin";
             String query =  String.format("{\"query\": {\"match\": {\"userName\": \"%s\"}}}", search_parameters[0]);

@@ -42,6 +42,9 @@
             android:label="@string/title_activity_new_record_avtivity"
             android:exported="true"
             android:theme="@style/NoActionBarTheme" />
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
     </application>
 
 </manifest>

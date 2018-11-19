@@ -1,10 +1,13 @@
 package com.example.symptologger;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -84,6 +87,41 @@ public class ViewConcernActivity extends AppCompatActivity {
         recordList = new ArrayList<Record>(concernList.get(pos).getRecords());
         recordListAdapter = new ArrayAdapter<Record>(this,android.R.layout.simple_list_item_1,recordList);
         recordListView.setAdapter(recordListAdapter);
+
+        recordListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id){
+                final int recPos = position;
+
+                AlertDialog.Builder recordAlert = new AlertDialog.Builder(ViewConcernActivity.this);
+
+                recordAlert.setTitle(recordList.get(recPos).getTitle());
+                recordAlert.setCancelable(true);
+
+                CharSequence[] options = {"View",
+                        "Delete",
+                        "Cancel"};
+
+                recordAlert.setItems(options, new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which){
+                        if (which == 0){
+                            Toast.makeText(ViewConcernActivity.this,recordList.get(recPos).getTitle(),Toast.LENGTH_SHORT).show();
+//                            Intent viewIntent = new Intent(ViewConcernActivity.this, ViewRecordActivity.class);
+//                            viewIntent.putExtra("pos",recPos);
+//                            startActivity(viewIntent);
+                        } else if (which == 1){
+                            Toast.makeText(ViewConcernActivity.this,"Delete",Toast.LENGTH_SHORT).show();
+                            concernList.get(pos).removeRecord(recordList.get(recPos));
+                        } else {
+                            Toast.makeText(ViewConcernActivity.this,"Cancel",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                recordAlert.show();
+                return false;
+            }
+        });
     }
 
     public void back() {
