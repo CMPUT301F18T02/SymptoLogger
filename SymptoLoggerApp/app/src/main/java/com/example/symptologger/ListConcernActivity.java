@@ -48,7 +48,7 @@ public class ListConcernActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(ListConcernActivity.this,"Good Bye", Toast.LENGTH_SHORT).show();
-                Intent logOut = new Intent(ListConcernActivity.this,SignUp.class);
+                Intent logOut = new Intent(ListConcernActivity.this,MainActivity.class);
                 startActivity(logOut);
             }
         });
