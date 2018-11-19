@@ -110,7 +110,6 @@ public class NewRecordActivity extends AppCompatActivity {
         newRecordFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RecordListController rlc = new RecordListController();
 
                 Toast.makeText(NewRecordActivity.this,"Saving Record", Toast.LENGTH_SHORT).show();
 
@@ -119,11 +118,22 @@ public class NewRecordActivity extends AppCompatActivity {
 
                 Record newRecord = new Record(c.getTime(),title);
 
-                rlc.addRecord(newRecord);
+                Concern thisConcern = concernList.get(pos);
+                thisConcern.addRecord(newRecord);
 
                 Intent doneIntent = new Intent(NewRecordActivity.this, ViewConcernActivity.class);
-                intent.putExtra("pos",pos);
+                doneIntent.putExtra("pos",pos);
                 startActivity(doneIntent);
+            }
+        });
+
+        FloatingActionButton cancelNewRecordFAB = findViewById(R.id.cancelNewRecordFAB);
+        cancelNewRecordFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent cancelIntent = new Intent(NewRecordActivity.this, ViewConcernActivity.class);
+                cancelIntent.putExtra("pos",pos);
+                startActivity(cancelIntent);
             }
         });
     }

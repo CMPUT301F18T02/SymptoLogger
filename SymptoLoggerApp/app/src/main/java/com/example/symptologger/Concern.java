@@ -2,6 +2,7 @@ package com.example.symptologger;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 
 import io.searchbox.annotations.JestId;
@@ -11,7 +12,6 @@ class Concern {
     private Date date;
     private String description;
     private RecordList myRecords;
-    private int recordCount = 0;
 
     @JestId
     private String id;
@@ -23,7 +23,6 @@ class Concern {
         this.date = new Date();
         this.description = "No description given";
         this.myRecords = new RecordList();
-        this.recordCount = 0;
     }
 
     Concern(String title, Date date, String description) throws TitleTooLongException, DescriptionTooLongException{
@@ -39,7 +38,6 @@ class Concern {
             throw new DescriptionTooLongException();
         }
         this.myRecords = new RecordList();
-        this.recordCount = 0;
     }
 
     Concern(String title, String description) throws TitleTooLongException, DescriptionTooLongException {
@@ -55,16 +53,12 @@ class Concern {
             throw new DescriptionTooLongException();
         }
         this.myRecords = new RecordList();
-        this.recordCount = 0;
     }
 
     public String toString(){
-        return getTitle()+"\t\t\t\t\t"+getRecordCount()+"\n"+getDate();
+        return getTitle()+"\t\t\t\t\t"+findRecordCount()+"\n"+getDate();
     }
 
-    public int getRecordCount() {
-        return this.recordCount;
-    }
 
     public void setTitle(String title) throws TitleTooLongException{
         if (title.length() <= 30){
@@ -103,6 +97,10 @@ class Concern {
     //A general "record" until we have the specifics of photo, geo-location and comments ironed out.
     public void addRecord(Record record) {
         this.myRecords.addRecord(record);
+    }
+
+    public Collection<Record> getRecords(){
+        return this.myRecords.getRecords();
     }
 
     public boolean recordListContains(Record record) {

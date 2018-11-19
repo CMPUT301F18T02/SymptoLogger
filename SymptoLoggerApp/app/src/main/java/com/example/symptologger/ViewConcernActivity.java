@@ -80,8 +80,8 @@ public class ViewConcernActivity extends AppCompatActivity {
         concernDescriptionView.setText(concernList.get(pos).getDescription());
 
         recordListView = findViewById(R.id.recordListView);
-        records = RecordListController.getRecordList().getRecords();
-        recordList = new ArrayList<Record>(records);
+        //records = RecordListController.getRecordList().getRecords();
+        recordList = new ArrayList<Record>(concernList.get(pos).getRecords());
         recordListAdapter = new ArrayAdapter<Record>(this,android.R.layout.simple_list_item_1,recordList);
         recordListView.setAdapter(recordListAdapter);
     }

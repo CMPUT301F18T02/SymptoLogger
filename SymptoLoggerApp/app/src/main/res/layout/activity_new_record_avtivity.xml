@@ -7,6 +7,21 @@
     tools:context=".NewRecordActivity">
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/cancelNewRecordFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:focusable="true"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addBodyPartsButton" />
+
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/newRecordFAB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
