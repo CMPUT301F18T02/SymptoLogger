@@ -6,16 +6,19 @@ public class User {
     private String id;
     private String email;
     private String cell;
-
+    private String user_type;
 
     public User() {}
 
-    public User(String id, String firstName, String lastName, String email, String cell) {
+
+    public User(String id, String firstName, String lastName, String email, String cell, String user_type) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.cell = cell;
+
+        this.user_type = user_type;
     }
 
     public void setFirstName(String first) {}
@@ -43,6 +46,8 @@ public class User {
     public String getCell() {
         return this.cell;
     }
+
+    public String getUsertype() { return user_type; }
 
     public void setId(String id) {
         this.id = id;

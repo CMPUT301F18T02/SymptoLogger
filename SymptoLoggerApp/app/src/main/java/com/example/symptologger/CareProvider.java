@@ -5,9 +5,8 @@ import java.util.ArrayList;
 public class CareProvider extends User {
     private ArrayList<Patient> patients;
 
-    public CareProvider(String id, String firstName, String lastName, String email, String cell) {
-        super(id, firstName, lastName, email, cell);
-        this.patients = new ArrayList<>();
+    public CareProvider(String id, String firstName, String lastName, String email, String cell, String user_type) {
+        super(id, firstName, lastName, email, cell, user_type);
     }
 
     private int assigneeCount;
