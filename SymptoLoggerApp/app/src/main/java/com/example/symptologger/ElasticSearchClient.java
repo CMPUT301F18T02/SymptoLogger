@@ -94,7 +94,7 @@ public class ElasticSearchClient {
         }
     }
 
-    public static class SearchRecord extends AsyncTask<String, Void, Boolean>{
+    public static class SearchUser extends AsyncTask<String, Void, Boolean>{
 
         @Override
         protected Boolean doInBackground(String... search_parameters){

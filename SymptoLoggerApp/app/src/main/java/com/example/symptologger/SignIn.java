@@ -27,11 +27,11 @@ public class SignIn extends AppCompatActivity {
         userName2 = typedUserName.getText().toString();
         Boolean val = Boolean.FALSE;
 
-        ElasticSearchClient.SearchRecord searchRecord = new ElasticSearchClient.SearchRecord();
-        searchRecord.execute(userName2);
+        ElasticSearchClient.SearchUser searchUser = new ElasticSearchClient.SearchUser();
+        searchUser.execute(userName2);
 
         try {
-            val = searchRecord.get();
+            val = searchUser.get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
