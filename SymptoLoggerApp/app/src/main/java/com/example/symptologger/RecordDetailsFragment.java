@@ -35,9 +35,9 @@ public class RecordDetailsFragment extends Fragment {
         Location location;
 
         // TODO: replace p, cp, record
-        CareProvider careProvider = new CareProvider("002", "CPFirst", "CPLast", "test@test.com", "123456790");
+        CareProvider careProvider = new CareProvider("002", "CPFirst", "CPLast", "test@test.com", "123456790","");
         Record record = new Record();
-        Patient patient = new Patient("001", "PFirst", "PLast", "test@test.com", "123456790");
+        Patient patient = new Patient("001", "PFirst", "PLast", "test@test.com", "123456790","");
 
         String careProviderName = careProvider.getFullName();
         String datetime = record.getDate().toString();

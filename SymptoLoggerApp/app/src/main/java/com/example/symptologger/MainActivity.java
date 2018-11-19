@@ -4,11 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-<<<<<<< HEAD
 import android.widget.EditText;
-=======
 import android.widget.Button;
->>>>>>> KaiwenWorkingBranch
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         //new ElasticSearchClient.SearchRecord().execute("no");
 
         Button button_sign_up = (Button) findViewById(R.id.button_sign_up);
-        Button button_add_geo_location = (Button) findViewById(R.id.button_geo_location);
+        //Button button_add_geo_location = (Button) findViewById(R.id.button_geo_location);
 
         button_sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,12 +27,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        button_add_geo_location.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, MapsActivity.class));
-            }
-        });
+//        button_add_geo_location.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(MainActivity.this, MapsActivity.class));
+//            }
+//        });
     }
 
     public void SignIn(View v) {
