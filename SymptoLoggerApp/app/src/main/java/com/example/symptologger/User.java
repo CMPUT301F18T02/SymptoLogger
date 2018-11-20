@@ -104,9 +104,12 @@ public class User {
      * Set ID
      * @param id
      */
-    // TODO: system generated or given by app user?
-    public void setId(String id) {
-        this.id = id;
+    public void setId(String id)throws UserIDTooShortException {
+        if (id.length() >= 8){
+            this.id = id;
+        } else {
+            throw new UserIDTooShortException();
+        }
     }
 
     /**

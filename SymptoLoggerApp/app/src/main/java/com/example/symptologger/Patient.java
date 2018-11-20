@@ -27,11 +27,12 @@ public class Patient extends User {
         this.concerns = new ArrayList<>();
     }
 
-    protected void createUserID(String userPrompt) {
-//        if (userPrompt.length() < 8) {
-//            throw new RuntimeException("User ID must be at least 8 characters.");
-//        }
-//        super.setUserID(userPrompt);
+    public void setId(String userPrompt) {
+        try {
+            super.setId(userPrompt);
+        } catch (UserIDTooShortException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

@@ -65,7 +65,15 @@ public class CreateProfileActivity extends AppCompatActivity{
                     //last_name = String.valueOf(editText_last_name.getText());
                     phone = String.valueOf(editText_phone.getText());
                     email = String.valueOf(editText_email.getText());
-                    createUser();
+                    if ((user_id.length()<8)||(user_id.equals(""))){
+                        Toast.makeText(CreateProfileActivity.this,"Please enter a user id that is at least 8 characters long.", Toast.LENGTH_SHORT).show();
+                    } else if (phone.equals("")) {
+                        Toast.makeText(CreateProfileActivity.this,"Please enter a phone number.",Toast.LENGTH_SHORT).show();
+                    } else if (email.equals("")){
+                        Toast.makeText(CreateProfileActivity.this,"Please enter an email address.",Toast.LENGTH_SHORT).show();
+                    } else {
+                        createUser();
+                    }
                 }
             }
         });
