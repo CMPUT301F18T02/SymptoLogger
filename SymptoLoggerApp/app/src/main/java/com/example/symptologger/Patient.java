@@ -19,9 +19,10 @@ public class Patient extends User {
      * @param lastName last name
      * @param email email address
      * @param cell cell number in string
+     * @param user_type type of user
      */
-    public Patient(String id, String firstName, String lastName, String email, String cell) {
-        super(id, firstName, lastName, email, cell);
+    public Patient(String id, String firstName, String lastName, String email, String cell, String user_type) {
+        super(id, firstName, lastName, email, cell, user_type);
 
         this.concerns = new ArrayList<>();
     }
@@ -33,20 +34,27 @@ public class Patient extends User {
 //        super.setUserID(userPrompt);
     }
 
+    /**
+     * Get patient's concern
+     * @return list of Concerns
+     */
     public ArrayList<Concern> getConcerns() {
         return this.concerns;
     }
 
+    /**
+     * Add a concern
+     * @param concern a concern object
+     */
     public void addConcern(Concern concern) {
         this.concerns.add(concern);
 
     }
 
-    public void updateConcern(Concern concern) {
-        //TODO
-
-    }
-
+    /**
+     * Remove a concern from the list
+     * @param concern
+     */
     public void deleteConcern(Concern concern) {
         this.concerns.remove(concern);
     }

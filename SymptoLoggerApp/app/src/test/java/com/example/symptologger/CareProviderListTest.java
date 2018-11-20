@@ -13,7 +13,7 @@ public class CareProviderListTest {
     public void testAddCareProvider() {
         CareProviderList careProviderList = new CareProviderList();
         CareProvider cp = new CareProvider("testCareProvider", "First", "Last",
-                "test@test.com", "123456789");
+                "test@test.com", "123456789", "cp");
 
         assertFalse(careProviderList.getCareProviders().contains(cp));
 
@@ -25,7 +25,7 @@ public class CareProviderListTest {
     public void testRemoveCareProvider() {
         CareProviderList careProviderList = new CareProviderList();
         CareProvider cp = new CareProvider("testCareProvider", "First", "Last",
-                "test@test.com", "123456789");
+                "test@test.com", "123456789", "cp");
 
         careProviderList.addCareProviders(cp);
         assertTrue(careProviderList.getCareProviders().contains(cp));
@@ -38,10 +38,10 @@ public class CareProviderListTest {
     public void testGetCareProviderList() {
         CareProviderList careProviderList = new CareProviderList();
         CareProvider cp1 = new CareProvider("testCareProvider1", "First", "Last",
-                "test@test.com", "123456789");
+                "test@test.com", "123456789", "cp");
         careProviderList.addCareProviders(cp1);
         CareProvider cp2 = new CareProvider("testCareProvider2", "First", "Last",
-                "test@test.com", "123456789");
+                "test@test.com", "123456789", "cp");
         careProviderList.addCareProviders(cp2);
 
         ArrayList<CareProvider> expected = new ArrayList<>();
@@ -55,10 +55,10 @@ public class CareProviderListTest {
     public void testGetCareProvidersCount() {
         CareProviderList careProviderList = new CareProviderList();
         CareProvider cp1 = new CareProvider("testCareProvider1", "First", "Last",
-                "test@test.com", "123456789");
+                "test@test.com", "123456789", "cp");
         careProviderList.addCareProviders(cp1);
         CareProvider cp2 = new CareProvider("testCareProvider2", "First", "Last",
-                "test@test.com", "123456789");
+                "test@test.com", "123456789", "cp");
         careProviderList.addCareProviders(cp2);
 
         int expected = 2;

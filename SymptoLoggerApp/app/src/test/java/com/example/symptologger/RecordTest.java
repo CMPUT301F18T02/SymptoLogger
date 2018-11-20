@@ -1,12 +1,10 @@
 package com.example.symptologger;
 
-import android.icu.text.AlphabeticIndex;
-
 import org.junit.Test;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 
 public class RecordTest {
@@ -38,13 +36,13 @@ public class RecordTest {
     @Test
     public void testGetDate(){
         Date date = new Date();
-        Record record = new Record("",date);
+        Record record = new Record(date, "title");
         assertEquals(date,record.getDate());
     }
 
     @Test
     public void testSetDate(){
-        Record myRecord = new Record("",new Date());
+        Record myRecord = new Record(new Date(), "title");
 
         Date myDate = new Date();
 
