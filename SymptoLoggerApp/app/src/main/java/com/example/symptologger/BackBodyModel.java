@@ -2,6 +2,14 @@ package com.example.symptologger;
 
 import java.util.ArrayList;
 
+/**
+ * BackBodyModel extends the BodyModel class. A BackBodyModel object represents the patient from the
+ * back.
+ *
+ * @author Jason Lee
+ * @see BodyModel
+ */
+
 public class BackBodyModel extends BodyModel {
     private Photograph bodyFrame;
     private User user;
