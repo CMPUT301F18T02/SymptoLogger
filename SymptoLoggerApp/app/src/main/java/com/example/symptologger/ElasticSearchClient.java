@@ -7,7 +7,6 @@ import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 
 import java.util.List;
-
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
 import io.searchbox.core.Index;
@@ -53,12 +52,12 @@ public class ElasticSearchClient {
         }
     }
 
-    public static class AddTable extends AsyncTask<String[], Void, Void> { //use Void instead of void for AsyncTask as return type
+    public static class AddTable extends AsyncTask<String, Void, Void> { //use Void instead of void for AsyncTask as return type
         @Override
-        protected Void doInBackground(String[]... indices) {
+        protected Void doInBackground(String... indices) {
 
             String type = "usersLogin";
-            String source = "{\"usersLogin\" : {\"properties\" : {\"userID\": {\"type\" : \"integer\"},\"userName\" : {\"type\" : \"string\", \"index\": \"not_analyzed\"},\"creationDate\": {\"type\" : \"string\"},\"userRole\": {\"type\" : \"string\"}}}}";
+            String source = "{\"usersLogin\" : {\"properties\" : {\"memberID\": {\"type\" : \"integer\"},\"userID\" : {\"type\" : \"string\", \"index\": \"not_analyzed\"},\"creationDate\": {\"type\" : \"string\"},\"userRole\": {\"type\" : \"string\"}}}}";
 
                 try {
                     JestResult result = client.execute(new PutMapping.Builder(index, type, source).build());
@@ -72,25 +71,26 @@ public class ElasticSearchClient {
         }
     }
 
-    public static class AddRecord extends AsyncTask<String[], Void, Void> { //use Void instead of void for AsyncTask as return type
+    public static class AddRecord extends AsyncTask<String, Void, Boolean> { //use Void instead of void for AsyncTask as return type
         @Override
-        protected Void doInBackground(String[]... indices) {
+        protected Boolean doInBackground(String... record) {
 
             String type = "usersLogin";
-            String source = "{\"userName\": \"patrick\", \"creationDate\": \"2018-11-16\", \"userRole\": \"P\", \"userID\": 13 }";
-            //String id = "9";
+            String source = String.format("{\"userID\": \"%s\", \"creationDate\": \"%s\", \"userRole\": \"%s\", \"memberID\": %d }",record[0], record[1], record[2], Integer.parseInt(record[3]));
 
             try {
-                //JestResult result = client.execute( new Index.Builder(source).index(index).type(type).id(id).build() );
                 JestResult result = client.execute( new Index.Builder(source).index(index).type(type).build() );
 
                 if (!result.isSucceeded()) {
-                    Log.e("Error", "ElasticSearch was not able to add record.");
+                    return Boolean.TRUE;
+                }
+                else{
+                    return Boolean.FALSE;
                 }
             } catch (Exception e) {
                 Log.i("Error", "The application failed - reason: AddRecord.");
             }
-            return null; //Void requires return, (it's not void)
+            return Boolean.FALSE;
         }
     }
 
@@ -100,12 +100,12 @@ public class ElasticSearchClient {
         protected Boolean doInBackground(String... search_parameters){
 
             String type = "usersLogin";
-            String query =  String.format("{\"query\": {\"match\": {\"userName\": \"%s\"}}}", search_parameters[0]);
+            String query =  String.format("{\"query\": {\"match\": {\"userID\": \"%s\"}}}", search_parameters[0]);
             try {
                 JestResult result = client.execute(  new Search.Builder(query).addIndex(index).addType(type).build() );
 
                 if (result.isSucceeded()){
-                    List<SignUp> res = result.getSourceAsObjectList(SignUp.class);
+                    List<SourceAsObjectListMap> res = result.getSourceAsObjectList(SourceAsObjectListMap.class);
                     if (res.size() != 0){
                         return Boolean.TRUE;
                     }
@@ -124,20 +124,34 @@ public class ElasticSearchClient {
             return Boolean.FALSE;
         }
     }
-}
+
+    public static class SearchLargestMemberID extends AsyncTask<String, Void, Integer>{
+
+        @Override
+        protected Integer doInBackground(String... search_parameters){
+
+            String type = "usersLogin";
+            String query =  "{\"query\": {\"match_all\": {}},\"sort\": {\"memberID\": \"desc\"},\"size\": 1}";
+            try {
+                JestResult result = client.execute(  new Search.Builder(query).addIndex(index).addType(type).build() );
+
+                if (result.isSucceeded()){
+                    List<SourceAsObjectListMap> res = result.getSourceAsObjectList(SourceAsObjectListMap.class);
+                    if (res.size() != 0){
+                        return res.get(0).getMemberID();
+                    }
+                    else{
+                        return -1;
+                    }
 
 
-/*
-{
-  "fields": [
-    "userID"
-  ],
-  "query": {
-    "match_all": {}
-  },
-  "sort": {
-    "userID": "desc"
-  },
-  "size": 1
+                } else {
+                    Log.e("Error","Some issues with query.");
+                }
+            } catch (Exception e){
+                Log.i("Error","Something went wrong when we tried to communicate with the elasticsearch server.");
+            }
+            return -1;
+        }
+    }
 }
-*/
