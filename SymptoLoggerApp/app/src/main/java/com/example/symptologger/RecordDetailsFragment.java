@@ -76,7 +76,7 @@ public class RecordDetailsFragment extends Fragment {
             }
         });
 
-        ArrayList<Photograph> photographs = record.getPhoto();
+        ArrayList<Photograph> photographs = record.getPhotos();
         if (photographs.size() == 0) {
             TextView t = view.findViewById(R.id.recordPictureText);
             t.setText("No pictures found");
