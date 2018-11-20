@@ -156,7 +156,7 @@ class Record {
      * returns the comments made by patients
      * @return patient comments
      */
-    
+
     public ArrayList<PatientComment> getPatientComment() {
         //When patient comment is ready
         return new ArrayList<>();
