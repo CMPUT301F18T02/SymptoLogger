@@ -1,5 +1,6 @@
 package com.example.symptologger;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -144,7 +145,7 @@ public class CreateProfileActivity extends AppCompatActivity{
 
             Boolean val = Boolean.FALSE;
             ElasticSearchClient.AddUser addUser = new ElasticSearchClient.AddUser();
-            addUser.execute(user_id, formatter.format(date), user_type, Integer.toString(existingLargestID + 1));
+            addUser.execute(user_id, formatter.format(date), user_type, Integer.toString(existingLargestID + 1), email, phone);
 
             try {
                 val = addUser.get();
@@ -158,6 +159,8 @@ public class CreateProfileActivity extends AppCompatActivity{
                 Toast.makeText(CreateProfileActivity.this, "Failed to add new user " + user_id + ". Please try again.", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(CreateProfileActivity.this, "Successfully added " + user_id + " to the user list.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(CreateProfileActivity.this,ListConcernActivity.class);
+                startActivity(intent);
             }
         } else {
             Toast.makeText(CreateProfileActivity.this,"User id already in use. Please enter a unique user id.",Toast.LENGTH_SHORT).show();

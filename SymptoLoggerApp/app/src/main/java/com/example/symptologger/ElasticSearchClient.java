@@ -14,6 +14,22 @@ import io.searchbox.core.Search;
 import io.searchbox.indices.DeleteIndex;
 import io.searchbox.indices.mapping.PutMapping;
 
+/*
+ *  Copyright 2018 Remi Arshad, Noni Hua, Jason Lee, Patrick Tamm, Kaiwen Zhang
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+
+ *     http://www.apache.org/licenses/LICENSE-2.0
+
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
 /**
  * ElasticSearchClient represents and handles all interactions with the ElasticSearch server. It creates
  * subclasses that represent specific objects for particular interactions (searching, adding, etc.).
@@ -82,7 +98,14 @@ public class ElasticSearchClient {
         protected Void doInBackground(String... indices) {
 
             String type = "usersLogin";
-            String source = "{\"usersLogin\" : {\"properties\" : {\"memberID\": {\"type\" : \"integer\"},\"userID\" : {\"type\" : \"string\", \"index\": \"not_analyzed\"},\"creationDate\": {\"type\" : \"string\"},\"userRole\": {\"type\" : \"string\"}}}}";
+            String source = "{\"usersLogin\" : {\"properties\" : " +
+                    "{\"memberID\": {\"type\" : \"integer\"}," +
+                    "\"email\": {\"type\" : \"string\"}, " +
+                    "\"phone\": {\"type\" : \"string\"}, " +
+                    "\"userID\" : {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
+                    "\"creationDate\": {\"type\" : \"string\"}," +
+                    "\"userRole\": {\"type\" : \"string\"}" +
+                    "}}}";
 
                 try {
                     JestResult result = client.execute(new PutMapping.Builder(index, type, source).build());
@@ -109,7 +132,7 @@ public class ElasticSearchClient {
         protected Boolean doInBackground(String... record) {
 
             String type = "usersLogin";
-            String source = String.format("{\"userID\": \"%s\", \"creationDate\": \"%s\", \"userRole\": \"%s\", \"memberID\": %d }",record[0], record[1], record[2], Integer.parseInt(record[3]));
+            String source = String.format("{\"userID\": \"%s\", \"creationDate\": \"%s\", \"userRole\": \"%s\", \"memberID\": %d, \"email\": \"%s\", \"phone\": \"%s\"}",record[0], record[1], record[2], Integer.parseInt(record[3]), record[4], record[5]);
 
             try {
                 JestResult result = client.execute( new Index.Builder(source).index(index).type(type).build() );
