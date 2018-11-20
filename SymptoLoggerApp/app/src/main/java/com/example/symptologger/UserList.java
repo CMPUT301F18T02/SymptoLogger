@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 
 /**
- * Controller for list of users.
+ * The list of users.
  */
 
 public class UserList {

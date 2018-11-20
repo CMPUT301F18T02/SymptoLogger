@@ -33,6 +33,10 @@ import java.util.ArrayList;
  */
 
 
+/**
+ * Activity for displaying photos and body models.
+ */
+
 public class RecordActivity extends Activity {
 
     //Should change these later

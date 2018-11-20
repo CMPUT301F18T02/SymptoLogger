@@ -16,6 +16,11 @@ package com.example.symptologger;
  *  limitations under the License.
  */
 
+/**
+ * The controller for accessing the record list. This way, the model does not need to be modified
+ * directly.
+ */
+
 public class RecordListController {
     private static RecordList recordList = null;
 

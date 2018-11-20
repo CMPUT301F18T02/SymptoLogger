@@ -25,6 +25,10 @@ import java.io.FileNotFoundException;
  *  limitations under the License.
  */
 
+/**
+ * Activity for viewing the photo.
+ */
+
 public class ViewPhotoActivity extends Activity {
 
     @Override

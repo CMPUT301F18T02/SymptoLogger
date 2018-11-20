@@ -16,6 +16,10 @@ package com.example.symptologger;
  *  limitations under the License.
  */
 
+/**
+ * Exception thrown when user id is less than 8 characters.
+ */
+
 public class UserIDTooShortException extends Exception {
     UserIDTooShortException(){
         super("User ID too short! Must be at least 8 characters.");

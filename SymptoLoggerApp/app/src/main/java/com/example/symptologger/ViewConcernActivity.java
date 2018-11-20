@@ -33,6 +33,10 @@ import java.util.Collection;
  *  limitations under the License.
  */
 
+/**
+ * The activity that handles viewing the concern.
+ */
+
 public class ViewConcernActivity extends AppCompatActivity {
 
     Collection<Concern> concerns;
