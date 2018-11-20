@@ -14,15 +14,31 @@ import io.searchbox.core.Search;
 import io.searchbox.indices.DeleteIndex;
 import io.searchbox.indices.mapping.PutMapping;
 
+/**
+ * ElasticSearchClient represents and handles all interactions with the ElasticSearch server. It creates
+ * subclasses that represent specific objects for particular interactions (searching, adding, etc.).
+ *
+ * @author Remi Arshad
+ */
+
 public class ElasticSearchClient {
 
     private static JestClient client = null;
     private static final String server = "http://cmput301.softwareprocess.es:8080";
     private static final String index = "cmput301f18t02";
 
+
+    /*
+     * Initialize connection to server ...
+      */
     static { // need static here since initClient is static
         initClient();
     }
+
+    /**
+     * initClient() initializes the connection to the ElasticSearch server, constructing a new Jest
+     * client.
+     */
 
     public static void initClient() {
         // Construct a new Jest client according to configuration via factory
@@ -33,6 +49,11 @@ public class ElasticSearchClient {
             client = factory.getObject();
         }
     }
+
+    /**
+     * Represents the object used to delete indices in the ElasticSearch server. Not used in prototype.
+     * Takes as a parameter the string representation of the username to be deleted.
+     */
 
     //AVOID USING DeleteIndices FOR NOW!
     public static class DeleteIndices extends AsyncTask<String, Void, Void> { //use Void instead of void for AsyncTask as return type
@@ -52,6 +73,10 @@ public class ElasticSearchClient {
         }
     }
 
+    /**
+     * Represents the object used to add a new table to the server.
+     */
+
     public static class AddTable extends AsyncTask<String, Void, Void> { //use Void instead of void for AsyncTask as return type
         @Override
         protected Void doInBackground(String... indices) {
@@ -70,6 +95,14 @@ public class ElasticSearchClient {
             return null; //Void requires return, (it's not void)
         }
     }
+
+    /**
+     * Represents the object used to add a new user to the server. The nested doInBackground method
+     * returns Boolean.TRUE or Boolean.FALSE depending on whether or not the user was successfully added.
+     * Takes as parameter the username to be added.
+     *
+     * @author Remi Arshad
+     */
 
     public static class AddUser extends AsyncTask<String, Void, Boolean> { //use Void instead of void for AsyncTask as return type
         @Override
@@ -93,6 +126,13 @@ public class ElasticSearchClient {
             return Boolean.FALSE;
         }
     }
+
+    /**
+     * Represents the object used to search for a user in the server. It takes as parameter the
+     * username to be found.
+     *
+     * @author Remi Arshad
+     */
 
     public static class SearchUser extends AsyncTask<String, Void, Boolean>{
 
@@ -124,6 +164,12 @@ public class ElasticSearchClient {
             return Boolean.FALSE;
         }
     }
+
+    /**
+     * Represents the object used to find the largest member id.
+     *
+     * @author Remi Arshad
+     */
 
     public static class SearchLargestMemberID extends AsyncTask<String, Void, Integer>{
 
