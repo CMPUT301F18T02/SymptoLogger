@@ -109,8 +109,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             Log.d(TAG, "onComplete: found location!");
                             Location currentLocation = (Location) task.getResult();
 
-                            moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
-                                    DEFAULT_ZOOM);
+                            try {
+                                moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
+                                        DEFAULT_ZOOM);
+                            } catch (Exception e){
+                                Toast.makeText(MapsActivity.this, "Unable to get current location.",Toast.LENGTH_SHORT).show();
+                            }
 
                         }else{
                             Log.d(TAG, "onComplete: current location is null");
