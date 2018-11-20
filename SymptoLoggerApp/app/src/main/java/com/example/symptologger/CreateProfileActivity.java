@@ -18,6 +18,11 @@ import java.util.Random;
 import java.util.TimeZone;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * The activity that allows the user to create a new profile. It will get the profile details and
+ * then send them off to the ElasticSearchClient object for interacting with the server.
+ */
+
 public class CreateProfileActivity extends AppCompatActivity{
 
     View mView;

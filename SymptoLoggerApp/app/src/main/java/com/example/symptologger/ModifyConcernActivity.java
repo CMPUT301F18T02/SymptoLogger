@@ -30,6 +30,11 @@ import java.util.Date;
  *  limitations under the License.
  */
 
+/**
+ * If the patient would like to modify the details of a particular concern, this is the activity that
+ * enables them to do so.
+ */
+
 public class ModifyConcernActivity extends AppCompatActivity {
 
     private int pos;

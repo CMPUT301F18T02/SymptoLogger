@@ -44,6 +44,10 @@ import com.google.android.gms.tasks.Task;
 
 /* https://github.com/mitchtabian/Google-Maps-Google-Places*/
 
+/**
+ * The activity that starts when the users would like to view/add geolocations.
+ */
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;

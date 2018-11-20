@@ -15,6 +15,10 @@ package com.example.symptologger;
  *  limitations under the License.
  */
 
+/**
+ * A listener for the concern list.
+ */
+
 public interface ConcernListener {
     public void updateListener();
 }

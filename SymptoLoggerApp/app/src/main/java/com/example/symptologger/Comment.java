@@ -17,6 +17,11 @@ import java.util.Date;
  *  limitations under the License.
  */
 
+/**
+ * An interface for the comment classes. Provides the blue print for the methods these classes need to
+ * implement.
+ */
+
 public interface Comment {
     void setDate(Date date);
 
