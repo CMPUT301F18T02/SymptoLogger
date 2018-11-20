@@ -8,6 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.ArrayList;
+
 /**
  * <p>
  *     Fragment to display record details. App user should be able to see
@@ -37,8 +46,6 @@ public class RecordDetailsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_record_details, container, false);
 
-        Location location;
-
         // TODO: replace p, cp, record
         CareProvider careProvider = new CareProvider("002", "CPFirst", "CPLast", "test@test.com", "123456790", "care_provider");
         Record record = new Record();
@@ -53,10 +60,29 @@ public class RecordDetailsFragment extends Fragment {
         TextView datetimeView = view.findViewById(R.id.dateTimeContent);
         datetimeView.setText(datetime);
 
-        // TODO: maybe map fragment?
-//        mapView = findViewById(R.id.recordMapView);
-//        mapView.onCreate(Bundle.EMPTY);
-//        MapsInitializer.initialize(this);
+        Location location;
+        location = record.getGeoLocation();
+        final MapView mapView = view.findViewById(R.id.recordMapView);
+        mapView.onCreate(savedInstanceState);
+        mapView.getMapAsync(new OnMapReadyCallback() {
+
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
+                // TODO: use saved location
+                LatLng coordinates = new LatLng(32.882216, -117.222028);
+                googleMap.addMarker(new MarkerOptions().position(coordinates).title("testing"));
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 15));
+                mapView.onResume();
+            }
+        });
+
+        ArrayList<Photograph> photographs = record.getPhoto();
+        if (photographs.size() == 0) {
+            TextView t = view.findViewById(R.id.recordPictureText);
+            t.setText("No pictures found");
+        } else {
+            // TODO
+        }
 
         return view;
     }

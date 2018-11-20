@@ -73,7 +73,7 @@
             <com.google.android.gms.maps.MapView
                 android:id="@+id/recordMapView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:clickable="true"
                 android:paddingVertical="8dp" />
 
@@ -89,11 +89,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="62dp">
 
-                <ImageButton
-                    android:id="@+id/imageButton3"
+                <TextView
+                    android:id="@+id/recordPictureText"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="?android:attr/selectableItemBackground" />
+                    android:layout_height="32dp"
+                    android:paddingVertical="8dp"/>
             </android.support.v7.widget.GridLayout>
 
             <TextView
