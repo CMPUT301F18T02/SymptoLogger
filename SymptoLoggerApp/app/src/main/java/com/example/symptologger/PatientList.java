@@ -25,7 +25,7 @@ public class PatientList {
 
     /**
      * Remove a patient
-     * @param p patient obejct
+     * @param p patient object
      */
     public void removePatient(Patient p) {
         this.patients.remove(p);

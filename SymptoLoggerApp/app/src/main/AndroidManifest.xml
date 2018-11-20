@@ -44,7 +44,7 @@
         <activity android:name=".ViewConcernActivity" />
         <activity android:name=".ModifyConcernActivity"></activity>
         <!--<activity android:name=".SignUp" />-->
-        <activity android:name=".SignIn"></activity>
+        <activity android:name=".SignInActivity"></activity>
         <activity
             android:name=".NewRecordActivity"
             android:label="@string/title_activity_new_record_avtivity"

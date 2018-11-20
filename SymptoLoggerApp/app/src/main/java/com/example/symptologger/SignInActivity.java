@@ -1,7 +1,6 @@
 package com.example.symptologger;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +9,7 @@ import android.widget.Toast;
 
 import java.util.concurrent.ExecutionException;
 
-public class SignIn extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity {
 
     private String userName2;
     private EditText typedUserName;
@@ -42,7 +41,7 @@ public class SignIn extends AppCompatActivity {
 
     public void LogIn(View v) {
         if (verifyLogIn()){
-            Intent intent = new Intent(SignIn.this, ListConcernActivity.class);
+            Intent intent = new Intent(SignInActivity.this, ListConcernActivity.class);
             startActivity(intent);
         } else {
             Toast.makeText(this,"Sorry, username "+userName2+" was not found. Please try again.", Toast.LENGTH_LONG).show();

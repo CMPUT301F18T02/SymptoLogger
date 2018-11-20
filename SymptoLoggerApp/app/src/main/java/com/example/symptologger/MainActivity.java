@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void SignIn(View v) {
-        Intent SignInIntent = new Intent(this, SignIn.class);
+        Intent SignInIntent = new Intent(this, SignInActivity.class);
         startActivity(SignInIntent);
 //        Intent intent = new Intent(MainActivity.this, ListConcernActivity.class);
 //        startActivity(intent);
