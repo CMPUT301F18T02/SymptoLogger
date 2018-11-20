@@ -37,7 +37,7 @@ import java.util.ArrayList;
  * Activity for displaying photos and body models.
  */
 
-public class RecordActivity extends Activity {
+public class PhotoRecordActivity extends Activity {
 
     //Should change these later
     Record record = new Record();
@@ -51,7 +51,7 @@ public class RecordActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_record);
+        setContentView(R.layout.activity_photo_record);
         //This is just adding in all the ImageButtons of the photo (10 in total)
         //This is for when displaying the images (there probably is a better way than this)
         targetImage = (ImageButton)findViewById(R.id.targetimage1);

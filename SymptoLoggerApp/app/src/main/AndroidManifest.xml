@@ -74,7 +74,7 @@
          <!--https://stackoverflow.com/questions/50461881/java-lang-noclassdeffounderrorfailed-resolution-of-lorg-apache-http-protocolve-->
         <uses-library android:name="org.apache.http.legacy" android:required="false" />
         <!--<activity android:name=".photoactivity" />-->
-        <activity android:name=".RecordActivity" />
+        <activity android:name=".PhotoRecordActivity" />
         <activity android:name=".ViewPhotoActivity" />
     </application>
 

@@ -117,15 +117,16 @@ public class NewRecordActivity extends AppCompatActivity {
         addLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent cancelIntent = new Intent(NewRecordActivity.this, MapsActivity.class);
-                startActivity(cancelIntent);
+                Intent mapIntent = new Intent(NewRecordActivity.this, MapsActivity.class);
+                startActivity(mapIntent);
             }
         });
 
         addBodyPartsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: go to new body part view
+                Intent bodyPartsIntent = new Intent(NewRecordActivity.this, PhotoRecordActivity.class);
+                startActivity(bodyPartsIntent);
             }
         });
 
