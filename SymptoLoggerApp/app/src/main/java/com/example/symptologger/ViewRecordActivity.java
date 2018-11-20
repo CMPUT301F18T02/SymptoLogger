@@ -1,5 +1,6 @@
 package com.example.symptologger;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -8,6 +9,9 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 /*
  *  Copyright 2018 Remi Arshad, Noni Hua, Jason Lee, Patrick Tamm, Kaiwen Zhang
@@ -39,6 +43,13 @@ public class ViewRecordActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private Toolbar toolbar;
 
+    Collection<Concern> concerns;
+    ArrayList<Concern> concernList;
+    ArrayList<Record> recordList;
+
+    int CONCERN_POS;
+    int RECORD_POS;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +64,18 @@ public class ViewRecordActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        CONCERN_POS = extras.getInt("CONCERN");
+        RECORD_POS = extras.getInt("RECORD");
 
+        concerns = ConcernListController.getConcernList().getConcerns();
+        concernList = new ArrayList<Concern>(concerns);
+
+        Concern concernToView = concernList.get(CONCERN_POS);
+        recordList = new ArrayList<Record>(concernToView.getRecords());
+
+        Record recordToView = recordList.get(RECORD_POS);
     }
 
     private void addTabs(ViewPager viewPager) {
