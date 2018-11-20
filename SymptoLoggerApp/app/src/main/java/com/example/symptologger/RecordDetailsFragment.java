@@ -46,6 +46,8 @@ import java.util.ArrayList;
 public class RecordDetailsFragment extends Fragment {
 
 //    private OnFragmentInteractionListener mListener;
+    private Record record;
+    private Concern concern;
 
     public RecordDetailsFragment() {
         // Required empty public constructor
@@ -64,11 +66,10 @@ public class RecordDetailsFragment extends Fragment {
 
         // TODO: replace p, cp, record
         CareProvider careProvider = new CareProvider("002", "CPFirst", "CPLast", "test@test.com", "123456790", "care_provider");
-        Record record = new Record();
         Patient patient = new Patient("001", "PFirst", "PLast", "test@test.com", "123456790", "patient");
 
         String careProviderName = careProvider.getFullName();
-        String datetime = record.getDate().toString();
+        String datetime = this.record.getDate().toString();
 
         TextView careProviderView = view.findViewById(R.id.careProviderContent);
         careProviderView.setText(careProviderName);
@@ -77,7 +78,7 @@ public class RecordDetailsFragment extends Fragment {
         datetimeView.setText(datetime);
 
         Location location;
-        location = record.getGeoLocation();
+        location = this.record.getGeoLocation();
         final MapView mapView = view.findViewById(R.id.recordMapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(new OnMapReadyCallback() {
@@ -103,6 +104,13 @@ public class RecordDetailsFragment extends Fragment {
         return view;
     }
 
+    public void passRecord(Record record){
+        this.record = record;
+    }
+
+    public void passConcern(Concern concern) {
+        this.concern = concern;
+    }
 //    // TODO: Rename method, update argument and hook method into UI event
 //    public void onButtonPressed(Uri uri) {
 //        if (mListener != null) {
