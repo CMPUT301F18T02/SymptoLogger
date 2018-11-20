@@ -43,7 +43,7 @@
         <activity android:name=".NewConcernActivity" />
         <activity android:name=".ViewConcernActivity" />
         <activity android:name=".ModifyConcernActivity"></activity>
-        <activity android:name=".SignUp" />
+        <!--<activity android:name=".SignUp" />-->
         <activity android:name=".SignIn"></activity>
         <activity
             android:name=".NewRecordActivity"
@@ -73,8 +73,9 @@
 
          <!--https://stackoverflow.com/questions/50461881/java-lang-noclassdeffounderrorfailed-resolution-of-lorg-apache-http-protocolve-->
         <uses-library android:name="org.apache.http.legacy" android:required="false" />
-
->>>>>>> KaiwenWorkingBranch
+        <!--<activity android:name=".photoactivity" />-->
+        <activity android:name=".RecordActivity" />
+        <activity android:name=".ViewPhotoActivity" />
     </application>
 
 </manifest>

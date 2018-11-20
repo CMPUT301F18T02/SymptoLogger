@@ -1,8 +1,10 @@
 package com.example.symptologger;
 
+
 import android.location.Location;
 
 import com.google.android.gms.maps.GoogleMap;
+
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,10 +23,14 @@ class Record {
     private Location location;
     private String title;
 
+    private ArrayList<Photograph> photo = new ArrayList<Photograph>();
+    private ArrayList<BodyPart> views = new ArrayList<BodyPart>();
+
     /**
      * The first of two constructors for the Record class. If no title or
      * date are supplied, this constructor is used.
      */
+
 
     public Record(){
         this.title = "";
@@ -74,6 +80,15 @@ class Record {
      * @return date
      */
 
+    public void addView(BodyPart bp){
+        views.add(bp);
+    }
+
+    public void removeView(Integer index){
+        views.remove(index);
+    }
+
+
     public Date getDate() {
         return this.date;
     }
@@ -91,8 +106,21 @@ class Record {
      * adding photos to records.
      */
 
-    public void addPhoto(){
+
+    public void addPhoto(Photograph photograph){
+
+        if (photo.size() < 10) {
+            photo.add(photograph);
+        }
+    }
+
+    public ArrayList<Photograph> getPhoto(){
+        return this.photo;
+    }
+
+    public void removePhoto(Integer index){
         //When photo functionality established
+        photo.remove(index);
     }
 
     /**
