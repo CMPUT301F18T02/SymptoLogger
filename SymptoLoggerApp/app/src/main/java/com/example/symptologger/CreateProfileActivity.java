@@ -23,8 +23,8 @@ public class CreateProfileActivity extends AppCompatActivity{
     String user_id;
     //String first_name;
     //String last_name;
-    //String phone;
-    //String email;
+    String phone;
+    String email;
     String user_type;
 
     Patient patient;
@@ -46,11 +46,11 @@ public class CreateProfileActivity extends AppCompatActivity{
 
     public void addButtonSignUpListener() {
         Button button_sign_up = (Button) mView.findViewById(R.id.button_sign_up);
-        final EditText editText_user_id = (EditText) mView.findViewById(R.id.editText_user_id);
+        final EditText editText_user_id = (EditText) mView.findViewById(R.id.editTextUserId);
         //final EditText editText_first_name = (EditText) mView.findViewById(R.id.editText_first_name);
         //final EditText editText_last_name = (EditText) mView.findViewById(R.id.editText_last_name);
-        //final EditText editText_phone= (EditText) mView.findViewById(R.id.editText_phone_number);
-        //final EditText editText_email= (EditText) mView.findViewById(R.id.editText_email);
+        final EditText editText_phone= (EditText) mView.findViewById(R.id.editText_phone_number);
+        final EditText editText_email= (EditText) mView.findViewById(R.id.editText_email);
 
         button_sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,8 +63,8 @@ public class CreateProfileActivity extends AppCompatActivity{
                     user_id = String.valueOf(editText_user_id.getText());
                     //first_name = String.valueOf(editText_first_name.getText());
                     //last_name = String.valueOf(editText_last_name.getText());
-                    //phone = String.valueOf(editText_phone.getText());
-                    //email = String.valueOf(editText_email.getText());
+                    phone = String.valueOf(editText_phone.getText());
+                    email = String.valueOf(editText_email.getText());
                     createUser();
                 }
             }
@@ -92,16 +92,15 @@ public class CreateProfileActivity extends AppCompatActivity{
 
         if (user_type.equals("Patient")) {
             //patient = new Patient(user_id, first_name, last_name, email, phone, user_type);
-            patient = new Patient(user_id, "", "", "", "", user_type);
+            patient = new Patient(user_id, "", "", email, phone, user_type);
             userList.addUser(patient);
         } else if (user_type.equals("Care Provider")){
             //care_provider = new CareProvider(user_id, first_name, last_name, email, phone, user_type);
-            care_provider = new CareProvider(user_id, "", "", "", "", user_type);
+            care_provider = new CareProvider(user_id, "", "", email, phone, user_type);
             userList.addUser(care_provider);
         }
 
-        // Log.d("user", String.valueOf(userList.getUserList().get(0)));
-        // TODO: save to database
+        // Log.d("user", String.valueOf(userList.getUserList().get(0)));e
 
         Integer existingLargestID = -1;
         ElasticSearchClient.SearchLargestMemberID SearchLargestMemberID = new ElasticSearchClient.SearchLargestMemberID();
@@ -121,19 +120,40 @@ public class CreateProfileActivity extends AppCompatActivity{
         formatter.setTimeZone(TimeZone.getTimeZone("MST"));
         Date date = new Date();
 
-        Boolean val = Boolean.FALSE;
-        ElasticSearchClient.AddRecord addRecord = new ElasticSearchClient.AddRecord();
-        addRecord.execute(user_id, formatter.format(date), user_type, Integer.toString(existingLargestID + 1));
 
+        Boolean isInUse = Boolean.FALSE;
+        ElasticSearchClient.SearchUser searchUser = new ElasticSearchClient.SearchUser();
+        searchUser.execute(user_id);
         try {
-            val = addRecord.get();
+            isInUse = searchUser.get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        //if val == FALSE --> failed to add
+        if (!isInUse) {
+
+            Boolean val = Boolean.FALSE;
+            ElasticSearchClient.AddUser addUser = new ElasticSearchClient.AddUser();
+            addUser.execute(user_id, formatter.format(date), user_type, Integer.toString(existingLargestID + 1));
+
+            try {
+                val = addUser.get();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            if (!val) {
+                Toast.makeText(CreateProfileActivity.this, "Failed to add new user " + user_id + ". Please try again.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(CreateProfileActivity.this, "Successfully added " + user_id + " to the user list.", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(CreateProfileActivity.this,"User id already in use. Please enter a unique user id.",Toast.LENGTH_SHORT).show();
+        }
     }
 
     /* Generate user id from 1000 ~ 9999 */
