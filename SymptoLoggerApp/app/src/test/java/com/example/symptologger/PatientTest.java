@@ -3,8 +3,6 @@ package com.example.symptologger;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
@@ -14,7 +12,7 @@ public class PatientTest {
     @Test
     public void testCreateValidUserID() {
         Patient patient = new Patient("testCarePatient", "First", "Last",
-                "test@test.com", "123456789");
+                "test@test.com", "123456789", "patient");
         String expected = "validName";
         patient.createUserID(expected);
 
@@ -24,7 +22,7 @@ public class PatientTest {
     @Test
     public void testCreateInvalidUserID() {
         Patient patient = new Patient("testCarePatient", "First", "Last",
-                "test@test.com", "123456789");
+                "test@test.com", "123456789", "patient");
         boolean thrown = false;
         String expected = "short";
 
@@ -41,7 +39,7 @@ public class PatientTest {
     @Test
     public void testGetConcerns() {
         Patient patient = new Patient("testCarePatient", "First", "Last",
-                "test@test.com", "123456789");
+                "test@test.com", "123456789", "patient");
         Concern concern1 = new Concern();
         Concern concern2 = new Concern();
 
@@ -59,7 +57,7 @@ public class PatientTest {
     @Test
     public void testAddConcern() {
         Patient patient = new Patient("testCarePatient", "First", "Last",
-                "test@test.com", "123456789");
+                "test@test.com", "123456789", "patient");
         Concern concern = new Concern();
 
         assertFalse(patient.getConcerns().contains(concern));
@@ -69,23 +67,9 @@ public class PatientTest {
     }
 
     @Test
-    public void testUpdateConcern() {
-        Patient patient = new Patient("testCarePatient", "First", "Last",
-                "test@test.com", "123456789");
-        Concern concern = new Concern();
-        patient.addConcern(concern);
-
-        Concern concernUpdated = new Concern();
-        concernUpdated.setDate(new Date());
-        patient.updateConcern(concernUpdated);
-
-        assertFalse(patient.getConcerns().contains(concern));
-    }
-
-    @Test
     public void testDeleteConcern() {
         Patient patient = new Patient("testCarePatient", "First", "Last",
-                "test@test.com", "123456789");
+                "test@test.com", "123456789", "patient");
         Concern concern = new Concern();
 
         assertFalse(patient.getConcerns().contains(concern));

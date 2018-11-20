@@ -1,8 +1,5 @@
 package com.example.symptologger;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  * <p>
  *     User model.
@@ -30,13 +27,15 @@ public class User {
      * @param lastName last name of the user
      * @param email email address of the user
      * @param cell cell number of the user
+     * @param user_type type of user
      */
-    public User(String id, String firstName, String lastName, String email, String cell) {
+    public User(String id, String firstName, String lastName, String email, String cell, String user_type) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.cell = cell;
+        this.user_type = user_type;
     }
 
     /**
@@ -117,6 +116,18 @@ public class User {
     // TODO: email validator?
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * Set user type
+     * @param user_type type of user
+     */
+    public void setUser_type(String user_type){
+        this.user_type = user_type;
+    }
+
+    public String getUser_type() {
+        return this.user_type;
     }
 
     /**

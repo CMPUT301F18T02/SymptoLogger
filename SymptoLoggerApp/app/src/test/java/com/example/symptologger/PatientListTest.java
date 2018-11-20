@@ -13,7 +13,7 @@ public class PatientListTest {
     public void testAddPatient() {
         PatientList patientList = new PatientList();
         Patient p = new Patient("testCarePatient", "First", "Last",
-                "test@test.com", "123456789");
+                "test@test.com", "123456789", "patient");
 
         assertFalse(patientList.getPatients().contains(p));
 
@@ -25,7 +25,7 @@ public class PatientListTest {
     public void testRemovePatient() {
         PatientList patientList = new PatientList();
         Patient p = new Patient("testCarePatient", "First", "Last",
-                "test@test.com", "123456789");
+                "test@test.com", "123456789", "patient");
 
         patientList.addPatient(p);
         assertTrue(patientList.getPatients().contains(p));
@@ -39,9 +39,9 @@ public class PatientListTest {
     public void testGetPatientList() {
         PatientList patientList = new PatientList();
         Patient p1 = new Patient("testCarePatient1", "First", "Last",
-                "test@test.com", "123456789");
+                "test@test.com", "123456789", "patient");
         Patient p2 = new Patient("testCarePatient2", "First", "Last",
-                "test@test.com", "123456789");
+                "test@test.com", "123456789", "patient");
 
         patientList.addPatient(p1);
         patientList.addPatient(p2);
@@ -57,9 +57,9 @@ public class PatientListTest {
     public void testGetPatientSCount() {
         PatientList patientList = new PatientList();
         Patient p1 = new Patient("testCarePatient1", "First", "Last",
-                "test@test.com", "123456789");
+                "test@test.com", "123456789", "patient");
         Patient p2 = new Patient("testCarePatient2", "First", "Last",
-                "test@test.com", "123456789");
+                "test@test.com", "123456789", "patient");
 
         patientList.addPatient(p1);
         patientList.addPatient(p2);
