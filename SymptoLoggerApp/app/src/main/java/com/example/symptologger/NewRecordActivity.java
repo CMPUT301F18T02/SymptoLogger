@@ -101,7 +101,8 @@ public class NewRecordActivity extends AppCompatActivity {
         addLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: go to new location view
+                Intent cancelIntent = new Intent(NewRecordActivity.this, MapsActivity.class);
+                startActivity(cancelIntent);
             }
         });
 
