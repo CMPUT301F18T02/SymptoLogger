@@ -2,36 +2,77 @@ package com.example.symptologger;
 
 import java.util.ArrayList;
 
+/*
+ *  Copyright 2018 Remi Arshad, Noni Hua, Jason Lee, Patrick Tamm, Kaiwen Zhang
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+
+ *     http://www.apache.org/licenses/LICENSE-2.0
+
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
+/**
+ * <p>
+ *     Patient model. Extends User class.
+ *
+ * </p>
+ */
 public class Patient extends User {
     private ArrayList<Concern> concerns;
     private CareProviderList careProviderList;
 
-    public Patient(String id, String firstName, String lastName, String email, String cell) {
-        super(id, firstName, lastName, email, cell);
+    /**
+     * Constructor of Patient class.
+     * @param id id of the patient
+     * @param firstName first name
+     * @param lastName last name
+     * @param email email address
+     * @param cell cell number in string
+     * @param user_type type of user
+     */
+    public Patient(String id, String firstName, String lastName, String email, String cell, String user_type) {
+        super(id, firstName, lastName, email, cell, user_type);
 
         this.concerns = new ArrayList<>();
     }
 
-    protected void createUserID(String userPrompt) {
-//        if (userPrompt.length() < 8) {
-//            throw new RuntimeException("User ID must be at least 8 characters.");
-//        }
-//        super.setUserID(userPrompt);
+    public void setId(String userPrompt) {
+        try {
+            super.setId(userPrompt);
+        } catch (UserIDTooShortException e) {
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * Get patient's concern
+     * @return list of Concerns
+     */
     public ArrayList<Concern> getConcerns() {
         return this.concerns;
     }
 
+    /**
+     * Add a concern
+     * @param concern a concern object
+     */
     public void addConcern(Concern concern) {
+        this.concerns.add(concern);
 
     }
 
-    public void updateConcern(Concern concern) {
-
-    }
-
+    /**
+     * Remove a concern from the list
+     * @param concern
+     */
     public void deleteConcern(Concern concern) {
-
+        this.concerns.remove(concern);
     }
 }

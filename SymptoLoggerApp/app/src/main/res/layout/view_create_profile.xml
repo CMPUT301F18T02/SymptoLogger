@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/view_create_profile"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteY="25dp">
+
+    <EditText
+        android:id="@+id/editTextUserId"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginStart="99dp"
+        android:layout_marginLeft="99dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="99dp"
+        android:layout_marginRight="99dp"
+        android:layout_marginBottom="296dp"
+        android:ems="10"
+        android:hint="@string/user_id"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/editText_phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="99dp"
+        android:layout_marginLeft="99dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="99dp"
+        android:layout_marginRight="99dp"
+        android:ems="10"
+        android:hint="@string/phone_number"
+        android:inputType="phone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextUserId" />
+
+    <EditText
+        android:id="@+id/editText_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="99dp"
+        android:layout_marginLeft="99dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="99dp"
+        android:layout_marginRight="99dp"
+        android:ems="10"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editText_phone_number" />
+
+    <!--<TextView-->
+    <!--android:id="@+id/textView_add_profile"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="38dp"-->
+    <!--android:layout_marginBottom="15dp"-->
+    <!--android:layout_marginEnd="30dp"-->
+    <!--android:layout_marginLeft="60dp"-->
+    <!--android:layout_marginRight="30dp"-->
+    <!--android:layout_marginStart="60dp"-->
+    <!--android:layout_marginTop="19dp"-->
+    <!--android:text="Add Profile Picture"-->
+    <!--app:layout_constraintBottom_toTopOf="@+id/radioGroup_user_type"-->
+    <!--app:layout_constraintEnd_toStartOf="@+id/imageButton"-->
+    <!--app:layout_constraintStart_toStartOf="parent"-->
+    <!--app:layout_constraintTop_toTopOf="@+id/imageButton" />-->
+
+    <TextView
+        android:id="@+id/textView_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="82dp"
+        android:text="I am a"
+        app:layout_constraintEnd_toStartOf="@+id/radioGroup_user_type"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <!--<ImageButton-->
+    <!--android:id="@+id/imageButton"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="65dp"-->
+    <!--android:layout_marginBottom="47dp"-->
+    <!--android:layout_marginEnd="89dp"-->
+    <!--android:layout_marginRight="89dp"-->
+    <!--android:layout_marginTop="50dp"-->
+    <!--app:layout_constraintBottom_toBottomOf="@+id/textView_temp"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintStart_toEndOf="@+id/textView_add_profile"-->
+    <!--app:layout_constraintTop_toTopOf="parent"-->
+    <!--app:srcCompat="@android:drawable/ic_input_add" />-->
+
+    <RadioGroup
+        android:id="@+id/radioGroup_user_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="129dp"
+        android:layout_marginRight="129dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/radioButton_patient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:text="Patient"
+            app:layout_constraintBottom_toBottomOf="@+id/textView_temp"
+            app:layout_constraintStart_toEndOf="@+id/textView_temp" />
+
+        <RadioButton
+            android:id="@+id/radioButton_care_provider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:layout_marginStart="17dp"
+            android:text="Care Provider"
+            app:layout_constraintBaseline_toBaselineOf="@+id/radioButton_patient"
+            app:layout_constraintStart_toEndOf="@+id/radioButton_patient" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/button_sign_up"
+        android:layout_width="308dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="51dp"
+        android:layout_marginLeft="51dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginRight="52dp"
+        android:layout_marginBottom="8dp"
+        android:text="Sign Up"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.906" />
+
+</android.support.constraint.ConstraintLayout>

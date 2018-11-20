@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">SymptoLogger</string>
+    <string name="care_provider">Care Provider</string>
+    <string name="description">Description</string>
+    <string name="date_and_time">Date and Time</string>
+    <string name="location">Location</string>
+    <string name="body_parts">Body Parts</string>
+    <string name="title_activity_view_concern">ViewConcernActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="addNewConcernButton">Add Concern</string>
+    <string name="logOutButton">Log Out</string>
+    <string name="concernTitleHint">Enter Concern Title</string>
+    <string name="concernDescriptionHint">Enter Description</string>
+    <string name="concernDateHint">Enter Date</string>
+    <string name="buttonSaveNewConcern">Save</string>
+    <string name="buttonCancelNewConcern">Cancel</string>
+    <string name="modifyConcernTitle">Enter New Title</string>
+    <string name="modifyConcernDate">Enter New Date</string>
+    <string name="modifyConcernDescription">Enter New Description</string>
+    <string name="modifyConcernButton">Modify</string>
+    <string name="buttonBack">Back</string>
+    <string name="buttonAddRecord">Add Record</string>
+    <string name="addConcernFAB">+</string>
+    <string name="title_activity_sign_in">sign_in</string>
+    <string name="title_activity_new_record_avtivity">NewRecordAvtivity</string>
+    <string name="user_id">id</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="email">Email</string>
+    <string name="test">test</string>
+    <string name="title_activity_maps">Map</string>
+
 </resources>
