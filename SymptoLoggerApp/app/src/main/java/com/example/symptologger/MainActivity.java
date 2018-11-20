@@ -22,6 +22,10 @@ import android.widget.Button;
  *  limitations under the License.
  */
 
+/**
+ * The main activity that starts when the user opens the app.
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     @Override

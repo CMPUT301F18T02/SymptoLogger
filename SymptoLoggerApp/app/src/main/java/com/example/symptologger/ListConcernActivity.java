@@ -31,6 +31,10 @@ import java.util.Collection;
  *  limitations under the License.
  */
 
+/**
+ * The activity that allows the user to view the list of concerns.
+ */
+
 public class ListConcernActivity extends AppCompatActivity {
 
     //https://developer.android.com/training/basics/firstapp/starting-activity#java

@@ -36,8 +36,6 @@ import java.util.ArrayList;
 public class RecordCommentFragment extends Fragment {
 
 //    private OnFragmentInteractionListener mListener;
-    private Record record;
-    private Concern concern;
 
     private ArrayList<CareProviderComment> careProviderCommentList = new ArrayList<>();
     private ArrayAdapter<CareProviderComment> adapter;
@@ -57,6 +55,9 @@ public class RecordCommentFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_record_comment, container, false);
 
+        // TODO: replace record
+        Record record = new Record();
+        record.addCareProviderComment();
         careProviderCommentList = record.getCareProviderComment();
 
         adapter = new ArrayAdapter<CareProviderComment>(
@@ -67,14 +68,6 @@ public class RecordCommentFragment extends Fragment {
         careProviderCommentsListView.setAdapter(adapter);
 
         return view;
-    }
-
-    public void passRecord(Record record){
-        this.record = record;
-    }
-
-    public void passConcern(Concern concern) {
-        this.concern = concern;
     }
 
 //    // TODO: Rename method, update argument and hook method into UI event

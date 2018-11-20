@@ -16,6 +16,10 @@ package com.example.symptologger;
  *  limitations under the License.
  */
 
+/**
+ * If the description exceeds 300 characters, this exception will be thrown.
+ */
+
 public class DescriptionTooLongException extends Exception {
     DescriptionTooLongException(){
         super("Description too long: 300 characters maximum");
