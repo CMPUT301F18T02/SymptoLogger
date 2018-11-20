@@ -11,7 +11,14 @@ public class ConcernTest {
     @Test // The "@Test" came from https://developer.android.com/training/testing/unit-testing/local-unit-tests#java, 2018-10-27
     public void testGetTitle(){
         String test = "Problem";
-        Concern testConcern = new Concern(test, new Date(), null);
+        Concern testConcern = null;
+        try {
+            testConcern = new Concern(test, new Date(), null);
+        } catch (TitleTooLongException e) {
+            e.printStackTrace();
+        } catch (DescriptionTooLongException e) {
+            e.printStackTrace();
+        }
 
         String testTitle = testConcern.getTitle();
 
@@ -24,7 +31,11 @@ public class ConcernTest {
         Concern testConcern = new Concern();
 
         String title = "Problem1";
-        testConcern.setTitle(title);
+        try {
+            testConcern.setTitle(title);
+        } catch (TitleTooLongException e) {
+            e.printStackTrace();
+        }
         String testTitle = testConcern.getTitle();
 
         assertEquals(title, testTitle);
@@ -36,7 +47,14 @@ public class ConcernTest {
 
         Date date = new Date();
         String problem = "Problem";
-        Concern newConcern = new Concern(problem, date, null);
+        Concern newConcern = null;
+        try {
+            newConcern = new Concern(problem, date, null);
+        } catch (TitleTooLongException e) {
+            e.printStackTrace();
+        } catch (DescriptionTooLongException e) {
+            e.printStackTrace();
+        }
 
         Date testDate = newConcern.getDate();
 
@@ -45,7 +63,14 @@ public class ConcernTest {
 
     @Test
     public void testSetDate(){
-        Concern myConcern = new Concern("Problem2",null, null);
+        Concern myConcern = null;
+        try {
+            myConcern = new Concern("Problem2",null, null);
+        } catch (TitleTooLongException e) {
+            e.printStackTrace();
+        } catch (DescriptionTooLongException e) {
+            e.printStackTrace();
+        }
 
         Date myDate = new Date();
 
@@ -59,7 +84,14 @@ public class ConcernTest {
     @Test
     public void testGetDescription(){
         String description = "My description";
-        Concern concern = new Concern("abc",new Date(), description);
+        Concern concern = null;
+        try {
+            concern = new Concern("abc",new Date(), description);
+        } catch (TitleTooLongException e) {
+            e.printStackTrace();
+        } catch (DescriptionTooLongException e) {
+            e.printStackTrace();
+        }
 
         String d = concern.getDescription();
 
@@ -76,7 +108,11 @@ public class ConcernTest {
 
         assertNotEquals(des,description);
 
-        concern.setDescription(description);
+        try {
+            concern.setDescription(description);
+        } catch (DescriptionTooLongException e) {
+            e.printStackTrace();
+        }
 
         String newDes = concern.getDescription();
 
