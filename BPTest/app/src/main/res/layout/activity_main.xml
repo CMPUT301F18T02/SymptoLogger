@@ -593,15 +593,15 @@
         android:text="Body Parts"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.35" />
 
     <RelativeLayout
         android:id="@+id/rel"
-        android:layout_width="316dp"
-        android:layout_height="284dp"
+        android:layout_width="364dp"
+        android:layout_height="329dp"
         android:layout_marginStart="67dp"
         android:layout_marginLeft="67dp"
         android:layout_marginTop="10dp"
@@ -610,12 +610,28 @@
         android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.634"
+        app:layout_constraintHorizontal_bias="0.58"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
         app:layout_constraintVertical_bias="0.0">
 
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tagview"
+        android:layout_width="304dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.41000003" />
 
 
 </android.support.constraint.ConstraintLayout>

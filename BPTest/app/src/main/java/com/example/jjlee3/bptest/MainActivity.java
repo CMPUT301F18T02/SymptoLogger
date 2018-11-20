@@ -34,35 +34,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //tags = findViewById(R.id.Tags);
+        tags = (TextView) findViewById(R.id.tagview);
     }
 
     public void DisplayCircles(Button b){
         ImageView imageView = new ImageView(this);
         imageView.setImageResource(R.drawable.circle);
-        /*Bitmap bmp;
-        bmp = BitmapFactory.decodeResource(getResources(),R.drawable.circle);
-        bmp = Bitmap.createScaledBitmap(bmp, 250,250,true);
-        */
+
 
         RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.rel);
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(50,50);
 
-        // Add rule to layout parameters
-        // Add the ImageView below to Button
         lp.addRule(RelativeLayout.BELOW, b.getId());
-
+        //Does a simple calculations to get the middle of the button position
         lp.leftMargin = b.getLeft() - relativeLayout.getLeft() + b.getWidth()/2 - 25;
         lp.topMargin = b.getTop() - relativeLayout.getTop() + b.getHeight()/2 - 25;
 
-
-
         System.out.println(lp.leftMargin + " " + lp.topMargin);
-
         imageView.setLayoutParams(lp);
-
-
-        //imageView.setImageBitmap(bmp);
 
         relativeLayout.addView(imageView, lp);
 
@@ -76,15 +65,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void Displaytags(){
         //Grid layout with all of the tags listed for this body parts
+        //Technically only prints out 10 max due to having 10 photos as max
         if (bps.size() == 0){
             tags.setText("...");
         }else{
             String str = "";
-            for (BodyPart bp : bps){
-                if (bps.indexOf(bp) == bps.size()-1){
-                    str = str + bp.getBody();
-                }else{
-                    str = str + bp.getBody() + ", ";
+            Boolean t = true;
+            for (int i = 0; i < bps.size(); i++){
+                if (i == 0){
+                    str = bps.get(i).getBody() + " ";
+                }else if (i < 10){
+                    str = str + bps.get(i).getBody() + ", ";
+                }else if (i == 10){
+                    str = str + "...";
                 }
             }
             tags.setText(str);
@@ -104,42 +97,21 @@ public class MainActivity extends AppCompatActivity {
                 img.setImageDrawable(null);
                 imgs.remove(i);
                 existing = true;
-                System.out.println("Removed " + str);
+                //System.out.println("Removed " + str);
             }
         }
-
-
         if (existing == true){
             //Since already exists remove it from the array list
-
         }else {
             //add to the list
-
-
             int id = ViewCompat.generateViewId();
             BodyPart bp = new BodyPart(id, str);
-            /*
-            ImageView imageView = new ImageView(this);
-            imageView.setImageResource(R.drawable.circle);
-            imageView.setId(id);
-
-            RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
-            p.addRule(RelativeLayout.BELOW, b.getId());
-            b.setLayoutParams(p);
-            ((RelativeLayout) imageView).addView(b);
-
-            imgs.add(imageView);
-            */
             bps.add(bp);
 
             DisplayCircles(b);
-            System.out.println("Added " + str);
         }
         //Either way update the thing I guess
-        //Displaytags();
-
-
-
+        Displaytags();
     }
 
 

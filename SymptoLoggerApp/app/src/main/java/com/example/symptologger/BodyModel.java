@@ -15,11 +15,9 @@ public class BodyModel {
     }
 
     public Photograph getPhoto(int bodyPartId){
-        String url = "";
-        Date date = new Date();
-        Photograph photo = new Photograph(date, url);
+        //String url = "";
+        Photograph photo = new Photograph();
         return photo;
-
     }
 
     public void setPhoto(int bodyPartId, Photograph photo){

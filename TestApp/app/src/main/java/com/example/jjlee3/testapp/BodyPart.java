@@ -4,22 +4,15 @@ import java.util.ArrayList;
 
 public class BodyPart {
     private int bodyPartId;
-    private int xStart;
-    private int xEnd;
-    private int yStart;
-    private int yEnd;
+    private String body;
 
-    public BodyPart(int bodyPartId, int xStart, int xEnd, int yStart, int yEnd){
-        this.bodyPartId = bodyPartId;
-        this.xStart = xStart;
-        this.xEnd = xEnd;
-        this.yStart = yStart;
-        this.yEnd = yEnd;
+    public String getBody() {
+        return this.body;
     }
 
-    public ArrayList<Integer> getRange(int bodyPartId){
-        ArrayList<Integer> coords = new ArrayList<>();
-        return coords;
+    public BodyPart(int bodyPartId, String body) {
+        this.bodyPartId = bodyPartId;
+        this.body = body;
     }
 
 }

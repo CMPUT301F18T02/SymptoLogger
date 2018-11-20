@@ -1,27 +1,36 @@
 package com.example.symptologger;
 
 import android.media.Image;
+import android.net.Uri;
 
 import java.util.Date;
 
 //https://stackoverflow.com/questions/29208007/what-is-the-data-type-for-images-in-java
 
 public class Photograph {
-    private String url;
+    private Uri uri;
     private Date date;
 
+    Photograph(){
 
-    Photograph(Date date, String image){
-        setDate(date);
-        setURL(image);
     }
 
-    public void setURL(String url) {
-        this.url = url;
+    Photograph(Uri image){
+        this.date = new Date();
+        this.uri = image;
     }
 
-    public String getURL(){
-        return this.url;
+    Photograph(Uri image, Date date){
+        this.date = date;
+        this.uri = image;
+    }
+
+    public void setURL(Uri uri) {
+        this.uri = uri;
+    }
+
+    public Uri getURL(){
+        return this.uri;
     }
 
     public Date getDate() {

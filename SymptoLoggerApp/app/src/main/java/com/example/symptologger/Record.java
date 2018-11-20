@@ -44,16 +44,14 @@ class Record {
     }
 
     public void addPhoto(Photograph photograph){
-        //When photo functionality established
-        /*
-        JLabel lblimage = new JLabel(new ImageIcon(image));
-        JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.add(lblimage);
-        // add more components here
-        frame.add(mainPanel);
-        frame.setVisible(true);
-        */
-        photo.add(photograph);
+
+        if (photo.size() < 10) {
+            photo.add(photograph);
+        }
+    }
+
+    public ArrayList<Photograph> getPhoto(){
+        return this.photo;
     }
 
     public void removePhoto(Integer index){
