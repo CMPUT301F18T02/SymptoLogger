@@ -9,6 +9,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+/**
+ * <p>
+ *     Patient view of a record in two tabs.
+ *     Details tab @see RecordDetailsFragment
+ *     Comments tab @see RecordCommentFragment
+ * </p>
+ */
+
 public class ViewRecordActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
