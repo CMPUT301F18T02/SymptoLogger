@@ -32,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //new ElasticSearchClient.AddRecord().execute();
-        //new ElasticSearchClient.SearchRecord().execute("no");
 
         Button button_sign_up = (Button) findViewById(R.id.button_sign_up);
         //Button button_add_geo_location = (Button) findViewById(R.id.button_geo_location);
@@ -41,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         button_sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, CreateProfileActivity.class));
+                startActivity(new Intent(MainActivity.this, MapsActivity.class));
             }
         });
 
