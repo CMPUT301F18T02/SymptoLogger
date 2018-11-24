@@ -1,11 +1,16 @@
 package com.example.symptologger;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.text.DateFormat;
@@ -66,6 +71,11 @@ public class NewConcernActivity extends AppCompatActivity {
         getCalendarInfo();
         Date now = c.getTime();
 
+        final Button editDateButton = findViewById(R.id.newConcernDateField);
+        editDateButton.setText(dateFormat.format(now));
+        final Button editTimeButton = findViewById(R.id.newConcernTimeField);
+        editTimeButton.setText(timeFormat.format(now));
+
         FloatingActionButton saveFAB = findViewById(R.id.saveNewFAB);
         saveFAB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +97,40 @@ public class NewConcernActivity extends AppCompatActivity {
                 startActivity(cancelIntent);
             }
         });
+
+        editDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getCalendarInfo();
+
+                final DatePickerDialog datePickerDialog = new DatePickerDialog(NewConcernActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        updateCalendarDate(year, month, dayOfMonth);
+                        editDateButton.setText(dateFormat.format(c.getTime()));
+                    }
+                }, year, month, day);
+
+                datePickerDialog.show();
+            }
+        });
+
+        editTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getCalendarInfo();
+
+                final TimePickerDialog timePickerDialog = new TimePickerDialog(NewConcernActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        updateCalendarTime(hourOfDay, minute);
+                        editTimeButton.setText(timeFormat.format(c.getTime()));
+                    }
+                }, hour, minute, false);
+
+                timePickerDialog.show();
+            }
+        });
     }
 
     public void saveConcern() throws ParseException {
@@ -99,11 +143,11 @@ public class NewConcernActivity extends AppCompatActivity {
 
         EditText editTitle = (EditText) findViewById(R.id.concernTitle);
         EditText editDescription = (EditText) findViewById(R.id.concernDescription);
-        EditText editDate = (EditText) findViewById(R.id.concernDate);
+        //EditText editDate = (EditText) findViewById(R.id.newConcernDate);
 
         String concernTitle = editTitle.getText().toString();
         String concernDescription = editDescription.getText().toString();
-        String concernDate = editDate.getText().toString();
+        //String concernDate = editDate.getText().toString();
 
         /*
         That EditText.getText() does not return null, but empty string ...
@@ -118,13 +162,13 @@ public class NewConcernActivity extends AppCompatActivity {
 //            //blankDate = sdf.parse(concernDate);
 //        }
 
-//        try {
-//            newConcern = new Concern(concernTitle,blankDate,concernDescription);
-//        } catch (TitleTooLongException e) {
-//            e.printStackTrace();
-//        } catch (DescriptionTooLongException f){
-//            f.printStackTrace();
-//        }
+        try {
+            newConcern = new Concern(concernTitle,c.getTime(),concernDescription);
+        } catch (TitleTooLongException e) {
+            e.printStackTrace();
+        } catch (DescriptionTooLongException f){
+            f.printStackTrace();
+        }
 
         clc.addConcern(newConcern);
 
@@ -142,5 +186,24 @@ public class NewConcernActivity extends AppCompatActivity {
         year = c.get(Calendar.YEAR);
         hour = c.get(Calendar.HOUR);
         minute = c.get(Calendar.MINUTE);
+    }
+
+    /**
+     * Update calendar information after user chooses a date
+     * @param year
+     * @param month
+     * @param dayOfMonth
+     */
+    private void updateCalendarDate(int year, int month, int dayOfMonth) {
+        c.set(year, month, dayOfMonth);
+    }
+
+    /**
+     * Update time after user selects a time
+     * @param hour
+     * @param minute
+     */
+    private void updateCalendarTime(int hour, int minute) {
+        c.set(year, month, day, hour, minute);
     }
 }
