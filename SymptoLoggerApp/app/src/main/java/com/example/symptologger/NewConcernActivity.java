@@ -8,10 +8,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /*
  *  Copyright 2018 Remi Arshad, Noni Hua, Jason Lee, Patrick Tamm, Kaiwen Zhang
@@ -35,14 +38,33 @@ import java.util.List;
 
 public class NewConcernActivity extends AppCompatActivity {
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    /*
+    * The date features for this activity have been taken from Noni Hua's NewRecordActivity
+    */
+
+//    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+    private static DateFormat dateFormat = new SimpleDateFormat("EEEE, MMM dd", Locale.CANADA);
+    private static DateFormat timeFormat = new SimpleDateFormat("h:mm a", Locale.CANADA);
+
     Concern newConcern; //New concern variable declared ...
-    Date blankDate;
+    //Date blankDate;
+
+    Calendar c;
+
+    int year;
+    int month;
+    int day;
+    int hour;
+    int minute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_concern);
+
+        getCalendarInfo();
+        Date now = c.getTime();
 
         FloatingActionButton saveFAB = findViewById(R.id.saveNewFAB);
         saveFAB.setOnClickListener(new View.OnClickListener() {
@@ -90,23 +112,35 @@ public class NewConcernActivity extends AppCompatActivity {
         Date: 2018-11-11
         */
 
-        if (concernDate.equals("")){
-            blankDate = new Date();
-        } else {
-            blankDate = sdf.parse(concernDate);
-        }
+//        if (concernDate.equals("")){
+//           // blankDate = new Date();
+//        } else {
+//            //blankDate = sdf.parse(concernDate);
+//        }
 
-        try {
-            newConcern = new Concern(concernTitle,blankDate,concernDescription);
-        } catch (TitleTooLongException e) {
-            e.printStackTrace();
-        } catch (DescriptionTooLongException f){
-            f.printStackTrace();
-        }
+//        try {
+//            newConcern = new Concern(concernTitle,blankDate,concernDescription);
+//        } catch (TitleTooLongException e) {
+//            e.printStackTrace();
+//        } catch (DescriptionTooLongException f){
+//            f.printStackTrace();
+//        }
 
         clc.addConcern(newConcern);
 
         Intent doneIntent = new Intent(NewConcernActivity.this, ListConcernActivity.class);
         startActivity(doneIntent);
+    }
+
+    /**
+     * Get calendar information and update global variables
+     */
+    private void getCalendarInfo() {
+        c = Calendar.getInstance(Locale.CANADA);
+        day = c.get(Calendar.DAY_OF_MONTH);
+        month = c.get(Calendar.MONTH);
+        year = c.get(Calendar.YEAR);
+        hour = c.get(Calendar.HOUR);
+        minute = c.get(Calendar.MINUTE);
     }
 }

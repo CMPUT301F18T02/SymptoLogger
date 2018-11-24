@@ -62,7 +62,7 @@ public class NewRecordActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_record_avtivity);
+        setContentView(R.layout.activity_new_record_activity);
 
         Intent intent = getIntent();
         pos = intent.getIntExtra("pos",0);
