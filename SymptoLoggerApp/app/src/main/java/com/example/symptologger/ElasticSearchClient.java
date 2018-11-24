@@ -97,14 +97,13 @@ public class ElasticSearchClient {
         @Override
         protected Void doInBackground(String... indices) {
 
-            String type = "usersLogin";
-            String source = "{\"usersLogin\" : {\"properties\" : " +
-                    "{\"memberID\": {\"type\" : \"integer\"}," +
-                    "\"email\": {\"type\" : \"string\"}, " +
-                    "\"phone\": {\"type\" : \"string\"}, " +
-                    "\"userID\" : {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
+            String type = "concern";
+            String source = "{\"concern\" : {\"properties\" : " +
+                    "{\"concernTitle\": {\"type\" : \"string\"}," +
+                    "\"concernDate\": {\"type\" : \"string\"}, " +
+                    "\"concernDescription\": {\"type\" : \"string\"}, " +
+                    "\"userName\" : {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
                     "\"creationDate\": {\"type\" : \"string\"}," +
-                    "\"userRole\": {\"type\" : \"string\"}" +
                     "}}}";
 
                 try {
