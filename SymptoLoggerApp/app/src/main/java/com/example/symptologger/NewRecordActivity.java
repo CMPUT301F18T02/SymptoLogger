@@ -127,7 +127,6 @@ public class NewRecordActivity extends AppCompatActivity {
         addLocationButton.setOnClickListener(new View.OnClickListener() {
                                                      @Override
                                                      public void onClick(View v) {
-//                                                         Toast.makeText(MapsActivity.this, "Start place picker", Toast.LENGTH_SHORT).show();
                                                          Intent intent;
                                                          PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
 
@@ -141,14 +140,6 @@ public class NewRecordActivity extends AppCompatActivity {
                                                          }
                                                      }
         });
-
-//        addLocationButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent mapIntent = new Intent(NewRecordActivity.this, MapsActivity.class);
-//                startActivity(mapIntent);
-//            }
-//        });
 
         addBodyPartsButton.setOnClickListener(new View.OnClickListener() {
             @Override
