@@ -13,6 +13,13 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,6 +51,10 @@ import java.util.Locale;
  * </p>
  */
 public class NewRecordActivity extends AppCompatActivity {
+
+    private int PLACE_PICKER_REQUEST = 1;
+    private Place place;
+
     private static DateFormat dateFormat = new SimpleDateFormat("EEEE, MMM dd", Locale.CANADA);
     private static DateFormat timeFormat = new SimpleDateFormat("h:mm a", Locale.CANADA);
 
@@ -80,6 +91,8 @@ public class NewRecordActivity extends AppCompatActivity {
         Button addLocationButton = findViewById(R.id.addLocationButton);
         Button addBodyPartsButton = findViewById(R.id.addBodyPartsButton);
 
+
+
         editDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,12 +128,30 @@ public class NewRecordActivity extends AppCompatActivity {
         });
 
         addLocationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent mapIntent = new Intent(NewRecordActivity.this, MapsActivity.class);
-                startActivity(mapIntent);
-            }
+                                                     @Override
+                                                     public void onClick(View v) {
+//                                                         Toast.makeText(MapsActivity.this, "Start place picker", Toast.LENGTH_SHORT).show();
+                                                         Intent intent;
+                                                         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+
+                                                         try {
+                                                             intent = builder.build(NewRecordActivity.this);
+                                                             startActivityForResult(intent, 1);
+                                                         } catch (GooglePlayServicesRepairableException e) {
+                                                             e.printStackTrace();
+                                                         } catch (GooglePlayServicesNotAvailableException e) {
+                                                             e.printStackTrace();
+                                                         }
+                                                     }
         });
+
+//        addLocationButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent mapIntent = new Intent(NewRecordActivity.this, MapsActivity.class);
+//                startActivity(mapIntent);
+//            }
+//        });
 
         addBodyPartsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -191,6 +222,17 @@ public class NewRecordActivity extends AppCompatActivity {
      */
     private void updateCalendarTime(int hour, int minute) {
         c.set(year, month, day, hour, minute);
+    }
+
+    // called when location is selected
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PLACE_PICKER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                place = PlacePicker.getPlace(this, data);
+                Button addLocationButton = findViewById(R.id.addLocationButton);
+                addLocationButton.setText(place.getAddress());
+            }
+        }
     }
 
 }

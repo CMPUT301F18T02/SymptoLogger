@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         button_sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, MapsActivity.class));
+                startActivity(new Intent(MainActivity.this, CreateProfileActivity.class));
             }
         });
 
