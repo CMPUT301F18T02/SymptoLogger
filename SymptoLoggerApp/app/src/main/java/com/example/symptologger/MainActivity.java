@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //new ElasticSearchClient.AddTable().execute();
         //new ElasticSearchClient.AddRecord().execute();
         //new ElasticSearchClient.SearchRecord().execute("no");
 

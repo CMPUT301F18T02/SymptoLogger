@@ -97,8 +97,8 @@ public class ElasticSearchClient {
         @Override
         protected Void doInBackground(String... indices) {
 
-            String type = "concern";
-            String source = "{\"concern\" : {\"properties\" : " +
+            String type = "Concerns";
+            String source = "{\"Concerns\" : {\"properties\" : " +
                     "{\"concernTitle\": {\"type\" : \"string\"}," +
                     "\"concernDate\": {\"type\" : \"string\"}, " +
                     "\"concernDescription\": {\"type\" : \"string\"}, " +
@@ -131,7 +131,18 @@ public class ElasticSearchClient {
         protected Boolean doInBackground(String... record) {
 
             String type = "usersLogin";
-            String source = String.format("{\"userID\": \"%s\", \"creationDate\": \"%s\", \"userRole\": \"%s\", \"memberID\": %d, \"email\": \"%s\", \"phone\": \"%s\"}",record[0], record[1], record[2], Integer.parseInt(record[3]), record[4], record[5]);
+            String source = String.format("{\"userID\": \"%s\"," +
+                    " \"creationDate\": \"%s\", " +
+                    "\"userRole\": \"%s\", " +
+                    "\"memberID\": %d, " +
+                    "\"email\": \"%s\", " +
+                    "\"phone\": \"%s\"}",
+                    record[0],
+                    record[1],
+                    record[2],
+                    Integer.parseInt(record[3]),
+                    record[4],
+                    record[5]);
 
             try {
                 JestResult result = client.execute( new Index.Builder(source).index(index).type(type).build() );
@@ -222,4 +233,36 @@ public class ElasticSearchClient {
             return -1;
         }
     }
+
+    public static class AddConcern extends AsyncTask<String, Void, Boolean> { //use Void instead of void for AsyncTask as return type
+        @Override
+        protected Boolean doInBackground(String... record) {
+
+//            String source = "{\"Concerns\" : {\"properties\" : " +
+//                    "{\"concernTitle\": {\"type\" : \"string\"}," +
+//                    "\"concernDate\": {\"type\" : \"string\"}, " +
+//                    "\"concernDescription\": {\"type\" : \"string\"}, " +
+//                    "\"userName\" : {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
+//                    "\"creationDate\": {\"type\" : \"string\"}," +
+//                    "}}}";
+
+            String type = "Concern";
+            String source = String.format("{\"concernTitle\": \"%s\", \"concernDate\": \"%s\", \"concernDescription\": \"%s\", \"userName\": \"%s\", \"creationDate\": \"%s\"}",record[0], record[1], record[2], record[3], record[4], record[5]);
+
+            try {
+                JestResult result = client.execute( new Index.Builder(source).index(index).type(type).build() );
+
+                if (result.isSucceeded()) {
+                    return Boolean.TRUE;
+                }
+                else{
+                    return Boolean.FALSE;
+                }
+            } catch (Exception e) {
+                Log.i("Error", "The application failed - reason: AddConcern.");
+            }
+            return Boolean.FALSE;
+        }
+    }
+
 }

@@ -63,6 +63,8 @@ public class NewConcernActivity extends AppCompatActivity {
     int hour;
     int minute;
 
+    String userName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +72,9 @@ public class NewConcernActivity extends AppCompatActivity {
 
         getCalendarInfo();
         Date now = c.getTime();
+
+        Intent fromListConcerns = getIntent();
+        userName = fromListConcerns.getStringExtra("userName");
 
         final Button editDateButton = findViewById(R.id.newConcernDateField);
         editDateButton.setText(dateFormat.format(now));
@@ -94,6 +99,7 @@ public class NewConcernActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(NewConcernActivity.this,"Cancel ...", Toast.LENGTH_SHORT).show();
                 Intent cancelIntent = new Intent(NewConcernActivity.this,ListConcernActivity.class);
+                cancelIntent.putExtra("userName",userName);
                 startActivity(cancelIntent);
             }
         });
@@ -173,6 +179,7 @@ public class NewConcernActivity extends AppCompatActivity {
         clc.addConcern(newConcern);
 
         Intent doneIntent = new Intent(NewConcernActivity.this, ListConcernActivity.class);
+        doneIntent.putExtra("userName",userName);
         startActivity(doneIntent);
     }
 

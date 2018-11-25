@@ -62,6 +62,7 @@ public class SignInActivity extends AppCompatActivity {
     public void LogIn(View v) {
         if (verifyLogIn()){
             Intent intent = new Intent(SignInActivity.this, ListConcernActivity.class);
+            intent.putExtra("userName",userName2);
             startActivity(intent);
         } else {
             Toast.makeText(this,"Sorry, username "+userName2+" was not found. Please try again.", Toast.LENGTH_LONG).show();
