@@ -52,9 +52,6 @@ import java.util.Locale;
  */
 public class NewRecordActivity extends AppCompatActivity {
 
-    private int PLACE_PICKER_REQUEST = 1;
-    private Place place;
-
     private static DateFormat dateFormat = new SimpleDateFormat("EEEE, MMM dd", Locale.CANADA);
     private static DateFormat timeFormat = new SimpleDateFormat("h:mm a", Locale.CANADA);
 
@@ -226,9 +223,10 @@ public class NewRecordActivity extends AppCompatActivity {
 
     // called when location is selected
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        int PLACE_PICKER_REQUEST = 1;
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
-                place = PlacePicker.getPlace(this, data);
+                Place place = PlacePicker.getPlace(this, data);
                 Button addLocationButton = findViewById(R.id.addLocationButton);
                 addLocationButton.setText(place.getAddress());
             }
