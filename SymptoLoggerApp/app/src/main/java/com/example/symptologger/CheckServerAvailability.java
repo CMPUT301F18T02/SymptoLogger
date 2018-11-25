@@ -10,7 +10,7 @@ public class CheckServerAvailability {
     private static final int port = 8080;
     private static boolean connectionStatus = false;
 
-    public static void startIsOnlineTimer() {
+    public static void startIsAvailableTimer() {
 
         Timer timer = new Timer();
         timer.schedule(executeIsAvailable, 0, 10000);
