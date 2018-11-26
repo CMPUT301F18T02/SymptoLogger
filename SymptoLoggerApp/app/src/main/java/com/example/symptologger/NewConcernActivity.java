@@ -169,7 +169,7 @@ public class NewConcernActivity extends AppCompatActivity {
 //        }
 
         try {
-            newConcern = new Concern(concernTitle,c.getTime(),concernDescription);
+            newConcern = new Concern(concernTitle,c.getTime(),concernDescription,userName);
         } catch (TitleTooLongException e) {
             e.printStackTrace();
         } catch (DescriptionTooLongException f){

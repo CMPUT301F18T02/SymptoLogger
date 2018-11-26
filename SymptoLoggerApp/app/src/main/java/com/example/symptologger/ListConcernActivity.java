@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.concurrent.ExecutionException;
 
 /*
  *  Copyright 2018 Remi Arshad, Noni Hua, Jason Lee, Patrick Tamm, Kaiwen Zhang
@@ -90,19 +91,39 @@ public class ListConcernActivity extends AppCompatActivity {
 
         concernListView = (ListView) findViewById(R.id.listConcernsView);
         concerns = ConcernListController.getConcernList().getConcerns();
-        concernList = new ArrayList<Concern>(concerns);
+        concernList = new ArrayList<Concern>();
+
+        ElasticSearchClient.GetConcerns getConcerns = new ElasticSearchClient.GetConcerns();
+        getConcerns.execute(userName);
+
+        try {
+            concernList = getConcerns.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            System.out.println("Error getting concerns from server");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            System.out.println("Error getting concerns from server: 2");
+        }
+
+        System.out.println(concernList.size());
+
+        for (Concern c : concernList){
+            System.out.println(c.getTitle());
+        }
+
         concernListAdapter = new ArrayAdapter<Concern>(this, android.R.layout.simple_list_item_1, concernList);
         concernListView.setAdapter(concernListAdapter);
 
-        ConcernListController.getConcernList().addListener(new ConcernListener() {
-            @Override
-            public void updateListener() {
-                concernList.clear();
-                Collection<Concern> c = ConcernListController.getConcernList().getConcerns();
-                concernList.addAll(c);
-                concernListAdapter.notifyDataSetChanged();
-            }
-        });
+//        ConcernListController.getConcernList().addListener(new ConcernListener() {
+//            @Override
+//            public void updateListener() {
+//                concernList.clear();
+//                Collection<Concern> c = ConcernListController.getConcernList().getConcerns();
+//                concernList.addAll(c);
+//                concernListAdapter.notifyDataSetChanged();
+//            }
+//        });
 
         concernListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
             @Override

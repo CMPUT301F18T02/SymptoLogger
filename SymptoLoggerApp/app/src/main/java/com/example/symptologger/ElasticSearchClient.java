@@ -274,13 +274,21 @@ public class ElasticSearchClient {
             ArrayList<Concern> foundConcerns = new ArrayList<Concern>();
 
             String type = "Concern";
-            String query =  String.format("{\"query\": {\"match\": {\"userID\": \"%s\"}}}", search_parameters[0]);
+            String query =  String.format("{\"query\": {\"match\": {\"userName\": \"%s\"}}}", search_parameters[0]);
             try {
                 JestResult result = client.execute(  new Search.Builder(query).addIndex(index).addType(type).build() );
 
                 if (result.isSucceeded()){
                     List<Concern> res = result.getSourceAsObjectList(Concern.class);
-                    foundConcerns.addAll(res);
+                    if (res.size() != 0){
+                        foundConcerns.addAll(res);
+                        System.out.println("From elastic search client: "+foundConcerns.size());
+                    }
+                    else{
+                        Log.e("Error","nothing found.");
+                    }
+
+
                 } else {
                     Log.e("Error","Some issues with query.");
                 }
@@ -290,5 +298,6 @@ public class ElasticSearchClient {
             return foundConcerns;
         }
     }
+
 
 }
