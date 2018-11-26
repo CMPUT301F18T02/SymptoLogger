@@ -107,12 +107,6 @@ public class NewConcernActivity extends AppCompatActivity {
         }
 
         clc.addConcern(newConcern);
-        SharedPreference sharedPreferences = new SharedPreference();
-        ArrayList<Concern> concerns = sharedPreferences.getConcerns(getApplicationContext());
-        concerns.add(newConcern);
-        sharedPreferences.refreshConcerns(getApplicationContext(), concerns);
-        Log.d("CONCERS", String.valueOf(concerns));
-
 
         Intent doneIntent = new Intent(NewConcernActivity.this, ListConcernActivity.class);
         startActivity(doneIntent);
