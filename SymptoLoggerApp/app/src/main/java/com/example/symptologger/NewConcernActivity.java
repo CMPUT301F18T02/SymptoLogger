@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -105,6 +107,12 @@ public class NewConcernActivity extends AppCompatActivity {
         }
 
         clc.addConcern(newConcern);
+        SharedPreference sharedPreferences = new SharedPreference();
+        ArrayList<Concern> concerns = sharedPreferences.getConcerns(getApplicationContext());
+        concerns.add(newConcern);
+        sharedPreferences.refreshConcerns(getApplicationContext(), concerns);
+        Log.d("CONCERS", String.valueOf(concerns));
+
 
         Intent doneIntent = new Intent(NewConcernActivity.this, ListConcernActivity.class);
         startActivity(doneIntent);
