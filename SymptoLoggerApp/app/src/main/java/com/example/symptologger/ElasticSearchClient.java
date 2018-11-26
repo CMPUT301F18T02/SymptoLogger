@@ -6,6 +6,7 @@ import android.util.Log;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
@@ -97,8 +98,8 @@ public class ElasticSearchClient {
         @Override
         protected Void doInBackground(String... indices) {
 
-            String type = "Concerns";
-            String source = "{\"Concerns\" : {\"properties\" : " +
+            String type = "Concern";
+            String source = "{\"Concern\" : {\"properties\" : " +
                     "{\"concernTitle\": {\"type\" : \"string\"}," +
                     "\"concernDate\": {\"type\" : \"string\"}, " +
                     "\"concernDescription\": {\"type\" : \"string\"}, " +
@@ -262,6 +263,31 @@ public class ElasticSearchClient {
                 Log.i("Error", "The application failed - reason: AddConcern.");
             }
             return Boolean.FALSE;
+        }
+    }
+
+    public static class GetConcerns extends AsyncTask<String, Void, ArrayList<Concern>>{
+
+        @Override
+        protected ArrayList<Concern> doInBackground(String... search_parameters){
+
+            ArrayList<Concern> foundConcerns = new ArrayList<Concern>();
+
+            String type = "Concern";
+            String query =  String.format("{\"query\": {\"match\": {\"userID\": \"%s\"}}}", search_parameters[0]);
+            try {
+                JestResult result = client.execute(  new Search.Builder(query).addIndex(index).addType(type).build() );
+
+                if (result.isSucceeded()){
+                    List<Concern> res = result.getSourceAsObjectList(Concern.class);
+                    foundConcerns.addAll(res);
+                } else {
+                    Log.e("Error","Some issues with query.");
+                }
+            } catch (Exception e){
+                Log.i("Error","Something went wrong when we tried to communicate with the elasticsearch server.");
+            }
+            return foundConcerns;
         }
     }
 
