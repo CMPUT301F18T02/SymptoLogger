@@ -176,7 +176,7 @@ public class NewConcernActivity extends AppCompatActivity {
             f.printStackTrace();
         }
 
-        clc.addConcern(newConcern);
+        clc.addConcern(newConcern, userName);
 
         Intent doneIntent = new Intent(NewConcernActivity.this, ListConcernActivity.class);
         doneIntent.putExtra("userName",userName);

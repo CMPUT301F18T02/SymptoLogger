@@ -74,7 +74,7 @@ public class ModifyConcernActivity extends AppCompatActivity {
         Intent intent = getIntent();
         pos = intent.getIntExtra("pos",0);
 
-        concerns = ConcernListController.getConcernList().getConcerns();
+        concerns = ConcernListController.getConcernList("").getConcernsList();
         concernList = new ArrayList<Concern>(concerns);
 
         Concern newConcern; //New concern variable declared ...

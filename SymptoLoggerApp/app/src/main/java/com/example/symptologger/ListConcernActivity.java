@@ -90,7 +90,7 @@ public class ListConcernActivity extends AppCompatActivity {
         super.onStart();
 
         concernListView = (ListView) findViewById(R.id.listConcernsView);
-        concerns = ConcernListController.getConcernList().getConcerns();
+        concerns = ConcernListController.getConcernList(userName).getConcernsList();
         concernList = new ArrayList<Concern>();
 
         ElasticSearchClient.GetConcerns getConcerns = new ElasticSearchClient.GetConcerns();
@@ -144,7 +144,7 @@ public class ListConcernActivity extends AppCompatActivity {
                             startActivity(viewIntent);
                         } else if (which == 1){
                             Toast.makeText(ListConcernActivity.this,"Delete",Toast.LENGTH_SHORT).show();
-                            ConcernListController.getConcernList().deleteConcern(concernList.get(pos));
+                            ConcernListController.getConcernList(userName).deleteConcern(concernList.get(pos));
                         } else {
                             Toast.makeText(ListConcernActivity.this,"Cancel",Toast.LENGTH_SHORT).show();
                         }

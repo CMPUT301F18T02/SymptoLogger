@@ -66,7 +66,7 @@ public class ViewConcernActivity extends AppCompatActivity {
         pos = intent.getIntExtra("pos",0);
 
 
-        concerns = ConcernListController.getConcernList().getConcerns();
+        concerns = ConcernListController.getConcernList("").getConcernsList();
         concernList = new ArrayList<Concern>(concerns);
 
         Toast.makeText(this,"View "+concernList.get(pos).getTitle(),Toast.LENGTH_SHORT).show();

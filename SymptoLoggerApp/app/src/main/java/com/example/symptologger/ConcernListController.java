@@ -24,26 +24,26 @@ package com.example.symptologger;
 public class ConcernListController {
     private static ConcernList concernList = null;
 
-    static public ConcernList getConcernList(){
+    static public ConcernList getConcernList(String userName){
         if (concernList == null){
-            concernList = new ConcernList();
+            concernList = new ConcernList(userName);
         }
         return concernList;
     }
 
-    public void addConcern(Concern concern){
-        getConcernList().addConcern(concern);
+    public void addConcern(Concern concern, String userName){
+        getConcernList(userName).addConcern(concern, userName);
     }
 
-    public boolean containsConcern(Concern concern){
-        return getConcernList().containsConcern(concern);
+    public boolean containsConcern(Concern concern, String userName){
+        return getConcernList(userName).containsConcern(concern);
     }
 
-    public void deleteConcern(Concern concern){
-        getConcernList().deleteConcern(concern);
+    public void deleteConcern(Concern concern, String userName){
+        getConcernList(userName).deleteConcern(concern);
     }
 
-    public int findCount(){
-        return getConcernList().findCount();
+    public int findCount(String userName){
+        return getConcernList(userName).findCount();
     }
 }

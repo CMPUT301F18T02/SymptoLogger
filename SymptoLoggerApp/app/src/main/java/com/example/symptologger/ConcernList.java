@@ -4,6 +4,8 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+import java.util.concurrent.ExecutionException;
 
 /*
  *  Copyright 2018 Remi Arshad, Noni Hua, Jason Lee, Patrick Tamm, Kaiwen Zhang
@@ -40,8 +42,17 @@ class ConcernList {
      * of ConcernListeners.
      */
 
-    ConcernList(){
-        this.myConcerns = new ArrayList<Concern>();
+    //TODO add check for server connectivity
+    ConcernList(String userName){
+        ElasticSearchClient.GetConcerns getConcerns = new ElasticSearchClient.GetConcerns();
+        getConcerns.execute(userName);
+        try {
+            this.myConcerns = getConcerns.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         this.concernListeners = new ArrayList<ConcernListener>();
     }
 
@@ -51,7 +62,7 @@ class ConcernList {
      * @return myConcerns a list of concerns
      */
 
-    public Collection<Concern> getConcerns(){
+    public Collection<Concern> getConcernsList(){
 
         return this.myConcerns;
     }
@@ -61,9 +72,10 @@ class ConcernList {
      * @param concern a new concern to be added to the list.
      */
 
-    public void addConcern(Concern concern) {
+    public void addConcern(Concern concern, String userName) {
+        ElasticSearchClient.AddConcern addConcern = new ElasticSearchClient.AddConcern();
+        addConcern.execute(concern.getTitle(),concern.getDate().toString(),concern.getDescription(), userName, new Date().toString());
         this.myConcerns.add(concern);
-
     }
 
     /**
