@@ -25,6 +25,7 @@ package com.example.symptologger;
 public class SourceAsObjectListMap {
     private String userID;
     private Integer memberID;
+    private String userRole;
 
     /**
      * Gets the user id
@@ -40,6 +41,10 @@ public class SourceAsObjectListMap {
 
     public Integer getMemberID() {
         return memberID;
+    }
+
+    public String getRole(){
+        return userRole;
     }
 
 }

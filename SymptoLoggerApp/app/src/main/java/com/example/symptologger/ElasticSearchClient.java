@@ -223,4 +223,35 @@ public class ElasticSearchClient {
             return -1;
         }
     }
+
+    public static class GetUserRole extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected String doInBackground(String... search_parameters){
+
+            String type = "usersLogin";
+            String query =  String.format("{\"query\": {\"match\": {\"userID\": \"%s\"}}}", search_parameters[0]);
+            try {
+                JestResult result = client.execute(  new Search.Builder(query).addIndex(index).addType(type).build() );
+
+                if (result.isSucceeded()){
+                    List<SourceAsObjectListMap> res = result.getSourceAsObjectList(SourceAsObjectListMap.class);
+                    if (res.size() != 0){
+                        return res.get(0).getRole();
+                    }
+                    else{
+                        //Log.e("Error","nothing found.");
+                        return "";
+                    }
+
+
+                } else {
+                    Log.e("Error","Some issues with query.");
+                }
+            } catch (Exception e){
+                Log.i("Error","Something went wrong when we tried to communicate with the elasticsearch server.");
+            }
+            return "";
+        }
+    }
 }
