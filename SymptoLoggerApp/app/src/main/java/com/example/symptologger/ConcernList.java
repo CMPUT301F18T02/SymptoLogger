@@ -74,7 +74,12 @@ class ConcernList {
 
     public void addConcern(Concern concern, String userName) {
         ElasticSearchClient.AddConcern addConcern = new ElasticSearchClient.AddConcern();
-        addConcern.execute(concern.getTitle(),concern.getDate().toString(),concern.getDescription(), userName, new Date().toString());
+        String title = concern.getTitle();
+        String des = concern.getDescription();
+        String date = concern.getDate().toString();
+        String user = userName;
+        String cDate = new Date().toString();
+        addConcern.execute(title, date, des, user, cDate);
         this.myConcerns.add(concern);
     }
 

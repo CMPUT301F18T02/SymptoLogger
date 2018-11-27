@@ -91,23 +91,7 @@ public class ListConcernActivity extends AppCompatActivity {
 
         concernListView = (ListView) findViewById(R.id.listConcernsView);
         concerns = ConcernListController.getConcernList(userName).getConcernsList();
-        concernList = new ArrayList<Concern>();
-
-        ElasticSearchClient.GetConcerns getConcerns = new ElasticSearchClient.GetConcerns();
-        getConcerns.execute(userName);
-
-        try {
-            concernList = getConcerns.get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-            //System.out.println("Error getting concerns from server");
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            //System.out.println("Error getting concerns from server: 2");
-        }
-
-        //System.out.println(concernList.size());
-
+        concernList = new ArrayList<Concern>(concerns);
         concernListAdapter = new ArrayAdapter<Concern>(this, android.R.layout.simple_list_item_1, concernList);
         concernListView.setAdapter(concernListAdapter);
 

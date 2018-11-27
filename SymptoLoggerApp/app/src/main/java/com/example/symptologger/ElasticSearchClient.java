@@ -252,7 +252,7 @@ public class ElasticSearchClient {
 //                    "}}}";
 
             String type = "Concern";
-            String source = String.format("{\"concernTitle\": \"%s\", \"concernDate\": \"%s\", \"concernDescription\": \"%s\", \"userName\": \"%s\", \"creationDate\": \"%s\"}",record[0], record[1], record[2], record[3], record[4], record[5]);
+            String source = String.format("{\"concernTitle\": \"%s\", \"concernDate\": \"%s\", \"concernDescription\": \"%s\", \"userName\": \"%s\", \"creationDate\": \"%s\"}",record[0], record[1], record[2], record[3], record[4]);
 
             try {
                 JestResult result = client.execute( new Index.Builder(source).index(index).type(type).build() );
@@ -285,7 +285,7 @@ public class ElasticSearchClient {
                     List<Concern> res = result.getSourceAsObjectList(Concern.class);
                     if (res.size() != 0){
                         for (int i=0;i<=res.size();i++){
-                            System.out.println("From res: "+res.get(i).getTitle());
+                            foundConcerns.addAll(res);
                         }
                         System.out.println("From elastic search client: "+foundConcerns.size());
                     }
