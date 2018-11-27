@@ -8,6 +8,9 @@ import com.searchly.jestdroid.JestClientFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.transform.Source;
+
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
 import io.searchbox.core.Index;
@@ -181,6 +184,7 @@ public class ElasticSearchClient {
                 if (result.isSucceeded()){
                     List<SourceAsObjectListMap> res = result.getSourceAsObjectList(SourceAsObjectListMap.class);
                     if (res.size() != 0){
+                        System.out.println("From search user: "+res.get(0).getUserID());
                         return Boolean.TRUE;
                     }
                     else{
@@ -272,7 +276,6 @@ public class ElasticSearchClient {
         protected ArrayList<Concern> doInBackground(String... search_parameters){
 
             ArrayList<Concern> foundConcerns = new ArrayList<Concern>();
-
             String type = "Concern";
             String query =  String.format("{\"query\": {\"match\": {\"userName\": \"%s\"}}}", search_parameters[0]);
             try {
@@ -281,7 +284,9 @@ public class ElasticSearchClient {
                 if (result.isSucceeded()){
                     List<Concern> res = result.getSourceAsObjectList(Concern.class);
                     if (res.size() != 0){
-                        foundConcerns.addAll(res);
+                        for (int i=0;i<=res.size();i++){
+                            System.out.println("From res: "+res.get(i).getTitle());
+                        }
                         System.out.println("From elastic search client: "+foundConcerns.size());
                     }
                     else{

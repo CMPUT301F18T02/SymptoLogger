@@ -100,17 +100,13 @@ public class ListConcernActivity extends AppCompatActivity {
             concernList = getConcerns.get();
         } catch (ExecutionException e) {
             e.printStackTrace();
-            System.out.println("Error getting concerns from server");
+            //System.out.println("Error getting concerns from server");
         } catch (InterruptedException e) {
             e.printStackTrace();
-            System.out.println("Error getting concerns from server: 2");
+            //System.out.println("Error getting concerns from server: 2");
         }
 
-        System.out.println(concernList.size());
-
-        for (Concern c : concernList){
-            System.out.println(c.getTitle());
-        }
+        //System.out.println(concernList.size());
 
         concernListAdapter = new ArrayAdapter<Concern>(this, android.R.layout.simple_list_item_1, concernList);
         concernListView.setAdapter(concernListAdapter);
