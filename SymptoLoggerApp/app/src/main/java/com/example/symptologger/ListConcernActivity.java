@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -80,9 +81,18 @@ public class ListConcernActivity extends AppCompatActivity {
 
         concernListView = (ListView) findViewById(R.id.listConcernsView);
         concerns = ConcernListController.getConcernList().getConcerns();
+//        concernList = new ArrayList<Concern>(concerns);
+
+        // load concerns from sharedPreference
+        final SharedPreference sharedPreference = new SharedPreference();
+        concerns = sharedPreference.readConcerns(getApplicationContext());
         concernList = new ArrayList<Concern>(concerns);
+
+//        Log.d("CONCERNLIST", String.valueOf(concernList));
+
         concernListAdapter = new ArrayAdapter<Concern>(this, android.R.layout.simple_list_item_1, concernList);
         concernListView.setAdapter(concernListAdapter);
+
 
         ConcernListController.getConcernList().addListener(new ConcernListener() {
             @Override
@@ -96,7 +106,7 @@ public class ListConcernActivity extends AppCompatActivity {
 
         concernListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id){
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int position, long id){
                 final int pos = position;
 
                 AlertDialog.Builder modifyAlert = new AlertDialog.Builder(ListConcernActivity.this);
@@ -117,7 +127,16 @@ public class ListConcernActivity extends AppCompatActivity {
                             startActivity(viewIntent);
                         } else if (which == 1){
                             Toast.makeText(ListConcernActivity.this,"Delete",Toast.LENGTH_SHORT).show();
-                            ConcernListController.getConcernList().deleteConcern(concernList.get(pos));
+                            Log.d("LIST", String.valueOf(concernList));
+//                            ConcernListController.getConcernList().deleteConcern(concernList.get(pos));
+                            concernList.remove(position);
+                            Log.d("LIST", String.valueOf(concernList));
+
+                            // update concerns
+//                            ArrayList<Concern> concerns = sharedPreference.readConcerns(getApplicationContext());
+                            sharedPreference.updateConcerns(getApplicationContext(), concernList);
+
+                            concernListAdapter.notifyDataSetChanged();
                         } else {
                             Toast.makeText(ListConcernActivity.this,"Cancel",Toast.LENGTH_SHORT).show();
                         }

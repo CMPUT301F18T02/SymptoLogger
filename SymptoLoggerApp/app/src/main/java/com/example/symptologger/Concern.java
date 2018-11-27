@@ -38,7 +38,8 @@ class Concern {
     @JestId
     private String id;
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    // This code causes SharedPreference to crash
+//    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     /**
      * Concern class constructor. There are three, as the patient has the option of passing a title,
