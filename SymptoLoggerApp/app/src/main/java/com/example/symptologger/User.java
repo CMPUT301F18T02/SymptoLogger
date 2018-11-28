@@ -16,6 +16,9 @@ package com.example.symptologger;
  *  limitations under the License.
  */
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * <p>
  *     User model.
@@ -23,7 +26,7 @@ package com.example.symptologger;
  * </p>
  */
 
-public class User {
+public class User implements Parcelable {
     private String firstName;
     private String lastName;
     private String id;
@@ -31,6 +34,38 @@ public class User {
     private String cell;
     private String user_type;
 
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeString(this.firstName);
+        out.writeString(this.lastName);
+        out.writeString(this.id);
+        out.writeString(this.email);
+        out.writeString(this.cell);
+        out.writeString(this.user_type);
+    }
+
+    public static final Parcelable.Creator<User> CREATOR
+            = new Parcelable.Creator<User>() {
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
+
+    private User(Parcel in) {
+        this.firstName = in.readString();
+        this.lastName = in.readString();
+        this.id = in.readString();
+        this.email = in.readString();
+        this.cell = in.readString();
+        this.user_type = in.readString();
+    }
     /**
      * Empty constructor.
      */

@@ -1,13 +1,16 @@
 package com.example.symptologger;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -81,8 +84,17 @@ public class ViewRecordActivity extends AppCompatActivity {
 
     private void addTabs(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new RecordDetailsFragment(), "DETAILS");
-        adapter.addFrag(new RecordCommentFragment(), "COMMENTS");
+        Bundle bundle = new Bundle();
+        bundle.putInt("record_pos", RECORD_POS);
+
+        RecordDetailsFragment detailsFragment = new RecordDetailsFragment();
+        RecordCommentFragment commentFragment = new RecordCommentFragment();
+
+        detailsFragment.setArguments(bundle);
+        commentFragment.setArguments(bundle);
+
+        adapter.addFrag(detailsFragment, "DETAILS");
+        adapter.addFrag(commentFragment, "COMMENTS");
         viewPager.setAdapter(adapter);
     }
 
@@ -102,9 +114,30 @@ public class ViewRecordActivity extends AppCompatActivity {
 
         switch(id) {
             case R.id.editOption:
-                // TODO: edit a record
+                // TODO: edit a record; should load the current reocrd information
+                Intent editRecordIntent = new Intent(ViewRecordActivity.this, NewRecordActivity.class);
+                startActivity(editRecordIntent);
             case R.id.deleteOption:
                 // TODO: delete a record, pops up a dialog
+                AlertDialog.Builder deleteAlert = new AlertDialog.Builder(ViewRecordActivity.this);
+
+                deleteAlert.setTitle("Delete this record?");
+                deleteAlert.setCancelable(true);
+
+                CharSequence[] options = {"Yes", "Cancel"};
+
+                deleteAlert.setItems(options, new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which){
+                        if (which == 0){
+                            // TODO: update shared preference
+                            Toast.makeText(ViewRecordActivity.this, "Record deleted",Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(ViewRecordActivity.this,"Cancelled",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                deleteAlert.show();
         }
 
         return super.onOptionsItemSelected(item);

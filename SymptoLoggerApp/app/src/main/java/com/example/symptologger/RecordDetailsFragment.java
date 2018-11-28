@@ -46,6 +46,7 @@ import java.util.ArrayList;
 public class RecordDetailsFragment extends Fragment {
 
 //    private OnFragmentInteractionListener mListener;
+    private ArrayList<Record> recordArrayList;
     private Record record;
 
     public RecordDetailsFragment() {
