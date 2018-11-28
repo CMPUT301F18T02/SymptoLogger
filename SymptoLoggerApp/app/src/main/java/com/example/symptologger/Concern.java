@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Locale;
 
 import io.searchbox.annotations.JestId;
 
@@ -32,14 +33,14 @@ import io.searchbox.annotations.JestId;
 class Concern {
     private String concernTitle;
     private Date concernDate;
-    private String concernDescription;
+    private String description;
     private RecordList myRecords;
     private String userName;
 
     @JestId
     private String id;
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MMM dd h:mm a", Locale.CANADA);
 
     /**
      * Concern class constructor. There are three, as the patient has the option of passing a title,
@@ -51,7 +52,7 @@ class Concern {
     Concern(String userName){
         this.concernTitle = "No title given";
         this.concernDate = new Date();
-        this.concernDescription = "No description given";
+        this.description = "No description given";
         this.myRecords = new RecordList();
         this.userName = userName;
     }
@@ -73,7 +74,7 @@ class Concern {
         }
         this.concernDate = date;
         if (description.length()<= 300){
-            this.concernDescription = description;
+            this.description = description;
         } else{
             throw new DescriptionTooLongException();
         }
@@ -99,7 +100,7 @@ class Concern {
         }
         this.concernDate = new Date();
         if (description.length() <= 300){
-            this.concernDescription = description;
+            this.description = description;
         } else {
             throw new DescriptionTooLongException();
         }
@@ -167,7 +168,7 @@ class Concern {
      */
 
     public String getDescription() {
-        return this.concernDescription;
+        return this.description;
     }
 
 
@@ -179,7 +180,7 @@ class Concern {
 
     public void setDescription(String description) throws DescriptionTooLongException{
         if (description.length() <= 300){
-            this.concernDescription = description;
+            this.description = description;
         } else {
             throw new DescriptionTooLongException();
         }

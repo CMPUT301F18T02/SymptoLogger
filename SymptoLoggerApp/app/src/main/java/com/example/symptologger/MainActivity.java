@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         //new ElasticSearchClient.AddRecord().execute();
         //new ElasticSearchClient.SearchRecord().execute("no");
 
+        new ElasticSearchClient.GetConcernsMap().execute("11111111");
+
         Button button_sign_up = (Button) findViewById(R.id.button_sign_up);
         //Button button_add_geo_location = (Button) findViewById(R.id.button_geo_location);
 

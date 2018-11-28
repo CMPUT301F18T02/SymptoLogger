@@ -302,5 +302,38 @@ public class ElasticSearchClient {
         }
     }
 
+    public static class GetConcernsMap extends AsyncTask<String, Void, ArrayList<ConcernMap>>{
+
+        @Override
+        protected ArrayList<ConcernMap> doInBackground(String... search_parameters){
+
+            ArrayList<ConcernMap> foundConcerns = new ArrayList<ConcernMap>();
+            String type = "Concern";
+            String query =  String.format("{\"query\": {\"match\": {\"userName\": \"%s\"}}}", search_parameters[0]);
+            try {
+                JestResult result = client.execute(  new Search.Builder(query).addIndex(index).addType(type).build() );
+
+                if (result.isSucceeded()){
+                    List<ConcernMap> res = result.getSourceAsObjectList(ConcernMap.class);
+                    if (res.size() != 0){
+                        foundConcerns.addAll(res);
+                        System.out.println("From elastic search client: "+foundConcerns.size());
+                        System.out.println("From ES client - title ... "+foundConcerns.get(1).getConcernTitle());
+                    }
+                    else{
+                        Log.e("Error","nothing found.");
+                    }
+
+
+                } else {
+                    Log.e("Error","Some issues with query.");
+                }
+            } catch (Exception e){
+                Log.i("Error","Something went wrong when we tried to communicate with the elasticsearch server.");
+            }
+            return foundConcerns;
+        }
+    }
+
 
 }
