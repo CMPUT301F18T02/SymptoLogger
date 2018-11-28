@@ -104,10 +104,10 @@ public class ElasticSearchClient {
             String type = "Concern";
             String source = "{\"Concern\" : {\"properties\" : " +
                     "{\"concernTitle\": {\"type\" : \"string\"}," +
-                    "\"concernDate\": {\"type\" : \"string\"}, " +
+                    "\"concernDate\": {\"type\" : \"date\"}, " +
                     "\"concernDescription\": {\"type\" : \"string\"}, " +
                     "\"userName\" : {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
-                    "\"creationDate\": {\"type\" : \"string\"}," +
+                    "\"created\": {\"type\" : \"date\"}," +
                     "}}}";
 
                 try {

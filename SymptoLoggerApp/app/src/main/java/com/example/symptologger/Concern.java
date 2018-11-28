@@ -30,9 +30,9 @@ import io.searchbox.annotations.JestId;
  */
 
 class Concern {
-    private String title;
-    private Date date;
-    private String description;
+    private String concernTitle;
+    private Date concernDate;
+    private String concernDescription;
     private RecordList myRecords;
     private String userName;
 
@@ -49,9 +49,9 @@ class Concern {
      */
 
     Concern(String userName){
-        this.title = "No title given";
-        this.date = new Date();
-        this.description = "No description given";
+        this.concernTitle = "No title given";
+        this.concernDate = new Date();
+        this.concernDescription = "No description given";
         this.myRecords = new RecordList();
         this.userName = userName;
     }
@@ -67,13 +67,13 @@ class Concern {
 
     Concern(String title, Date date, String description, String userName) throws TitleTooLongException, DescriptionTooLongException{
         if (title.length() <= 30){
-            this.title = title;
+            this.concernTitle = title;
         } else {
             throw new TitleTooLongException();
         }
-        this.date = date;
+        this.concernDate = date;
         if (description.length()<= 300){
-            this.description = description;
+            this.concernDescription = description;
         } else{
             throw new DescriptionTooLongException();
         }
@@ -95,11 +95,11 @@ class Concern {
         if (title.length() > 30){
             throw new TitleTooLongException();
         } else {
-            this.title = title;
+            this.concernTitle = title;
         }
-        this.date = new Date();
+        this.concernDate = new Date();
         if (description.length() <= 300){
-            this.description = description;
+            this.concernDescription = description;
         } else {
             throw new DescriptionTooLongException();
         }
@@ -114,7 +114,7 @@ class Concern {
      */
 
     public String toString(){
-        return this.title+"\t\t\t\t\t"+findRecordCount()+"\n"+this.date;
+        return this.concernTitle+"\t\t\t\t\t"+findRecordCount()+"\n"+this.concernDate;
     }
 
 
@@ -127,7 +127,7 @@ class Concern {
 
     public void setTitle(String title) throws TitleTooLongException{
         if (title.length() <= 30){
-            this.title = title;
+            this.concernTitle = title;
         } else{
             throw new TitleTooLongException();
         }
@@ -139,7 +139,7 @@ class Concern {
      */
 
     public String getTitle() {
-        return this.title;
+        return this.concernTitle;
     }
 
     /**
@@ -149,7 +149,7 @@ class Concern {
      */
 
     public Date getDate() {
-        return this.date;
+        return this.concernDate;
     }
 
     /**
@@ -158,7 +158,7 @@ class Concern {
      */
 
     public void setDate(Date date) {
-        this.date = date;
+        this.concernDate = date;
     }
 
     /**
@@ -167,7 +167,7 @@ class Concern {
      */
 
     public String getDescription() {
-        return this.description;
+        return this.concernDescription;
     }
 
 
@@ -179,7 +179,7 @@ class Concern {
 
     public void setDescription(String description) throws DescriptionTooLongException{
         if (description.length() <= 300){
-            this.description = description;
+            this.concernDescription = description;
         } else {
             throw new DescriptionTooLongException();
         }
