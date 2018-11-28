@@ -95,15 +95,15 @@ public class ListConcernActivity extends AppCompatActivity {
         concernListAdapter = new ArrayAdapter<Concern>(this, android.R.layout.simple_list_item_1, concernList);
         concernListView.setAdapter(concernListAdapter);
 
-//        ConcernListController.getConcernList().addListener(new ConcernListener() {
-//            @Override
-//            public void updateListener() {
-//                concernList.clear();
-//                Collection<Concern> c = ConcernListController.getConcernList().getConcerns();
-//                concernList.addAll(c);
-//                concernListAdapter.notifyDataSetChanged();
-//            }
-//        });
+        ConcernListController.getConcernList(userName).addListener(new ConcernListener() {
+            @Override
+            public void updateListener() {
+                concernList.clear();
+                Collection<Concern> c = ConcernListController.getConcernList(userName).getConcernsList();
+                concernList.addAll(c);
+                concernListAdapter.notifyDataSetChanged();
+            }
+        });
 
         concernListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
             @Override
@@ -139,12 +139,4 @@ public class ListConcernActivity extends AppCompatActivity {
             }
         });
     }
-
-    @Override
-    protected void onRestart(){
-        super.onRestart();
-
-        concernListAdapter.notifyDataSetChanged();
-    }
-
 }

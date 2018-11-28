@@ -251,8 +251,8 @@ public class ElasticSearchClient {
 //                    "\"creationDate\": {\"type\" : \"string\"}," +
 //                    "}}}";
 
-            String type = "Concern";
-            String source = String.format("{\"concernTitle\": \"%s\", \"concernDate\": \"%s\", \"concernDescription\": \"%s\", \"userName\": \"%s\", \"creationDate\": \"%s\"}",record[0], record[1], record[2], record[3], record[4]);
+            String type = "Concerns";
+            String source = String.format("{\"title\": \"%s\", \"date\": \"%s\", \"description\": \"%s\", \"userName\": \"%s\", \"created\": \"%s\"}",record[0], record[1], record[2], record[3], record[4]);
 
             try {
                 JestResult result = client.execute( new Index.Builder(source).index(index).type(type).build() );

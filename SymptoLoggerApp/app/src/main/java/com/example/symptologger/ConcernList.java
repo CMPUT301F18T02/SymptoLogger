@@ -63,15 +63,6 @@ class ConcernList {
      */
 
     public Collection<Concern> getConcernsList(){
-//        ElasticSearchClient.GetConcerns getConcerns = new ElasticSearchClient.GetConcerns();
-//        getConcerns.execute(userName);
-//        try {
-//            this.myConcerns = getConcerns.get();
-//        } catch (ExecutionException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
         return this.myConcerns;
     }
 
@@ -89,6 +80,8 @@ class ConcernList {
         String cDate = new Date().toString();
         addConcern.execute(title, date, des, user, cDate);
         this.myConcerns.add(concern);
+        notifyListeners();
+        this.concernListeners.size();
     }
 
     /**
@@ -136,6 +129,7 @@ class ConcernList {
      */
 
     public void addListener(ConcernListener cl){
-        concernListeners.add(cl);
+        this.concernListeners.add(cl);
+        this.concernListeners.size();
     }
 }
