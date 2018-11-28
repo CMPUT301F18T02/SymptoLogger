@@ -45,7 +45,6 @@ class ConcernList {
         this.concernListeners = new ArrayList<ConcernListener>();
     }
 
-
     /**
      * returns the list of concerns
      * @return myConcerns a list of concerns
