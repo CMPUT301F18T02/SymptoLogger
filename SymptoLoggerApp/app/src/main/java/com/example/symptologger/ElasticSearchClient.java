@@ -284,9 +284,7 @@ public class ElasticSearchClient {
                 if (result.isSucceeded()){
                     List<Concern> res = result.getSourceAsObjectList(Concern.class);
                     if (res.size() != 0){
-                        for (int i=0;i<=res.size();i++){
-                            foundConcerns.addAll(res);
-                        }
+                        foundConcerns.addAll(res);
                         System.out.println("From elastic search client: "+foundConcerns.size());
                     }
                     else{
