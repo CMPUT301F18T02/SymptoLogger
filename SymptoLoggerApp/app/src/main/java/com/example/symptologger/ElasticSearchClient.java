@@ -184,7 +184,6 @@ public class ElasticSearchClient {
                 if (result.isSucceeded()){
                     List<SourceAsObjectListMap> res = result.getSourceAsObjectList(SourceAsObjectListMap.class);
                     if (res.size() != 0){
-                        System.out.println("From search user: "+res.get(0).getUserID());
                         return Boolean.TRUE;
                     }
                     else{
@@ -243,14 +242,6 @@ public class ElasticSearchClient {
         @Override
         protected Boolean doInBackground(String... record) {
 
-//            String source = "{\"Concerns\" : {\"properties\" : " +
-//                    "{\"concernTitle\": {\"type\" : \"string\"}," +
-//                    "\"concernDate\": {\"type\" : \"string\"}, " +
-//                    "\"concernDescription\": {\"type\" : \"string\"}, " +
-//                    "\"userName\" : {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
-//                    "\"creationDate\": {\"type\" : \"string\"}," +
-//                    "}}}";
-
             String type = "Concerns";
             String source = String.format("{\"title\": \"%s\", \"date\": \"%s\", \"description\": \"%s\", \"userName\": \"%s\", \"created\": \"%s\"}",record[0], record[1], record[2], record[3], record[4]);
 
@@ -285,7 +276,6 @@ public class ElasticSearchClient {
                     List<Concern> res = result.getSourceAsObjectList(Concern.class);
                     if (res.size() != 0){
                         foundConcerns.addAll(res);
-                        System.out.println("From elastic search client: "+foundConcerns.size());
                     }
                     else{
                         Log.e("Error","nothing found.");
@@ -301,39 +291,5 @@ public class ElasticSearchClient {
             return foundConcerns;
         }
     }
-
-    public static class GetConcernsMap extends AsyncTask<String, Void, ArrayList<ConcernMap>>{
-
-        @Override
-        protected ArrayList<ConcernMap> doInBackground(String... search_parameters){
-
-            ArrayList<ConcernMap> foundConcerns = new ArrayList<ConcernMap>();
-            String type = "Concern";
-            String query =  String.format("{\"query\": {\"match\": {\"userName\": \"%s\"}}}", search_parameters[0]);
-            try {
-                JestResult result = client.execute(  new Search.Builder(query).addIndex(index).addType(type).build() );
-
-                if (result.isSucceeded()){
-                    List<ConcernMap> res = result.getSourceAsObjectList(ConcernMap.class);
-                    if (res.size() != 0){
-                        foundConcerns.addAll(res);
-                        System.out.println("From elastic search client: "+foundConcerns.size());
-                        System.out.println("From ES client - title ... "+foundConcerns.get(1).getConcernTitle());
-                    }
-                    else{
-                        Log.e("Error","nothing found.");
-                    }
-
-
-                } else {
-                    Log.e("Error","Some issues with query.");
-                }
-            } catch (Exception e){
-                Log.i("Error","Something went wrong when we tried to communicate with the elasticsearch server.");
-            }
-            return foundConcerns;
-        }
-    }
-
 
 }

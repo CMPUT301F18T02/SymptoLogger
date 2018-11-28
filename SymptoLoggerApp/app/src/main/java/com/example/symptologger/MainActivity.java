@@ -33,13 +33,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //new ElasticSearchClient.AddTable().execute();
-        //new ElasticSearchClient.AddRecord().execute();
-        //new ElasticSearchClient.SearchRecord().execute("no");
-
-        new ElasticSearchClient.GetConcernsMap().execute("11111111");
 
         Button button_sign_up = (Button) findViewById(R.id.button_sign_up);
-        //Button button_add_geo_location = (Button) findViewById(R.id.button_geo_location);
 
         button_sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,20 +43,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        button_add_geo_location.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(MainActivity.this, MapsActivity.class));
-//            }
-//        });
     }
 
     public void SignIn(View v) {
         Intent SignInIntent = new Intent(this, SignInActivity.class);
         startActivity(SignInIntent);
-//        Intent intent = new Intent(MainActivity.this, ListConcernActivity.class);
-//        startActivity(intent);
-
 
     }
 }
