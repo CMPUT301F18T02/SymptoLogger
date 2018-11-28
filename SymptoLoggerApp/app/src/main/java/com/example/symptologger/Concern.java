@@ -31,8 +31,8 @@ import io.searchbox.annotations.JestId;
  */
 
 class Concern {
-    private String concernTitle;
-    private Date concernDate;
+    private String title;
+    private String date;
     private String description;
     private RecordList myRecords;
     private String userName;
@@ -50,8 +50,8 @@ class Concern {
      */
 
     Concern(String userName){
-        this.concernTitle = "No title given";
-        this.concernDate = new Date();
+        this.title = "No title given";
+        this.date = new Date().toString();
         this.description = "No description given";
         this.myRecords = new RecordList();
         this.userName = userName;
@@ -68,11 +68,11 @@ class Concern {
 
     Concern(String title, Date date, String description, String userName) throws TitleTooLongException, DescriptionTooLongException{
         if (title.length() <= 30){
-            this.concernTitle = title;
+            this.title = title;
         } else {
             throw new TitleTooLongException();
         }
-        this.concernDate = date;
+        this.date = date.toString();
         if (description.length()<= 300){
             this.description = description;
         } else{
@@ -96,9 +96,9 @@ class Concern {
         if (title.length() > 30){
             throw new TitleTooLongException();
         } else {
-            this.concernTitle = title;
+            this.title = title;
         }
-        this.concernDate = new Date();
+        this.date = new Date().toString();
         if (description.length() <= 300){
             this.description = description;
         } else {
@@ -115,7 +115,7 @@ class Concern {
      */
 
     public String toString(){
-        return this.concernTitle+"\t\t\t\t\t"+findRecordCount()+"\n"+this.concernDate;
+        return this.title+"\t\t\t\t\t"+findRecordCount()+"\n"+this.date;
     }
 
 
@@ -128,7 +128,7 @@ class Concern {
 
     public void setTitle(String title) throws TitleTooLongException{
         if (title.length() <= 30){
-            this.concernTitle = title;
+            this.title = title;
         } else{
             throw new TitleTooLongException();
         }
@@ -140,7 +140,7 @@ class Concern {
      */
 
     public String getTitle() {
-        return this.concernTitle;
+        return this.title;
     }
 
     /**
@@ -149,8 +149,8 @@ class Concern {
      * @return date
      */
 
-    public Date getDate() {
-        return this.concernDate;
+    public String getDate() {
+        return this.date;
     }
 
     /**
@@ -159,13 +159,22 @@ class Concern {
      */
 
     public void setDate(Date date) {
-        this.concernDate = date;
+        this.date = date.toString();
     }
 
     /**
      * gets the concern's description.
      * @return description
      */
+
+    /**
+     * Overloaded method; set date can either be Date or String
+     * @param date string representation of the date
+     */
+
+    public void setDate(String date){
+        this.date = date;
+    }
 
     public String getDescription() {
         return this.description;

@@ -63,7 +63,7 @@ public class ModifyConcernActivity extends AppCompatActivity {
 
     String concernTitle;
     String concernDesc;
-    Date concernDate;
+    String concernDate;
 
 
     @Override
@@ -164,7 +164,7 @@ public class ModifyConcernActivity extends AppCompatActivity {
     }
 
     public void modDate(View view){
-        concernDate = c.getTime();
+        concernDate = c.getTime().toString();
         Toast.makeText(this, "Date changed; click save to apply changes.",Toast.LENGTH_LONG).show();
     }
 

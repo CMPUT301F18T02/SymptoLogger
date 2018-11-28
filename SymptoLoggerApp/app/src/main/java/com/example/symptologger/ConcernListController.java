@@ -22,12 +22,10 @@ package com.example.symptologger;
  */
 
 public class ConcernListController {
-    private static ConcernList concernList = null;
+    private static ConcernList concernList;
 
     static public ConcernList getConcernList(String userName){
-        if (concernList == null){
-            concernList = new ConcernList(userName);
-        }
+        concernList = new ConcernList(userName);
         return concernList;
     }
 

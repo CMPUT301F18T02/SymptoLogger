@@ -276,7 +276,7 @@ public class ElasticSearchClient {
         protected ArrayList<Concern> doInBackground(String... search_parameters){
 
             ArrayList<Concern> foundConcerns = new ArrayList<Concern>();
-            String type = "Concern";
+            String type = "Concerns";
             String query =  String.format("{\"query\": {\"match\": {\"userName\": \"%s\"}}}", search_parameters[0]);
             try {
                 JestResult result = client.execute(  new Search.Builder(query).addIndex(index).addType(type).build() );

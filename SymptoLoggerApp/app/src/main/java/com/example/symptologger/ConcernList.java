@@ -63,7 +63,15 @@ class ConcernList {
      */
 
     public Collection<Concern> getConcernsList(){
-
+//        ElasticSearchClient.GetConcerns getConcerns = new ElasticSearchClient.GetConcerns();
+//        getConcerns.execute(userName);
+//        try {
+//            this.myConcerns = getConcerns.get();
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         return this.myConcerns;
     }
 
