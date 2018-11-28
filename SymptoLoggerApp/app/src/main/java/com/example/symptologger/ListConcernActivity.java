@@ -139,4 +139,13 @@ public class ListConcernActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+
+        concerns = ConcernListController.getConcernList(userName).getConcernsList();
+        concernList = new ArrayList<Concern>(concerns);
+        concernListAdapter.notifyDataSetChanged();
+    }
 }
