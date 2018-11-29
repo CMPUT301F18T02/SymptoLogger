@@ -292,4 +292,27 @@ public class ElasticSearchClient {
         }
     }
 
+    public static class AddRecord extends AsyncTask<String, Void, Boolean> { //use Void instead of void for AsyncTask as return type
+        @Override
+        protected Boolean doInBackground(String... record) {
+
+            String type = "Records";
+            String source = String.format("{\"title\": \"%s\", \"date\": \"%s\", \"concernTitle\": \"%s\", \"userName\": \"%s\", \"created\": \"%s\"}",record[0], record[1], record[2], record[3], record[4]);
+
+            try {
+                JestResult result = client.execute( new Index.Builder(source).index(index).type(type).build() );
+
+                if (result.isSucceeded()) {
+                    return Boolean.TRUE;
+                }
+                else{
+                    return Boolean.FALSE;
+                }
+            } catch (Exception e) {
+                Log.i("Error", "The application failed - reason: AddRecord.");
+            }
+            return Boolean.FALSE;
+        }
+    }
+
 }
