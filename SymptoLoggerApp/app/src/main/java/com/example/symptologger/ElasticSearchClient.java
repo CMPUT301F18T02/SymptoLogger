@@ -13,6 +13,7 @@ import javax.xml.transform.Source;
 
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
+import io.searchbox.core.DeleteByQuery;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.indices.DeleteIndex;
@@ -315,6 +316,8 @@ public class ElasticSearchClient {
         }
     }
 
+
+
     public static class GetRecords extends AsyncTask<String, Void, ArrayList<Record>>{
 
         @Override
@@ -343,6 +346,27 @@ public class ElasticSearchClient {
                 Log.i("Error","Something went wrong when we tried to communicate with the elasticsearch server.");
             }
             return foundRecords;
+        }
+    }
+
+    public static class DeleteRecord extends AsyncTask<String, Void, Boolean>{
+
+        @Override
+        protected Boolean doInBackground(String... search_parameters){
+
+            String type = "Records";
+            String query =  String.format("{\"query\": {\"must\": [{\"match\": {\"title\": \"%s\"}}, {\"match\": {\"concernTitle\": \'%s\"}}]}}", search_parameters[0], search_parameters[1]);
+            try {
+                JestResult result = client.execute(  new DeleteByQuery.Builder(query).addIndex(index).addType(type).build() );
+                if (result.isSucceeded()){
+                    return Boolean.TRUE;
+                } else {
+                    Log.e("Error","Some issues with DeleteRecord query.");
+                }
+            } catch (Exception e){
+                Log.i("Error","Something went wrong when we tried to communicate with the elasticsearch server.");
+            }
+            return Boolean.FALSE;
         }
     }
 
