@@ -46,6 +46,7 @@ import java.util.Locale;
 public class ModifyConcernActivity extends AppCompatActivity {
 
     private int pos;
+    private String userName;
     Collection<Concern> concerns;
     ArrayList<Concern> concernList;
 
@@ -72,7 +73,9 @@ public class ModifyConcernActivity extends AppCompatActivity {
         setContentView(R.layout.activity_modify_concern);
 
         Intent intent = getIntent();
-        pos = intent.getIntExtra("pos",0);
+        Bundle extras = intent.getExtras();
+        pos = extras.getInt("pos");
+        userName = extras.getString("userName");
 
         concerns = ConcernListController.getConcernList("").getConcernsList();
         concernList = new ArrayList<Concern>(concerns);

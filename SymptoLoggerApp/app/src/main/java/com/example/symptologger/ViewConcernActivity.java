@@ -47,6 +47,7 @@ public class ViewConcernActivity extends AppCompatActivity {
     ArrayList<Record> recordList;
     ArrayAdapter<Record> recordListAdapter;
     Collection<Record> records;
+    String userName = "11111111";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,13 @@ public class ViewConcernActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_concern);
 
         Intent intent = getIntent();
+        //Bundle extras = intent.getExtras();
+        //pos = extras.getInt("pos",0);
+        //userName = extras.getString("userName");
+        pos = intent.getIntExtra("pos",0);
+        userName = intent.getStringExtra("userName");
+
+        //Intent intent = getIntent();
 
         /*
         * passing integer from one activity to another:
@@ -63,10 +71,10 @@ public class ViewConcernActivity extends AppCompatActivity {
         * Date: 2018-11-13
         */
 
-        pos = intent.getIntExtra("pos",0);
+        //pos = intent.getIntExtra("pos",0);
 
 
-        concerns = ConcernListController.getConcernList("").getConcernsList();
+        concerns = ConcernListController.getConcernList(userName).getConcernsList();
         concernList = new ArrayList<Concern>(concerns);
 
         Toast.makeText(this,"View "+concernList.get(pos).getTitle(),Toast.LENGTH_SHORT).show();
@@ -102,13 +110,13 @@ public class ViewConcernActivity extends AppCompatActivity {
         TextView concernDescriptionView = (TextView) findViewById(R.id.concernDescriptionView);
         concernDescriptionView.setText(concernList.get(pos).getDescription());
 
-        recordListView = findViewById(R.id.recordListView);
+        //recordListView = findViewById(R.id.recordListView);
         //records = RecordListController.getRecordList().getRecords();
-        recordList = new ArrayList<Record>(concernList.get(pos).getRecords());
-        recordListAdapter = new ArrayAdapter<Record>(this,android.R.layout.simple_list_item_1,recordList);
-        recordListView.setAdapter(recordListAdapter);
+        //recordList = new ArrayList<Record>(concernList.get(pos).getRecords());
+        //recordListAdapter = new ArrayAdapter<Record>(this,android.R.layout.simple_list_item_1,recordList);
+        //recordListView.setAdapter(recordListAdapter);
 
-        recordListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+        /*recordListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id){
                 final int recPos = position;
@@ -144,19 +152,23 @@ public class ViewConcernActivity extends AppCompatActivity {
                 recordAlert.show();
                 return false;
             }
-        });
+        });*/
     }
 
     public void back() {
         Toast.makeText(this, "Back ...", Toast.LENGTH_SHORT).show();
         Intent backIntent = new Intent(ViewConcernActivity.this, ListConcernActivity.class);
+        backIntent.putExtra("userName",userName);
         startActivity(backIntent);
     }
 
     public void modify(){
         Toast.makeText(this,"Modify ...", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(ViewConcernActivity.this, ModifyConcernActivity.class);
-        intent.putExtra("pos",pos);
+        Bundle modifyExtras = new Bundle();
+        modifyExtras.putInt("pos",pos);
+        modifyExtras.putString("userName",userName);
+        intent.putExtras(modifyExtras);
         startActivity(intent);
     }
 }
