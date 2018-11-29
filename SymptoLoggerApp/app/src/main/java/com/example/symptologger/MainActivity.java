@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         //new ElasticSearchClient.AddTable().execute();
         //new ElasticSearchClient.AddRecord().execute("rec",new Date().toString(),"test","11111111",new Date().toString());
         //new ElasticSearchClient.DeleteIndices().execute("Records");
-        new ElasticSearchClient.DeleteRecord().execute("rec3","11111111");
+        new ElasticSearchClient.DeleteRecord().execute("rec3","z");
         Button button_sign_up = (Button) findViewById(R.id.button_sign_up);
 
         button_sign_up.setOnClickListener(new View.OnClickListener() {

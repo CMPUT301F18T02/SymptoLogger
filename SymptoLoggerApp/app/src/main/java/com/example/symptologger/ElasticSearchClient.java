@@ -355,7 +355,11 @@ public class ElasticSearchClient {
         protected Boolean doInBackground(String... search_parameters){
 
             String type = "Records";
-            String query =  String.format("{\"query\": {\"must\": [{\"match\": {\"title\": \"%s\"}}, {\"match\": {\"concernTitle\": \'%s\"}}]}}", search_parameters[0], search_parameters[1]);
+            String query =  String.format(
+                    "{\"query\": {\"bool\": " +
+                            "{\"must\": [" +
+                            "{\"match\": {\"title\": \"%s\"}}, " +
+                            "{\"match\": {\"concernTitle\": \"%s\"}}]}}}", search_parameters[0], search_parameters[1]);
             try {
                 JestResult result = client.execute(  new DeleteByQuery.Builder(query).addIndex(index).addType(type).build() );
                 if (result.isSucceeded()){
