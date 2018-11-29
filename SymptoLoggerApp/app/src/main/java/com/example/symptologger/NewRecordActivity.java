@@ -140,7 +140,7 @@ public class NewRecordActivity extends AppCompatActivity {
                 EditText recordTitle = (EditText) findViewById(R.id.recordTitleText);
                 String title = recordTitle.getText().toString();
 
-                Record newRecord = new Record(c.getTime(),title);
+                Record newRecord = new Record(c.getTime(),title,"11111111","...");
 
                 Concern thisConcern = concernList.get(pos);
                 thisConcern.addRecord(newRecord);

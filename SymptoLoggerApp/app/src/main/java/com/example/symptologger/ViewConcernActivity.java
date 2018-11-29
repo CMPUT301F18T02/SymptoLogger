@@ -108,13 +108,13 @@ public class ViewConcernActivity extends AppCompatActivity {
         TextView concernDescriptionView = (TextView) findViewById(R.id.concernDescriptionView);
         concernDescriptionView.setText(concernList.get(pos).getDescription());
 
-        //recordListView = findViewById(R.id.recordListView);
+        recordListView = findViewById(R.id.recordListView);
         //records = RecordListController.getRecordList().getRecords();
-        //recordList = new ArrayList<Record>(concernList.get(pos).getRecords());
-        //recordListAdapter = new ArrayAdapter<Record>(this,android.R.layout.simple_list_item_1,recordList);
-        //recordListView.setAdapter(recordListAdapter);
+        recordList = new ArrayList<Record>(concernList.get(pos).getRecords());
+        recordListAdapter = new ArrayAdapter<Record>(this,android.R.layout.simple_list_item_1,recordList);
+        recordListView.setAdapter(recordListAdapter);
 
-        /*recordListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+        recordListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id){
                 final int recPos = position;
@@ -150,7 +150,7 @@ public class ViewConcernActivity extends AppCompatActivity {
                 recordAlert.show();
                 return false;
             }
-        });*/
+        });
     }
 
     public void back() {

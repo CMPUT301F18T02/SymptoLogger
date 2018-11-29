@@ -315,4 +315,35 @@ public class ElasticSearchClient {
         }
     }
 
+    public static class GetRecords extends AsyncTask<String, Void, ArrayList<Record>>{
+
+        @Override
+        protected ArrayList<Record> doInBackground(String... search_parameters){
+
+            ArrayList<Record> foundRecords = new ArrayList<Record>();
+            String type = "Records";
+            String query =  String.format("{\"query\": {\"match\": {\"concernTitle\": \"%s\"}}}", search_parameters[0]);
+            try {
+                JestResult result = client.execute(  new Search.Builder(query).addIndex(index).addType(type).build() );
+
+                if (result.isSucceeded()){
+                    List<Record> res = result.getSourceAsObjectList(Record.class);
+                    if (res.size() != 0){
+                        foundRecords.addAll(res);
+                    }
+                    else{
+                        Log.e("Error","nothing found.");
+                    }
+
+
+                } else {
+                    Log.e("Error","Some issues with query.");
+                }
+            } catch (Exception e){
+                Log.i("Error","Something went wrong when we tried to communicate with the elasticsearch server.");
+            }
+            return foundRecords;
+        }
+    }
+
 }
