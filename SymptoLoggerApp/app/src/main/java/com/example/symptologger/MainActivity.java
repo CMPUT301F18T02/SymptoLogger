@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //new ElasticSearchClient.AddTable().execute();
+        new ElasticSearchClient.AddTable().execute();
 
         Button button_sign_up = (Button) findViewById(R.id.button_sign_up);
 
