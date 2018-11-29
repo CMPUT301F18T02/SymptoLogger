@@ -55,11 +55,9 @@ public class ViewConcernActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_concern);
 
         Intent intent = getIntent();
-        //Bundle extras = intent.getExtras();
-        //pos = extras.getInt("pos",0);
-        //userName = extras.getString("userName");
-        pos = intent.getIntExtra("pos",0);
-        userName = intent.getStringExtra("userName");
+        Bundle extras = intent.getExtras();
+        pos = extras.getInt("pos",0);
+        userName = extras.getString("userName");
 
         //Intent intent = getIntent();
 

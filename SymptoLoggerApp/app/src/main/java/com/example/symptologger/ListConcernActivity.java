@@ -124,12 +124,10 @@ public class ListConcernActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which){
                         if (which == 0){
                             Intent viewIntent = new Intent(ListConcernActivity.this, ViewConcernActivity.class);
-                            //Bundle viewBundle = new Bundle();
-                            //viewBundle.putInt("pos",pos);
-                            //viewBundle.putString("userName",userName);
-                            //viewIntent.putExtras(viewBundle);
-                            viewIntent.putExtra("userName",userName);
-                            viewIntent.putExtra("pos",pos);
+                            Bundle viewBundle = new Bundle();
+                            viewBundle.putInt("pos",pos);
+                            viewBundle.putString("userName",userName);
+                            viewIntent.putExtras(viewBundle);
                             startActivity(viewIntent);
                         } else if (which == 1){
                             Toast.makeText(ListConcernActivity.this,"Delete",Toast.LENGTH_SHORT).show();
