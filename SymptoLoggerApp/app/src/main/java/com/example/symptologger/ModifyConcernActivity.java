@@ -77,7 +77,7 @@ public class ModifyConcernActivity extends AppCompatActivity {
         pos = extras.getInt("pos");
         userName = extras.getString("userName");
 
-        concerns = ConcernListController.getConcernList("").getConcernsList();
+        concerns = ConcernListController.getConcernList(userName).getConcernsList();
         concernList = new ArrayList<Concern>(concerns);
 
         Concern newConcern; //New concern variable declared ...
@@ -208,7 +208,10 @@ public class ModifyConcernActivity extends AppCompatActivity {
     public void addRecord(View view){
         Toast.makeText(this,"Add record ...", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(ModifyConcernActivity.this, NewRecordActivity.class);
-        intent.putExtra("pos",pos);
+        Bundle addRecordBundle = new Bundle();
+        addRecordBundle.putInt("pos",pos);
+        addRecordBundle.putString("userName",userName);
+        intent.putExtras(addRecordBundle);
         startActivity(intent);
     }
 
