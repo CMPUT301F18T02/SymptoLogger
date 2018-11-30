@@ -2,6 +2,7 @@ package com.example.symptologger;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -47,6 +49,7 @@ public class CareProviderViewPatientConcernsActivity extends AppCompatActivity {
     Collection<Concern> patientConcerns;
 
     String pUserName;
+    String cpName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +57,24 @@ public class CareProviderViewPatientConcernsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_care_provider_view_patient_concerns);
 
         Intent fromPatientList = getIntent();
-        pUserName = fromPatientList.getStringExtra("pUserName");
+        Bundle extras = fromPatientList.getExtras();
+        pUserName = extras.getString("pUserName");
+        cpName = extras.getString("pUserName");
 
         TextView userTextView = findViewById(R.id.patientUserNameTextView);
         userTextView.setText("Viewing "+pUserName);
+
+        FloatingActionButton backToPatientListFAB = findViewById(R.id.backToPatientListFAB);
+        backToPatientListFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(CareProviderViewPatientConcernsActivity.this,"Back",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(CareProviderViewPatientConcernsActivity.this,CareProviderListPatientsActivity.class);
+                Bundle e = new Bundle();
+                e.putString("cpUserName",cpName);
+                intent.putExtras(e);
+            }
+        });
     }
 
     @Override

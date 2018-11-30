@@ -88,7 +88,7 @@ public class CareProviderListPatientsActivity extends AppCompatActivity {
                         if (which == 0){
                             Intent viewIntent = new Intent(CareProviderListPatientsActivity.this, CareProviderViewPatientConcernsActivity.class);
                             Bundle viewBundle = new Bundle();
-                            //viewBundle.putInt("pos",pos);
+                            viewBundle.putString("cpName",cpUserName);
                             viewBundle.putString("pUserName",patientUserNamesList.get(pos).getUserID());
                             viewIntent.putExtras(viewBundle);
                             startActivity(viewIntent);
