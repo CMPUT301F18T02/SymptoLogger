@@ -123,6 +123,8 @@ public class ListConcernActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which){
                         if (which == 0){
                             Intent viewIntent = new Intent(ListConcernActivity.this, ViewConcernActivity.class);
+
+
                             viewIntent.putExtra("pos",pos);
                             startActivity(viewIntent);
                         } else if (which == 1){

@@ -67,7 +67,8 @@ public class ViewConcernActivity extends AppCompatActivity {
 
 
         concerns = ConcernListController.getConcernList().getConcerns();
-        concernList = new ArrayList<Concern>(concerns);
+        SharedPreference sharedPreference = new SharedPreference();
+        concernList = sharedPreference.readConcerns(getApplicationContext());
 
         Toast.makeText(this,"View "+concernList.get(pos).getTitle(),Toast.LENGTH_SHORT).show();
 
