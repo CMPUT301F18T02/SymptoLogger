@@ -244,6 +244,8 @@ class Concern {
      */
 
     public void removeRecord(Record record) {
+        ElasticSearchClient.DeleteRecord delRecord = new ElasticSearchClient.DeleteRecord();
+        delRecord.execute(record.getTitle(),this.title);
         this.myRecords.remove(record);
     }
 

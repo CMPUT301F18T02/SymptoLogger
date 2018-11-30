@@ -112,6 +112,10 @@ public class ModifyConcernActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(ModifyConcernActivity.this,"Cancel ...", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ModifyConcernActivity.this, ViewConcernActivity.class);
+                Bundle cancelMod = new Bundle();
+                cancelMod.putString("userName",userName);
+                cancelMod.putInt("pos",pos);
+                intent.putExtras(cancelMod);
                 startActivity(intent);
             }
         });

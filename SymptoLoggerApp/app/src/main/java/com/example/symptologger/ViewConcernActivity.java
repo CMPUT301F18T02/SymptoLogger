@@ -142,6 +142,8 @@ public class ViewConcernActivity extends AppCompatActivity {
                         } else if (which == 1){
                             Toast.makeText(ViewConcernActivity.this,"Delete",Toast.LENGTH_SHORT).show();
                             concernList.get(pos).removeRecord(recordList.get(recPos));
+                            recordList = new ArrayList<Record>(concernList.get(pos).getRecords());
+                            recordListAdapter.notifyDataSetChanged();
                         } else {
                             Toast.makeText(ViewConcernActivity.this,"Cancel",Toast.LENGTH_SHORT).show();
                         }
