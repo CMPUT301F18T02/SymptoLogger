@@ -2,8 +2,11 @@ package com.example.symptologger;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 
 import io.searchbox.annotations.JestId;
 
@@ -31,14 +34,15 @@ import io.searchbox.annotations.JestId;
 
 class Concern {
     private String title;
-    private Date date;
+    private String date;
     private String description;
-    private RecordList myRecords;
+    private ArrayList<Record> myRecords;
+    private String userName;
 
     @JestId
     private String id;
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MMM dd h:mm a", Locale.CANADA);
 
     /**
      * Concern class constructor. There are three, as the patient has the option of passing a title,
@@ -47,11 +51,12 @@ class Concern {
      * @see RecordList
      */
 
-    Concern(){
+    Concern(String userName){
         this.title = "No title given";
-        this.date = new Date();
+        this.date = new Date().toString();
         this.description = "No description given";
-        this.myRecords = new RecordList();
+        this.myRecords = new ArrayList<Record>();
+        this.userName = userName;
     }
 
     /**
@@ -63,19 +68,20 @@ class Concern {
      * @throws DescriptionTooLongException if the description exceeds 300 characters
      */
 
-    Concern(String title, Date date, String description) throws TitleTooLongException, DescriptionTooLongException{
+    Concern(String title, Date date, String description, String userName) throws TitleTooLongException, DescriptionTooLongException{
         if (title.length() <= 30){
             this.title = title;
         } else {
             throw new TitleTooLongException();
         }
-        this.date = date;
+        this.date = date.toString();
         if (description.length()<= 300){
             this.description = description;
         } else{
             throw new DescriptionTooLongException();
         }
-        this.myRecords = new RecordList();
+        this.myRecords = new ArrayList<Record>();
+        this.userName = userName;
     }
 
     /**
@@ -88,19 +94,20 @@ class Concern {
      * @throws DescriptionTooLongException description exceeds 300 chars
      */
 
-    Concern(String title, String description) throws TitleTooLongException, DescriptionTooLongException {
+    Concern(String title, String description, String userName) throws TitleTooLongException, DescriptionTooLongException {
         if (title.length() > 30){
             throw new TitleTooLongException();
         } else {
             this.title = title;
         }
-        this.date = new Date();
+        this.date = new Date().toString();
         if (description.length() <= 300){
             this.description = description;
         } else {
             throw new DescriptionTooLongException();
         }
-        this.myRecords = new RecordList();
+        this.myRecords = new ArrayList<Record>();
+        this.userName = userName;
     }
 
     /**
@@ -110,7 +117,7 @@ class Concern {
      */
 
     public String toString(){
-        return getTitle()+"\t\t\t\t\t"+findRecordCount()+"\n"+getDate();
+        return this.title+"\t\t\t\t\t"+findRecordCount()+"\n"+this.date;
     }
 
 
@@ -144,7 +151,7 @@ class Concern {
      * @return date
      */
 
-    public Date getDate() {
+    public String getDate() {
         return this.date;
     }
 
@@ -154,13 +161,22 @@ class Concern {
      */
 
     public void setDate(Date date) {
-        this.date = date;
+        this.date = date.toString();
     }
 
     /**
      * gets the concern's description.
      * @return description
      */
+
+    /**
+     * Overloaded method; set date can either be Date or String
+     * @param date string representation of the date
+     */
+
+    public void setDate(String date){
+        this.date = date;
+    }
 
     public String getDescription() {
         return this.description;
@@ -187,7 +203,9 @@ class Concern {
      */
 
     public void addRecord(Record record) {
-        this.myRecords.addRecord(record);
+        //this.myRecords.add(record);
+        ElasticSearchClient.AddRecord addNewRecord = new ElasticSearchClient.AddRecord();
+        addNewRecord.execute(record.getTitle(),record.getDate(),record.getConcernTitle(),record.getUserName(),new Date().toString());
     }
 
     /**
@@ -196,7 +214,18 @@ class Concern {
      */
 
     public Collection<Record> getRecords(){
-        return this.myRecords.getRecords();
+        ElasticSearchClient.GetRecords getRecords = new ElasticSearchClient.GetRecords();
+        getRecords.execute(this.title);
+
+        try {
+            this.myRecords = getRecords.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return this.myRecords;
     }
 
     /**
@@ -206,7 +235,7 @@ class Concern {
      */
 
     public boolean recordListContains(Record record) {
-        return this.myRecords.containsRecord(record);
+        return this.myRecords.contains(record);
     }
 
     /**
@@ -215,7 +244,9 @@ class Concern {
      */
 
     public void removeRecord(Record record) {
-        this.myRecords.deleteRecord(record);
+        ElasticSearchClient.DeleteRecord delRecord = new ElasticSearchClient.DeleteRecord();
+        delRecord.execute(record.getTitle(),this.title);
+        this.myRecords.remove(record);
     }
 
     /**
@@ -224,7 +255,13 @@ class Concern {
      */
 
     public int findRecordCount() {
-        return this.myRecords.findCount();
+        //return this.myRecords.findCount();
+        getRecords();
+        if (this.myRecords==null){
+            return 0;
+        } else {
+            return this.myRecords.size();
+        }
     }
 
     /** The below getter/setter methods are for the id generated by elastic search.
@@ -237,5 +274,9 @@ class Concern {
 
     public String getId() {
         return id;
+    }
+
+    public String getUserName(){
+        return this.userName;
     }
 }

@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.Date;
+
 /*
  *  Copyright 2018 Remi Arshad, Noni Hua, Jason Lee, Patrick Tamm, Kaiwen Zhang
  *
@@ -32,11 +34,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //new ElasticSearchClient.AddRecord().execute();
-        //new ElasticSearchClient.SearchRecord().execute("no");
-
+        //new ElasticSearchClient.AddTable().execute();
+        //new ElasticSearchClient.AddRecord().execute("rec",new Date().toString(),"test","11111111",new Date().toString());
+        //new ElasticSearchClient.DeleteIndices().execute("Concerns");
+        //new ElasticSearchClient.DeleteConcern().execute("...","11111111");
         Button button_sign_up = (Button) findViewById(R.id.button_sign_up);
-        //Button button_add_geo_location = (Button) findViewById(R.id.button_geo_location);
 
         button_sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,20 +47,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        button_add_geo_location.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(MainActivity.this, MapsActivity.class));
-//            }
-//        });
     }
 
     public void SignIn(View v) {
         Intent SignInIntent = new Intent(this, SignInActivity.class);
         startActivity(SignInIntent);
-//        Intent intent = new Intent(MainActivity.this, ListConcernActivity.class);
-//        startActivity(intent);
-
 
     }
 }

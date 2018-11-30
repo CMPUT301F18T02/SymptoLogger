@@ -6,6 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".NewConcernActivity">
 
+    <Button
+        android:id="@+id/newConcernTimeField"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="98dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/newConcernDateField"
+        app:layout_constraintTop_toBottomOf="@+id/concernTitle" />
+
+    <Button
+        android:id="@+id/newConcernDateField"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="177dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="date"
+        app:layout_constraintHorizontal_bias="0.765"
+        app:layout_constraintEnd_toStartOf="@+id/newConcernTimeField"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/concernTitle" />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/cancelNewFAB"
         android:layout_width="wrap_content"
@@ -63,8 +90,6 @@
         android:layout_width="0dp"
         android:layout_height="226dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
@@ -73,22 +98,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/concernDate" />
-
-    <EditText
-        android:id="@+id/concernDate"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/concernDateHint"
-        android:inputType="text|date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/concernTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/newConcernDateField" />
 
 </android.support.constraint.ConstraintLayout>

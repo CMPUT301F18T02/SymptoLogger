@@ -47,6 +47,7 @@ public class ViewConcernActivity extends AppCompatActivity {
     ArrayList<Record> recordList;
     ArrayAdapter<Record> recordListAdapter;
     Collection<Record> records;
+    String userName = "11111111";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,11 @@ public class ViewConcernActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_concern);
 
         Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        pos = extras.getInt("pos");
+        userName = extras.getString("userName");
+
+        //Intent intent = getIntent();
 
         /*
         * passing integer from one activity to another:
@@ -63,10 +69,10 @@ public class ViewConcernActivity extends AppCompatActivity {
         * Date: 2018-11-13
         */
 
-        pos = intent.getIntExtra("pos",0);
+        //pos = intent.getIntExtra("pos",0);
 
 
-        concerns = ConcernListController.getConcernList().getConcerns();
+        concerns = ConcernListController.getConcernList(userName).getConcernsList();
         concernList = new ArrayList<Concern>(concerns);
 
         Toast.makeText(this,"View "+concernList.get(pos).getTitle(),Toast.LENGTH_SHORT).show();
@@ -136,6 +142,8 @@ public class ViewConcernActivity extends AppCompatActivity {
                         } else if (which == 1){
                             Toast.makeText(ViewConcernActivity.this,"Delete",Toast.LENGTH_SHORT).show();
                             concernList.get(pos).removeRecord(recordList.get(recPos));
+                            recordList = new ArrayList<Record>(concernList.get(pos).getRecords());
+                            recordListAdapter.notifyDataSetChanged();
                         } else {
                             Toast.makeText(ViewConcernActivity.this,"Cancel",Toast.LENGTH_SHORT).show();
                         }
@@ -150,13 +158,17 @@ public class ViewConcernActivity extends AppCompatActivity {
     public void back() {
         Toast.makeText(this, "Back ...", Toast.LENGTH_SHORT).show();
         Intent backIntent = new Intent(ViewConcernActivity.this, ListConcernActivity.class);
+        backIntent.putExtra("userName",userName);
         startActivity(backIntent);
     }
 
     public void modify(){
         Toast.makeText(this,"Modify ...", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(ViewConcernActivity.this, ModifyConcernActivity.class);
-        intent.putExtra("pos",pos);
+        Bundle modifyExtras = new Bundle();
+        modifyExtras.putInt("pos",pos);
+        modifyExtras.putString("userName",userName);
+        intent.putExtras(modifyExtras);
         startActivity(intent);
     }
 }
