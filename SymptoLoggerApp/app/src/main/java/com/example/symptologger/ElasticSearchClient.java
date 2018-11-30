@@ -435,4 +435,53 @@ public class ElasticSearchClient {
             return null; //Void requires return, (it's not void)
         }
     }
+
+    public static class AddPatient extends AsyncTask<String, Void, Boolean> { //use Void instead of void for AsyncTask as return type
+        @Override
+        protected Boolean doInBackground(String... record) {
+
+            String type = "Patients";
+            String source = String.format("{\"userID\": \"%s\", \"email\": \"%s\", \"cell\": \"%s\", \"cpUserName\": \"%s\", \"created\": \"%s\"}", record[0], record[1], record[2], record[3], record[4]);
+
+            try {
+                JestResult result = client.execute(new Index.Builder(source).index(index).type(type).build());
+
+                if (result.isSucceeded()) {
+                    return Boolean.TRUE;
+                } else {
+                    return Boolean.FALSE;
+                }
+            } catch (Exception e) {
+                Log.i("Error", "The application failed - reason: AddConcern.");
+            }
+            return Boolean.FALSE;
+        }
+    }
+
+    public static class GetPatients extends AsyncTask<String, Void, ArrayList<Patient>> {
+
+        @Override
+        protected ArrayList<Patient> doInBackground(String... search_parameters) {
+
+            ArrayList<Patient> foundPatients = new ArrayList<Patient>();
+            String type = "Patients";
+            String query = String.format("{\"query\": {\"match\": {\"cpUserName\": \"%s\"}}}", search_parameters[0]);
+            try {
+                JestResult result = client.execute(new Search.Builder(query).addIndex(index).addType(type).build());
+                if (result.isSucceeded()) {
+                    List<Patient> res = result.getSourceAsObjectList(Patient.class);
+                    if (res.size() != 0) {
+                        foundPatients.addAll(res);
+                    } else {
+                        Log.e("Error", "nothing found.");
+                    }
+                } else {
+                    Log.e("Error", "Some issues with GetPatients query.");
+                }
+            } catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server.");
+            }
+            return foundPatients;
+        }
+    }
 }

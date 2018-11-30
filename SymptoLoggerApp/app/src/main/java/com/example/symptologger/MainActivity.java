@@ -34,7 +34,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        new ElasticSearchClient.AddPatientsTable().execute();
+        //new ElasticSearchClient.AddPatientsTable().execute();
+
+        //new ElasticSearchClient.AddPatient().execute("11111111","123","123","careprovider",new Date().toString());
+
         Button button_sign_up = (Button) findViewById(R.id.button_sign_up);
 
         button_sign_up.setOnClickListener(new View.OnClickListener() {

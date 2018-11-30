@@ -90,6 +90,10 @@ public class User {
      */
 //    public String getFullName() { return this.firstName + " " + this.lastName; }
 
+    public String toString(){
+        return this.userID;
+    }
+
     /**
      * Get ID
      * @return ID

@@ -10,19 +10,24 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class CareProviderListPatientsActivity extends AppCompatActivity {
 
+    private String cpUserName;
+
     ListView patientListView;
-    ArrayList<String> patientUserNamesList;
-    ArrayAdapter<String> patientListAdapter;
+    ArrayList<Patient> patientUserNamesList;
+    ArrayAdapter<Patient> patientListAdapter;
+    Collection<Patient> patients;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_care_provider_list_patients);
 
-
+        Intent intent = getIntent();
+        cpUserName = intent.getStringExtra("userName");
 
         FloatingActionButton addPatientFAB = findViewById(R.id.addPatientFAB);
         addPatientFAB.setOnClickListener(new View.OnClickListener() {
@@ -41,7 +46,8 @@ public class CareProviderListPatientsActivity extends AppCompatActivity {
         super.onStart();
 
         patientListView = (ListView) findViewById(R.id.patientListView);
-        patientUserNamesList = new ArrayList<String>();
+        patients = PatientListController.getPatientList(cpUserName).getPatients();
+        patientUserNamesList = new ArrayList<Patient>(patients);
         patientListAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, patientUserNamesList);
         patientListView.setAdapter(patientListAdapter);
     }

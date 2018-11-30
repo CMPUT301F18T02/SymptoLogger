@@ -1,6 +1,7 @@
 package com.example.symptologger;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /*
  *  Copyright 2018 Remi Arshad, Noni Hua, Jason Lee, Patrick Tamm, Kaiwen Zhang
@@ -27,8 +28,16 @@ public class PatientList {
     /**
      * Constructor
      */
-    public PatientList() {
-        this.patients = new ArrayList<>();
+    public PatientList(String cpID) {
+        ElasticSearchClient.GetPatients getESPatients = new ElasticSearchClient.GetPatients();
+        getESPatients.execute(cpID);
+        try {
+            this.patients = getESPatients.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

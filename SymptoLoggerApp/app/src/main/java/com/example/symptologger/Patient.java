@@ -36,13 +36,13 @@ public class Patient extends User {
 
     /**
      * Constructor of Patient class.
-     * @param id id of the patient
+     * @param userID id of the patient
      * @param email email address
      * @param cell cell number in string
      * @param user_type type of user
      */
-    public Patient(String id, String email, String cell, String user_type) {
-        super(id, email, cell, user_type);
+    public Patient(String userID, String email, String cell, String user_type) {
+        super(userID, email, cell, user_type);
 
         this.concerns = new ArrayList<>();
     }
