@@ -81,17 +81,16 @@ public class SignInActivity extends AppCompatActivity {
         if (verifyLogIn()){
             if (determineRole().equals("Patient")){
                 Intent intent = new Intent(SignInActivity.this, ListConcernActivity.class);
+                intent.putExtra("userName",userName2);
                 startActivity(intent);
             } else if (determineRole().equals("Care Provider")){
                 Intent intent = new Intent(SignInActivity.this, CareProviderListPatientsActivity.class);
+                intent.putExtra("userName",userName2);
                 startActivity(intent);
             } else {
                 Log.e("Error","No role found for user from elasticsearch.");
                 Toast.makeText(this,"No role found for user",Toast.LENGTH_SHORT).show();
             }
-            Intent intent = new Intent(SignInActivity.this, ListConcernActivity.class);
-            intent.putExtra("userName",userName2);
-            startActivity(intent);
         } else {
             Toast.makeText(this,"Sorry, username "+userName2+" was not found. Please try again.", Toast.LENGTH_LONG).show();
         }
