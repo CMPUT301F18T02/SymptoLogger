@@ -160,15 +160,17 @@ public class ModifyConcernActivity extends AppCompatActivity {
     public void modTitle(View view){
         EditText newTitle = (EditText) findViewById(R.id.modifyConcernTitle);
         String title = newTitle.getText().toString();
-        if (!title.equals("")){
-            concernTitle = title;
-        }
-        Toast.makeText(this,"Title changed; click save to apply changes",Toast.LENGTH_LONG).show();
+
+//        Do we want this?
+//        if (!title.equals("")){
+//            concernTitle = title;
+//        }
+        Toast.makeText(this,"New title staged; click save to apply changes",Toast.LENGTH_LONG).show();
     }
 
     public void modDate(View view){
         concernDate = c.getTime().toString();
-        Toast.makeText(this, "Date changed; click save to apply changes.",Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "New date staged; click save to apply changes.",Toast.LENGTH_LONG).show();
     }
 
     public void modDesc(View view){
@@ -177,13 +179,16 @@ public class ModifyConcernActivity extends AppCompatActivity {
         if(!description.equals("")){
             concernDesc = description;
         }
-        Toast.makeText(this,"Description changed; click save to apply changes.",Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"New description staged; click save to apply changes.",Toast.LENGTH_LONG).show();
     }
 
     public void modifyConcern() throws ParseException {
         Toast.makeText(this,"Modifying ...",Toast.LENGTH_SHORT).show();
 
         Concern modConcern = concernList.get(pos);
+
+        ElasticSearchClient.DeleteConcern deleteConcern = new ElasticSearchClient.DeleteConcern();
+        deleteConcern.execute(concernList.get(pos).getTitle(),userName);
 
         try {
             modConcern.setTitle(concernTitle);
@@ -201,9 +206,6 @@ public class ModifyConcernActivity extends AppCompatActivity {
         }
 
         modConcern.setDate(concernDate);
-
-        ElasticSearchClient.DeleteConcern deleteConcern = new ElasticSearchClient.DeleteConcern();
-        deleteConcern.execute(concernList.get(pos).getTitle(),userName);
 
         ElasticSearchClient.AddConcern reAddConcern = new ElasticSearchClient.AddConcern();
         reAddConcern.execute(modConcern.getTitle(),modConcern.getDate(),modConcern.getDescription(),modConcern.getUserName(),new Date().toString());
