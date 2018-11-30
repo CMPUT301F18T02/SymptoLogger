@@ -102,11 +102,11 @@ public class ElasticSearchClient {
         @Override
         protected Void doInBackground(String... indices) {
 
-            String type = "Records";
-            String source = "{\"Records\" : {\"properties\" : " +
+            String type = "Concerns";
+            String source = "{\"Concerns\" : {\"properties\" : " +
                     "{\"title\": {\"type\" : \"string\"}," +
                     "\"date\": {\"type\" : \"date\"}, " +
-                    "\"concernTitle\": {\"type\" : \"string\"}, " +
+                    "\"description\": {\"type\" : \"string\"}, " +
                     "\"userName\" : {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
                     "\"created\": {\"type\" : \"date\"}," +
                     "}}}";

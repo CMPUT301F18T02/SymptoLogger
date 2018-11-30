@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //new ElasticSearchClient.AddTable().execute();
         //new ElasticSearchClient.AddRecord().execute("rec",new Date().toString(),"test","11111111",new Date().toString());
-        //new ElasticSearchClient.DeleteIndices().execute("Records");
-        new ElasticSearchClient.DeleteRecord().execute("rec3","z");
+        //new ElasticSearchClient.DeleteIndices().execute("Concerns");
+        //new ElasticSearchClient.DeleteConcern().execute("...","11111111");
         Button button_sign_up = (Button) findViewById(R.id.button_sign_up);
 
         button_sign_up.setOnClickListener(new View.OnClickListener() {
