@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -111,13 +112,19 @@ public class ViewRecordActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        Log.d("DEBUG", "Selected item id is " + id);
 
         switch(id) {
             case R.id.editOption:
-                // TODO: edit a record; should load the current reocrd information
+                Log.d("DEBUG", "edit option id is " + R.id.editOption);
+
+                // TODO: edit a record; should load the current record information
                 Intent editRecordIntent = new Intent(ViewRecordActivity.this, NewRecordActivity.class);
                 startActivity(editRecordIntent);
+                break;
             case R.id.deleteOption:
+                Log.d("DEBUG", "delete option id is " + R.id.deleteOption);
+
                 // TODO: delete a record, pops up a dialog
                 AlertDialog.Builder deleteAlert = new AlertDialog.Builder(ViewRecordActivity.this);
 
@@ -138,6 +145,10 @@ public class ViewRecordActivity extends AppCompatActivity {
                     }
                 });
                 deleteAlert.show();
+                break;
+
+            default:
+                break;
         }
 
         return super.onOptionsItemSelected(item);
