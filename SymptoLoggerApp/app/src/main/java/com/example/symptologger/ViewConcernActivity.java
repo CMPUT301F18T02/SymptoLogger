@@ -47,7 +47,7 @@ public class ViewConcernActivity extends AppCompatActivity {
     ArrayList<Record> recordList;
     ArrayAdapter<Record> recordListAdapter;
     Collection<Record> records;
-    String userName = "11111111";
+    String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

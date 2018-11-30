@@ -86,7 +86,7 @@ public class CareProviderListPatientsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which){
                         if (which == 0){
-                            Intent viewIntent = new Intent(CareProviderListPatientsActivity.this, CareProviderPatientViewActivity.class);
+                            Intent viewIntent = new Intent(CareProviderListPatientsActivity.this, CareProviderViewPatientConcernsActivity.class);
                             Bundle viewBundle = new Bundle();
                             //viewBundle.putInt("pos",pos);
                             viewBundle.putString("pUserName",patientUserNamesList.get(pos).getUserID());

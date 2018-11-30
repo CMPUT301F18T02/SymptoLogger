@@ -2,7 +2,6 @@ package com.example.symptologger;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,8 +14,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 /*
  *  Copyright 2018 Remi Arshad, Noni Hua, Jason Lee, Patrick Tamm, Kaiwen Zhang
@@ -38,7 +35,7 @@ import java.util.concurrent.ExecutionException;
  * The activity that allows the user to view the list of concerns.
  */
 
-public class CareProviderPatientViewActivity extends AppCompatActivity {
+public class CareProviderViewPatientConcernsActivity extends AppCompatActivity {
 
     //https://developer.android.com/training/basics/firstapp/starting-activity#java
     //2018-11-12
@@ -49,18 +46,18 @@ public class CareProviderPatientViewActivity extends AppCompatActivity {
     ArrayAdapter<Concern> patientConcernListAdapter;
     Collection<Concern> patientConcerns;
 
-    String userName;
+    String pUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_care_provider_patient_view);
+        setContentView(R.layout.activity_care_provider_view_patient_concerns);
 
-        Intent fromSignIn = getIntent();
-        userName = fromSignIn.getStringExtra("pUserName");
+        Intent fromPatientList = getIntent();
+        pUserName = fromPatientList.getStringExtra("pUserName");
 
         TextView userTextView = findViewById(R.id.patientUserNameTextView);
-        userTextView.setText(userName);
+        userTextView.setText("Viewing "+pUserName);
     }
 
     @Override
@@ -68,7 +65,7 @@ public class CareProviderPatientViewActivity extends AppCompatActivity {
         super.onStart();
 
         patientConcernsView = (ListView) findViewById(R.id.cpListConcernsView);
-        patientConcerns = ConcernListController.getConcernList(userName).getConcernsList();
+        patientConcerns = ConcernListController.getConcernList(pUserName).getConcernsList();
         patientConcernList = new ArrayList<Concern>(patientConcerns);
         patientConcernListAdapter = new ArrayAdapter<Concern>(this, android.R.layout.simple_list_item_1, patientConcernList);
         patientConcernsView.setAdapter(patientConcernListAdapter);
@@ -79,7 +76,7 @@ public class CareProviderPatientViewActivity extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
                 final int pos = position;
 
-                AlertDialog.Builder modifyAlert = new AlertDialog.Builder(CareProviderPatientViewActivity.this);
+                AlertDialog.Builder modifyAlert = new AlertDialog.Builder(CareProviderViewPatientConcernsActivity.this);
 
                 modifyAlert.setTitle(patientConcernList.get(pos).getTitle());
                 modifyAlert.setCancelable(true);
@@ -91,14 +88,14 @@ public class CareProviderPatientViewActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (which == 0) {
-                            Intent viewIntent = new Intent(CareProviderPatientViewActivity.this, ViewConcernActivity.class);
+                            Intent viewIntent = new Intent(CareProviderViewPatientConcernsActivity.this, CareProviderViewConcernActivity.class);
                             Bundle viewBundle = new Bundle();
                             viewBundle.putInt("pos", pos);
-                            viewBundle.putString("userName", userName);
+                            viewBundle.putString("pUserName", pUserName);
                             viewIntent.putExtras(viewBundle);
                             startActivity(viewIntent);
                         } else {
-                            Toast.makeText(CareProviderPatientViewActivity.this, "Cancel", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CareProviderViewPatientConcernsActivity.this, "Cancel", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -112,7 +109,7 @@ public class CareProviderPatientViewActivity extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
 
-        patientConcerns = ConcernListController.getConcernList(userName).getConcernsList();
+        patientConcerns = ConcernListController.getConcernList(pUserName).getConcernsList();
         patientConcernList = new ArrayList<Concern>(patientConcerns);
         patientConcernListAdapter.notifyDataSetChanged();
     }

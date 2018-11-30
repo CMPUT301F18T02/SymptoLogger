@@ -83,7 +83,9 @@
         <activity android:name=".ViewPhotoActivity" />
         <activity android:name=".CareProviderListPatientsActivity" />
         <activity android:name=".AddPatientActivity" />
-        <activity android:name=".CareProviderPatientViewActivity"></activity>
+        <activity android:name=".CareProviderViewPatientConcernsActivity" />
+        <activity android:name=".CareProviderViewConcernActivity" />
+        <activity android:name=".CareProviderViewRecordActivity"></activity>
     </application>
 
 </manifest>
