@@ -256,7 +256,7 @@ class Concern {
 
     public int findRecordCount() {
         //return this.myRecords.findCount();
-        getRecords();
+        //this.getRecords();
         if (this.myRecords==null){
             return 0;
         } else {

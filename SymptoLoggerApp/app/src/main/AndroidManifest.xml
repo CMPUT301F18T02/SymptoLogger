@@ -27,7 +27,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -81,7 +82,8 @@
         <activity android:name=".PhotoRecordActivity" />
         <activity android:name=".ViewPhotoActivity" />
         <activity android:name=".CareProviderListPatientsActivity" />
-        <activity android:name=".AddPatientActivity"></activity>
+        <activity android:name=".AddPatientActivity" />
+        <activity android:name=".CareProviderPatientViewActivity"></activity>
     </application>
 
 </manifest>
