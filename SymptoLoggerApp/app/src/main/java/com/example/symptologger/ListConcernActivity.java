@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 /*
@@ -132,6 +133,9 @@ public class ListConcernActivity extends AppCompatActivity {
                         } else if (which == 1){
                             Toast.makeText(ListConcernActivity.this,"Delete",Toast.LENGTH_SHORT).show();
                             ConcernListController.getConcernList(userName).deleteConcern(concernList.get(pos));
+                            Intent restart = new Intent(ListConcernActivity.this,ListConcernActivity.class);
+                            restart.putExtra("userName",userName);
+                            startActivity(restart);
                         } else {
                             Toast.makeText(ListConcernActivity.this,"Cancel",Toast.LENGTH_SHORT).show();
                         }

@@ -101,6 +101,8 @@ class ConcernList {
 
     public void deleteConcern(Concern concern) {
         this.myConcerns.remove(concern);
+        ElasticSearchClient.DeleteConcern esDeleteConcern = new ElasticSearchClient.DeleteConcern();
+        esDeleteConcern.execute(concern.getTitle(),concern.getUserName());
         notifyListeners();
     }
 
