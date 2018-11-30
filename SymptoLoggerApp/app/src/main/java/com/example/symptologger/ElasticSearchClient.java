@@ -374,4 +374,29 @@ public class ElasticSearchClient {
         }
     }
 
+    public static class DeleteConcern extends AsyncTask<String, Void, Boolean>{
+
+        @Override
+        protected Boolean doInBackground(String... search_parameters){
+
+            String type = "Concerns";
+            String query =  String.format(
+                    "{\"query\": {\"bool\": " +
+                            "{\"must\": [" +
+                            "{\"match\": {\"title\": \"%s\"}}, " +
+                            "{\"match\": {\"userName\": \"%s\"}}]}}}", search_parameters[0], search_parameters[1]);
+            try {
+                JestResult result = client.execute(  new DeleteByQuery.Builder(query).addIndex(index).addType(type).build() );
+                if (result.isSucceeded()){
+                    return Boolean.TRUE;
+                } else {
+                    Log.e("Error","Some issues with DeleteRecord query.");
+                }
+            } catch (Exception e){
+                Log.i("Error","Something went wrong when we tried to communicate with the elasticsearch server.");
+            }
+            return Boolean.FALSE;
+        }
+    }
+
 }

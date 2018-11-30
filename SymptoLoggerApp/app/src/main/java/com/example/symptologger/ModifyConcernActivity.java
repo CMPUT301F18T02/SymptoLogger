@@ -183,8 +183,10 @@ public class ModifyConcernActivity extends AppCompatActivity {
     public void modifyConcern() throws ParseException {
         Toast.makeText(this,"Modifying ...",Toast.LENGTH_SHORT).show();
 
+        Concern modConcern = concernList.get(pos);
+
         try {
-            concernList.get(pos).setTitle(concernTitle);
+            modConcern.setTitle(concernTitle);
         } catch (TitleTooLongException e) {
             e.printStackTrace();
             Toast.makeText(this, "Title too long: 30 characters maximum", Toast.LENGTH_LONG).show();
@@ -192,16 +194,25 @@ public class ModifyConcernActivity extends AppCompatActivity {
 
 
         try {
-            concernList.get(pos).setDescription(concernDesc);
+            modConcern.setDescription(concernDesc);
         } catch (DescriptionTooLongException e) {
             e.printStackTrace();
             Toast.makeText(this, "Description too long: 300 characters maximum", Toast.LENGTH_SHORT).show();
         }
 
-        concernList.get(pos).setDate(concernDate);
+        modConcern.setDate(concernDate);
+
+        ElasticSearchClient.DeleteConcern deleteConcern = new ElasticSearchClient.DeleteConcern();
+        deleteConcern.execute(concernList.get(pos).getTitle(),userName);
+
+        ElasticSearchClient.AddConcern reAddConcern = new ElasticSearchClient.AddConcern();
+        reAddConcern.execute(modConcern.getTitle(),modConcern.getDate(),modConcern.getDescription(),modConcern.getUserName(),new Date().toString());
 
         Intent intent = new Intent(ModifyConcernActivity.this,ViewConcernActivity.class);
-        intent.putExtra("pos",pos);
+        Bundle doneMod = new Bundle();
+        doneMod.putInt("pos",pos);
+        doneMod.putString("userName",userName);
+        intent.putExtras(doneMod);
         startActivity(intent);
     }
 
