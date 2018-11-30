@@ -78,6 +78,9 @@ public class NewRecordActivity extends AppCompatActivity {
         concerns = ConcernListController.getConcernList().getConcerns();
         concernList = new ArrayList<Concern>(concerns);
 
+        SharedPreference sharedPreference = new SharedPreference();
+        concernList = sharedPreference.readConcerns(getApplicationContext());
+
         getCalendarInfo();
         Date now = c.getTime();
 
@@ -159,7 +162,7 @@ public class NewRecordActivity extends AppCompatActivity {
                 EditText recordTitle = (EditText) findViewById(R.id.recordTitleText);
                 String title = recordTitle.getText().toString();
 
-                Record newRecord = new Record(c.getTime(),title);
+                Record newRecord = new Record(c.getTime(), place, title);
 
                 Concern thisConcern = concernList.get(pos);
                 thisConcern.addRecord(newRecord);

@@ -3,6 +3,7 @@ package com.example.symptologger;
 
 import android.location.Location;
 
+import com.google.android.gms.location.places.Place;
 import com.google.android.gms.maps.GoogleMap;
 
 
@@ -36,7 +37,7 @@ import java.util.Date;
 class Record {
     //private String comment;
     private Date date;
-    private Location location;
+    private Place place;
     private String title;
 
     private ArrayList<Photograph> photo = new ArrayList<Photograph>();
