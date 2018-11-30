@@ -34,8 +34,22 @@ public class CareProviderViewRecordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_care_provider_view_record);
 
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        Intent intent = getIntent();
+//        Bundle extras = intent.getExtras();
+//        CP_CONCERN_POS = extras.getInt("CP_CONCERN");
+//        CP_RECORD_POS = extras.getInt("CP_RECORD");
+//        pUserName = extras.getString("pUserName");
+//
+//        patientConcerns = ConcernListController.getConcernList(pUserName).getConcernsList();
+//        patientConcernList = new ArrayList<Concern>(patientConcerns);
+//
+//        Concern concernToView = patientConcernList.get(CP_CONCERN_POS);
+//        cpRecordList = new ArrayList<Record>(concernToView.getRecords());
+//
+//        cpRecordToView = cpRecordList.get(CP_RECORD_POS);
+
+//        toolbar = findViewById(R.id.cpToolbar);
+//        setSupportActionBar(toolbar);
 
         cpViewPager = findViewById(R.id.cpViewpager);
         addTabs(cpViewPager);
@@ -43,19 +57,7 @@ public class CareProviderViewRecordActivity extends AppCompatActivity {
         cpTabLayout = findViewById(R.id.cpTabs);
         cpTabLayout.setupWithViewPager(cpViewPager);
 
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
-        CP_CONCERN_POS = extras.getInt("CP_CONCERN");
-        CP_RECORD_POS = extras.getInt("CP_RECORD");
-        pUserName = extras.getString("pUserName");
 
-        patientConcerns = ConcernListController.getConcernList(pUserName).getConcernsList();
-        patientConcernList = new ArrayList<Concern>(patientConcerns);
-
-        Concern concernToView = patientConcernList.get(CP_CONCERN_POS);
-        cpRecordList = new ArrayList<Record>(concernToView.getRecords());
-
-        cpRecordToView = cpRecordList.get(CP_RECORD_POS);
     }
 
     private void addTabs(ViewPager viewPager) {
