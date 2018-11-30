@@ -106,11 +106,11 @@ public class CreateProfileActivity extends AppCompatActivity{
 
         if (user_type.equals("Patient")) {
             //patient = new Patient(user_id, first_name, last_name, email, phone, user_type);
-            patient = new Patient(user_id, "", "", email, phone, user_type);
+            patient = new Patient(user_id, email, phone, user_type);
             userList.addUser(patient);
         } else if (user_type.equals("Care Provider")){
             //care_provider = new CareProvider(user_id, first_name, last_name, email, phone, user_type);
-            care_provider = new CareProvider(user_id, "", "", email, phone, user_type);
+            care_provider = new CareProvider(user_id, email, phone, user_type);
             userList.addUser(care_provider);
         }
 

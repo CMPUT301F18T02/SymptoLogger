@@ -25,8 +25,8 @@ public class CareProvider extends User {
     private PatientList patients;
     private int assigneeCount;
 
-    public CareProvider(String id, String firstName, String lastName, String email, String cell, String user_type) {
-        super(id, firstName, lastName, email, cell, user_type);
+    public CareProvider(String id, String email, String cell, String user_type) {
+        super(id, email, cell, user_type);
     }
 
     /**

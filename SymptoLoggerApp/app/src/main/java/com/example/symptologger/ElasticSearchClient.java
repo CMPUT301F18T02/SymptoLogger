@@ -98,30 +98,30 @@ public class ElasticSearchClient {
      * Represents the object used to add a new table to the server.
      */
 
-    public static class AddTable extends AsyncTask<String, Void, Void> { //use Void instead of void for AsyncTask as return type
-        @Override
-        protected Void doInBackground(String... indices) {
-
-            String type = "Concerns";
-            String source = "{\"Concerns\" : {\"properties\" : " +
-                    "{\"title\": {\"type\" : \"string\"}," +
-                    "\"date\": {\"type\" : \"date\"}, " +
-                    "\"description\": {\"type\" : \"string\"}, " +
-                    "\"userName\" : {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
-                    "\"created\": {\"type\" : \"date\"}," +
-                    "}}}";
-
-                try {
-                    JestResult result = client.execute(new PutMapping.Builder(index, type, source).build());
-                    if (!result.isSucceeded()) {
-                        Log.e("Error", "ElasticSearch was not able to add table.");
-                    }
-                } catch (Exception e) {
-                    Log.i("Error", "The application failed - reason: AddTable.");
-                }
-            return null; //Void requires return, (it's not void)
-        }
-    }
+//    public static class AddConcernsTable extends AsyncTask<String, Void, Void> { //use Void instead of void for AsyncTask as return type
+//        @Override
+//        protected Void doInBackground(String... indices) {
+//
+//            String type = "Concerns";
+//            String source = "{\"Concerns\" : {\"properties\" : " +
+//                    "{\"title\": {\"type\" : \"string\"}," +
+//                    "\"date\": {\"type\" : \"date\"}, " +
+//                    "\"description\": {\"type\" : \"string\"}, " +
+//                    "\"userName\" : {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
+//                    "\"created\": {\"type\" : \"date\"}," +
+//                    "}}}";
+//
+//                try {
+//                    JestResult result = client.execute(new PutMapping.Builder(index, type, source).build());
+//                    if (!result.isSucceeded()) {
+//                        Log.e("Error", "ElasticSearch was not able to add table.");
+//                    }
+//                } catch (Exception e) {
+//                    Log.i("Error", "The application failed - reason: AddConcernsTable.");
+//                }
+//            return null; //Void requires return, (it's not void)
+//        }
+//    }
 
     /**
      * Represents the object used to add a new user to the server. The nested doInBackground method
@@ -410,4 +410,29 @@ public class ElasticSearchClient {
                 return Boolean.FALSE;
             }
         }
+
+    public static class AddPatientsTable extends AsyncTask<String, Void, Void> { //use Void instead of void for AsyncTask as return type
+        @Override
+        protected Void doInBackground(String... indices) {
+
+            String type = "Patients";
+            String source = "{\"Patients\" : {\"properties\" : " +
+                    "{\"userID\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
+                    "\"email\": {\"type\" : \"string\"}, " +
+                    "\"cell\": {\"type\" : \"string\"}, " +
+                    "\"cpUserName\" : {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
+                    "\"created\": {\"type\" : \"date\"}," +
+                    "}}}";
+
+            try {
+                JestResult result = client.execute(new PutMapping.Builder(index, type, source).build());
+                if (!result.isSucceeded()) {
+                    Log.e("Error", "ElasticSearch was not able to add table.");
+                }
+            } catch (Exception e) {
+                Log.i("Error", "The application failed - reason: AddPatientsTable.");
+            }
+            return null; //Void requires return, (it's not void)
+        }
     }
+}
