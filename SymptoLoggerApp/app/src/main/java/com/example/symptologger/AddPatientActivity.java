@@ -32,6 +32,10 @@ public class AddPatientActivity extends AppCompatActivity {
                 EditText patientUserName = (EditText) findViewById(R.id.patientUserName);
                 patientUName = patientUserName.getText().toString();
 
+                if (patientUName.equals("")) {
+                    Toast.makeText(AddPatientActivity.this, "Nothing entered. Please enter a valid username.", Toast.LENGTH_SHORT).show();
+                }
+
                 EditText shareCodeText = (EditText) findViewById(R.id.enterShareCodeText);
                 String shareCode = shareCodeText.getText().toString();
 
@@ -48,30 +52,15 @@ public class AddPatientActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                if (patientUName.equals("")){
-                    Toast.makeText(AddPatientActivity.this,"Nothing entered. Please enter a valid username.",Toast.LENGTH_SHORT).show();
-                } else if (!val){
+                if (!val){
                     Toast.makeText(AddPatientActivity.this,"Username does not exist. Please enter valid username.",Toast.LENGTH_SHORT).show();
                 } else {
                     if (shareCode.equals("")){
                         Toast.makeText(AddPatientActivity.this,"Please enter the share code.",Toast.LENGTH_SHORT).show();
                     } else {
-                        ElasticSearchClient.GetShareCode getShareCode = new ElasticSearchClient.GetShareCode();
-                        getShareCode.execute(patientUName);
-
-                        String code = "";
-                        try {
-                            code = getShareCode.get();
-                        } catch (ExecutionException e) {
-                            e.printStackTrace();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-
-                        if (code.equals("")){
+                        if (getShareCode().equals("")){
                             Toast.makeText(AddPatientActivity.this,"The share code was not found. There may be an issue with the server.",Toast.LENGTH_SHORT).show();
                         } else {
-
                             Patient patient = null;
                             ElasticSearchClient.GetSinglePatient getSinglePatient = new ElasticSearchClient.GetSinglePatient();
                             try {
@@ -86,11 +75,11 @@ public class AddPatientActivity extends AppCompatActivity {
                             String pEmail = patient.getEmail();
                             String pCell = patient.getCell();
 
-                            ElasticSearchClient.DeletePatient deletePatient = new ElasticSearchClient.DeletePatient();
-                            deletePatient.execute(patientUName);
+//                            ElasticSearchClient.DeletePatient deletePatient = new ElasticSearchClient.DeletePatient();
+//                            deletePatient.execute(patientUName);
 
-                            ElasticSearchClient.AddPatient addPatient = new ElasticSearchClient.AddPatient();
-                            addPatient.execute(patientUName,pEmail,pCell,cpUserName, new Date().toString());
+//                            ElasticSearchClient.AddPatient addPatient = new ElasticSearchClient.AddPatient();
+//                            addPatient.execute(patientUName,pEmail,pCell,cpUserName, new Date().toString());
                         }
                     }
 
@@ -104,5 +93,20 @@ public class AddPatientActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public String getShareCode(){
+        ElasticSearchClient.GetShareCode getShareCode = new ElasticSearchClient.GetShareCode();
+        getShareCode.execute(patientUName);
+
+        String code = "";
+        try {
+            code = getShareCode.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return code;
     }
 }

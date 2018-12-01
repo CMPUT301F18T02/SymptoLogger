@@ -344,7 +344,11 @@ public class ElasticSearchClient {
 
                 ArrayList<Record> foundRecords = new ArrayList<Record>();
                 String type = "Records";
-                String query = String.format("{\"query\": {\"match\": {\"concernTitle\": \"%s\"}}}", search_parameters[0]);
+                String query = String.format(
+                        "{\"query\": {\"bool\": " +
+                                "{\"must\": [" +
+                                "{\"match\": {\"concernTitle\": \"%s\"}}, " +
+                                "{\"match\": {\"userName\": \"%s\"}}]}}}", search_parameters[0], search_parameters[1]);
                 try {
                     JestResult result = client.execute(new Search.Builder(query).addIndex(index).addType(type).build());
                     if (result.isSucceeded()) {
@@ -519,7 +523,7 @@ public class ElasticSearchClient {
         protected Boolean doInBackground(String... search_parameters) {
             String type = "Patients";
             String query = String.format(
-                    "{\"query\": {\"match\": {\"title\": \"%s\"}}}", search_parameters[0]);
+                    "{\"query\": {\"match\": {\"userID\": \"%s\"}}}", search_parameters[0]);
             try {
                 JestResult result = client.execute(new DeleteByQuery.Builder(query).addIndex(index).addType(type).build());
                 if (result.isSucceeded()) {
