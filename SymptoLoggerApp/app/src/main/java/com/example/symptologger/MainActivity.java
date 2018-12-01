@@ -5,8 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
 
 /*
  *  Copyright 2018 Remi Arshad, Noni Hua, Jason Lee, Patrick Tamm, Kaiwen Zhang
@@ -36,7 +38,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //new ElasticSearchClient.AddShareCodeTable().execute();
 
-        //new ElasticSearchClient.AddPatient().execute("11111111","123","123","careprovider",new Date().toString());
+        ElasticSearchClient.DeletePatient delPatient = new ElasticSearchClient.DeletePatient();
+        delPatient.execute("11111111");
+
+        Boolean val = Boolean.FALSE;
+        try {
+            delPatient.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if (!val){
+            Toast.makeText(this,"Couldn't delete patient",Toast.LENGTH_SHORT).show();
+        } else{
+            Toast.makeText(this,"Success!",Toast.LENGTH_SHORT).show();
+        }
+        //new ElasticSearchClient.AddPatient().execute("11111111","123","123","",new Date().toString());
 
         Button button_sign_up = (Button) findViewById(R.id.button_sign_up);
 

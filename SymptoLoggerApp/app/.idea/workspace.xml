@@ -46,8 +46,8 @@
       <file leaf-file-name="ElasticSearchClient.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/symptologger/ElasticSearchClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="592">
-              <caret line="528" column="17" lean-forward="true" selection-start-line="528" selection-start-column="17" selection-end-line="528" selection-end-column="17" />
+            <state relative-caret-position="248">
+              <caret line="559" selection-start-line="559" selection-end-line="559" />
               <folding>
                 <element signature="e#19459#19468#0" expanded="true" />
               </folding>
@@ -59,7 +59,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/symptologger/SignInActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="511">
-              <caret line="85" column="29" lean-forward="true" selection-start-line="85" selection-start-column="29" selection-end-line="85" selection-end-column="29" />
+              <caret line="85" column="29" selection-start-line="85" selection-start-column="29" selection-end-line="85" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -68,19 +68,31 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/symptologger/CareProviderListPatientsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="397">
-              <caret line="47" column="11" lean-forward="true" selection-start-line="47" selection-start-column="11" selection-end-line="47" selection-end-column="11" />
+              <caret line="47" column="11" selection-start-line="47" selection-start-column="11" selection-end-line="47" selection-end-column="11" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AddPatientActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AddPatientActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/symptologger/AddPatientActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="40" column="48" lean-forward="true" selection-start-line="40" selection-start-column="48" selection-end-line="40" selection-end-column="48" />
+            <state relative-caret-position="712">
+              <caret line="99" column="20" selection-start-line="99" selection-start-column="20" selection-end-line="99" selection-end-column="20" />
               <folding>
                 <element signature="e#862#4441#0" expanded="true" />
                 <element signature="e#4440#4441#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/symptologger/MainActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="160">
+              <caret line="40" column="95" selection-start-line="40" selection-start-column="95" selection-end-line="40" selection-end-column="95" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -93,15 +105,6 @@
           </provider>
           <provider selected="true" editor-type-id="android-designer2">
             <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CreateProfileActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/symptologger/CreateProfileActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="526">
-              <caret line="167" column="72" lean-forward="true" selection-start-line="167" selection-start-column="72" selection-end-line="167" selection-end-column="72" />
-            </state>
           </provider>
         </entry>
       </file>
@@ -2149,7 +2152,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/example/symptologger/NewRecordActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/symptologger/CareProvider.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/symptologger/RecordDetailsFragment.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/symptologger/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/symptologger/PatientList.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/symptologger/PatientListController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/symptologger/User.java" />
@@ -2170,8 +2172,9 @@
         <option value="$PROJECT_DIR$/src/main/res/layout/activity_add_patient.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/symptologger/ElasticSearchClient.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/symptologger/ElasticSearchClient.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/symptologger/AddPatientActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/symptologger/CareProviderListPatientsActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/symptologger/AddPatientActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/symptologger/MainActivity.java" />
       </list>
     </option>
   </component>
@@ -2395,7 +2398,7 @@
     <frame x="-1" y="31" width="1922" height="1004" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info anchor="bottom" id="Android Profiler" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Android Profiler" order="7" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
@@ -2409,14 +2412,14 @@
       <window_info id="Captures" order="2" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24973376" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24973376" />
       <window_info anchor="bottom" id="Build" order="7" weight="0.32982457" />
       <window_info anchor="right" id="Gradle" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Device File Explorer" order="3" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.4" />
       <window_info anchor="bottom" id="Android Profiler" order="7" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -2590,6 +2593,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret line="63" column="21" selection-start-line="63" selection-start-column="21" selection-end-line="63" selection-end-column="21" />
+          <folding>
+            <element signature="e#2420#2421#0" expanded="true" />
+            <element signature="e#2441#2442#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2612,13 +2619,6 @@
             <element signature="e#2365#2366#0" expanded="true" />
             <element signature="e#2410#2411#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/symptologger/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="45" column="90" selection-start-line="45" selection-start-column="90" selection-end-line="45" selection-end-column="90" />
         </state>
       </provider>
     </entry>
@@ -2647,6 +2647,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="235">
           <caret line="40" column="78" selection-start-line="40" selection-start-column="78" selection-end-line="40" selection-end-column="78" />
+          <folding>
+            <element signature="e#1944#1945#0" expanded="true" />
+            <element signature="e#1982#1983#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2699,6 +2703,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="45" selection-start-line="45" selection-end-line="47" selection-end-column="43" />
+          <folding>
+            <element signature="e#3005#3148#0" expanded="true" />
+            <element signature="e#3147#3148#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2757,13 +2765,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/symptologger/ListConcernActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1755">
-          <caret line="133" column="72" selection-start-line="133" selection-start-column="72" selection-end-line="133" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/symptologger/ModifyConcernActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1140">
@@ -2805,7 +2806,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/symptologger/SignInActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="511">
-          <caret line="85" column="29" lean-forward="true" selection-start-line="85" selection-start-column="29" selection-end-line="85" selection-end-column="29" />
+          <caret line="85" column="29" selection-start-line="85" selection-start-column="29" selection-end-line="85" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -2813,6 +2814,48 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="586">
           <caret line="98" column="54" selection-start-line="98" selection-start-column="54" selection-end-line="98" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/symptologger/CareProviderListPatientsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="47" column="11" selection-start-line="47" selection-start-column="11" selection-end-line="47" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/symptologger/ListConcernActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="93" column="61" selection-start-line="93" selection-start-column="61" selection-end-line="93" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/symptologger/CreateProfileActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="592">
+          <caret line="167" column="72" lean-forward="true" selection-start-line="167" selection-start-column="72" selection-end-line="167" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/symptologger/AddPatientActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="712">
+          <caret line="99" column="20" selection-start-line="99" selection-start-column="20" selection-end-line="99" selection-end-column="20" />
+          <folding>
+            <element signature="e#862#4441#0" expanded="true" />
+            <element signature="e#4440#4441#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/symptologger/ElasticSearchClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="559" selection-start-line="559" selection-end-line="559" />
+          <folding>
+            <element signature="e#19459#19468#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2824,37 +2867,12 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/symptologger/CreateProfileActivity.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/symptologger/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="526">
-          <caret line="167" column="72" lean-forward="true" selection-start-line="167" selection-start-column="72" selection-end-line="167" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/symptologger/ElasticSearchClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="592">
-          <caret line="528" column="17" lean-forward="true" selection-start-line="528" selection-start-column="17" selection-end-line="528" selection-end-column="17" />
+        <state relative-caret-position="160">
+          <caret line="40" column="95" selection-start-line="40" selection-start-column="95" selection-end-line="40" selection-end-column="95" />
           <folding>
-            <element signature="e#19459#19468#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/symptologger/CareProviderListPatientsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="47" column="11" lean-forward="true" selection-start-line="47" selection-start-column="11" selection-end-line="47" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/symptologger/AddPatientActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="40" column="48" lean-forward="true" selection-start-line="40" selection-start-column="48" selection-end-line="40" selection-end-column="48" />
-          <folding>
-            <element signature="e#862#4441#0" expanded="true" />
-            <element signature="e#4440#4441#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

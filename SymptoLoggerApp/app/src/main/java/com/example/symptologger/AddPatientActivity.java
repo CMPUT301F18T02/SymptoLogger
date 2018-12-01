@@ -97,7 +97,7 @@ public class AddPatientActivity extends AppCompatActivity {
                     Toast.makeText(AddPatientActivity.this,"Saving "+patientUName, Toast.LENGTH_SHORT).show();
 
                     Intent savePatient = new Intent(AddPatientActivity.this,CareProviderListPatientsActivity.class);
-                    //savePatient.putExtra("UNAME",patientUName);
+                    savePatient.putExtra("UNAME",patientUName);
                     startActivity(savePatient);
                 }
 
