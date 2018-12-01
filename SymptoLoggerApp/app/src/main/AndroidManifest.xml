@@ -86,7 +86,8 @@
         <activity android:name=".CareProviderViewPatientConcernsActivity" />
         <activity android:name=".CareProviderViewConcernActivity" />
         <activity android:name=".CareProviderViewRecordActivity" />
-        <activity android:name=".GenShareCodeActivity"></activity>
+        <activity android:name=".GenShareCodeActivity" />
+        <activity android:name=".PatientEntersShareCodeActivity"></activity>
     </application>
 
 </manifest>

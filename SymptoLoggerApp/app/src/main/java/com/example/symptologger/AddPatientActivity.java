@@ -73,7 +73,6 @@ public class AddPatientActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
 
-                            //String pUName = patient.getUserID();
                             String pEmail = patient.getEmail();
                             String pCell = patient.getCell();
 

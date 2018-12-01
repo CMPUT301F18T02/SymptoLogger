@@ -60,6 +60,22 @@ public class SignInActivity extends AppCompatActivity {
         return val;
     }
 
+    private String checkCode(){
+        ElasticSearchClient.GetShareCode getShareCode = new ElasticSearchClient.GetShareCode();
+        getShareCode.execute(userName2);
+
+        String code = "";
+        try {
+            code = getShareCode.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return code;
+    }
+
     private String determineRole(){
         ElasticSearchClient.GetUserRole getUserRole = new ElasticSearchClient.GetUserRole();
         getUserRole.execute(userName2);
@@ -80,9 +96,19 @@ public class SignInActivity extends AppCompatActivity {
     public void LogIn(View v) {
         if (verifyLogIn()){
             if (determineRole().equals("Patient")){
-                Intent intent = new Intent(SignInActivity.this, ListConcernActivity.class);
-                intent.putExtra("userName",userName2);
-                startActivity(intent);
+                String checkCode = checkCode();
+                if (checkCode.equals("")){
+                    Intent intent = new Intent(SignInActivity.this, ListConcernActivity.class);
+                    intent.putExtra("userName",userName2);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(SignInActivity.this, PatientEntersShareCodeActivity.class);
+                    Bundle extras = new Bundle();
+                    extras.putString("userName",userName2);
+                    extras.putString("checkCode",checkCode);
+                    intent.putExtras(extras);
+                    startActivity(intent);
+                }
             } else if (determineRole().equals("Care Provider")){
                 Intent intent = new Intent(SignInActivity.this, CareProviderListPatientsActivity.class);
                 intent.putExtra("cpUserName",userName2);
