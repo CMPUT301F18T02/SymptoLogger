@@ -32,6 +32,7 @@ public class AddPatientActivity extends AppCompatActivity {
                 EditText patientUserName = (EditText) findViewById(R.id.patientUserName);
                 patientUName = patientUserName.getText().toString();
 
+
                 if (patientUName.equals("")) {
                     Toast.makeText(AddPatientActivity.this, "Nothing entered. Please enter a valid username.", Toast.LENGTH_SHORT).show();
                 }
@@ -61,8 +62,9 @@ public class AddPatientActivity extends AppCompatActivity {
                         if (getShareCode().equals("")){
                             Toast.makeText(AddPatientActivity.this,"The share code was not found. There may be an issue with the server.",Toast.LENGTH_SHORT).show();
                         } else {
-                            Patient patient = null;
                             ElasticSearchClient.GetSinglePatient getSinglePatient = new ElasticSearchClient.GetSinglePatient();
+                            getSinglePatient.execute(patientUName);
+                            Patient patient = null;
                             try {
                                 patient = getSinglePatient.get();
                             } catch (ExecutionException e) {
@@ -75,11 +77,11 @@ public class AddPatientActivity extends AppCompatActivity {
                             String pEmail = patient.getEmail();
                             String pCell = patient.getCell();
 
-//                            ElasticSearchClient.DeletePatient deletePatient = new ElasticSearchClient.DeletePatient();
-//                            deletePatient.execute(patientUName);
+                            ElasticSearchClient.DeletePatient deletePatient = new ElasticSearchClient.DeletePatient();
+                            deletePatient.execute(patientUName);
 
-//                            ElasticSearchClient.AddPatient addPatient = new ElasticSearchClient.AddPatient();
-//                            addPatient.execute(patientUName,pEmail,pCell,cpUserName, new Date().toString());
+                            ElasticSearchClient.AddPatient addPatient = new ElasticSearchClient.AddPatient();
+                            addPatient.execute(patientUName,pEmail,pCell,cpUserName, new Date().toString());
                         }
                     }
 

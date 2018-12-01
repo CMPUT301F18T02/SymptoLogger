@@ -46,8 +46,8 @@
       <file leaf-file-name="ElasticSearchClient.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/symptologger/ElasticSearchClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="621" column="49" selection-start-line="621" selection-start-column="49" selection-end-line="621" selection-end-column="49" />
+            <state relative-caret-position="135">
+              <caret line="472" column="73" selection-start-line="472" selection-start-column="73" selection-end-line="472" selection-end-column="73" />
               <folding>
                 <element signature="e#20598#20607#0" expanded="true" />
               </folding>
@@ -76,8 +76,8 @@
       <file leaf-file-name="AddPatientActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/symptologger/AddPatientActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
-              <caret line="66" selection-start-line="66" selection-end-line="66" />
+            <state relative-caret-position="375">
+              <caret line="77" column="61" lean-forward="true" selection-start-line="77" selection-start-column="61" selection-end-line="77" selection-end-column="61" />
               <folding>
                 <element signature="e#861#4191#0" expanded="true" />
                 <element signature="e#4190#4191#0" expanded="true" />
@@ -2483,18 +2483,10 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/symptologger/AddPatientActivity.java</url>
-          <line>74</line>
-          <properties />
-          <option name="timeStamp" value="41" />
-        </line-breakpoint>
-      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="42" />
+      <option name="time" value="43" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -2911,8 +2903,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/symptologger/ElasticSearchClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="621" column="49" selection-start-line="621" selection-start-column="49" selection-end-line="621" selection-end-column="49" />
+        <state relative-caret-position="135">
+          <caret line="472" column="73" selection-start-line="472" selection-start-column="73" selection-end-line="472" selection-end-column="73" />
           <folding>
             <element signature="e#20598#20607#0" expanded="true" />
           </folding>
@@ -2921,8 +2913,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/symptologger/AddPatientActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="66" selection-start-line="66" selection-end-line="66" />
+        <state relative-caret-position="375">
+          <caret line="77" column="61" lean-forward="true" selection-start-line="77" selection-start-column="61" selection-end-line="77" selection-end-column="61" />
           <folding>
             <element signature="e#861#4191#0" expanded="true" />
             <element signature="e#4190#4191#0" expanded="true" />
