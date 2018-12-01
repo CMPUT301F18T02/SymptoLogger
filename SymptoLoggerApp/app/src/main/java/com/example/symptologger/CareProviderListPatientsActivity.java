@@ -42,6 +42,7 @@ public class CareProviderListPatientsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(CareProviderListPatientsActivity.this,"Add Patient", Toast.LENGTH_SHORT).show();
                 Intent addPatientIntent = new Intent(CareProviderListPatientsActivity.this,AddPatientActivity.class);
+                addPatientIntent.putExtra("cpUserName",cpUserName);
                 startActivity(addPatientIntent);
             }
         });
