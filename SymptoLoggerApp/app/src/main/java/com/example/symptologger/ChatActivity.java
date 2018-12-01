@@ -44,7 +44,6 @@ public class ChatActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.chatlogs_holder);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new ChatViewAdapter(chatLogs);
         recyclerView.setAdapter(mAdapter);
 
