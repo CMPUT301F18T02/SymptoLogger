@@ -59,7 +59,7 @@ public class CareProviderViewPatientConcernsActivity extends AppCompatActivity {
         Intent fromPatientList = getIntent();
         Bundle extras = fromPatientList.getExtras();
         pUserName = extras.getString("pUserName");
-        cpName = extras.getString("pUserName");
+        cpName = extras.getString("cpName");
 
         TextView userTextView = findViewById(R.id.patientUserNameTextView);
         userTextView.setText("Viewing "+pUserName);
@@ -70,9 +70,8 @@ public class CareProviderViewPatientConcernsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(CareProviderViewPatientConcernsActivity.this,"Back",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(CareProviderViewPatientConcernsActivity.this,CareProviderListPatientsActivity.class);
-                Bundle e = new Bundle();
-                e.putString("cpUserName",cpName);
-                intent.putExtras(e);
+                intent.putExtra("cpUserName",cpName);
+                startActivity(intent);
             }
         });
     }

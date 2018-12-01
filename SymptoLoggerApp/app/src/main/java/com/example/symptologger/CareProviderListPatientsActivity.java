@@ -31,7 +31,7 @@ public class CareProviderListPatientsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_care_provider_list_patients);
 
         Intent intent = getIntent();
-        cpUserName = intent.getStringExtra("userName");
+        cpUserName = intent.getStringExtra("cpUserName");
 
         TextView cpText = findViewById(R.id.careProviderWelcomeText);
         cpText.setText("Welcome "+cpUserName);

@@ -85,7 +85,7 @@ public class SignInActivity extends AppCompatActivity {
                 startActivity(intent);
             } else if (determineRole().equals("Care Provider")){
                 Intent intent = new Intent(SignInActivity.this, CareProviderListPatientsActivity.class);
-                intent.putExtra("userName",userName2);
+                intent.putExtra("cpUserName",userName2);
                 startActivity(intent);
             } else {
                 Log.e("Error","No role found for user from elasticsearch.");
