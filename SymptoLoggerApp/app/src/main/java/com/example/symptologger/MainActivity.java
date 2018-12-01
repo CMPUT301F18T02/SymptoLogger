@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //new ElasticSearchClient.AddPatientsTable().execute();
+        //new ElasticSearchClient.AddShareCodeTable().execute();
 
         //new ElasticSearchClient.AddPatient().execute("11111111","123","123","careprovider",new Date().toString());
 
