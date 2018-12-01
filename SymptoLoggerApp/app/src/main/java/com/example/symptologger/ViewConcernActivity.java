@@ -2,10 +2,10 @@ package com.example.symptologger;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,7 +13,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -137,6 +136,7 @@ public class ViewConcernActivity extends AppCompatActivity {
                             Bundle extras = new Bundle();
                             extras.putInt("CONCERN",pos);
                             extras.putInt("RECORD",recPos);
+                            extras.putString("USERNAME", userName);
                             viewIntent.putExtras(extras);
                             startActivity(viewIntent);
                         } else if (which == 1){
