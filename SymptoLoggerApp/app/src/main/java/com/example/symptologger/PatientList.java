@@ -1,5 +1,7 @@
 package com.example.symptologger;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -29,6 +31,7 @@ public class PatientList {
      * Constructor
      */
     public PatientList(String cpID) {
+
         ElasticSearchClient.GetPatients getESPatients = new ElasticSearchClient.GetPatients();
         getESPatients.execute(cpID);
         try {
@@ -38,6 +41,10 @@ public class PatientList {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+
+
+
     }
 
     /**

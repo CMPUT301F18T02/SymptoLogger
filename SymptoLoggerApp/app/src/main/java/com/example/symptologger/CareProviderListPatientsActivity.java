@@ -19,6 +19,8 @@ import java.util.Collection;
 public class CareProviderListPatientsActivity extends AppCompatActivity {
 
     private String cpUserName;
+    private SharedPreference sharedPref = new SharedPreference();
+
 
     ListView patientListView;
     ArrayList<Patient> patientUserNamesList;
@@ -64,6 +66,10 @@ public class CareProviderListPatientsActivity extends AppCompatActivity {
 
         patientListView = (ListView) findViewById(R.id.patientListView);
         patients = PatientListController.getPatientList(cpUserName).getPatients();
+
+        // save patients to local storage
+//        sharedPref.saveCareProviderSavePatients(this.getApplicationContext(), (ArrayList<Patient>)patients);
+
         patientUserNamesList = new ArrayList<Patient>(patients);
         patientListAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, patientUserNamesList);
         patientListView.setAdapter(patientListAdapter);

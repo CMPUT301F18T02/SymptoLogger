@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -93,6 +94,12 @@ public class ListConcernActivity extends AppCompatActivity {
         concernListView = (ListView) findViewById(R.id.listConcernsView);
         concerns = ConcernListController.getConcernList(userName).getConcernsList();
         concernList = new ArrayList<Concern>(concerns);
+
+        SharedPreference sharedPref = new SharedPreference();
+        sharedPref.saveConcerns(this.getApplicationContext(), (ArrayList<Concern>) concerns);
+
+
+
         concernListAdapter = new ArrayAdapter<Concern>(this, android.R.layout.simple_list_item_1, concernList);
         concernListView.setAdapter(concernListAdapter);
 

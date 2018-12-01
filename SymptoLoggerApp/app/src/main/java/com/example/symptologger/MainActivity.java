@@ -3,6 +3,7 @@ package com.example.symptologger;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -37,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
         //new ElasticSearchClient.AddPatientsTable().execute();
 
         //new ElasticSearchClient.AddPatient().execute("11111111","123","123","careprovider",new Date().toString());
+
+        CheckServerAvailability checkServerAvailability = new CheckServerAvailability();
+        checkServerAvailability.startIsAvailableTimer();
+
+
 
         Button button_sign_up = (Button) findViewById(R.id.button_sign_up);
 
