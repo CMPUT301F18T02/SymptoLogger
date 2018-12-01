@@ -87,6 +87,9 @@ public class ViewRecordActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         Bundle bundle = new Bundle();
         bundle.putInt("record_pos", RECORD_POS);
+        bundle.putInt("concern_pos", CONCERN_POS);
+        // TODO: handle username
+        // bundle.putString("username", )
 
         RecordDetailsFragment detailsFragment = new RecordDetailsFragment();
         RecordCommentFragment commentFragment = new RecordCommentFragment();
