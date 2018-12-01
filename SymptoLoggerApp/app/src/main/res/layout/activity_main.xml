@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/chatbox"
         android:layout_width="203dp"
         android:layout_height="94dp"
         android:gravity="center"

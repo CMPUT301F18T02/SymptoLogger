@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //new ElasticSearchClient.AddTable().execute();
         //new ElasticSearchClient.AddRecord().execute();
         //new ElasticSearchClient.SearchRecord().execute("no");
 
@@ -44,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, CreateProfileActivity.class));
             }
         });
+
+        Intent ChatActivity = new Intent(this, PhotoRecordActivity.class);
+        startActivity(ChatActivity);
 
 //        button_add_geo_location.setOnClickListener(new View.OnClickListener() {
 //            @Override

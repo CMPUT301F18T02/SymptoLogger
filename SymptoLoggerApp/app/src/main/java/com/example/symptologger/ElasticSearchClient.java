@@ -7,10 +7,13 @@ import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
+import io.searchbox.core.SearchResult;
 import io.searchbox.indices.DeleteIndex;
 import io.searchbox.indices.mapping.PutMapping;
 
@@ -98,16 +101,11 @@ public class ElasticSearchClient {
         protected Void doInBackground(String... indices) {
 
             String type = "usersLogin";
-            String source = "{\"usersLogin\" : {\"properties\" : " +
-                    "{\"memberID\": {\"type\" : \"integer\"}," +
-                    "\"email\": {\"type\" : \"string\"}, " +
-                    "\"phone\": {\"type\" : \"string\"}, " +
-                    "\"userID\" : {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
-                    "\"creationDate\": {\"type\" : \"string\"}," +
-                    "\"userRole\": {\"type\" : \"string\"}" +
-                    "}}}";
+            String source = "{\"usersLogin\":{\"properties\":{\"email\":{\"type\":\"string\",\"index\":\"not_analyzed\"},\"phone\":{\"type\":\"string\"},\"userID\":{\"type\":\"string\",\"index\":\"not_analyzed\"},\"created\":{\"type\":\"date\",\"format\":\"HH:mm:ss dd/MM/yyyy\"},\"userRole\":{\"type\":\"string\",\"index\":\"not_analyzed\"}}}}";
 
-                try {
+//            String type = "chatLogs";
+//            String source = "{\"chatLogs\":{\"properties\":{\"participantsID\":{\"type\":\"string\",\"index\":\"not_analyzed\"},\"message\":{\"type\":\"string\"},\"timestamp\":{\"type\":\"date\",\"format\":\"HH:mm:ss.SSS dd/MM/yyyy\"}}}}";
+            try {
                     JestResult result = client.execute(new PutMapping.Builder(index, type, source).build());
                     if (!result.isSucceeded()) {
                         Log.e("Error", "ElasticSearch was not able to add table.");
@@ -132,7 +130,7 @@ public class ElasticSearchClient {
         protected Boolean doInBackground(String... record) {
 
             String type = "usersLogin";
-            String source = String.format("{\"userID\": \"%s\", \"creationDate\": \"%s\", \"userRole\": \"%s\", \"memberID\": %d, \"email\": \"%s\", \"phone\": \"%s\"}",record[0], record[1], record[2], Integer.parseInt(record[3]), record[4], record[5]);
+            String source = String.format("{\"userID\":\"%s\",\"created\":\"%s\",\"userRole\":\"%s\",\"email\":\"%s\",\"phone\":\"%s\"}",record[0], record[1], record[2], record[3], record[4]);
 
             try {
                 JestResult result = client.execute( new Index.Builder(source).index(index).type(type).build() );
@@ -173,7 +171,6 @@ public class ElasticSearchClient {
                         return Boolean.TRUE;
                     }
                     else{
-                        //Log.e("Error","nothing found.");
                         return Boolean.FALSE;
                     }
 
@@ -188,39 +185,69 @@ public class ElasticSearchClient {
         }
     }
 
-    /**
-     * Represents the object used to find the largest member id.
-     *
-     * @author Remi Arshad
-     */
 
-    public static class SearchLargestMemberID extends AsyncTask<String, Void, Integer>{
+    public static class FetchChatLogs extends AsyncTask<String, Void, Void>{
 
         @Override
-        protected Integer doInBackground(String... search_parameters){
+        protected Void doInBackground(String... search_parameters){
 
-            String type = "usersLogin";
-            String query =  "{\"query\": {\"match_all\": {}},\"sort\": {\"memberID\": \"desc\"},\"size\": 1}";
+            String type = "chatLogs";
+            String query =  String.format("{\"query\":{\"bool\":{\"must\":[{\"match\":{\"participantsID\":\"%s\"}},{\"match\":{\"participantsID\":\"%s\"}}]}},\"sort\":{\"timestamp\":\"asc\"},\"size\":1000}", search_parameters[0], search_parameters[1]);
             try {
-                JestResult result = client.execute(  new Search.Builder(query).addIndex(index).addType(type).build() );
+                List<SearchResult.Hit<ChatLogs,Void>> hits = client.execute(  new Search.Builder(query).addIndex(index).addType(type).build() ).getHits(ChatLogs.class);
 
-                if (result.isSucceeded()){
-                    List<SourceAsObjectListMap> res = result.getSourceAsObjectList(SourceAsObjectListMap.class);
-                    if (res.size() != 0){
-                        return res.get(0).getMemberID();
+                if (hits.size() != 0){
+                    ChatActivity.chatLogs.add(hits.stream()
+                            .map(result -> new ChatLogs(result.source.getParticipantsID(), result.source.getMessage(), result.source.getTimestamp()))
+                            .collect(Collectors.toList()));
+                    System.out.println("FETCHING DONE!");
+                    ChatActivity.updateLogsReady = true;
+                    System.out.println("UPDATING VIEW DONE!");
+
+                    try {
+                        ChatManager.callViewUpdate();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                    else{
-                        return -1;
-                    }
 
-
-                } else {
-                    Log.e("Error","Some issues with query.");
+                    return null;
+                }
+                else{
+                    return null;
                 }
             } catch (Exception e){
                 Log.i("Error","Something went wrong when we tried to communicate with the elasticsearch server.");
             }
-            return -1;
+            return null;
         }
     }
+
+
+    public static class SaveChatLog extends AsyncTask<String, Void, Void>{
+
+        @Override
+        protected Void doInBackground(String... save_parameters){
+
+
+            String type = "chatLogs";
+            String source = String.format("{\"participantsID\":[\"%s\",\"%s\"],\"message\":\"%s\",\"timestamp\":\"%s\"}", save_parameters[0], save_parameters[1], save_parameters[2], save_parameters[3]);
+            System.out.println(source);
+
+            try {
+                JestResult result = client.execute( new Index.Builder(source).index(index).type(type).build() );
+
+                if (result.isSucceeded()) {
+                    System.out.println("SAVING DONE!");
+                    return null;
+                }
+                else{
+                    return null;
+                }
+            } catch (Exception e) {
+                Log.i("Error", "The application failed - reason: AddChatLog.");
+            }
+            return null;
+        }
+    }
+
 }
