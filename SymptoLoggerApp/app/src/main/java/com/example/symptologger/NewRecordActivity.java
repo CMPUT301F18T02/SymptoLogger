@@ -56,6 +56,7 @@ public class NewRecordActivity extends AppCompatActivity {
     private static DateFormat timeFormat = new SimpleDateFormat("h:mm a", Locale.CANADA);
 
     private int pos;
+    private String userName;
     Collection<Concern> concerns;
     ArrayList<Concern> concernList;
 
@@ -70,12 +71,14 @@ public class NewRecordActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_record_avtivity);
+        setContentView(R.layout.activity_new_record_activity);
 
         Intent intent = getIntent();
-        pos = intent.getIntExtra("pos",0);
+        Bundle fromModconcern = intent.getExtras();
+        pos = fromModconcern.getInt("pos",0);
+        userName = fromModconcern.getString("userName");
 
-        concerns = ConcernListController.getConcernList().getConcerns();
+        concerns = ConcernListController.getConcernList(userName).getConcernsList();
         concernList = new ArrayList<Concern>(concerns);
 
         getCalendarInfo();
@@ -159,13 +162,15 @@ public class NewRecordActivity extends AppCompatActivity {
                 EditText recordTitle = (EditText) findViewById(R.id.recordTitleText);
                 String title = recordTitle.getText().toString();
 
-                Record newRecord = new Record(c.getTime(),title);
-
                 Concern thisConcern = concernList.get(pos);
+                Record newRecord = new Record(c.getTime(),title,userName,thisConcern.getTitle());
                 thisConcern.addRecord(newRecord);
 
                 Intent doneIntent = new Intent(NewRecordActivity.this, ViewConcernActivity.class);
-                doneIntent.putExtra("pos",pos);
+                Bundle doneBundle = new Bundle();
+                doneBundle.putInt("pos",pos);
+                doneBundle.putString("userName",userName);
+                doneIntent.putExtras(doneBundle);
                 startActivity(doneIntent);
             }
         });
@@ -175,7 +180,10 @@ public class NewRecordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent cancelIntent = new Intent(NewRecordActivity.this, ViewConcernActivity.class);
-                cancelIntent.putExtra("pos",pos);
+                Bundle cancelBundle = new Bundle();
+                cancelBundle.putInt("pos",pos);
+                cancelBundle.putString("userName",userName);
+                cancelIntent.putExtras(cancelBundle);
                 startActivity(cancelIntent);
             }
         });

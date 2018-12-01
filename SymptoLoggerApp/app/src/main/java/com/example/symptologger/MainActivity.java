@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.Date;
+
 /*
  *  Copyright 2018 Remi Arshad, Noni Hua, Jason Lee, Patrick Tamm, Kaiwen Zhang
  *
@@ -32,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //new ElasticSearchClient.AddPatientsTable().execute();
+
+        //new ElasticSearchClient.AddPatient().execute("11111111","123","123","careprovider",new Date().toString());
 
         Button button_sign_up = (Button) findViewById(R.id.button_sign_up);
         //Button button_add_geo_location = (Button) findViewById(R.id.button_geo_location);
@@ -43,20 +48,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        button_add_geo_location.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(MainActivity.this, MapsActivity.class));
-//            }
-//        });
     }
 
     public void SignIn(View v) {
         Intent SignInIntent = new Intent(this, SignInActivity.class);
         startActivity(SignInIntent);
-//        Intent intent = new Intent(MainActivity.this, ListConcernActivity.class);
-//        startActivity(intent);
-
 
     }
 }

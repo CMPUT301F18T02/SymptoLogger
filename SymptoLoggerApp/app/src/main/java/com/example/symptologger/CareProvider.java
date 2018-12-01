@@ -22,11 +22,11 @@ import java.util.ArrayList;
  * Care Provider model. Extending User class.
  */
 public class CareProvider extends User {
-    private ArrayList<Patient> patients;
+    private PatientList patients;
     private int assigneeCount;
 
-    public CareProvider(String id, String firstName, String lastName, String email, String cell, String user_type) {
-        super(id, firstName, lastName, email, cell, user_type);
+    public CareProvider(String id, String email, String cell, String user_type) {
+        super(id, email, cell, user_type);
     }
 
     /**
@@ -34,7 +34,7 @@ public class CareProvider extends User {
      * @return patients
      */
 
-    public ArrayList<Patient> getAssignedPatients() {
+    public PatientList getAssignedPatients() {
         return this.patients;
     }
 
@@ -44,7 +44,7 @@ public class CareProvider extends User {
      */
 
     public void addPatient(Patient p) {
-        this.patients.add(p);
+        this.patients.addPatient(p);
     }
 
     /**

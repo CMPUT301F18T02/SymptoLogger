@@ -6,6 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".ModifyConcernActivity">
 
+    <Button
+        android:id="@+id/buttonChangedesc"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="59dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="16dp"
+        android:onClick="modDesc"
+        android:text="MOD"
+        app:layout_constraintBaseline_toBaselineOf="@+id/modifyConcernDesc"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/modConcernTimeField"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="94dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="time"
+        app:layout_constraintEnd_toStartOf="@+id/buttonChangeDate"
+        app:layout_constraintStart_toEndOf="@+id/modConcernDateField"
+        app:layout_constraintTop_toBottomOf="@+id/modifyConcernTitle" />
+
+    <Button
+        android:id="@+id/modConcernDateField"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="177dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/modifyConcernTitle" />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/modifyConcernFAB"
         android:layout_width="wrap_content"
@@ -38,62 +75,40 @@
 
     <EditText
         android:id="@+id/modifyConcernTitle"
-        android:layout_width="0dp"
+        android:layout_width="281dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/modifyConcernTitle"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonChangeTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/modifyConcernDate"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/modifyConcernDate"
-        android:importantForAutofill="no"
-        android:inputType="date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/modifyConcernTitle" />
-
-    <EditText
         android:id="@+id/modifyConcernDesc"
-        android:layout_width="0dp"
+        android:layout_width="284dp"
         android:layout_height="171dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/modifyConcernDescription"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonChangedesc"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/modifyConcernDate" />
+        app:layout_constraintTop_toBottomOf="@+id/modConcernDateField" />
 
     <Button
         android:id="@+id/buttonAddRecord"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="349dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:onClick="addRecord"
@@ -101,5 +116,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/modifyConcernDesc" />
+
+    <Button
+        android:id="@+id/buttonChangeTitle"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="59dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="16dp"
+        android:onClick="modTitle"
+        android:text="MOD"
+        app:layout_constraintBaseline_toBaselineOf="@+id/modifyConcernTitle"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/buttonChangeDate"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="59dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="16dp"
+        android:onClick="modDate"
+        android:text="MOD"
+        app:layout_constraintBaseline_toBaselineOf="@+id/modConcernTimeField"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

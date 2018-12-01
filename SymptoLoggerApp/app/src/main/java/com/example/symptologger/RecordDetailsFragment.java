@@ -65,15 +65,15 @@ public class RecordDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_record_details, container, false);
 
         // TODO: replace p, cp, record
-        CareProvider careProvider = new CareProvider("002", "CPFirst", "CPLast", "test@test.com", "123456790", "care_provider");
+        CareProvider careProvider = new CareProvider("002", "test@test.com", "123456790", "care_provider");
         Record record = new Record();
-        Patient patient = new Patient("001", "PFirst", "PLast", "test@test.com", "123456790", "patient");
+        Patient patient = new Patient("001", "test@test.com", "123456790", "patient");
 
-        String careProviderName = careProvider.getFullName();
+        //String careProviderName = careProvider.getFullName();
         String datetime = record.getDate().toString();
 
         TextView careProviderView = view.findViewById(R.id.careProviderContent);
-        careProviderView.setText(careProviderName);
+        //careProviderView.setText(careProviderName);
 
         TextView datetimeView = view.findViewById(R.id.dateTimeContent);
         datetimeView.setText(datetime);
