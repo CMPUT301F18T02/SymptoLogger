@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //new ElasticSearchClient.AddShareCodeTable().execute();
-
         Button button_sign_up = (Button) findViewById(R.id.button_sign_up);
 
         button_sign_up.setOnClickListener(new View.OnClickListener() {
