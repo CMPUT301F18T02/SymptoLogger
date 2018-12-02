@@ -281,6 +281,7 @@ public class ElasticSearchClient {
                     JestResult result = client.execute(new Index.Builder(source).index(index).type(type).build());
 
                     if (result.isSucceeded()) {
+                        //ListConcernActivity.fetchConcerns();
                         return Boolean.TRUE;
                     } else {
                         return Boolean.FALSE;
