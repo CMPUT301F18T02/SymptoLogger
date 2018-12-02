@@ -26,6 +26,7 @@ public class SourceAsObjectListMap {
     private String userID;
     private Integer memberID;
     private String userRole;
+    private String code;
 
     /**
      * Gets the user id
@@ -45,6 +46,10 @@ public class SourceAsObjectListMap {
 
     public String getRole(){
         return userRole;
+    }
+
+    public String getCode(){
+        return this.code;
     }
 
 }

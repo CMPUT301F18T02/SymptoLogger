@@ -158,4 +158,11 @@ public class ListConcernActivity extends AppCompatActivity {
         concernList = new ArrayList<Concern>(concerns);
         concernListAdapter.notifyDataSetChanged();
     }
+
+    public void shareProfile(View view){
+        Toast.makeText(this,"Generating share code ...",Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(ListConcernActivity.this,GenShareCodeActivity.class);
+        intent.putExtra("userName",userName);
+        startActivity(intent);
+    }
 }

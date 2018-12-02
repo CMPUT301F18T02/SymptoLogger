@@ -215,7 +215,7 @@ class Concern {
 
     public Collection<Record> getRecords(){
         ElasticSearchClient.GetRecords getRecords = new ElasticSearchClient.GetRecords();
-        getRecords.execute(this.title);
+        getRecords.execute(this.title,this.userName);
 
         try {
             this.myRecords = getRecords.get();
