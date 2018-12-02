@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -108,6 +109,8 @@ public class NewRecordActivity extends AppCompatActivity {
 
         } else {
             try {
+                TextView titleView = findViewById(R.id.recordTitleText);
+                titleView.setText(recordToModify.getTitle());
                 Date recordTime = stringDateFormat.parse(recordToModify.getDate());
                 editDateButton.setText(dateFormat.format(recordTime));
                 editTimeButton.setText(timeFormat.format(recordTime));
