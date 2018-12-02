@@ -45,7 +45,7 @@ import io.searchbox.indices.mapping.PutMapping;
 public class ElasticSearchClient {
 
     private static JestClient client = null;
-    private static final String server = "http://cmput301.softwareprocess.es:8080/cmput301f18t02";
+    private static final String server = "http://cmput301.softwareprocess.es:8080";
     private static final String index = "cmput301f18t02";
 
 
