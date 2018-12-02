@@ -43,9 +43,9 @@ public class SignInActivity extends AppCompatActivity {
         typedUserName = findViewById(R.id.typedUserName);
     }
 
-    private Boolean verifyLogIn(){
+    private String verifyLogIn(){
         userName2 = typedUserName.getText().toString();
-        Boolean val = Boolean.FALSE;
+        String val = "";
 
         ElasticSearchClient.SearchUser searchUser = new ElasticSearchClient.SearchUser();
         searchUser.execute(userName2);
@@ -94,7 +94,7 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     public void LogIn(View v) {
-        if (verifyLogIn()){
+        if (verifyLogIn().equals("")){
             if (determineRole().equals("Patient")){
                 String checkCode = checkCode();
                 if (checkCode.equals("")){
@@ -118,7 +118,7 @@ public class SignInActivity extends AppCompatActivity {
                 Toast.makeText(this,"No role found for user",Toast.LENGTH_SHORT).show();
             }
         } else {
-            Toast.makeText(this,"Sorry, username "+userName2+" was not found. Please try again.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,verifyLogIn(), Toast.LENGTH_LONG).show();
         }
     }
 }
