@@ -76,8 +76,7 @@ class ConcernList {
         String des = concern.getDescription();
         String date = concern.getDate();
         String user = userName;
-        String cDate = new Date().toString();
-        addConcern.execute(title, date, des, user, cDate);
+        addConcern.execute(title, date, des, user);
         this.myConcerns.add(concern);
         notifyListeners();
     }

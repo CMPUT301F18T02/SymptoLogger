@@ -275,7 +275,7 @@ public class ElasticSearchClient {
             protected Boolean doInBackground(String... record) {
 
                 String type = "Concerns";
-                String source = String.format("{\"title\": \"%s\", \"date\": \"%s\", \"description\": \"%s\", \"userName\": \"%s\", \"created\": \"%s\"}", record[0], record[1], record[2], record[3], record[4]);
+                String source = String.format("{\"title\": \"%s\", \"date\": \"%s\", \"description\": \"%s\", \"userName\": \"%s\"}", record[0], record[1], record[2], record[3]);
 
                 try {
                     JestResult result = client.execute(new Index.Builder(source).index(index).type(type).build());
