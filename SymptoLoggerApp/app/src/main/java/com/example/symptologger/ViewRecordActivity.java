@@ -11,7 +11,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 /*
  *  Copyright 2018 Remi Arshad, Noni Hua, Jason Lee, Patrick Tamm, Kaiwen Zhang
@@ -42,6 +46,7 @@ public class ViewRecordActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private Toolbar toolbar;
+    private TextView recordTitle;
 
     int CONCERN_POS;
     int RECORD_POS;
@@ -58,8 +63,18 @@ public class ViewRecordActivity extends AppCompatActivity {
         RECORD_POS = extras.getInt("RECORD");
         USERNAME = extras.getString("USERNAME");
 
+        Collection<Concern> concerns = ConcernListController.getConcernList(USERNAME).getConcernsList();
+        ArrayList<Concern> concernList = new ArrayList<Concern>(concerns);
+        Concern concernToView = concernList.get(CONCERN_POS);
+        ArrayList<Record> recordList = new ArrayList<Record>(concernToView.getRecords());
+
+        Record record = recordList.get(RECORD_POS);
+
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        recordTitle = findViewById(R.id.viewRecordTitleText);
+        recordTitle.setText(record.getTitle());
 
         viewPager = findViewById(R.id.viewpager);
         addTabs(viewPager);
