@@ -104,7 +104,7 @@ public class ElasticSearchClient {
 //
 //            String type = "Concerns";
 //            String source = "{\"Concerns\" : {\"properties\" : " +
-//                    "{\"title\": {\"type\" : \"string\"}," +
+//                    "{\"title\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
 //                    "\"date\": {\"type\" : \"date\"}, " +
 //                    "\"description\": {\"type\" : \"string\"}, " +
 //                    "\"userName\" : {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
