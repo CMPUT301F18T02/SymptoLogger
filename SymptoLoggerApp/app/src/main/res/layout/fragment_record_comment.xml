@@ -33,7 +33,7 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/sendCommentButton"
         android:layout_width="68dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
@@ -58,7 +58,7 @@
         android:hint="Add a comment"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/sendCommentButton"
         app:layout_constraintStart_toStartOf="parent" />
 
 

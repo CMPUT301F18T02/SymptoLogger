@@ -49,7 +49,7 @@ public class ChatManager {
 
     public void fetchLogs() {
         ElasticSearchClient.FetchChatLogs fetch = new ElasticSearchClient.FetchChatLogs();
-        fetch.execute("test1234","patrick1");
+        fetch.execute(senderID,receiverID);
 
         System.out.println("FETCHING LOGS...");
     }

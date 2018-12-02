@@ -9,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -58,6 +60,7 @@ public class RecordCommentFragment extends Fragment {
 
     private TextView textBox;
     private EditText messageBox;
+    private Button sendButton;
 
     private String senderID;
     private String receiverID;
@@ -70,7 +73,6 @@ public class RecordCommentFragment extends Fragment {
     private static RecyclerView recyclerView;
     private ChatManager cm;
     private static ChatViewAdapter mAdapter;
-
 
     public RecordCommentFragment() {
         // Required empty public constructor
@@ -118,6 +120,7 @@ public class RecordCommentFragment extends Fragment {
 
         messageBox = view.findViewById(R.id.addComment);
         textBox = view.findViewById(R.id.chatbox);
+        sendButton = view.findViewById(R.id.sendCommentButton);
 
         if (patient != null) {
             // Set receiver ID if there is a care provider added
@@ -133,7 +136,6 @@ public class RecordCommentFragment extends Fragment {
             cm.startFetchLogsTimer();
         }
         else {
-            record.addCareProviderComment();
             careProviderCommentList = record.getCareProviderComment();
 
             adapter = new ArrayAdapter<CareProviderComment>(
@@ -143,6 +145,26 @@ public class RecordCommentFragment extends Fragment {
             ListView careProviderCommentsListView = view.findViewById(R.id.chatlogs_holder);
             careProviderCommentsListView.setAdapter(adapter);
         }
+
+        sendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cm.stopFetchLogsTimer();
+                SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss.SSS dd/MM/yyyy");
+                formatter.setTimeZone(TimeZone.getTimeZone("MST"));
+                date = new Date();
+                String msg = messageBox.getText().toString();
+                if (msg.length() > 0) {
+                    ChatManager.setSaveVars(senderID, receiverID, msg, formatter.format(date));
+                    ChatManager.saveLogs();
+                    cm.restartTimer();
+                    messageBox.setText("");
+                    Toast.makeText(getContext(), "Message sent.", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "You can't send empty message.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         return view;
     }
@@ -168,28 +190,14 @@ public class RecordCommentFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-//        mListener = null;
+        // mListener = null;
         cm.stopFetchLogsTimer();
-    }
-
-    public void send(View v) { //USE LISTENER METHOD INSTEAD ON FINAL PROJECT
-        cm.stopFetchLogsTimer();
-        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss.SSS dd/MM/yyyy");
-        formatter.setTimeZone(TimeZone.getTimeZone("MST"));
-        date = new Date();
-
-        message = messageBox.getText().toString();
-        System.out.println(message);
-
-        ChatManager.setSaveVars(senderID, receiverID, message, formatter.format(date));
-        ChatManager.saveLogs();
-        cm.restartTimer();
     }
 
     public static void updateView() {
         System.out.println("-----status-----");
         System.out.println(updateLogsReady);
-        if (updateLogsReady == true) {
+        if (updateLogsReady) {
             updateLogsReady = false;
             mAdapter.notifyDataSetChanged();
             recyclerView.getLayoutManager().smoothScrollToPosition(recyclerView, null, mAdapter.getItemCount()-1);
