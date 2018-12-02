@@ -43,9 +43,9 @@ public class SignInActivity extends AppCompatActivity {
         typedUserName = findViewById(R.id.typedUserName);
     }
 
-    private Boolean verifyLogIn(){
+    private String verifyLogIn(){
         userName2 = typedUserName.getText().toString();
-        Boolean val = Boolean.FALSE;
+        String val = "";
 
         ElasticSearchClient.SearchUser searchUser = new ElasticSearchClient.SearchUser();
         searchUser.execute(userName2);
@@ -94,11 +94,10 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     public void LogIn(View v) {
+        if (verifyLogIn().equals("")){
         SharedPreference sp = new SharedPreference();
-        if (verifyLogIn()){
             sp.storeUserName(getApplicationContext(), userName2);
             if (determineRole().equals("Patient")){
-                sp.updateLogInStatus(getApplicationContext(), 1);
                 String checkCode = checkCode();
                 if (checkCode.equals("")){
                     Intent intent = new Intent(SignInActivity.this, ListConcernActivity.class);

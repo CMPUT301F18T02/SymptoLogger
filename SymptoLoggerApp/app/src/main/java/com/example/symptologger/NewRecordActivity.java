@@ -80,8 +80,8 @@ public class NewRecordActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle fromModconcern = intent.getExtras();
-        pos = fromModconcern.getInt("CONCERN_POS",0);
-        userName = fromModconcern.getString("USERNAME");
+        pos = fromModconcern.getInt("pos",0);
+        userName = fromModconcern.getString("userName");
 
         concerns = ConcernListController.getConcernList(userName).getConcernsList();
         concernList = new ArrayList<Concern>(concerns);
