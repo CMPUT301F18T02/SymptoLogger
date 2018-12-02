@@ -92,13 +92,16 @@ public class ListConcernActivity extends AppCompatActivity {
         super.onStart();
 
         concernListView = (ListView) findViewById(R.id.listConcernsView);
-        concerns = ConcernListController.getConcernList(userName).getConcernsList();
-        concernList = new ArrayList<Concern>(concerns);
 
+        // load from server
+//        concerns = ConcernListController.getConcernList(userName).getConcernsList();
+
+        // load from local
         SharedPreference sharedPref = new SharedPreference();
-        sharedPref.saveConcerns(this.getApplicationContext(), (ArrayList<Concern>) concerns);
+        concerns = sharedPref.loadConcerns(this.getApplicationContext());
 
 
+        concernList = new ArrayList<Concern>(concerns);
 
         concernListAdapter = new ArrayAdapter<Concern>(this, android.R.layout.simple_list_item_1, concernList);
         concernListView.setAdapter(concernListAdapter);

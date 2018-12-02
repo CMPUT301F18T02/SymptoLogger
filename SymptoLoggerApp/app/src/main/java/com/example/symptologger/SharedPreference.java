@@ -69,29 +69,3 @@ public class SharedPreference {
     }
 
 }
-
-//
-//    public ArrayList<Concern> readConcerns(Context context) {
-//        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-//        Gson gson = new Gson();
-//        String json = sharedPrefs.getString(CONCERNS, null);
-//
-//        Type type = new TypeToken<ArrayList<Concern>>(){}.getType();
-//        ArrayList<Concern>concerns = gson.fromJson(json, type);
-//        if (concerns == null) {
-//            concerns = new ArrayList<Concern>();
-//        }
-//
-//        return concerns;
-//    }
-//
-//    public void updateConcerns(Context context, ArrayList<Concern> new_concerns) {
-//
-//        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-//        SharedPreferences.Editor editor = sharedPrefs.edit();
-//
-//        Gson gson = new Gson();
-//        String json = gson.toJson(new_concerns);
-//        editor.putString(CONCERNS, json);
-//        editor.apply();
-//    }
