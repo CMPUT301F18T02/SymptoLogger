@@ -29,7 +29,7 @@
         android:inputType="time"
         app:layout_constraintEnd_toStartOf="@+id/buttonChangeDate"
         app:layout_constraintStart_toEndOf="@+id/modConcernDateField"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/showConcernTitle" />
 
     <Button
         android:id="@+id/modConcernDateField"
@@ -41,7 +41,7 @@
         android:ems="10"
         android:inputType="date"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/showConcernTitle" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/modifyConcernFAB"
