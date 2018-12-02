@@ -11,11 +11,14 @@ import java.util.List;
 
 import javax.xml.transform.Source;
 
+import java.util.stream.Collectors;
+
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
 import io.searchbox.core.DeleteByQuery;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
+import io.searchbox.core.SearchResult;
 import io.searchbox.indices.DeleteIndex;
 import io.searchbox.indices.mapping.PutMapping;
 
