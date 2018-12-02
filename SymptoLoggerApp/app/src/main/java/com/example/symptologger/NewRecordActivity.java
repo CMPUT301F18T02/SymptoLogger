@@ -3,9 +3,12 @@ package com.example.symptologger;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -13,12 +16,17 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 /*
@@ -51,6 +59,7 @@ public class NewRecordActivity extends AppCompatActivity {
     private String userName;
     Collection<Concern> concerns;
     ArrayList<Concern> concernList;
+    ArrayList<Photograph> photos = new ArrayList<>();
 
     Calendar c;
 
@@ -128,8 +137,29 @@ public class NewRecordActivity extends AppCompatActivity {
         addBodyPartsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bodyPartsIntent = new Intent(NewRecordActivity.this, PhotoRecordActivity.class);
-                startActivity(bodyPartsIntent);
+                //Return arraylist photos
+                //feature
+                Intent intent = new Intent(NewRecordActivity.this, PhotoRecordActivity.class);
+                intent.putExtra("USERNAMEOFRECORD",userName);
+                if (photos.size() != 0){
+                    intent.putExtra("ISEDITMODE",true);
+                    EncryptDecryptImageBitmap encryptor = new EncryptDecryptImageBitmap(userName);
+                    Gson gson = new Gson();
+                    List<Bitmap> pps = new ArrayList<>();
+                    for (Photograph p : photos){
+                        pps.add(encryptor.decrypt(p.getEncrypted()));
+                        p.setEncrypted("");
+                        p.setURL(null);
+
+                    }
+
+                    String jsonPhotos = gson.toJson(pps);
+                    String jsonPhotos2 = gson.toJson(photos);
+                    Log.d("GWERGBETBHERFE",jsonPhotos2);
+                    intent.putExtra("BITMAPS", jsonPhotos);
+                    intent.putExtra("PHOTOCLASSES",jsonPhotos2);
+                }
+                startActivityForResult(intent, 666);
             }
         });
 
@@ -145,6 +175,14 @@ public class NewRecordActivity extends AppCompatActivity {
 
                 Concern thisConcern = concernList.get(pos);
                 Record newRecord = new Record(c.getTime(),title,userName,thisConcern.getTitle());
+
+                //sOMEWHERE IN HERE
+                //newRecord.addPhoto();
+                for (Photograph p: photos){
+                    newRecord.addPhoto(p);
+                }
+                //
+
                 thisConcern.addRecord(newRecord);
 
                 Intent doneIntent = new Intent(NewRecordActivity.this, ViewConcernActivity.class);
@@ -201,4 +239,52 @@ public class NewRecordActivity extends AppCompatActivity {
         c.set(year, month, day, hour, minute);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO Auto-generated method stub
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 666 && resultCode == RESULT_OK && data != null) {
+            //When delete prompt is returned
+            String jsonPhotos1 = data.getStringExtra("BITMAPS");
+            String jsonPhotos2 = data.getStringExtra("PHOTOCLASSES");
+            String username = data.getStringExtra("THEUSERNAME");
+
+            Gson gson = new Gson();
+            Type type = new TypeToken<List<Photograph>>(){}.getType();
+            photos = gson.fromJson(jsonPhotos2, type);
+
+            EncryptDecryptImageBitmap ed = new EncryptDecryptImageBitmap(username);
+
+            Type type1 = new TypeToken<List<Bitmap>>(){}.getType();
+            ArrayList<Bitmap> bits = gson.fromJson(jsonPhotos1, type1);
+            String s = "";
+            String s3 = "";
+            String s2 = "";
+            for (int i = 0; i < bits.size(); i++){
+                Photograph p = photos.get(i);
+                Bitmap b = bits.get(i);
+                //
+                //Log.d("Yessir",i+"");
+                p.setEncrypted(ed.encrypt(b));
+                ArrayList<String> bps = p.getBPs();
+                for (String bbb: bps){
+                    if (s3.indexOf(bbb) == -1){
+                        s3 = s3 + " " + bbb;
+                    }
+                }
+            }
+            if (photos.size() == 0){
+                s2 = "Photo: 0";
+            }else{
+                s2 = "Photo(s): "+photos.size();
+            }
+            if (s3.length() == 0){
+                s = "Body Parts: None";
+            }else{
+                s = "Body Parts: " + s3;
+            }
+            Button addBodyPartsButton = findViewById(R.id.addBodyPartsButton);
+            addBodyPartsButton.setText(s2 + ";\n" + s);
+        }
+    }
 }

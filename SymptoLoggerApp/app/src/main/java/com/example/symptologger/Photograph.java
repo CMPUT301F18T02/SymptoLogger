@@ -3,6 +3,7 @@ package com.example.symptologger;
 import android.media.Image;
 import android.net.Uri;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /*
@@ -33,6 +34,9 @@ import java.util.Date;
 public class Photograph {
     private Uri uri;
     private Date date;
+    private String encrypted;
+    public ArrayList<String> BPs; //Instead of using BodyPart class I used String class since it only contains String anyways
+
 
     /**
      * Empty constructor
@@ -50,6 +54,8 @@ public class Photograph {
     Photograph(Uri image){
         this.date = new Date();
         this.uri = image;
+        this.BPs = new ArrayList<>();
+        this.encrypted = "";
     }
 
     /**
@@ -61,6 +67,8 @@ public class Photograph {
     Photograph(Uri image, Date date){
         this.date = date;
         this.uri = image;
+        this.BPs = new ArrayList<>();
+        this.encrypted = "";
     }
 
     /**
@@ -97,6 +105,26 @@ public class Photograph {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public void setEncrypted(String en){
+        this.encrypted = en;
+    }
+
+    public String getEncrypted(){
+        return encrypted;
+    }
+
+    public void addBodyLocation(String bp){
+        BPs.add(bp);
+    }
+
+    public void removeBodyLocation(String bp){
+        BPs.remove(bp);
+    }
+
+    public ArrayList<String> getBPs (){
+        return BPs;
     }
 
 }
