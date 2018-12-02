@@ -5,8 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
 
 /*
  *  Copyright 2018 Remi Arshad, Noni Hua, Jason Lee, Patrick Tamm, Kaiwen Zhang
@@ -34,10 +36,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //new ElasticSearchClient.AddPatientsTable().execute();
-
-        //new ElasticSearchClient.AddPatient().execute("11111111","123","123","careprovider",new Date().toString());
-
+        //new ElasticSearchClient.AddShareCodeTable().execute();
         Button button_sign_up = (Button) findViewById(R.id.button_sign_up);
         //Button button_add_geo_location = (Button) findViewById(R.id.button_geo_location);
 

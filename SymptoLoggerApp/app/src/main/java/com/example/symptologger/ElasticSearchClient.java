@@ -344,7 +344,11 @@ public class ElasticSearchClient {
 
                 ArrayList<Record> foundRecords = new ArrayList<Record>();
                 String type = "Records";
-                String query = String.format("{\"query\": {\"match\": {\"concernTitle\": \"%s\"}}}", search_parameters[0]);
+                String query = String.format(
+                        "{\"query\": {\"bool\": " +
+                                "{\"must\": [" +
+                                "{\"match\": {\"concernTitle\": \"%s\"}}, " +
+                                "{\"match\": {\"userName\": \"%s\"}}]}}}", search_parameters[0], search_parameters[1]);
                 try {
                     JestResult result = client.execute(new Search.Builder(query).addIndex(index).addType(type).build());
                     if (result.isSucceeded()) {
@@ -452,11 +456,40 @@ public class ElasticSearchClient {
                     return Boolean.FALSE;
                 }
             } catch (Exception e) {
-                Log.i("Error", "The application failed - reason: AddConcern.");
+                Log.i("Error", "The application failed - reason: AddPatient.");
             }
             return Boolean.FALSE;
         }
     }
+
+    public static class GetSinglePatient extends AsyncTask<String, Void, Patient> {
+
+        @Override
+        protected Patient doInBackground(String... search_parameters) {
+
+            Patient p = null;
+
+            String type = "Patients";
+            String query = String.format("{\"query\": {\"match\": {\"userID\": \"%s\"}}}", search_parameters[0]);
+            try {
+                JestResult result = client.execute(new Search.Builder(query).addIndex(index).addType(type).build());
+                if (result.isSucceeded()) {
+                    List<Patient> res = result.getSourceAsObjectList(Patient.class);
+                    if (res.size() != 0) {
+                        p = res.get(0);
+                    } else {
+                        Log.e("Error","nothing found.");
+                    }
+                } else {
+                    Log.e("Error", "Some issues with GetShareCode query.");
+                }
+            } catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server.");
+            }
+            return p;
+        }
+    }
+
 
     public static class GetPatients extends AsyncTask<String, Void, ArrayList<Patient>> {
 
@@ -482,6 +515,122 @@ public class ElasticSearchClient {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server.");
             }
             return foundPatients;
+        }
+    }
+
+    public static class DeletePatient extends AsyncTask<String, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(String... search_parameters) {
+            String type = "Patients";
+            String query = String.format(
+                    "{\"query\": {\"match\": {\"userID\": \"%s\"}}}", search_parameters[0]);
+            try {
+                JestResult result = client.execute(new DeleteByQuery.Builder(query).addIndex(index).addType(type).build());
+                if (result.isSucceeded()) {
+                    return Boolean.TRUE;
+                } else {
+                    Log.e("Error", "Some issues with DeletePatient query.");
+                }
+            } catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server.");
+            }
+            return Boolean.FALSE;
+        }
+    }
+
+
+    public static class AddShareCodeTable extends AsyncTask<String, Void, Void> { //use Void instead of void for AsyncTask as return type
+        @Override
+        protected Void doInBackground(String... indices) {
+
+            String type = "shareCode";
+            String source = "{\"shareCode\" : {\"properties\" : " +
+                    "{\"userID\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
+                    "\"code\": {\"type\" : \"string\"}, " +
+                    "\"created\": {\"type\" : \"date\"}," +
+                    "}}}";
+
+            try {
+                JestResult result = client.execute(new PutMapping.Builder(index, type, source).build());
+                if (!result.isSucceeded()) {
+                    Log.e("Error", "ElasticSearch was not able to add table.");
+                }
+            } catch (Exception e) {
+                Log.i("Error", "The application failed - reason: AddShareCodeTable.");
+            }
+            return null; //Void requires return, (it's not void)
+        }
+    }
+
+    public static class AddShareCode extends AsyncTask<String, Void, Boolean> { //use Void instead of void for AsyncTask as return type
+        @Override
+        protected Boolean doInBackground(String... record) {
+
+            String type = "shareCode";
+            String source = String.format("{\"userID\": \"%s\", \"code\": \"%s\", \"created\": \"%s\"}", record[0], record[1], record[2]);
+
+            try {
+                JestResult result = client.execute(new Index.Builder(source).index(index).type(type).build());
+
+                if (result.isSucceeded()) {
+                    return Boolean.TRUE;
+                } else {
+                    return Boolean.FALSE;
+                }
+            } catch (Exception e) {
+                Log.i("Error", "The application failed - reason: AddShareCode.");
+            }
+            return Boolean.FALSE;
+        }
+    }
+
+    public static class DeleteShareCode extends AsyncTask<String, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(String... search_parameters) {
+            String type = "shareCode";
+            String query = String.format(
+                    "{\"query\": {\"bool\": " +
+                            "{\"must\": [" +
+                            "{\"match\": {\"userID\": \"%s\"}}, " +
+                            "{\"match\": {\"code\": \"%s\"}}]}}}", search_parameters[0], search_parameters[1]);
+            try {
+                JestResult result = client.execute(new DeleteByQuery.Builder(query).addIndex(index).addType(type).build());
+                if (result.isSucceeded()) {
+                    return Boolean.TRUE;
+                } else {
+                    Log.e("Error", "Some issues with DeleteShareCode query.");
+                }
+            } catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server.");
+            }
+            return Boolean.FALSE;
+        }
+    }
+
+    public static class GetShareCode extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... search_parameters) {
+
+            String type = "shareCode";
+            String query = String.format("{\"query\": {\"match\": {\"userID\": \"%s\"}}}", search_parameters[0]);
+            try {
+                JestResult result = client.execute(new Search.Builder(query).addIndex(index).addType(type).build());
+                if (result.isSucceeded()) {
+                    List<SourceAsObjectListMap> res = result.getSourceAsObjectList(SourceAsObjectListMap.class);
+                    if (res.size() != 0) {
+                        return res.get(0).getCode();
+                    } else {
+                        //Log.e("Error","nothing found.");
+                        return "";
+                    }
+                } else {
+                    Log.e("Error", "Some issues with GetShareCode query.");
+                }
+            } catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server.");
+            }
+            return "";
         }
     }
 }
