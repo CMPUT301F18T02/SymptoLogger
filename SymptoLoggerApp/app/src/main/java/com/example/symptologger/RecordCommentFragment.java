@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -18,6 +19,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
+import java.util.concurrent.ExecutionException;
 
 /*
  *  Copyright 2018 Remi Arshad, Noni Hua, Jason Lee, Patrick Tamm, Kaiwen Zhang
@@ -57,8 +59,8 @@ public class RecordCommentFragment extends Fragment {
     private TextView textBox;
     private EditText messageBox;
 
-    private String senderID = "test1234";
-    private String receiverID = "patrick1";
+    private String senderID;
+    private String receiverID;
     private String message;
     private Date date;
 
@@ -84,6 +86,9 @@ public class RecordCommentFragment extends Fragment {
                              Bundle savedInstanceState) {
         Bundle bundle = getArguments();
 
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_record_comment, container, false);
+
         try {
             RECORD_POS = bundle.getInt("RECORD_POS");
             CONCERN_POS = bundle.getInt("CONCERN_POS");
@@ -99,31 +104,45 @@ public class RecordCommentFragment extends Fragment {
 
         record = recordList.get(RECORD_POS);
 
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_record_comment, container, false);
+        senderID = USERNAME;
+        ElasticSearchClient.GetSinglePatient singlePatient = new ElasticSearchClient.GetSinglePatient();
+        singlePatient.execute(USERNAME);
+        Patient patient = null;
+        try {
+            patient = singlePatient.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-        messageBox = view.findViewById(R.id.addComment);
-        textBox = view.findViewById(R.id.chatbox);
+        if (patient != null) {
+            // Set receiver ID if there is a care provider added
+            receiverID = patient.getCpUserName();
 
-        recyclerView = view.findViewById(R.id.chatlogs_holder);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new ChatViewAdapter(chatLogs);
-        recyclerView.setAdapter(mAdapter);
+            messageBox = view.findViewById(R.id.addComment);
+            textBox = view.findViewById(R.id.chatbox);
 
-        cm = new ChatManager(getActivity());
-        cm.startFetchLogsTimer();
+            recyclerView = view.findViewById(R.id.chatlogs_holder);
+            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+            recyclerView.setLayoutManager(mLayoutManager);
+            mAdapter = new ChatViewAdapter(chatLogs);
+            recyclerView.setAdapter(mAdapter);
 
+            cm = new ChatManager(getActivity());
+            cm.startFetchLogsTimer();
+        }
+        else {
+            record.addCareProviderComment();
+            careProviderCommentList = record.getCareProviderComment();
 
-//        record.addCareProviderComment();
-//        careProviderCommentList = record.getCareProviderComment();
-//
-//        adapter = new ArrayAdapter<CareProviderComment>(
-//                getContext(),
-//                R.layout.list_layout,
-//                careProviderCommentList);
-//        ListView careProviderCommentsListView = view.findViewById(R.id.recordCommentList);
-//        careProviderCommentsListView.setAdapter(adapter);
+            adapter = new ArrayAdapter<CareProviderComment>(
+                getContext(),
+                R.layout.list_layout,
+                careProviderCommentList);
+        ListView careProviderCommentsListView = view.findViewById(R.id.recordCommentList);
+        careProviderCommentsListView.setAdapter(adapter);
+        }
 
         return view;
     }
