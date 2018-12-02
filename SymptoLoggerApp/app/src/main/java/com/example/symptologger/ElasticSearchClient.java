@@ -445,6 +445,7 @@ public class ElasticSearchClient {
         }
     }
 
+
     public static class AddPatient extends AsyncTask<String, Void, Boolean> { //use Void instead of void for AsyncTask as return type
         @Override
         protected Boolean doInBackground(String... record) {
