@@ -45,7 +45,7 @@ import io.searchbox.indices.mapping.PutMapping;
 public class ElasticSearchClient {
 
     private static JestClient client = null;
-    private static final String server = "http://cmput301.softwareprocess.es:8080";
+    private static final String server = "http://cmput301.softwareprocess.es:8080/cmput301f18t02";
     private static final String index = "cmput301f18t02";
 
 
@@ -105,13 +105,13 @@ public class ElasticSearchClient {
             String type = "Concerns";
             String source = "{\"Concerns\" : {\"properties\" : " +
                     "{\"title\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
-                    "\"date\": {\"type\" : \"date\"}, " +
+                    "\"date\": {\"type\" : \"string\"}, " +
                     "\"description\": {\"type\" : \"string\"}, " +
-                    "\"userName\" : {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
-                    "\"created\": {\"type\" : \"date\"}" +
+                    "\"userName\" : {\"type\" : \"string\", \"index\": \"not_analyzed\"}" +
                     "}}}";
 
                 try {
+
                     JestResult result = client.execute(new PutMapping.Builder(index, type, source).build());
                     if (!result.isSucceeded()) {
                         Log.e("Error", "ElasticSearch was not able to add table.");
@@ -177,7 +177,7 @@ public class ElasticSearchClient {
         @Override
         protected String doInBackground(String... search_parameters){
 
-            String val = "";
+            String val = null;
 
             String type = "usersLogin";
             String query =  String.format("{\"query\": {\"match\": {\"userID\": \"%s\"}}}", search_parameters[0]);
