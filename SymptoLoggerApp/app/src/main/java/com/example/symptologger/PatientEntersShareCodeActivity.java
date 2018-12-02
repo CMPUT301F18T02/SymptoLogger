@@ -22,7 +22,6 @@ public class PatientEntersShareCodeActivity extends AppCompatActivity {
         Bundle extras = intent.getExtras();
         userName = extras.getString("userName");
         checkCode = extras.getString("checkCode");
-        Toast.makeText(this,"Check code: "+checkCode,Toast.LENGTH_SHORT).show();
 
     }
 
