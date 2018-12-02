@@ -28,6 +28,14 @@ import java.util.Collection;
  *  limitations under the License.
  */
 
+/**
+ * The feature that allows care providers to view a record in a concern. They will have the option
+ * of commenting on the record, but not modifying it. NOTE: The code is copied from the ViewRecordActivity
+ * class, with some slight modifications.
+ *
+ * @author Noni Hua, Patrick Tamm
+ */
+
 public class CareProviderViewRecordActivity extends AppCompatActivity {
 
     private TabLayout cpTabLayout;

@@ -32,6 +32,14 @@ import java.util.Collection;
  *  limitations under the License.
  */
 
+/**
+ * This is the welcome screen for care providers. After logging in to the app, they will see all of
+ * the patients they are assigned to. They will be able to view profiles and delete patients from
+ * their list.
+ *
+ * @author Patrick Tamm
+ */
+
 public class CareProviderListPatientsActivity extends AppCompatActivity {
 
     private String cpUserName;

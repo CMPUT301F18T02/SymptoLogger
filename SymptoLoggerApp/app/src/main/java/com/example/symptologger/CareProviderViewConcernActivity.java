@@ -32,6 +32,13 @@ import java.util.Collection;
  *  limitations under the License.
  */
 
+/**
+ * CareProviderViewconcernActivity is the feature that allows care providers to view a particular
+ * concern of their patient.
+ *
+ * @author Patrick Tamm
+ */
+
 public class CareProviderViewConcernActivity extends AppCompatActivity {
 
     private String pUserName;

@@ -23,6 +23,7 @@ import android.widget.Toast;
  *  limitations under the License.
  */
 
+
 public class PatientEntersShareCodeActivity extends AppCompatActivity {
 
     private String userName;

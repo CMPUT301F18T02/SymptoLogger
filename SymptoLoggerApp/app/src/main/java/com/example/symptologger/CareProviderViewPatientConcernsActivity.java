@@ -34,7 +34,11 @@ import java.util.Collection;
  */
 
 /**
- * The activity that allows the user to view the list of concerns.
+ * This is the activity that allows care providers to see the list of concerns that a particular
+ * patient has. The functionality here is the same as the ListConcernsActivity for patients, however
+ * some of the functionality (adding concerns, deleting concerns, etc.) has been removed.
+ *
+ * @author Patrick Tamm
  */
 
 public class CareProviderViewPatientConcernsActivity extends AppCompatActivity {
