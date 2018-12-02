@@ -15,25 +15,78 @@ import java.util.List;
 
 public class SharedPreference {
 
-//    private String PATIENTS = "Patients";
-//    private String CAREPROVIDERS = "Care Providers";
-    private String CONCERNS = "Concerns";
-
-
-    //    private ArrayList<User> userList;
-//    private ArrayList<Patient> patients;
-//    private ArrayList<CareProvider> careProviders;
-    private ConcernList concernList;
+    private String App = "App";
+    private String STATUS = "Status";
+    private String USERNAME = "UserName";
+    private ArrayList<Concern> concerns;
 
 
     SharedPreference() {
         super();
     }
 
-    public ArrayList<Concern> readConcerns(Context context) {
+    // 1 for patient
+    // 2 for cp
+    void storeUserName(Context context, String userName) {
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(userName);
+        editor.putString(USERNAME, json);
+        editor.apply();
+    }
+
+    String loadUserName(Context context) {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         Gson gson = new Gson();
-        String json = sharedPrefs.getString(CONCERNS, null);
+        String json = sharedPrefs.getString(USERNAME, null);
+        Type type = new TypeToken<String>(){}.getType();
+        String userName = gson.fromJson(json, type);
+        if (userName == null) {
+            return "";
+        }
+
+        return userName;
+    }
+
+    void updateLogInStatus(Context context, Integer role) {
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(role);
+        editor.putString(STATUS, json);
+        editor.apply();
+    }
+
+    int getLogInStatus(Context context) {
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        Gson gson = new Gson();
+        String json = sharedPrefs.getString(STATUS, null);
+        Type type = new TypeToken<Integer>(){}.getType();
+        Integer status = gson.fromJson(json, type);
+        if (status == null) {
+            return 0;
+        }
+
+        return status;
+    }
+
+    // update concerns
+    void saveConcerns(Context context, ArrayList<Concern> concerns) {
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(concerns);
+        editor.putString(App, json);
+        editor.apply();
+    }
+
+
+    ArrayList<Concern> loadConcerns(Context context) {
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        Gson gson = new Gson();
+        String json = sharedPrefs.getString(App, null);
 
         Type type = new TypeToken<ArrayList<Concern>>(){}.getType();
         ArrayList<Concern>concerns = gson.fromJson(json, type);
@@ -44,61 +97,21 @@ public class SharedPreference {
         return concerns;
     }
 
-    public void updateConcerns(Context context, ArrayList<Concern> new_concerns) {
-
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = sharedPrefs.edit();
-
-        Gson gson = new Gson();
-        String json = gson.toJson(new_concerns);
-        editor.putString(CONCERNS, json);
-        editor.apply();
-    }
-
-//    public ArrayList<Patient> getPatients(Context context) {
-//        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-//        Gson gson = new Gson();
-//        String json = sharedPrefs.getString(PATIENTS, null);
-//        Type type = new TypeToken<List<Patient>>() {}.getType();
-//        patients = gson.fromJson(json, type);
-//        if (patients == null) {
-//            patients = new ArrayList<Patient>();
+//    public void saveRecords(Context context, ArrayList<Record> records, int pos) {
+//        concerns = this.loadConcerns(context);
+//        Concern c = concerns.get(pos);
+//        for (Record r: records) {
+//            c.addRecord(r);
 //        }
 //
-//        return patients;
-//    }
-
-//    public ArrayList<CareProvider> getCareProviders(Context context) {
-//        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-//        Gson gson = new Gson();
-//        String json = sharedPrefs.getString(CAREPROVIDERS, null);
-//        Type type = new TypeToken<List<Patient>>() {}.getType();
-//        careProviders = gson.fromJson(json, type);
-//        if (careProviders == null) {
-//            careProviders = new ArrayList<CareProvider>();
-//        }
-//
-//        return careProviders;
+//        this.saveConcerns(context, concerns);
 //    }
 //
-//    public void refreshPatients(Context context, ArrayList<Patient> patients) {
-//        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-//        SharedPreferences.Editor editor = sharedPrefs.edit();
-//        Gson gson = new Gson();
-//        String json = gson.toJson(patients);
-//        editor.putString(PATIENTS, json);
-//        editor.commit();
+//
+//    public ArrayList<Record> loadRecords(Context context, int pos) {
+//        concerns = this.loadConcerns(context);
+//        Concern c = concerns.get(pos);
+//        return (ArrayList<Record>) c.getRecords();
 //    }
-
-
-//    public void refreshCareProviders(Context context, ArrayList<CareProvider> careProviders) {
-//        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-//        SharedPreferences.Editor editor = sharedPrefs.edit();
-//        Gson gson = new Gson();
-//        String json = gson.toJson(careProviders);
-//        editor.putString(CAREPROVIDERS, json);
-//        editor.commit();
-//    }
-
 
 }

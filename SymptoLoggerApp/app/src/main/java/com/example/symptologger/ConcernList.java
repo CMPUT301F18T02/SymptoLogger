@@ -79,6 +79,7 @@ class ConcernList {
         String cDate = new Date().toString();
         addConcern.execute(title, date, des, user, cDate);
         this.myConcerns.add(concern);
+
         notifyListeners();
         this.concernListeners.size();
     }

@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -177,12 +178,8 @@ public class NewConcernActivity extends AppCompatActivity {
             f.printStackTrace();
         }
 
-        // save new concern to sharedPreference
-        SharedPreference sharedPreference = new SharedPreference();
-        ArrayList<Concern> concerns = sharedPreference.readConcerns(getApplicationContext());
-        concerns.add(newConcern);
-        sharedPreference.updateConcerns(this.getApplicationContext(), concerns);
         clc.addConcern(newConcern, userName);
+        ConcernList concerns = ConcernListController.getConcernList(userName);
 
         Intent doneIntent = new Intent(NewConcernActivity.this, ListConcernActivity.class);
         doneIntent.putExtra("userName",userName);

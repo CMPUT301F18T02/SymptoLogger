@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -145,6 +146,7 @@ public class ListConcernActivity extends AppCompatActivity {
                     }
                 });
                 modifyAlert.show();
+
                 return false;
             }
         });
@@ -164,5 +166,15 @@ public class ListConcernActivity extends AppCompatActivity {
         Intent intent = new Intent(ListConcernActivity.this,GenShareCodeActivity.class);
         intent.putExtra("userName",userName);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }

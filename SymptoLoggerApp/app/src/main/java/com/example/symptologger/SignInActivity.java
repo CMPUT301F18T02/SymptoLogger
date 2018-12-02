@@ -94,8 +94,11 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     public void LogIn(View v) {
+        SharedPreference sp = new SharedPreference();
         if (verifyLogIn()){
+            sp.storeUserName(getApplicationContext(), userName2);
             if (determineRole().equals("Patient")){
+                sp.updateLogInStatus(getApplicationContext(), 1);
                 String checkCode = checkCode();
                 if (checkCode.equals("")){
                     Intent intent = new Intent(SignInActivity.this, ListConcernActivity.class);
@@ -110,6 +113,7 @@ public class SignInActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             } else if (determineRole().equals("Care Provider")){
+                sp.updateLogInStatus(getApplicationContext(), 2);
                 Intent intent = new Intent(SignInActivity.this, CareProviderListPatientsActivity.class);
                 intent.putExtra("cpUserName",userName2);
                 startActivity(intent);

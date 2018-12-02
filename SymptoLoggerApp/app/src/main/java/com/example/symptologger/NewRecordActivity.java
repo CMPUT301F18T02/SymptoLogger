@@ -198,6 +198,7 @@ public class NewRecordActivity extends AppCompatActivity {
                 Record newRecord = new Record(c.getTime(),title,userName,thisConcern.getTitle());
                 thisConcern.addRecord(newRecord);
 
+
                 Intent doneIntent = new Intent(NewRecordActivity.this, ViewConcernActivity.class);
                 Bundle doneBundle = new Bundle();
                 doneBundle.putInt("pos",pos);
