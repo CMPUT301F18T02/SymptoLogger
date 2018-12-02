@@ -120,7 +120,7 @@ public class CreateProfileActivity extends AppCompatActivity{
         Date date = new Date();
 
 
-        Boolean isInUse = Boolean.FALSE;
+        String isInUse = "";
         ElasticSearchClient.SearchUser searchUser = new ElasticSearchClient.SearchUser();
         searchUser.execute(user_id);
         try {
@@ -131,7 +131,7 @@ public class CreateProfileActivity extends AppCompatActivity{
             e.printStackTrace();
         }
 
-        if (!isInUse) {
+        if (!isInUse.equals("")) {
 
             Boolean val = Boolean.FALSE;
             ElasticSearchClient.AddUser addUser = new ElasticSearchClient.AddUser();

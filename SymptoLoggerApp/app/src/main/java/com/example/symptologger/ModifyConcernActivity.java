@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -85,6 +86,9 @@ public class ModifyConcernActivity extends AppCompatActivity {
         concernTitle = concernList.get(pos).getTitle();
         concernDate = concernList.get(pos).getDate();
         concernDesc = concernList.get(pos).getDescription();
+
+        TextView showTitle = findViewById(R.id.showConcernTitle);
+        showTitle.setText(concernTitle);
 
         getCalendarInfo();
         Date now = c.getTime();
@@ -162,13 +166,7 @@ public class ModifyConcernActivity extends AppCompatActivity {
     }
 
     public void modTitle(View view){
-        EditText newTitle = (EditText) findViewById(R.id.modifyConcernTitle);
-        String title = newTitle.getText().toString();
 
-//        Do we want this?
-//        if (!title.equals("")){
-//            concernTitle = title;
-//        }
         Toast.makeText(this,"New title staged; click save to apply changes",Toast.LENGTH_LONG).show();
     }
 
