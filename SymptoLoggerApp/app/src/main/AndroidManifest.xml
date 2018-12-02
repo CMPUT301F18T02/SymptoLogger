@@ -3,7 +3,6 @@
     package="com.example.symptologger">
 
     <!--
-<<<<<<< HEAD
     Joshua Campbell
     lonelyTwitter
     2018-11-14
@@ -19,7 +18,7 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -28,7 +27,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -42,17 +43,19 @@
         <activity android:name=".ListConcernActivity" />
         <activity android:name=".NewConcernActivity" />
         <activity android:name=".ViewConcernActivity" />
-        <activity android:name=".ModifyConcernActivity"></activity>
-        <!--<activity android:name=".SignUp" />-->
-        <activity android:name=".SignInActivity"></activity>
+        <activity android:name=".ModifyConcernActivity" />
+        <!-- <activity android:name=".SignUp" /> -->
+        <activity android:name=".SignInActivity" />
         <activity
             android:name=".NewRecordActivity"
-            android:label="@string/title_activity_new_record_avtivity"
             android:exported="true"
+            android:label="@string/title_activity_new_record_avtivity"
             android:theme="@style/NoActionBarTheme" />
+
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
+
         <activity android:name=".CreateProfileActivity" />
 
         <!--
@@ -71,11 +74,18 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
 
-         <!--https://stackoverflow.com/questions/50461881/java-lang-noclassdeffounderrorfailed-resolution-of-lorg-apache-http-protocolve-->
-        <uses-library android:name="org.apache.http.legacy" android:required="false" />
-        <!--<activity android:name=".photoactivity" />-->
+        <!-- https://stackoverflow.com/questions/50461881/java-lang-noclassdeffounderrorfailed-resolution-of-lorg-apache-http-protocolve -->
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+        <!-- <activity android:name=".photoactivity" /> -->
         <activity android:name=".PhotoRecordActivity" />
         <activity android:name=".ViewPhotoActivity" />
+        <activity android:name=".CareProviderListPatientsActivity" />
+        <activity android:name=".AddPatientActivity" />
+        <activity android:name=".CareProviderViewPatientConcernsActivity" />
+        <activity android:name=".CareProviderViewConcernActivity" />
+        <activity android:name=".CareProviderViewRecordActivity"></activity>
     </application>
 
 </manifest>

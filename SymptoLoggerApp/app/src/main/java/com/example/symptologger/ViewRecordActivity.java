@@ -70,7 +70,7 @@ public class ViewRecordActivity extends AppCompatActivity {
         CONCERN_POS = extras.getInt("CONCERN");
         RECORD_POS = extras.getInt("RECORD");
 
-        concerns = ConcernListController.getConcernList().getConcerns();
+        concerns = ConcernListController.getConcernList("").getConcernsList();
         concernList = new ArrayList<Concern>(concerns);
 
         Concern concernToView = concernList.get(CONCERN_POS);

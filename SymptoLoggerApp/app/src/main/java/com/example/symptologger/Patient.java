@@ -2,6 +2,8 @@ package com.example.symptologger;
 
 import java.util.ArrayList;
 
+import io.searchbox.annotations.JestId;
+
 /*
  *  Copyright 2018 Remi Arshad, Noni Hua, Jason Lee, Patrick Tamm, Kaiwen Zhang
  *
@@ -27,29 +29,47 @@ import java.util.ArrayList;
 public class Patient extends User {
     private ArrayList<Concern> concerns;
     private CareProviderList careProviderList;
+    private String cpUserName;
+
+    @JestId
+    private String id;
 
     /**
      * Constructor of Patient class.
-     * @param id id of the patient
-     * @param firstName first name
-     * @param lastName last name
+     * @param userID id of the patient
      * @param email email address
      * @param cell cell number in string
      * @param user_type type of user
      */
-    public Patient(String id, String firstName, String lastName, String email, String cell, String user_type) {
-        super(id, firstName, lastName, email, cell, user_type);
+    public Patient(String userID, String email, String cell, String user_type) {
+        super(userID, email, cell, user_type);
 
         this.concerns = new ArrayList<>();
     }
 
-    public void setId(String userPrompt) {
-        try {
-            super.setId(userPrompt);
-        } catch (UserIDTooShortException e) {
-            e.printStackTrace();
-        }
+    public void setId(String id){
+        this.id = id;
     }
+
+    public String getId(){
+        return this.id;
+    }
+
+    public String getCpUserName(){
+        return this.cpUserName;
+    }
+
+    public void setCpUserName(String cpUserName){
+        this.cpUserName = cpUserName;
+    }
+
+//    public void setUserID(String userPrompt) {
+//        try {
+//            super.setUserID(userPrompt);
+//        } catch (UserIDTooShortException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     /**
      * Get patient's concern

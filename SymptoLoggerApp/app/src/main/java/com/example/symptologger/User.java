@@ -24,9 +24,9 @@ package com.example.symptologger;
  */
 
 public class User {
-    private String firstName;
-    private String lastName;
-    private String id;
+    //private String firstName;
+    //private String lastName;
+    private String userID;
     private String email;
     private String cell;
     private String user_type;
@@ -38,17 +38,15 @@ public class User {
 
     /**
      * Constructor with parameters
-     * @param id id of a user
-     * @param firstName first name of the user
-     * @param lastName last name of the user
+     * @param userID id of a user
      * @param email email address of the user
      * @param cell cell number of the user
      * @param user_type type of user
      */
-    public User(String id, String firstName, String lastName, String email, String cell, String user_type) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(String userID, String email, String cell, String user_type) {
+        this.userID = userID;
+      //  this.firstName = firstName;
+        //this.lastName = lastName;
         this.email = email;
         this.cell = cell;
         this.user_type = user_type;
@@ -58,46 +56,50 @@ public class User {
      * Set first name of current user
      * @param first first name given by app user
      */
-    public void setFirstName(String first) {
-        this.firstName = first;
-    }
+    //public void setFirstName(String first) {
+      //  this.firstName = first;
+    //}
 
     /**
      * Get first name
      * @return first name
      */
-    public String getFirstName() {
-        return this.firstName;
-    }
+    //public String getFirstName() {
+      //  return this.firstName;
+    //}
 
     /**
      * Set last name of current user
      * @param last last name given by app user
      */
-    public void setLastName(String last) {
-        this.lastName = last;
-    }
+    //public void setLastName(String last) {
+//        this.lastName = last;
+  //  }
 
     /**
      * Get last name
      * @return last name
      */
-    public String getLastName() {
-        return this.lastName;
-    }
+//    public String getLastName() {
+//        return this.lastName;
+//    }
 
     /**
      * Get full name
      * @return first name + space + last name
      */
-    public String getFullName() { return this.firstName + " " + this.lastName; }
+//    public String getFullName() { return this.firstName + " " + this.lastName; }
+
+    public String toString(){
+        return this.userID;
+    }
 
     /**
      * Get ID
      * @return ID
      */
-    public String getId() {
-        return this.id;
+    public String getUserID() {
+        return this.userID;
     }
 
     /**
@@ -118,11 +120,11 @@ public class User {
 
     /**
      * Set ID
-     * @param id
+     * @param userID
      */
-    public void setId(String id)throws UserIDTooShortException {
-        if (id.length() >= 8){
-            this.id = id;
+    public void setUserID(String userID)throws UserIDTooShortException {
+        if (userID.length() >= 8){
+            this.userID = userID;
         } else {
             throw new UserIDTooShortException();
         }

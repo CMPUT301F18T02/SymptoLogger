@@ -10,10 +10,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /*
  *  Copyright 2018 Remi Arshad, Noni Hua, Jason Lee, Patrick Tamm, Kaiwen Zhang
@@ -46,10 +49,18 @@ public class ListConcernActivity extends AppCompatActivity {
     ArrayAdapter<Concern> concernListAdapter;
     Collection<Concern> concerns;
 
+    String userName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_concern);
+
+        Intent fromSignIn = getIntent();
+        userName = fromSignIn.getStringExtra("userName");
+
+        TextView userTextView = findViewById(R.id.userNameTextView);
+        userTextView.setText(userName);
 
         /*https://developer.android.com/guide/topics/ui/floating-action-button#java
         * Date: 2018-11-17*/
@@ -59,6 +70,7 @@ public class ListConcernActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(ListConcernActivity.this,"Add New Concern", Toast.LENGTH_SHORT).show();
                 Intent newConcernIntent = new Intent(ListConcernActivity.this,NewConcernActivity.class);
+                newConcernIntent.putExtra("userName",userName);
                 startActivity(newConcernIntent);
             }
         });
@@ -79,16 +91,16 @@ public class ListConcernActivity extends AppCompatActivity {
         super.onStart();
 
         concernListView = (ListView) findViewById(R.id.listConcernsView);
-        concerns = ConcernListController.getConcernList().getConcerns();
+        concerns = ConcernListController.getConcernList(userName).getConcernsList();
         concernList = new ArrayList<Concern>(concerns);
         concernListAdapter = new ArrayAdapter<Concern>(this, android.R.layout.simple_list_item_1, concernList);
         concernListView.setAdapter(concernListAdapter);
 
-        ConcernListController.getConcernList().addListener(new ConcernListener() {
+        ConcernListController.getConcernList(userName).addListener(new ConcernListener() {
             @Override
             public void updateListener() {
                 concernList.clear();
-                Collection<Concern> c = ConcernListController.getConcernList().getConcerns();
+                Collection<Concern> c = ConcernListController.getConcernList(userName).getConcernsList();
                 concernList.addAll(c);
                 concernListAdapter.notifyDataSetChanged();
             }
@@ -113,11 +125,20 @@ public class ListConcernActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which){
                         if (which == 0){
                             Intent viewIntent = new Intent(ListConcernActivity.this, ViewConcernActivity.class);
-                            viewIntent.putExtra("pos",pos);
+                            Bundle viewBundle = new Bundle();
+                            viewBundle.putInt("pos",pos);
+                            viewBundle.putString("userName",userName);
+                            viewIntent.putExtras(viewBundle);
                             startActivity(viewIntent);
                         } else if (which == 1){
                             Toast.makeText(ListConcernActivity.this,"Delete",Toast.LENGTH_SHORT).show();
-                            ConcernListController.getConcernList().deleteConcern(concernList.get(pos));
+                            ConcernListController.getConcernList(userName).deleteConcern(concernList.get(pos));
+                            Intent restart = new Intent(ListConcernActivity.this,ListConcernActivity.class);
+                            restart.putExtra("userName",userName);
+                            startActivity(restart);
+//                            concerns = ConcernListController.getConcernList(userName).getConcernsList();
+//                            concernList = new ArrayList<Concern>(concerns);
+//                            concernListAdapter.notifyDataSetChanged();
                         } else {
                             Toast.makeText(ListConcernActivity.this,"Cancel",Toast.LENGTH_SHORT).show();
                         }
@@ -133,7 +154,8 @@ public class ListConcernActivity extends AppCompatActivity {
     protected void onRestart(){
         super.onRestart();
 
+        concerns = ConcernListController.getConcernList(userName).getConcernsList();
+        concernList = new ArrayList<Concern>(concerns);
         concernListAdapter.notifyDataSetChanged();
     }
-
 }

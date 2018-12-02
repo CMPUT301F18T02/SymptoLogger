@@ -106,11 +106,11 @@ public class CreateProfileActivity extends AppCompatActivity{
 
         if (user_type.equals("Patient")) {
             //patient = new Patient(user_id, first_name, last_name, email, phone, user_type);
-            patient = new Patient(user_id, "", "", email, phone, user_type);
+            patient = new Patient(user_id, email, phone, user_type);
             userList.addUser(patient);
         } else if (user_type.equals("Care Provider")){
             //care_provider = new CareProvider(user_id, first_name, last_name, email, phone, user_type);
-            care_provider = new CareProvider(user_id, "", "", email, phone, user_type);
+            care_provider = new CareProvider(user_id, email, phone, user_type);
             userList.addUser(care_provider);
         }
 
@@ -163,6 +163,12 @@ public class CreateProfileActivity extends AppCompatActivity{
             if (!val) {
                 Toast.makeText(CreateProfileActivity.this, "Failed to add new user " + user_id + ". Please try again.", Toast.LENGTH_SHORT).show();
             } else {
+                if(user_type.equals("Patient")){
+                    ElasticSearchClient.AddPatient addPatient = new ElasticSearchClient.AddPatient();
+                    addPatient.execute(user_id,email,phone,"",new Date().toString());
+                } else {
+                    //TODO Add care provider ES
+                }
                 Toast.makeText(CreateProfileActivity.this, "Successfully added " + user_id + " to the user list.", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(CreateProfileActivity.this,MainActivity.class);
                 startActivity(intent);

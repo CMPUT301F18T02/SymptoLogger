@@ -3,6 +3,7 @@ package com.example.symptologger;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -59,10 +60,37 @@ public class SignInActivity extends AppCompatActivity {
         return val;
     }
 
+    private String determineRole(){
+        ElasticSearchClient.GetUserRole getUserRole = new ElasticSearchClient.GetUserRole();
+        getUserRole.execute(userName2);
+
+        String role = "";
+
+        try {
+            role = getUserRole.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return role;
+    }
+
     public void LogIn(View v) {
         if (verifyLogIn()){
-            Intent intent = new Intent(SignInActivity.this, ListConcernActivity.class);
-            startActivity(intent);
+            if (determineRole().equals("Patient")){
+                Intent intent = new Intent(SignInActivity.this, ListConcernActivity.class);
+                intent.putExtra("userName",userName2);
+                startActivity(intent);
+            } else if (determineRole().equals("Care Provider")){
+                Intent intent = new Intent(SignInActivity.this, CareProviderListPatientsActivity.class);
+                intent.putExtra("cpUserName",userName2);
+                startActivity(intent);
+            } else {
+                Log.e("Error","No role found for user from elasticsearch.");
+                Toast.makeText(this,"No role found for user",Toast.LENGTH_SHORT).show();
+            }
         } else {
             Toast.makeText(this,"Sorry, username "+userName2+" was not found. Please try again.", Toast.LENGTH_LONG).show();
         }
