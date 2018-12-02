@@ -53,6 +53,7 @@ public class PhotoRecordActivity extends Activity {
     Record record = new Record();
 
     //
+    boolean opened = false;
     String username = "";//record.getUserName();
     ArrayList<ImageButton> views = new ArrayList<>();
     ArrayList<ImageView> imgs = new ArrayList<>();
@@ -205,8 +206,6 @@ public class PhotoRecordActivity extends Activity {
                 return true;
             }
         });
-
-        DisplayAllCircles();
     }
 
     public void DisplayCircles(Button b){
@@ -539,4 +538,13 @@ public class PhotoRecordActivity extends Activity {
         }
     }
 
+
+    @Override
+    public void onWindowFocusChanged (boolean hasFocus){
+        super.onWindowFocusChanged(hasFocus);
+        if(hasFocus && opened == false){
+            opened = true;
+            DisplayAllCircles();
+        }
+    }
 }
