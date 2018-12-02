@@ -16,6 +16,7 @@ import android.widget.Toast;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -176,6 +177,11 @@ public class NewConcernActivity extends AppCompatActivity {
             f.printStackTrace();
         }
 
+        // save new concern to sharedPreference
+        //SharedPreference sharedPreference = new SharedPreference();
+        //ArrayList<Concern> concerns = sharedPreference.readConcerns(getApplicationContext());
+        //concerns.add(newConcern);
+        //sharedPreference.updateConcerns(this.getApplicationContext(), concerns);
         clc.addConcern(newConcern, userName);
 
         Intent doneIntent = new Intent(NewConcernActivity.this, ListConcernActivity.class);

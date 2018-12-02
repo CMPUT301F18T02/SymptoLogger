@@ -16,6 +16,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /*
  *  Copyright 2018 Remi Arshad, Noni Hua, Jason Lee, Patrick Tamm, Kaiwen Zhang
@@ -48,6 +49,10 @@ public class RecordDetailsFragment extends Fragment {
 //    private OnFragmentInteractionListener mListener;
     private Record record;
 
+    int RECORD_POS;
+    int CONCERN_POS;
+    String USERNAME;
+
     public RecordDetailsFragment() {
         // Required empty public constructor
     }
@@ -60,45 +65,64 @@ public class RecordDetailsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Bundle bundle = getArguments();
+
+        try {
+            RECORD_POS = bundle.getInt("RECORD_POS");
+            CONCERN_POS = bundle.getInt("CONCERN_POS");
+            USERNAME = bundle.getString("USERNAME");
+        } catch (Exception e) {
+            // TODO: offline mode
+        }
 
         View view = inflater.inflate(R.layout.fragment_record_details, container, false);
 
-        // TODO: replace p, cp, record
-        CareProvider careProvider = new CareProvider("002", "test@test.com", "123456790", "care_provider");
-        Record record = new Record();
-        Patient patient = new Patient("001", "test@test.com", "123456790", "patient");
+        Collection<Concern> concerns = ConcernListController.getConcernList(USERNAME).getConcernsList();
+        ArrayList<Concern> concernList = new ArrayList<Concern>(concerns);
+        Concern concernToView = concernList.get(CONCERN_POS);
+        ArrayList<Record> recordList = new ArrayList<Record>(concernToView.getRecords());
 
-        //String careProviderName = careProvider.getFullName();
-        String datetime = record.getDate().toString();
+        record = recordList.get(RECORD_POS);
 
-        TextView careProviderView = view.findViewById(R.id.careProviderContent);
-        //careProviderView.setText(careProviderName);
+        // CareProvider careProvider = new CareProvider("002", "test@test.com", "123456790", "care_provider");
+        // Patient patient = new Patient("001", "test@test.com", "123456790", "patient");
 
+        // String careProviderName = careProvider.getFullName();
+
+        // TextView careProviderView = view.findViewById(R.id.careProviderContent);
+        // careProviderView.setText(careProviderName);
+
+        String datetime = record.getDate();
         TextView datetimeView = view.findViewById(R.id.dateTimeContent);
         datetimeView.setText(datetime);
 
-        Location location;
+        final Location location;
         location = record.getGeoLocation();
-        final MapView mapView = view.findViewById(R.id.recordMapView);
-        mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(new OnMapReadyCallback() {
 
-            @Override
-            public void onMapReady(GoogleMap googleMap) {
-                // TODO: use saved location
-                LatLng coordinates = new LatLng(32.882216, -117.222028);
-                googleMap.addMarker(new MarkerOptions().position(coordinates).title("testing"));
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 15));
-                mapView.onResume();
-            }
-        });
+        if (location != null) {
+            final MapView mapView = view.findViewById(R.id.recordMapView);
+            mapView.onCreate(savedInstanceState);
+            mapView.getMapAsync(new OnMapReadyCallback() {
+
+                @Override
+                public void onMapReady(GoogleMap googleMap) {
+                    LatLng coordinates = new LatLng(location.getLatitude(), location.getLongitude());
+                    googleMap.addMarker(new MarkerOptions().position(coordinates).title("testing"));
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 15));
+                    mapView.onResume();
+                }
+            });
+        } else {
+            TextView t = view.findViewById(R.id.locationViewText);
+            t.setText("No location record.");
+        }
 
         ArrayList<Photograph> photographs = record.getPhotos();
-        if (photographs.size() == 0) {
-            TextView t = view.findViewById(R.id.recordPictureText);
-            t.setText("No pictures found");
+        if (photographs.size() != 0) {
+            // TODO: load the pictures
         } else {
-            // TODO
+            TextView t = view.findViewById(R.id.recordPictureText);
+            t.setText("No pictures record.");
         }
 
         return view;

@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -59,7 +58,9 @@ public class NewRecordActivity extends AppCompatActivity {
     private String userName;
     Collection<Concern> concerns;
     ArrayList<Concern> concernList;
+
     ArrayList<Photograph> photos = new ArrayList<>();
+    List<Bitmap> bits = new ArrayList<>();
 
     Calendar c;
 
@@ -129,8 +130,7 @@ public class NewRecordActivity extends AppCompatActivity {
         addLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mapIntent = new Intent(NewRecordActivity.this, MapsActivity.class);
-                startActivity(mapIntent);
+
             }
         });
 
@@ -145,17 +145,16 @@ public class NewRecordActivity extends AppCompatActivity {
                     intent.putExtra("ISEDITMODE",true);
                     EncryptDecryptImageBitmap encryptor = new EncryptDecryptImageBitmap(userName);
                     Gson gson = new Gson();
-                    List<Bitmap> pps = new ArrayList<>();
-                    for (Photograph p : photos){
-                        pps.add(encryptor.decrypt(p.getEncrypted()));
-                        p.setEncrypted("");
-                        p.setURL(null);
 
+                    ArrayList<Bitmap> bitt = new ArrayList<>();
+                    for (int u = 0; u < photos.size(); u++){
+                        Photograph p = new Photograph(); //photos.get(u);
+                        bitt.add(encryptor.decrypt(p.getEncrypted()));
+                        p.setURL(null);
                     }
 
-                    String jsonPhotos = gson.toJson(pps);
+                    String jsonPhotos = gson.toJson(bitt);
                     String jsonPhotos2 = gson.toJson(photos);
-                    Log.d("GWERGBETBHERFE",jsonPhotos2);
                     intent.putExtra("BITMAPS", jsonPhotos);
                     intent.putExtra("PHOTOCLASSES",jsonPhotos2);
                 }
@@ -175,14 +174,6 @@ public class NewRecordActivity extends AppCompatActivity {
 
                 Concern thisConcern = concernList.get(pos);
                 Record newRecord = new Record(c.getTime(),title,userName,thisConcern.getTitle());
-
-                //sOMEWHERE IN HERE
-                //newRecord.addPhoto();
-                for (Photograph p: photos){
-                    newRecord.addPhoto(p);
-                }
-                //
-
                 thisConcern.addRecord(newRecord);
 
                 Intent doneIntent = new Intent(NewRecordActivity.this, ViewConcernActivity.class);
@@ -256,7 +247,7 @@ public class NewRecordActivity extends AppCompatActivity {
             EncryptDecryptImageBitmap ed = new EncryptDecryptImageBitmap(username);
 
             Type type1 = new TypeToken<List<Bitmap>>(){}.getType();
-            ArrayList<Bitmap> bits = gson.fromJson(jsonPhotos1, type1);
+            bits = gson.fromJson(jsonPhotos1, type1);
             String s = "";
             String s3 = "";
             String s2 = "";
@@ -265,7 +256,9 @@ public class NewRecordActivity extends AppCompatActivity {
                 Bitmap b = bits.get(i);
                 //
                 //Log.d("Yessir",i+"");
-                p.setEncrypted(ed.encrypt(b));
+                if (b != null){
+                    p.setEncrypted(ed.encrypt(b));
+                }
                 ArrayList<String> bps = p.getBPs();
                 for (String bbb: bps){
                     if (s3.indexOf(bbb) == -1){
@@ -287,4 +280,5 @@ public class NewRecordActivity extends AppCompatActivity {
             addBodyPartsButton.setText(s2 + ";\n" + s);
         }
     }
+
 }

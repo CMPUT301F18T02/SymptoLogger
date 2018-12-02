@@ -70,22 +70,18 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" />
-
-        <!-- https://stackoverflow.com/questions/50461881/java-lang-noclassdeffounderrorfailed-resolution-of-lorg-apache-http-protocolve -->
-        <uses-library
-            android:name="org.apache.http.legacy"
-            android:required="false" />
-        <!-- <activity android:name=".photoactivity" /> -->
+        <!--https://stackoverflow.com/questions/50461881/java-lang-noclassdeffounderrorfailed-resolution-of-lorg-apache-http-protocolve-->
+        <uses-library android:name="org.apache.http.legacy" android:required="false" />
+        <!--<activity android:name=".photoactivity" />-->
         <activity android:name=".PhotoRecordActivity" />
         <activity android:name=".ViewPhotoActivity" />
         <activity android:name=".CareProviderListPatientsActivity" />
         <activity android:name=".AddPatientActivity" />
         <activity android:name=".CareProviderViewPatientConcernsActivity" />
         <activity android:name=".CareProviderViewConcernActivity" />
-        <activity android:name=".CareProviderViewRecordActivity"></activity>
+        <activity android:name=".CareProviderViewRecordActivity" />
+        <activity android:name=".GenShareCodeActivity" />
+        <activity android:name=".PatientEntersShareCodeActivity"></activity>
     </application>
 
 </manifest>

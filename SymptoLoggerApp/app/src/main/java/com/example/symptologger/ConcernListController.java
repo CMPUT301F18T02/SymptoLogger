@@ -16,6 +16,8 @@ package com.example.symptologger;
  *  limitations under the License.
  */
 
+import java.util.ArrayList;
+
 /**
  * The controller for the concern list. This allows access to the concern list without having to
  * modify it directly.

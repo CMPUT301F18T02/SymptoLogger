@@ -43,7 +43,8 @@ public class Photograph {
      */
 
     Photograph(){
-
+        this.date = new Date();
+        this.encrypted = "";
     }
 
     /**

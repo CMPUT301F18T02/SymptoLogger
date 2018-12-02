@@ -82,7 +82,6 @@ public class PhotoRecordActivity extends Activity {
             String jsonPhotos1 = getIntent().getStringExtra("BITMAPS");
             String jsonPhotos2 = getIntent().getStringExtra("PHOTOCLASSES");
 
-            Log.d("GREBRYJTUYGWM^$#R##",jsonPhotos2);
             Gson gson = new Gson();
             Type type = new TypeToken<List<Photograph>>(){}.getType();
             ArrayList<Photograph> photos = gson.fromJson(jsonPhotos2, type);
@@ -92,10 +91,13 @@ public class PhotoRecordActivity extends Activity {
             for (int i = 0; i < bits.size(); i++){
                 Photograph p = photos.get(i);
                 Bitmap b = bits.get(i);
-                p.setEncrypted(encryptor.encrypt(b));
-                record.addPhoto(p);
+                if (b != null){
+                    p.setEncrypted(encryptor.encrypt(b));
+                }
+                if (p != null) {
+                    record.addPhoto(p);
+                }
             }
-
         }
 
         ImageButton targetImage1 = (ImageButton)findViewById(R.id.targetimage1);
@@ -203,6 +205,8 @@ public class PhotoRecordActivity extends Activity {
                 return true;
             }
         });
+
+        DisplayAllCircles();
     }
 
     public void DisplayCircles(Button b){
@@ -214,6 +218,10 @@ public class PhotoRecordActivity extends Activity {
 
         lp.addRule(RelativeLayout.BELOW, b.getId());
         //Does a simple calculations to get the middle of the button position
+        /*Log.d("CALCULATIONS LEFT:",(b.getLeft() - relativeLayout.getLeft() + b.getWidth()/2 - 25)+"");
+        Log.d("CALCULATIONS RIGHT:",(b.getTop() - relativeLayout.getTop() + b.getHeight()/2 - 25)+"");
+        Log.d("THE BUTTON IS ",b.getText().toString());
+        */
         lp.leftMargin = b.getLeft() - relativeLayout.getLeft() + b.getWidth()/2 - 25;
         lp.topMargin = b.getTop() - relativeLayout.getTop() + b.getHeight()/2 - 25;
 
@@ -261,16 +269,15 @@ public class PhotoRecordActivity extends Activity {
     public void DisplayAllCircles(){
         ArrayList<Photograph> ALLPHOTOS = record.getPhoto();
         clearAllCircles();
-        Log.d("PHOTO STUFF",""+ALLPHOTOS.size());
         for (int i = 0; i < 10; i++){
             if (ALLPHOTOS.size() >= i+1){
                 Photograph p = ALLPHOTOS.get(i);
                 ArrayList<String> BPs = p.getBPs();
+
                 for (int u = 0; u < BPs.size(); u++){
-                    String getu = BPs.get(u).replaceAll("\\s+","");
-                    if (bps.contains(getu)){
+                    String getu = BPs.get(u);
+                    if (bps.indexOf(getu) != -1){
                         //Argghhhhhh
-                        Log.d("A TAG WHY",getu);
                     }else{
                         //Yeeehawww
                         Button bee = findButton(getu);
@@ -278,7 +285,6 @@ public class PhotoRecordActivity extends Activity {
                             DisplayCircles(bee);
                             bps.add(getu);
                         }else{
-
                         }
                     }
                 }
@@ -396,7 +402,7 @@ public class PhotoRecordActivity extends Activity {
     protected  void onResume() {
         super.onResume();
         DisplayPhotos();
-        DisplayAllCircles();
+        //DisplayAllCircles();
     }
 
 
@@ -509,7 +515,7 @@ public class PhotoRecordActivity extends Activity {
             ArrayList<String> thisbps = p.getBPs();
             for (int k = 0; k < thisbps.size(); k++) {
                 String bodyloc = thisbps.get(k);
-                if (str == bodyloc) {
+                if (str.equals(bodyloc)) {
                     p.removeBodyLocation(bodyloc);
                     ImageView img = imgs.get(k);
                     img.setImageDrawable(null);

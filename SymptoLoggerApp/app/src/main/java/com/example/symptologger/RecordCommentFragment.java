@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /*
  *  Copyright 2018 Remi Arshad, Noni Hua, Jason Lee, Patrick Tamm, Kaiwen Zhang
@@ -40,6 +41,12 @@ public class RecordCommentFragment extends Fragment {
     private ArrayList<CareProviderComment> careProviderCommentList = new ArrayList<>();
     private ArrayAdapter<CareProviderComment> adapter;
 
+    int RECORD_POS;
+    int CONCERN_POS;
+    String USERNAME;
+
+    Record record;
+
     public RecordCommentFragment() {
         // Required empty public constructor
     }
@@ -52,11 +59,26 @@ public class RecordCommentFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Bundle bundle = getArguments();
+
+        try {
+            RECORD_POS = bundle.getInt("RECORD_POS");
+            CONCERN_POS = bundle.getInt("CONCERN_POS");
+            USERNAME = bundle.getString("USERNAME");
+        } catch (Exception e) {
+            // TODO: offline mode
+        }
+
+        Collection<Concern> concerns = ConcernListController.getConcernList(USERNAME).getConcernsList();
+        ArrayList<Concern> concernList = new ArrayList<Concern>(concerns);
+        Concern concernToView = concernList.get(CONCERN_POS);
+        ArrayList<Record> recordList = new ArrayList<Record>(concernToView.getRecords());
+
+        record = recordList.get(RECORD_POS);
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_record_comment, container, false);
 
-        // TODO: replace record
-        Record record = new Record();
         record.addCareProviderComment();
         careProviderCommentList = record.getCareProviderComment();
 

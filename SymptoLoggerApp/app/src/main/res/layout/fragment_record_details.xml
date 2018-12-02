@@ -38,19 +38,6 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/careProviderTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/care_provider"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
-
-            <TextView
-                android:id="@+id/careProviderContent"
-                android:layout_width="match_parent"
-                android:layout_height="32dp"
-                android:paddingVertical="8dp"/>
-
-            <TextView
                 android:id="@+id/dateTimeTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,10 +57,17 @@
                 android:text="@string/location"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
+            <TextView
+                android:id="@+id/locationViewText"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:paddingVertical="8dp"
+                />
+
             <com.google.android.gms.maps.MapView
                 android:id="@+id/recordMapView"
                 android:layout_width="match_parent"
-                android:layout_height="65dp"
+                android:layout_height="wrap_content"
                 android:clickable="true"
                 android:paddingVertical="8dp" />
 
