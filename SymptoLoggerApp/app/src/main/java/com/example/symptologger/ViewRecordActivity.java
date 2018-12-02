@@ -106,6 +106,13 @@ public class ViewRecordActivity extends AppCompatActivity {
 
                 // TODO: edit a record; should load the current record information
                 Intent editRecordIntent = new Intent(ViewRecordActivity.this, NewRecordActivity.class);
+
+                Bundle extras = new Bundle();
+                extras.putInt("RECORD_POS", RECORD_POS);
+                extras.putInt("CONCERN_POS", CONCERN_POS);
+                extras.putString("USERNAME", USERNAME);
+                editRecordIntent.putExtras(extras);
+
                 startActivity(editRecordIntent);
                 break;
             case R.id.deleteOption:

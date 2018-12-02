@@ -17,8 +17,6 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -54,11 +52,17 @@ public class NewRecordActivity extends AppCompatActivity {
 
     private static DateFormat dateFormat = new SimpleDateFormat("EEEE, MMM dd", Locale.CANADA);
     private static DateFormat timeFormat = new SimpleDateFormat("h:mm a", Locale.CANADA);
+    private static DateFormat stringDateFormat = new SimpleDateFormat("E, MMM dd yyyy HH:mm:ss", Locale.CANADA);
 
     private int pos;
     private String userName;
+    private int record_pos;
+    private boolean modifying = false;
     Collection<Concern> concerns;
     ArrayList<Concern> concernList;
+    Concern concernToModify;
+    ArrayList<Record> recordList;
+    Record recordToModify;
 
     Calendar c;
 
@@ -75,22 +79,45 @@ public class NewRecordActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle fromModconcern = intent.getExtras();
-        pos = fromModconcern.getInt("pos",0);
-        userName = fromModconcern.getString("userName");
+        pos = fromModconcern.getInt("CONCERN_POS",0);
+        userName = fromModconcern.getString("USERNAME");
 
         concerns = ConcernListController.getConcernList(userName).getConcernsList();
         concernList = new ArrayList<Concern>(concerns);
 
-        getCalendarInfo();
-        Date now = c.getTime();
+        try {
+            record_pos = fromModconcern.getInt("RECORD_POS");
+            modifying = true;
+            concernToModify = concernList.get(pos);
+            recordList = new ArrayList<>(concernToModify.getRecords());
+            recordToModify = recordList.get(record_pos);
+        } catch (Exception e) {
+            record_pos = 0;
+        }
 
         final Button editDateButton = findViewById(R.id.dateField);
-        editDateButton.setText(dateFormat.format(now));
         final Button editTimeButton = findViewById(R.id.timeField);
-        editTimeButton.setText(timeFormat.format(now));
         Button addLocationButton = findViewById(R.id.addLocationButton);
         Button addBodyPartsButton = findViewById(R.id.addBodyPartsButton);
 
+        if (!modifying) {
+            getCalendarInfo();
+            Date now = c.getTime();
+            editDateButton.setText(dateFormat.format(now));
+            editTimeButton.setText(timeFormat.format(now));
+
+        } else {
+            try {
+                Date recordTime = stringDateFormat.parse(recordToModify.getDate());
+                editDateButton.setText(dateFormat.format(recordTime));
+                editTimeButton.setText(timeFormat.format(recordTime));
+            } catch (Exception e) {
+                getCalendarInfo();
+                Date now = c.getTime();
+                editDateButton.setText(dateFormat.format(now));
+                editTimeButton.setText(timeFormat.format(now));
+            }
+        }
 
 
         editDateButton.setOnClickListener(new View.OnClickListener() {
@@ -157,6 +184,8 @@ public class NewRecordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                // TODO: change for offline mode
+                // TODO: change for modifying mode
                 Toast.makeText(NewRecordActivity.this,"Saving Record", Toast.LENGTH_SHORT).show();
 
                 EditText recordTitle = (EditText) findViewById(R.id.recordTitleText);

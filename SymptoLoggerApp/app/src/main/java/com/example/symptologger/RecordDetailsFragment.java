@@ -67,9 +67,13 @@ public class RecordDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         Bundle bundle = getArguments();
 
-        RECORD_POS = bundle.getInt("RECORD_POS");
-        CONCERN_POS = bundle.getInt("CONCERN_POS");
-        USERNAME = bundle.getString("USERNAME");
+        try {
+            RECORD_POS = bundle.getInt("RECORD_POS");
+            CONCERN_POS = bundle.getInt("CONCERN_POS");
+            USERNAME = bundle.getString("USERNAME");
+        } catch (Exception e) {
+            // TODO: offline mode
+        }
 
         View view = inflater.inflate(R.layout.fragment_record_details, container, false);
 
@@ -80,17 +84,15 @@ public class RecordDetailsFragment extends Fragment {
 
         record = recordList.get(RECORD_POS);
 
-        // TODO: replace p, cp, record
-        CareProvider careProvider = new CareProvider("002", "test@test.com", "123456790", "care_provider");
-//        Record record = new Record();
-        Patient patient = new Patient("001", "test@test.com", "123456790", "patient");
+        // CareProvider careProvider = new CareProvider("002", "test@test.com", "123456790", "care_provider");
+        // Patient patient = new Patient("001", "test@test.com", "123456790", "patient");
 
-        //String careProviderName = careProvider.getFullName();
+        // String careProviderName = careProvider.getFullName();
+
+        // TextView careProviderView = view.findViewById(R.id.careProviderContent);
+        // careProviderView.setText(careProviderName);
+
         String datetime = record.getDate();
-
-        TextView careProviderView = view.findViewById(R.id.careProviderContent);
-        //careProviderView.setText(careProviderName);
-
         TextView datetimeView = view.findViewById(R.id.dateTimeContent);
         datetimeView.setText(datetime);
 

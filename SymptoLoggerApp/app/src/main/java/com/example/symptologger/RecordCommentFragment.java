@@ -61,9 +61,13 @@ public class RecordCommentFragment extends Fragment {
                              Bundle savedInstanceState) {
         Bundle bundle = getArguments();
 
-        RECORD_POS = bundle.getInt("RECORD_POS");
-        CONCERN_POS = bundle.getInt("CONCERN_POS");
-        USERNAME = bundle.getString("USERNAME");
+        try {
+            RECORD_POS = bundle.getInt("RECORD_POS");
+            CONCERN_POS = bundle.getInt("CONCERN_POS");
+            USERNAME = bundle.getString("USERNAME");
+        } catch (Exception e) {
+            // TODO: offline mode
+        }
 
         Collection<Concern> concerns = ConcernListController.getConcernList(USERNAME).getConcernsList();
         ArrayList<Concern> concernList = new ArrayList<Concern>(concerns);
