@@ -221,11 +221,11 @@ public class ElasticSearchClient {
                 List<SearchResult.Hit<ChatLogs,Void>> hits = client.execute(  new Search.Builder(query).addIndex(index).addType(type).build() ).getHits(ChatLogs.class);
 
                 if (hits.size() != 0){
-                    ChatActivity.chatLogs.add(hits.stream()
+                    RecordCommentFragment.chatLogs.add(hits.stream()
                             .map(result -> new ChatLogs(result.source.getParticipantsID(), result.source.getMessage(), result.source.getTimestamp()))
                             .collect(Collectors.toList()));
                     System.out.println("FETCHING DONE!");
-                    ChatActivity.updateLogsReady = true;
+                    RecordCommentFragment.updateLogsReady = true;
                     System.out.println("UPDATING VIEW DONE!");
 
                     try {

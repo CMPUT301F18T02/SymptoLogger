@@ -69,7 +69,7 @@ public class ChatManager {
     }
 
     final static Runnable refreshView = () ->
-            ChatActivity.updateView();
+            RecordCommentFragment.updateView();
 
     public static void callViewUpdate(){
         activity.runOnUiThread(refreshView);

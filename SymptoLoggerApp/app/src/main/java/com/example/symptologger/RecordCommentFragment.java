@@ -116,12 +116,12 @@ public class RecordCommentFragment extends Fragment {
             e.printStackTrace();
         }
 
+        messageBox = view.findViewById(R.id.addComment);
+        textBox = view.findViewById(R.id.chatbox);
+
         if (patient != null) {
             // Set receiver ID if there is a care provider added
             receiverID = patient.getCpUserName();
-
-            messageBox = view.findViewById(R.id.addComment);
-            textBox = view.findViewById(R.id.chatbox);
 
             recyclerView = view.findViewById(R.id.chatlogs_holder);
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
@@ -140,8 +140,8 @@ public class RecordCommentFragment extends Fragment {
                 getContext(),
                 R.layout.list_layout,
                 careProviderCommentList);
-        ListView careProviderCommentsListView = view.findViewById(R.id.recordCommentList);
-        careProviderCommentsListView.setAdapter(adapter);
+            ListView careProviderCommentsListView = view.findViewById(R.id.chatlogs_holder);
+            careProviderCommentsListView.setAdapter(adapter);
         }
 
         return view;
