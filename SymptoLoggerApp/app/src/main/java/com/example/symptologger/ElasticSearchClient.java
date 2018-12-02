@@ -633,4 +633,29 @@ public class ElasticSearchClient {
             return "";
         }
     }
+
+    public static class AddRecordTable extends AsyncTask<String, Void, Void> { //use Void instead of void for AsyncTask as return type
+        @Override
+        protected Void doInBackground(String... indices) {
+
+            String type = "Records";
+            String source = "{\"Records\" : {\"properties\" : " +
+                    "{\"title\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
+                    "\"date\": {\"type\" : \"date\"}, " +
+                    "\"concernTitle\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
+                    "\"userName\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
+                    "\"created\": {\"type\" : \"date\"}," +
+                    "}}}";
+
+            try {
+                JestResult result = client.execute(new PutMapping.Builder(index, type, source).build());
+                if (!result.isSucceeded()) {
+                    Log.e("Error", "ElasticSearch was not able to add table.");
+                }
+            } catch (Exception e) {
+                Log.i("Error", "The application failed - reason: AddRecordTable.");
+            }
+            return null; //Void requires return, (it's not void)
+        }
+    }
 }
