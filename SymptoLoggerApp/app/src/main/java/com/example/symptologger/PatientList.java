@@ -43,6 +43,10 @@ public class PatientList {
         }
     }
 
+    PatientList(){
+        this.patients = new ArrayList<Patient>();
+    }
+
     /**
      * Add a patient to the list
      * @param p patient object
