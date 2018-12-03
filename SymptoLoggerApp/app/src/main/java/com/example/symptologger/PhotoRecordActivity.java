@@ -317,6 +317,9 @@ public class PhotoRecordActivity extends Activity {
                 cv.setCardBackgroundColor(Color.TRANSPARENT);
             }
         }
+        if (b == null){
+            selected = null;
+        }
     }
 
     public void unselectImage(View v){
@@ -333,8 +336,8 @@ public class PhotoRecordActivity extends Activity {
     }
 
     public void selectImage(View v){
-        clearAllCircles();
         if (selected == (ImageButton) v){
+            clearAllCircles();
             unselectImage(v);
         }else{
             //Check if it's an empty button
@@ -342,6 +345,7 @@ public class PhotoRecordActivity extends Activity {
             int index = views.indexOf(b);
             if (record.getPhoto().size() > index){
                 //Photograph exists
+                clearAllCircles();
                 selected = b;
                 unselectothers(selected);
                 LinearLayout mylayout = (LinearLayout) v.getParent();
@@ -364,7 +368,7 @@ public class PhotoRecordActivity extends Activity {
                 }
                 Displaytags();
             }else{
-                unselectImage(v);
+                //unselectothers(null);
             }
         }
     }
