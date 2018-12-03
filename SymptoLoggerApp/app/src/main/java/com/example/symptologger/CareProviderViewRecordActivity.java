@@ -45,6 +45,7 @@ public class CareProviderViewRecordActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private String CP_USERNAME;
     private Toolbar toolbar;
     private TextView recordTitle;
 
@@ -64,6 +65,7 @@ public class CareProviderViewRecordActivity extends AppCompatActivity {
             CONCERN_POS = extras.getInt("CONCERN");
             RECORD_POS = extras.getInt("RECORD");
             USERNAME = extras.getString("USERNAME");
+            CP_USERNAME = extras.getString("CP_USERNAME");
         } catch (Exception e) {
             // TODO: this is for testing only
             CONCERN_POS = 0;
@@ -97,9 +99,10 @@ public class CareProviderViewRecordActivity extends AppCompatActivity {
         bundle.putInt("RECORD_POS", RECORD_POS);
         bundle.putInt("CONCERN_POS", CONCERN_POS);
         bundle.putString("USERNAME", USERNAME);
+        bundle.putString("CP_USERNAME",CP_USERNAME);
 
         RecordDetailsFragment detailsFragment = new RecordDetailsFragment();
-        RecordCommentFragment commentFragment = new RecordCommentFragment();
+        CareProviderRecordCommentFragment commentFragment = new CareProviderRecordCommentFragment();
 
         detailsFragment.setArguments(bundle);
         commentFragment.setArguments(bundle);

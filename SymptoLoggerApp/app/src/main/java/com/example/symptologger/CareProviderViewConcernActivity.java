@@ -20,6 +20,7 @@ public class CareProviderViewConcernActivity extends AppCompatActivity {
 
     private String pUserName;
     private int pos;
+    private String CP_USERNAME;
 
     Collection<Concern> patientConcerns;
     ArrayList<Concern> patientConcernList;
@@ -37,6 +38,7 @@ public class CareProviderViewConcernActivity extends AppCompatActivity {
         Bundle extras = intent.getExtras();
         pUserName = extras.getString("pUserName");
         pos = extras.getInt("pos");
+        CP_USERNAME = extras.getString("CP_USERNAME");
 
         patientConcerns = ConcernListController.getConcernList(pUserName).getConcernsList();
         patientConcernList = new ArrayList<Concern>(patientConcerns);
@@ -48,6 +50,7 @@ public class CareProviderViewConcernActivity extends AppCompatActivity {
                 Toast.makeText(CareProviderViewConcernActivity.this, "Back ...", Toast.LENGTH_SHORT).show();
                 Intent backIntent = new Intent(CareProviderViewConcernActivity.this, CareProviderViewPatientConcernsActivity.class);
                 backIntent.putExtra("pUserName",pUserName);
+                backIntent.putExtra("cpNAme",CP_USERNAME);
                 startActivity(backIntent);
             }
         });
@@ -95,6 +98,7 @@ public class CareProviderViewConcernActivity extends AppCompatActivity {
                             extras.putInt("CONCERN",pos);
                             extras.putInt("RECORD",recPos);
                             extras.putString("USERNAME",pUserName);
+                            extras.putString("CP_USERNAME",CP_USERNAME);
                             viewIntent.putExtras(extras);
                             startActivity(viewIntent);
                         } else {
