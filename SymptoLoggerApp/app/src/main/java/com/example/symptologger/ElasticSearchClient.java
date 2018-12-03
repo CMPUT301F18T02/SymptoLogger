@@ -309,6 +309,7 @@ public class ElasticSearchClient {
                     JestResult result = client.execute(new Index.Builder(source).index(index).type(type).build());
 
                     if (result.isSucceeded()) {
+                        //ListConcernActivity.fetchConcerns();
                         return Boolean.TRUE;
                     } else {
                         return Boolean.FALSE;
@@ -352,7 +353,7 @@ public class ElasticSearchClient {
             protected Boolean doInBackground(String... record) {
 
                 String type = "Records";
-                String source = String.format("{\"title\": \"%s\", \"date\": \"%s\", \"concernTitle\": \"%s\", \"userName\": \"%s\", \"created\": \"%s\"}", record[0], record[1], record[2], record[3], record[4]);
+                String source = String.format("{\"title\": \"%s\", \"date\": \"%s\", \"concernTitle\": \"%s\", \"userName\": \"%s\"}", record[0], record[1], record[2], record[3]);
 
                 try {
                     JestResult result = client.execute(new Index.Builder(source).index(index).type(type).build());
@@ -471,6 +472,7 @@ public class ElasticSearchClient {
             return null; //Void requires return, (it's not void)
         }
     }
+
 
     public static class AddPatient extends AsyncTask<String, Void, Boolean> { //use Void instead of void for AsyncTask as return type
         @Override
@@ -666,17 +668,24 @@ public class ElasticSearchClient {
         }
     }
 
+
     public static class AddRecordTable extends AsyncTask<String, Void, Void> { //use Void instead of void for AsyncTask as return type
         @Override
         protected Void doInBackground(String... indices) {
 
             String type = "Records";
+//            String source = "{\"Records\" : {\"properties\" : " +
+//                    "{\"title\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
+//                    "\"date\": {\"type\" : \"date\",\"format\":\"HH:mm:ss.SSS dd/MM/yyyy\"}, " +
+//                    "\"concernTitle\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
+//                    "\"userName\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}" +
+//                    "}}}";
+
             String source = "{\"Records\" : {\"properties\" : " +
                     "{\"title\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
-                    "\"date\": {\"type\" : \"date\"}, " +
+                    "\"date\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
                     "\"concernTitle\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
-                    "\"userName\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
-                    "\"created\": {\"type\" : \"date\"}," +
+                    "\"userName\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}" +
                     "}}}";
 
             try {
