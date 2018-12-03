@@ -71,7 +71,6 @@ public class SharedPreference {
         return status;
     }
 
-    // update concerns
     void saveConcerns(Context context, ArrayList<Concern> concerns) {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
 
@@ -80,6 +79,32 @@ public class SharedPreference {
         String json = gson.toJson(concerns);
         editor.putString(App, json);
         editor.apply();
+    }
+
+    void saveOneConcern(Context context, Concern concern) {
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        Gson gson = new Gson();
+
+        concerns = this.loadConcerns(context);
+        concerns.add(concern);
+        this.saveConcerns(context, concerns);
+//        String json = gson.toJson(concerns);
+//        editor.putString(App, json);
+//        editor.apply();
+    }
+
+    void deleteOneConcern(Context context, Concern concern) {
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        Gson gson = new Gson();
+
+        concerns = this.loadConcerns(context);
+        concerns.remove(concern);
+        this.saveConcerns(context, concerns);
+//        String json = gson.toJson(concerns);
+//        editor.putString(App, json);
+//        editor.apply();
     }
 
 
@@ -96,6 +121,8 @@ public class SharedPreference {
 
         return concerns;
     }
+
+
 
 //    public void saveRecords(Context context, ArrayList<Record> records, int pos) {
 //        concerns = this.loadConcerns(context);

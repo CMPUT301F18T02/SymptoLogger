@@ -99,6 +99,7 @@ public class SignInActivity extends AppCompatActivity {
             sp.storeUserName(getApplicationContext(), userName2);
             if (determineRole().equals("Patient")){
                 String checkCode = checkCode();
+                sp.updateLogInStatus(getApplicationContext(), 1);
                 if (checkCode.equals("")){
                     Intent intent = new Intent(SignInActivity.this, ListConcernActivity.class);
                     intent.putExtra("userName",userName2);

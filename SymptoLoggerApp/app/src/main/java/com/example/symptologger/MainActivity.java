@@ -39,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
         SharedPreference sp = new SharedPreference();
         Integer status = sp.getLogInStatus(getApplicationContext());
         String userName = sp.loadUserName(getApplicationContext());
+
+        CheckServerAvailability.startIsAvailableTimer();
+
         if (status == 1) {
             Intent intent = new Intent(MainActivity.this, ListConcernActivity.class);
             intent.putExtra("userName",userName);

@@ -1,5 +1,6 @@
 package com.example.symptologger;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
@@ -45,6 +46,8 @@ public class ListConcernActivity extends AppCompatActivity {
     //2018-11-12
 //    public static final String EXTRA_MESSAGE = "com.example.symptologger.MESSAGE";
 
+    public static Context contextOfApplication;
+
     ListView concernListView;
     ArrayList<Concern> concernList;
     ArrayAdapter<Concern> concernListAdapter;
@@ -52,10 +55,16 @@ public class ListConcernActivity extends AppCompatActivity {
 
     String userName;
 
+    public static Context getContextOfApplication(){
+        return contextOfApplication;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_concern);
+
+        contextOfApplication = getApplicationContext();
 
         Intent fromSignIn = getIntent();
         userName = fromSignIn.getStringExtra("userName");
@@ -133,7 +142,7 @@ public class ListConcernActivity extends AppCompatActivity {
                             startActivity(viewIntent);
                         } else if (which == 1){
                             Toast.makeText(ListConcernActivity.this,"Delete",Toast.LENGTH_SHORT).show();
-                            ConcernListController.getConcernList(userName).deleteConcern(concernList.get(pos));
+                            ConcernListController.getConcernList(userName).deleteConcern(concernList.get(pos), pos);
                             Intent restart = new Intent(ListConcernActivity.this,ListConcernActivity.class);
                             restart.putExtra("userName",userName);
                             startActivity(restart);

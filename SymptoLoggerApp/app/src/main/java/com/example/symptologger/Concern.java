@@ -1,5 +1,8 @@
 package com.example.symptologger;
 
+import android.content.Context;
+import android.util.Log;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,11 +41,13 @@ class Concern {
     private String description;
     private ArrayList<Record> myRecords;
     private String userName;
+    private SharedPreference sp = new SharedPreference();
+
 
     @JestId
     private String id;
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MMM dd h:mm a", Locale.CANADA);
+//    private SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MMM dd h:mm a", Locale.CANADA);
 
     /**
      * Concern class constructor. There are three, as the patient has the option of passing a title,
@@ -224,6 +229,15 @@ class Concern {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+
+//        if (CheckServerAvailability.getConnectionStatus()) {
+//            sp.saveConcerns(context, myConcerns);
+////            Log.d("online, sync concerns", String.valueOf(myConcerns));
+//        } else {
+//            myConcerns = sp.loadConcerns(context);
+////            Log.d("offline, from sp", String.valueOf(myConcerns));
+//        }
 
         return this.myRecords;
     }
