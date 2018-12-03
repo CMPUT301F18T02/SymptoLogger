@@ -36,7 +36,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //new ElasticSearchClient.AddShareCodeTable().execute();
+        //new ElasticSearchClient.AddRecordTable().execute();
+        //new ElasticSearchClient.DeleteIndices().execute("Concerns");
+        new ElasticSearchClient.AddConcernsTable().execute();
         Button button_sign_up = (Button) findViewById(R.id.button_sign_up);
         //Button button_add_geo_location = (Button) findViewById(R.id.button_geo_location);
 

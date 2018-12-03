@@ -82,6 +82,8 @@
         <activity android:name=".CareProviderViewRecordActivity" />
         <activity android:name=".GenShareCodeActivity" />
         <activity android:name=".PatientEntersShareCodeActivity"></activity>
+        <activity android:name=".ChatActivity"
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>
