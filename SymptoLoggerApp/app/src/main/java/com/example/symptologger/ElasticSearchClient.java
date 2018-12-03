@@ -218,7 +218,7 @@ public class ElasticSearchClient {
                 List<SearchResult.Hit<ChatLogs,Void>> hits = client.execute(  new Search.Builder(query).addIndex(index).addType(type).build() ).getHits(ChatLogs.class);
 
                 if (hits.size() != 0){
-                    Log.d("DEBUG", "His size is: " + hits.size());
+                    Log.d("DEBUG", "Hit size is: " + hits.size());
                     RecordCommentFragment.chatLogs.add(hits.stream()
                             .map(result -> new ChatLogs(result.source.getRecordID(), result.source.getParticipantsID(), result.source.getMessage(), result.source.getTimestamp()))
                             .collect(Collectors.toList()));

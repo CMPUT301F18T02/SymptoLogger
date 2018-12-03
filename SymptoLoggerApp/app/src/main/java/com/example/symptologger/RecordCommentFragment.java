@@ -122,6 +122,7 @@ public class RecordCommentFragment extends Fragment {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        recordID = record.getDate();
 
         messageBox = view.findViewById(R.id.addComment);
         textBox = view.findViewById(R.id.chatbox);
@@ -139,6 +140,7 @@ public class RecordCommentFragment extends Fragment {
             recyclerView.setAdapter(mAdapter);
 
             cm = new ChatManager(getActivity());
+            cm.setFetchInfo(recordID, senderID, receiverID);
             cm.startFetchLogsTimer();
         }
         else {
@@ -162,12 +164,12 @@ public class RecordCommentFragment extends Fragment {
                 String msg = messageBox.getText().toString();
 
                 if (msg.length() > 0) {
-                    try {
-                        Date recordTime = stringToDateFormat.parse(record.getDate());
-                        recordID = formatter.format(recordTime);
-                    } catch (Exception e) {
-                        recordID = formatter.format(new Date());
-                    }
+//                    try {
+//                        Date recordTime = stringToDateFormat.parse(record.getDate());
+//                        recordID = formatter.format(recordTime);
+//                    } catch (Exception e) {
+//                        recordID = formatter.format(new Date());
+//                    }
                     ChatManager.setSaveVars(recordID, senderID, receiverID, msg, formatter.format(date));
                     ChatManager.saveLogs();
                     cm.restartTimer();

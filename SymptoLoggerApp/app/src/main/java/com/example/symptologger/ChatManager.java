@@ -48,6 +48,12 @@ public class ChatManager {
         timer.schedule( executeFetchLogs, 1000, period );
     }
 
+    public void setFetchInfo(String rID, String sID, String receID) {
+        recordID = rID;
+        senderID = sID;
+        receiverID = receID;
+    }
+
     public void fetchLogs() {
         ElasticSearchClient.FetchChatLogs fetch = new ElasticSearchClient.FetchChatLogs();
         fetch.execute(recordID, senderID,receiverID);
