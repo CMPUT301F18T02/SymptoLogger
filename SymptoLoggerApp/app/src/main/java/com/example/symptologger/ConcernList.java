@@ -1,5 +1,6 @@
 package com.example.symptologger;
 
+import android.content.Context;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -36,6 +37,9 @@ class ConcernList {
     private ArrayList<Concern> myConcerns;
     private ArrayList<ConcernListener> concernListeners;
 
+    private SharedPreference sp = new SharedPreference();
+    private Context context = ListConcernActivity.getContextOfApplication();
+
 
     /**
      * The constructor for the ConcernList. Creates a new ArrayList of type Concern and an ArrayList
@@ -53,6 +57,15 @@ class ConcernList {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        if (CheckServerAvailability.getConnectionStatus()) {
+            sp.saveConcerns(context, myConcerns);
+//            Log.d("online, sync concerns", String.valueOf(myConcerns));
+        } else {
+            myConcerns = sp.loadConcerns(context);
+//            Log.d("offline, from sp", String.valueOf(myConcerns));
+        }
+//        Log.d("CONTEXT", String.valueOf(context));
         this.concernListeners = new ArrayList<ConcernListener>();
     }
 
@@ -78,6 +91,10 @@ class ConcernList {
         String user = userName;
         addConcern.execute(title, date, des, user);
         this.myConcerns.add(concern);
+
+        // save to local storage even if offline
+        sp.saveOneConcern(context, concern);
+
         notifyListeners();
     }
 
@@ -96,10 +113,16 @@ class ConcernList {
      * @param concern the concern to be deleted
      */
 
-    public void deleteConcern(Concern concern) {
-        this.myConcerns.remove(concern);
+    public void deleteConcern(Concern concern, int pos) {
+        this.myConcerns.remove(pos);
+        //myConcerns.remove(concern);
+//        Log.d("this concenrn", String.valueOf(concern));
+//        Log.d("delete", String.valueOf(myConcerns));
         ElasticSearchClient.DeleteConcern esDeleteConcern = new ElasticSearchClient.DeleteConcern();
         esDeleteConcern.execute(concern.getTitle(),concern.getUserName());
+
+        sp.saveConcerns(context, myConcerns);
+
         notifyListeners();
     }
 

@@ -40,7 +40,7 @@ public class ConcernListController {
     }
 
     public void deleteConcern(Concern concern, String userName){
-        getConcernList(userName).deleteConcern(concern);
+        getConcernList(userName).deleteConcern(concern, 999);
     }
 
     public int findCount(String userName){

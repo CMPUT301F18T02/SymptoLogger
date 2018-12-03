@@ -35,20 +35,37 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        //new ElasticSearchClient.AddRecordTable().execute();
-        //new ElasticSearchClient.DeleteIndices().execute("Records");
-        //new ElasticSearchClient.AddRecordTable().execute();
-        Button button_sign_up = (Button) findViewById(R.id.button_sign_up);
-        //Button button_add_geo_location = (Button) findViewById(R.id.button_geo_location);
 
-        button_sign_up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, CreateProfileActivity.class));
-            }
-        });
+        SharedPreference sp = new SharedPreference();
+        Integer status = sp.getLogInStatus(getApplicationContext());
+        String userName = sp.loadUserName(getApplicationContext());
 
+        if (!CheckServerAvailability.getTimerStart()) {
+            CheckServerAvailability.startIsAvailableTimer();
+        }
+
+        if (status == 1) {
+            Intent intent = new Intent(MainActivity.this, ListConcernActivity.class);
+            intent.putExtra("userName",userName);
+            startActivity(intent);
+        } else if ((status == 2)){
+            Intent intent = new Intent(MainActivity.this, CareProviderListPatientsActivity.class);
+            intent.putExtra("userName",userName);
+            startActivity(intent);
+        } else {
+            setContentView(R.layout.activity_main);
+            //new ElasticSearchClient.AddShareCodeTable().execute();
+            Button button_sign_up = (Button) findViewById(R.id.button_sign_up);
+            //Button button_add_geo_location = (Button) findViewById(R.id.button_geo_location);
+
+            button_sign_up.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent signUpIntent = new Intent(MainActivity.this, CreateProfileActivity.class);
+                    startActivity(signUpIntent);
+                }
+            });
+        }
     }
 
     public void SignIn(View v) {

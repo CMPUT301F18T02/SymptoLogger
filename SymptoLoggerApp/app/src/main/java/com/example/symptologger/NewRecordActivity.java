@@ -66,6 +66,7 @@ public class NewRecordActivity extends AppCompatActivity {
     Concern concernToModify;
     ArrayList<Record> recordList;
     Record recordToModify;
+    Place place;
 
     Calendar c;
 
@@ -204,6 +205,7 @@ public class NewRecordActivity extends AppCompatActivity {
                 Record newRecord = new Record(formatter.format(c.getTime()),title,userName,thisConcern.getTitle());
                 thisConcern.addRecord(newRecord);
 
+
                 Intent doneIntent = new Intent(NewRecordActivity.this, ViewConcernActivity.class);
                 Bundle doneBundle = new Bundle();
                 doneBundle.putInt("pos",pos);
@@ -263,7 +265,7 @@ public class NewRecordActivity extends AppCompatActivity {
         int PLACE_PICKER_REQUEST = 1;
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
-                Place place = PlacePicker.getPlace(this, data);
+                place = PlacePicker.getPlace(this, data);
                 Button addLocationButton = findViewById(R.id.addLocationButton);
                 addLocationButton.setText(place.getAddress());
             }
