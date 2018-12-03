@@ -18,7 +18,6 @@ package com.example.symptologger;
 /**
  * A listener for the concern list.
  */
-
 public interface ConcernListener {
     public void updateListener();
 }

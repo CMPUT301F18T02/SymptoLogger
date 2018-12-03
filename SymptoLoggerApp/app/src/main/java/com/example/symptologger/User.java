@@ -22,7 +22,6 @@ package com.example.symptologger;
  *     Contains getter and setter for id, first and last name, email and cell number.
  * </p>
  */
-
 public class User {
     //private String firstName;
     //private String lastName;

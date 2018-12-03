@@ -21,8 +21,9 @@ import java.util.ArrayList;
 /**
  * The controller for the concern list. This allows access to the concern list without having to
  * modify it directly.
+ *
+ * @author Patrick Tamm
  */
-
 public class ConcernListController {
     private static ConcernList concernList;
 

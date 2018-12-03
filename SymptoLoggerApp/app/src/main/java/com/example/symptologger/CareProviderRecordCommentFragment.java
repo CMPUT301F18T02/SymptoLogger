@@ -47,7 +47,6 @@ import java.util.concurrent.ExecutionException;
  *     Fragment to display list of Care Provider comments.
  * </p>
  */
-
 public class CareProviderRecordCommentFragment extends Fragment {
 
 //    private OnFragmentInteractionListener mListener;

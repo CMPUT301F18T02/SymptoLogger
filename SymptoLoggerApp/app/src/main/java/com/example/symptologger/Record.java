@@ -53,8 +53,6 @@ class Record {
      * The first of two constructors for the Record class. If no title or
      * date are supplied, this constructor is used.
      */
-
-
     public Record(){
         this.title = "";
         this.date = new Date().toString();
@@ -67,7 +65,6 @@ class Record {
      * @param date the date value for the record
      * @param title the title given to the record
      */
-
     public Record(Date date, String title, String userName, String concernTitle) {
       //  this.comment = comment;
         this.date = date.toString();
@@ -76,6 +73,13 @@ class Record {
         this.concernTitle = concernTitle;
     }
 
+    /**
+     * Another optional constructor.
+     * @param date
+     * @param title
+     * @param userName
+     * @param concernTitle
+     */
     public Record(String date, String title, String userName, String concernTitle) {
         //  this.comment = comment;
         this.date = date;
@@ -84,10 +88,19 @@ class Record {
         this.concernTitle = concernTitle;
     }
 
+
+    /**
+     * For elasticsearch
+     * @param id from elasticsearch
+     */
     public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     * For elasticsearch
+     * @return id from elasticsearch
+     */
     public String getId() {
         return id;
     }
