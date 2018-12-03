@@ -53,8 +53,6 @@ class Record {
      * The first of two constructors for the Record class. If no title or
      * date are supplied, this constructor is used.
      */
-
-
     public Record(){
         this.title = "";
         this.date = new Date().toString();
@@ -67,7 +65,6 @@ class Record {
      * @param date the date value for the record
      * @param title the title given to the record
      */
-
     public Record(Date date, String title, String userName, String concernTitle) {
       //  this.comment = comment;
         this.date = date.toString();
@@ -76,6 +73,13 @@ class Record {
         this.concernTitle = concernTitle;
     }
 
+    /**
+     * Another optional constructor.
+     * @param date
+     * @param title
+     * @param userName
+     * @param concernTitle
+     */
     public Record(String date, String title, String userName, String concernTitle) {
         //  this.comment = comment;
         this.date = date;
@@ -84,10 +88,19 @@ class Record {
         this.concernTitle = concernTitle;
     }
 
+
+    /**
+     * For elasticsearch
+     * @param id from elasticsearch
+     */
     public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     * For elasticsearch
+     * @return id from elasticsearch
+     */
     public String getId() {
         return id;
     }
@@ -96,7 +109,6 @@ class Record {
      * returns the title of the record
      * @return title
      */
-
     public String getTitle(){
         return this.title;
     }
@@ -105,25 +117,32 @@ class Record {
      * used when displaying records, such as in a ListView.
      * @return title
      */
-
     public String toString(){
         return this.title;
     }
 
-    /**
-     * gets the date of the record
-     * @return date
-     */
 
+    /**
+     * Adds a view
+     * @param bp body part
+     */
     public void addView(BodyPart bp){
         views.add(bp);
     }
 
+    /**
+     * removeView takes an integer and removes the view
+     * @param index the index to remove
+     */
     public void removeView(Integer index){
         views.remove(index);
     }
 
 
+    /**
+     * gets the date of the record
+     * @return date
+     */
     public String getDate() {
         return this.date;
     }
@@ -132,7 +151,6 @@ class Record {
      * sets the date for a previously created record
      * @param date the new date value
      */
-
     public void setDate(Date date) {
         this.date = date.toString();
     }
@@ -141,15 +159,23 @@ class Record {
      * Overloaded setDate; it can either take a date value or string
      * @param date String representation of date
      */
-
     public void setDate(String date){
         this.date = date;
     }
 
+    /**
+     * getConcernTitle gets the concern title associated with the record.
+     * @return concernTitle: the title of the concern
+     */
     public String getConcernTitle(){
         return this.concernTitle;
     }
 
+
+    /**
+     * getUserName returns the user name associated with the record.
+     * @return userName
+     */
     public String getUserName(){
         return this.userName;
     }
@@ -157,8 +183,6 @@ class Record {
     /**
      * adding photos to records.
      */
-
-
     public void addPhoto(Photograph photograph){
 
         if (photo.size() < 10) {
@@ -166,6 +190,10 @@ class Record {
         }
     }
 
+    /**
+     * returns the photos
+     * @return photos
+     */
     public ArrayList<Photograph> getPhoto(){
         return this.photo;
     }
@@ -179,12 +207,19 @@ class Record {
      * gets the photos associated with a record.
      * @return list of photos
      */
+<<<<<<< HEAD
+=======
+    public ArrayList<Photograph> getPhotos() {
+        //When photo functionality established
+
+        return new ArrayList<>();
+    }
+>>>>>>> c60c1f411bbdbe2efbfdf18a829dc0db2a597ef2
 
 
     /**
      * adding a geolocation to a record
      */
-
     public void addGeoLocation(){
         //When location services established and enabled
     }
@@ -193,9 +228,7 @@ class Record {
      * getting a geolocation from a record.
      * @return geolocation
      */
-
     public Location getGeoLocation() {
-        //When location services is up
 
         return this.location;
     }
@@ -203,7 +236,6 @@ class Record {
     /**
      * adding comments made by care providers assigned to patient.
      */
-
     public void addCareProviderComment(){
         //When CareProviderComment is ready
     }
@@ -212,7 +244,6 @@ class Record {
      * getting comments made by care providers assigned to patient
      * @return care provider comments
      */
-
     public ArrayList<CareProviderComment> getCareProviderComment() {
         //When CareProviderComment is ready
         return new ArrayList<>();
@@ -221,7 +252,6 @@ class Record {
     /**
      * adding a patient comment
      */
-
     public void addPatientComment(){
         //When patient comment is ready
     }
@@ -230,7 +260,6 @@ class Record {
      * returns the comments made by patients
      * @return patient comments
      */
-
     public ArrayList<PatientComment> getPatientComment() {
         //When patient comment is ready
         return new ArrayList<>();

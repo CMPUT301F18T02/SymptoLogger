@@ -29,7 +29,6 @@ import java.util.List;
  *     Allows user to create tabs and fragments associated with each tap.
  * </p>
  */
-
 public class ViewPagerAdapter extends FragmentPagerAdapter {
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();

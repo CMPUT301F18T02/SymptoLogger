@@ -37,7 +37,6 @@ import java.util.List;
 /**
  * Activity for viewing the photo.
  */
-
 public class ViewPhotoActivity extends Activity {
     ImageView img;
     int INDEX;

@@ -1,6 +1,8 @@
 package com.example.symptologger;
 
 import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,7 +36,6 @@ import io.searchbox.annotations.JestId;
  * @author Patrick Tamm
  * @see ConcernList, Record
  */
-
 class Concern {
     private String title;
     private String date;
@@ -54,7 +55,6 @@ class Concern {
      * date, description and myRecords, an object of type RecordList.
      * @see RecordList
      */
-
     Concern(String userName, String title) throws TitleTooLongException{
         if (title.length() <= 30){
             this.title = title;
@@ -75,7 +75,6 @@ class Concern {
      * @throws TitleTooLongException if the title exceeds 30 characters
      * @throws DescriptionTooLongException if the description exceeds 300 characters
      */
-
     Concern(String title, Date date, String description, String userName) throws TitleTooLongException, DescriptionTooLongException{
         if (title.length() <= 30){
             this.title = title;
@@ -101,7 +100,6 @@ class Concern {
      * @throws TitleTooLongException title exceeds 30 chars
      * @throws DescriptionTooLongException description exceeds 300 chars
      */
-
     Concern(String title, String description, String userName) throws TitleTooLongException, DescriptionTooLongException {
         if (title.length() > 30){
             throw new TitleTooLongException();
@@ -123,7 +121,6 @@ class Concern {
      * in a ListView.
      * @return concatenation of title, record count and date
      */
-
     public String toString(){
         return this.title+"\t\t\t\t\t"+findRecordCount()+"\n"+this.date;
     }
@@ -135,7 +132,6 @@ class Concern {
      * @param title title of concern
      * @throws TitleTooLongException title exceeds 30 chars
      */
-
     public void setTitle(String title) throws TitleTooLongException{
         if (title.length() <= 30){
             this.title = title;
@@ -148,7 +144,6 @@ class Concern {
      * gets the title of the concern.
      * @return title
      */
-
     public String getTitle() {
         return this.title;
     }
@@ -158,7 +153,6 @@ class Concern {
      *
      * @return date
      */
-
     public String getDate() {
         return this.date;
     }
@@ -167,7 +161,6 @@ class Concern {
      * enables patients to modify the date value associated with a previously entered concern.
      * @param date date of concern
      */
-
     public void setDate(Date date) {
         this.date = date.toString();
     }
@@ -215,9 +208,9 @@ class Concern {
         ElasticSearchClient.AddRecord addNewRecord = new ElasticSearchClient.AddRecord();
         addNewRecord.execute(record.getTitle(),record.getDate(),record.getConcernTitle(),record.getUserName(),new Date().toString());
 
-        context = ListConcernActivity.getContextOfApplication();
-        SharedPreference sp = new SharedPreference();
-        sp.saveRecords(context, myRecords, this.title);
+//        context = ListConcernActivity.getContextOfApplication();
+//        SharedPreference sp = new SharedPreference();
+//        sp.saveRecords(context, myRecords, this.title);
     }
 
 
@@ -242,15 +235,12 @@ class Concern {
             e.printStackTrace();
         }
 
-//        context = ListConcernActivity.getContextOfApplication();
+        context = ListConcernActivity.getContextOfApplication();
 //        SharedPreference sp = new SharedPreference();
-//        if (CheckServerAvailability.getConnectionStatus()) {
-//            sp.saveRecords(context, myRecords, this.title);
-//            Log.d("Online", "Saved records to sp");
-//        } else {
-//            Toast.makeText(context, "Offline, unable to load records",
-//                    Toast.LENGTH_SHORT).show();
-//        }
+        if (!CheckServerAvailability.getConnectionStatus()) {
+            Toast.makeText(context, "Offline, unable to load records",
+                    Toast.LENGTH_SHORT).show();
+        }
 
         return this.myRecords;
     }
@@ -274,9 +264,9 @@ class Concern {
         ElasticSearchClient.DeleteRecord delRecord = new ElasticSearchClient.DeleteRecord();
         delRecord.execute(record.getTitle(),this.title);
         this.myRecords.remove(record);
-        context = ListConcernActivity.getContextOfApplication();
-        SharedPreference sp = new SharedPreference();
-        sp.saveRecords(context, myRecords, this.title);
+//        context = ListConcernActivity.getContextOfApplication();
+//        SharedPreference sp = new SharedPreference();
+//        sp.saveRecords(context, myRecords, this.title);
     }
 
     /**

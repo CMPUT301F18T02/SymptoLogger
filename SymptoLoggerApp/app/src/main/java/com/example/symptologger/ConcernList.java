@@ -29,7 +29,6 @@ import java.util.concurrent.ExecutionException;
  * @author Patrick Tamm
  * @see Concern
  */
-
 class ConcernList {
 
     private ArrayList<Concern> myConcerns;
@@ -43,8 +42,6 @@ class ConcernList {
      * The constructor for the ConcernList. Creates a new ArrayList of type Concern and an ArrayList
      * of ConcernListeners.
      */
-
-    //TODO add check for server connectivity
     ConcernList(String userName){
         ElasticSearchClient.GetConcerns getConcerns = new ElasticSearchClient.GetConcerns();
         getConcerns.execute(userName);
@@ -75,7 +72,6 @@ class ConcernList {
      * returns the list of concerns
      * @return myConcerns a list of concerns
      */
-
     public Collection<Concern> getConcernsList(){
         return this.myConcerns;
     }
@@ -84,7 +80,6 @@ class ConcernList {
      * allows the adding of concerns to the concern list.
      * @param concern a new concern to be added to the list.
      */
-
     public void addConcern(Concern concern, String userName) {
         ElasticSearchClient.AddConcern addConcern = new ElasticSearchClient.AddConcern();
         String title = concern.getTitle();
@@ -110,7 +105,6 @@ class ConcernList {
      * @param concern the concern to be found
      * @return true/false
      */
-
     public boolean containsConcern(Concern concern) {
         return this.myConcerns.contains(concern);
     }
@@ -119,7 +113,6 @@ class ConcernList {
      * removes a concern from the list.
      * @param concern the concern to be deleted
      */
-
     public void deleteConcern(Concern concern, int pos) {
         this.myConcerns.remove(pos);
         //myConcerns.remove(concern);
@@ -137,7 +130,6 @@ class ConcernList {
      * determines the number of concerns found in the list.
      * @return size of concern list
      */
-
     public int findCount() {
         return this.myConcerns.size();
     }
@@ -145,7 +137,6 @@ class ConcernList {
     /**
      * informs the listeners that a change has been made.
      */
-
     public void notifyListeners(){
         for (ConcernListener cl : concernListeners){
             cl.updateListener();
@@ -156,7 +147,6 @@ class ConcernList {
      * adds a new listener to the list of listeners.
      * @param cl "concern listener", the particular listener to be added.
      */
-
     public void addListener(ConcernListener cl){
         this.concernListeners.add(cl);
         this.concernListeners.size();

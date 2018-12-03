@@ -22,7 +22,6 @@ import java.util.Date;
  * PatientComment represents the comments made by patients on their records. This is intended to
  * enable effective communication between care providers and patients.
  */
-
 public class PatientComment implements Comment {
     private User user;
     private Date date;
@@ -33,7 +32,6 @@ public class PatientComment implements Comment {
      * @param user the user adding the comment
      * @param comment the comment to be added
      */
-
     PatientComment(User user, String comment){
         this.comment = comment;
         //setUser(user);
@@ -48,7 +46,6 @@ public class PatientComment implements Comment {
      * @param comment the comment being added
      * @param date the date
      */
-
     PatientComment(User user, String comment, Date date){
         this.comment = comment;
         //setUser(user);
@@ -60,7 +57,6 @@ public class PatientComment implements Comment {
      * Sets the date value
      * @param date the date
      */
-
     public void setDate(Date date){
         this.date = date;
     }
@@ -69,7 +65,6 @@ public class PatientComment implements Comment {
      * Returns the date value
      * @return date
      */
-
     public Date getDate(){
         return this.date;
     }
@@ -78,7 +73,6 @@ public class PatientComment implements Comment {
      * Returns the user who made the comment
      * @return user
      */
-
     public User getUser(){
         return this.user;
     }
@@ -91,7 +85,6 @@ public class PatientComment implements Comment {
      * Gets the comment
      * @return comment
      */
-
     public String getComment(){
         return this.comment;
     }
@@ -100,7 +93,6 @@ public class PatientComment implements Comment {
      * Sets the comment. Could be used for editing.
      * @param comment the comment being made
      */
-
     public void setComment(String comment){
         this.comment = comment;
     }

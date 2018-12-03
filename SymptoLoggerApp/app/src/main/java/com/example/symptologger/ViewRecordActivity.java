@@ -40,7 +40,6 @@ import java.util.Collection;
  *     Comments tab @see RecordCommentFragment
  * </p>
  */
-
 public class ViewRecordActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;

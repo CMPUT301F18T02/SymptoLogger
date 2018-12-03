@@ -34,13 +34,12 @@ import java.util.Collection;
  */
 
 /**
- * <p>
- *     Patient view of a record in two tabs.
- *     Details tab @see RecordDetailsFragment
- *     Comments tab @see RecordCommentFragment
- * </p>
+ * The feature that allows care providers to view a record in a concern. They will have the option
+ * of commenting on the record, but not modifying it. NOTE: The code is copied from the ViewRecordActivity
+ * class, with some slight modifications.
+ *
+ * @author Noni Hua, Patrick Tamm
  */
-
 public class CareProviderViewRecordActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;

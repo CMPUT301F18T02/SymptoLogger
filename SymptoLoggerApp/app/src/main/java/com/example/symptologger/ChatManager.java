@@ -5,6 +5,31 @@ import android.app.Activity;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/*
+ *  Copyright 2018 Remi Arshad, Noni Hua, Jason Lee, Patrick Tamm, Kaiwen Zhang
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+
+ *     http://www.apache.org/licenses/LICENSE-2.0
+
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
+
+/**
+ * ChatManager handles the chat feature between patients and care providers. The view will be updated
+ * frequently whil there is server connectivity, to implement real-time, or close to real-time,
+ * interaction.
+ *
+ * @author Remi Arshad
+ * @see ChatLogs
+ */
 public class ChatManager {
     private Timer timer = new Timer();
     private final int period = 15000;

@@ -41,7 +41,6 @@ import java.util.Locale;
 /**
  * The activity that starts when the patient is adding a new concern.
  */
-
 public class NewConcernActivity extends AppCompatActivity {
 
     /*

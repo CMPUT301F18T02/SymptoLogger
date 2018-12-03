@@ -21,7 +21,6 @@ import java.util.Date;
  * An interface for the comment classes. Provides the blue print for the methods these classes need to
  * implement.
  */
-
 public interface Comment {
     void setDate(Date date);
 

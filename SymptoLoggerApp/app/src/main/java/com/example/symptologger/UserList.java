@@ -21,7 +21,6 @@ import java.util.ArrayList;
 /**
  * The list of users.
  */
-
 public class UserList {
     private ArrayList<User> userList = new ArrayList<User>();
 

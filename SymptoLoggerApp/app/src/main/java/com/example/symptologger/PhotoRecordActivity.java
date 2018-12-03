@@ -45,8 +45,9 @@ import java.util.List;
 
 /**
  * Activity for displaying photos and body models.
+ *
+ * @author Jason Lee
  */
-
 public class PhotoRecordActivity extends Activity {
 
     //Should change these later

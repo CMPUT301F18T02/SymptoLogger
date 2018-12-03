@@ -35,7 +35,6 @@ public class CareProvider extends User {
      * Gets the list of a care provider's assigned patients
      * @return patients
      */
-
     public ArrayList<Patient> getAssignedPatients() {
         return this.patients;
     }
@@ -44,10 +43,8 @@ public class CareProvider extends User {
      * Enables the adding of a new patient to the patient list.
      * @param p the new patient to be added.
      */
-
     public void addPatient(Patient p) {
         this.patients.add(p);
     }
-
 }
 

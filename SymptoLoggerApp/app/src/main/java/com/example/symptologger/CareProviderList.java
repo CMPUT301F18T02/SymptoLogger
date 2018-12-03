@@ -27,7 +27,6 @@ public class CareProviderList {
     /**
      * The constructor. Sets a new ArrayList
      */
-
     public CareProviderList() {
         this.careProviders = new ArrayList<>();
     }
@@ -36,7 +35,6 @@ public class CareProviderList {
      * Adds a new care provider to the list.
      * @param careProvider the new care provider
      */
-
     public void addCareProviders(CareProvider careProvider) {
         this.careProviders.add(careProvider);
     }
@@ -45,7 +43,6 @@ public class CareProviderList {
      * Removes a care provider
      * @param careProvider the care provider to be removed
      */
-
     public void removeCareProviders(CareProvider careProvider) {
         this.careProviders.remove(careProvider);
     }
@@ -54,7 +51,6 @@ public class CareProviderList {
      * Returns the number of care providers in the list.
      * @return number of care providers
      */
-
     public int getCareProvidersCount() {
         return this.careProviders.size();
     }
@@ -63,7 +59,6 @@ public class CareProviderList {
      * Gets the care providers
      * @return careProviders
      */
-
     public ArrayList<CareProvider> getCareProviders() {
         return this.careProviders;
     }

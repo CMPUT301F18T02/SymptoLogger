@@ -38,8 +38,9 @@ import java.util.concurrent.ExecutionException;
 
 /**
  * The activity that allows the user to view the list of concerns.
+ *
+ * @author Patrick Tamm
  */
-
 public class ListConcernActivity extends AppCompatActivity {
 
     //https://developer.android.com/training/basics/firstapp/starting-activity#java
