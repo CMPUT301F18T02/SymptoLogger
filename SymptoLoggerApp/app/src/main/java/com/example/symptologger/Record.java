@@ -76,6 +76,14 @@ class Record {
         this.concernTitle = concernTitle;
     }
 
+    public Record(String date, String title, String userName, String concernTitle) {
+        //  this.comment = comment;
+        this.date = date;
+        this.title = title;
+        this.userName = userName;
+        this.concernTitle = concernTitle;
+    }
+
     public void setId(String id) {
         this.id = id;
     }

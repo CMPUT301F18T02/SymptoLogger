@@ -1,5 +1,7 @@
 package com.example.symptologger;
 
+import android.util.Log;
+
 import java.net.Socket;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -22,7 +24,7 @@ import java.util.TimerTask;
 
 
 /**
- * ChackServerAvailability determines if there is connectivity to the server, or if it is offline.
+ * CheckServerAvailability determines if there is connectivity to the server, or if it is offline.
  *
  * @author Remi Arshad
  */
@@ -37,6 +39,7 @@ public class CheckServerAvailability {
         public void run() {
             isAvailable();
             //DO SOMETHING
+            Log.d("SERVER", String.valueOf(connectionStatus));
         }
     };
 
@@ -53,5 +56,9 @@ public class CheckServerAvailability {
         } catch (Exception e) {
             connectionStatus = false;
         }
+    }
+
+    public static boolean getConnectionStatus() {
+        return connectionStatus;
     }
 }

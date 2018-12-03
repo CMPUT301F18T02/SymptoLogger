@@ -6,11 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -26,6 +26,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 /*
  *  Copyright 2018 Remi Arshad, Noni Hua, Jason Lee, Patrick Tamm, Kaiwen Zhang
@@ -53,12 +54,13 @@ public class NewRecordActivity extends AppCompatActivity {
 
     private static DateFormat dateFormat = new SimpleDateFormat("EEEE, MMM dd", Locale.CANADA);
     private static DateFormat timeFormat = new SimpleDateFormat("h:mm a", Locale.CANADA);
-    private static DateFormat stringDateFormat = new SimpleDateFormat("E, MMM dd yyyy HH:mm:ss", Locale.CANADA);
+    //private static DateFormat stringDateFormat = new SimpleDateFormat("E, MMM dd yyyy HH:mm:ss:SSS", Locale.CANADA);
+    private static SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss.SSS dd/MM/yyyy");
+
 
     private int pos;
     private String userName;
     private int record_pos;
-    private boolean modifying = false;
     Collection<Concern> concerns;
     ArrayList<Concern> concernList;
     Concern concernToModify;
@@ -80,47 +82,49 @@ public class NewRecordActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle fromModconcern = intent.getExtras();
-        pos = fromModconcern.getInt("CONCERN_POS",0);
-        userName = fromModconcern.getString("USERNAME");
+        pos = fromModconcern.getInt("pos",0);
+        userName = fromModconcern.getString("userName");
+
+        formatter.setTimeZone(TimeZone.getTimeZone("MST"));
 
         concerns = ConcernListController.getConcernList(userName).getConcernsList();
         concernList = new ArrayList<Concern>(concerns);
 
-        try {
-            record_pos = fromModconcern.getInt("RECORD_POS");
-            modifying = true;
-            concernToModify = concernList.get(pos);
-            recordList = new ArrayList<>(concernToModify.getRecords());
-            recordToModify = recordList.get(record_pos);
-        } catch (Exception e) {
-            record_pos = 0;
-        }
+//        try {
+//            record_pos = fromModconcern.getInt("RECORD_POS");
+//            modifying = true;
+//            concernToModify = concernList.get(pos);
+//            recordList = new ArrayList<>(concernToModify.getRecords());
+//            recordToModify = recordList.get(record_pos);
+//        } catch (Exception e) {
+//            record_pos = 0;
+//        }
 
         final Button editDateButton = findViewById(R.id.dateField);
         final Button editTimeButton = findViewById(R.id.timeField);
         Button addLocationButton = findViewById(R.id.addLocationButton);
         Button addBodyPartsButton = findViewById(R.id.addBodyPartsButton);
 
-        if (!modifying) {
-            getCalendarInfo();
-            Date now = c.getTime();
-            editDateButton.setText(dateFormat.format(now));
-            editTimeButton.setText(timeFormat.format(now));
+//        if (!modifying) {
+        getCalendarInfo();
+        Date now = c.getTime();
+        editDateButton.setText(dateFormat.format(now));
+        editTimeButton.setText(timeFormat.format(now));
 
-        } else {
-            try {
-                TextView titleView = findViewById(R.id.recordTitleText);
-                titleView.setText(recordToModify.getTitle());
-                Date recordTime = stringDateFormat.parse(recordToModify.getDate());
-                editDateButton.setText(dateFormat.format(recordTime));
-                editTimeButton.setText(timeFormat.format(recordTime));
-            } catch (Exception e) {
-                getCalendarInfo();
-                Date now = c.getTime();
-                editDateButton.setText(dateFormat.format(now));
-                editTimeButton.setText(timeFormat.format(now));
-            }
-        }
+//        } else {
+//            try {
+//                TextView titleView = findViewById(R.id.recordTitleText);
+//                titleView.setText(recordToModify.getTitle());
+//                Date recordTime = formatter.parse(recordToModify.getDate());
+//                editDateButton.setText(dateFormat.format(recordTime));
+//                editTimeButton.setText(timeFormat.format(recordTime));
+//            } catch (Exception e) {
+//                getCalendarInfo();
+//                Date now = c.getTime();
+//                editDateButton.setText(dateFormat.format(now));
+//                editTimeButton.setText(timeFormat.format(now));
+//            }
+//        }
 
 
         editDateButton.setOnClickListener(new View.OnClickListener() {
@@ -194,9 +198,12 @@ public class NewRecordActivity extends AppCompatActivity {
                 EditText recordTitle = (EditText) findViewById(R.id.recordTitleText);
                 String title = recordTitle.getText().toString();
 
+                Log.d("DEBUG", "Concern pos is " + pos);
                 Concern thisConcern = concernList.get(pos);
-                Record newRecord = new Record(c.getTime(),title,userName,thisConcern.getTitle());
+                getCalendarInfo();
+                Record newRecord = new Record(formatter.format(c.getTime()),title,userName,thisConcern.getTitle());
                 thisConcern.addRecord(newRecord);
+
 
                 Intent doneIntent = new Intent(NewRecordActivity.this, ViewConcernActivity.class);
                 Bundle doneBundle = new Bundle();

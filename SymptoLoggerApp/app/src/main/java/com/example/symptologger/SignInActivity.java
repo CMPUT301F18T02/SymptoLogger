@@ -94,8 +94,11 @@ public class SignInActivity extends AppCompatActivity {
 
     public void LogIn(View v) {
         if (verifyLogIn().equals("")){
+        SharedPreference sp = new SharedPreference();
+            sp.storeUserName(getApplicationContext(), userName2);
             if (determineRole().equals("Patient")){
                 String checkCode = checkCode();
+                sp.updateLogInStatus(getApplicationContext(), 1);
                 if (checkCode.equals("")){
                     Intent intent = new Intent(SignInActivity.this, ListConcernActivity.class);
                     intent.putExtra("userName",userName2);
@@ -109,6 +112,7 @@ public class SignInActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             } else if (determineRole().equals("Care Provider")){
+                sp.updateLogInStatus(getApplicationContext(), 2);
                 Intent intent = new Intent(SignInActivity.this, CareProviderListPatientsActivity.class);
                 intent.putExtra("cpUserName",userName2);
                 startActivity(intent);
@@ -117,7 +121,7 @@ public class SignInActivity extends AppCompatActivity {
                 Toast.makeText(this,"No role found for user",Toast.LENGTH_SHORT).show();
             }
         } else {
-            Toast.makeText(this,verifyLogIn(), Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Sorry, username "+userName2+" was not found. Please try again.", Toast.LENGTH_LONG).show();
         }
     }
 }

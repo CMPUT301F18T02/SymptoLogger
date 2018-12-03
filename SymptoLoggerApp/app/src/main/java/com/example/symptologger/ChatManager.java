@@ -34,6 +34,7 @@ public class ChatManager {
     private Timer timer = new Timer();
     private final int period = 15000;
 
+    private static String recordID;
     private static String receiverID;
     private static String senderID;
     private static String date;
@@ -72,9 +73,15 @@ public class ChatManager {
         timer.schedule( executeFetchLogs, 1000, period );
     }
 
+    public void setFetchInfo(String rID, String sID, String receID) {
+        recordID = rID;
+        senderID = sID;
+        receiverID = receID;
+    }
+
     public void fetchLogs() {
         ElasticSearchClient.FetchChatLogs fetch = new ElasticSearchClient.FetchChatLogs();
-        fetch.execute(senderID,receiverID);
+        fetch.execute(recordID, senderID,receiverID);
 
         System.out.println("FETCHING LOGS...");
     }
@@ -82,11 +89,12 @@ public class ChatManager {
 
     public static void saveLogs() {
         ElasticSearchClient.SaveChatLog save = new ElasticSearchClient.SaveChatLog();
-        save.execute(senderID, receiverID, message, date);
+        save.execute(recordID, senderID, receiverID, message, date);
         System.out.println("SAVING LOGS...");
     }
 
-    public static void setSaveVars(String sid, String rid, String msg, String timestamp){
+    public static void setSaveVars(String rID, String sid, String rid, String msg, String timestamp){
+        recordID = rID;
         senderID = sid;
         receiverID = rid;
         message = msg;

@@ -1,5 +1,7 @@
 package com.example.symptologger;
 
+import android.content.Context;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,11 +40,12 @@ class Concern {
     private String description;
     private ArrayList<Record> myRecords;
     private String userName;
+    private Context context;
 
     @JestId
     private String id;
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MMM dd h:mm a", Locale.CANADA);
+//    private SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MMM dd h:mm a", Locale.CANADA);
 
     /**
      * Concern class constructor. There are three, as the patient has the option of passing a title,
@@ -195,9 +198,18 @@ class Concern {
      */
 
     public void addRecord(Record record) {
-        //this.myRecords.add(record);
+//        this.myRecords.add(record);
         ElasticSearchClient.AddRecord addNewRecord = new ElasticSearchClient.AddRecord();
         addNewRecord.execute(record.getTitle(),record.getDate(),record.getConcernTitle(),record.getUserName(),new Date().toString());
+
+        context = ListConcernActivity.getContextOfApplication();
+        SharedPreference sp = new SharedPreference();
+        sp.saveRecords(context, myRecords, this.title);
+    }
+
+
+    public void setRecords(ArrayList<Record> records) {
+        this.myRecords = records;
     }
 
     /**
@@ -216,6 +228,16 @@ class Concern {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+//        context = ListConcernActivity.getContextOfApplication();
+//        SharedPreference sp = new SharedPreference();
+//        if (CheckServerAvailability.getConnectionStatus()) {
+//            sp.saveRecords(context, myRecords, this.title);
+//            Log.d("Online", "Saved records to sp");
+//        } else {
+//            Toast.makeText(context, "Offline, unable to load records",
+//                    Toast.LENGTH_SHORT).show();
+//        }
 
         return this.myRecords;
     }
@@ -239,6 +261,9 @@ class Concern {
         ElasticSearchClient.DeleteRecord delRecord = new ElasticSearchClient.DeleteRecord();
         delRecord.execute(record.getTitle(),this.title);
         this.myRecords.remove(record);
+        context = ListConcernActivity.getContextOfApplication();
+        SharedPreference sp = new SharedPreference();
+        sp.saveRecords(context, myRecords, this.title);
     }
 
     /**
@@ -248,7 +273,7 @@ class Concern {
 
     public int findRecordCount() {
         //return this.myRecords.findCount();
-        //this.getRecords();
+        this.getRecords();
         if (this.myRecords==null){
             return 0;
         } else {
