@@ -117,7 +117,7 @@ public class RecordDetailsFragment extends Fragment {
             t.setText("No location record.");
         }
 
-        ArrayList<Photograph> photographs = record.getPhotos();
+        ArrayList<Photograph> photographs = record.getPhoto();
         if (photographs.size() != 0) {
             // TODO: load the pictures
         } else {

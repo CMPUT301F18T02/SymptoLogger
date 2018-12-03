@@ -180,12 +180,6 @@ class Record {
      * @return list of photos
      */
 
-    public ArrayList<Photograph> getPhotos() {
-        //When photo functionality established
-
-        return new ArrayList<>();
-    }
-
 
     /**
      * adding a geolocation to a record

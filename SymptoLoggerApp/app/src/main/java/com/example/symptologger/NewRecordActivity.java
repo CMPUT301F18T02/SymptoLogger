@@ -12,9 +12,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -51,13 +56,20 @@ import java.util.Locale;
  * </p>
  */
 public class NewRecordActivity extends AppCompatActivity {
+
     private static DateFormat dateFormat = new SimpleDateFormat("EEEE, MMM dd", Locale.CANADA);
     private static DateFormat timeFormat = new SimpleDateFormat("h:mm a", Locale.CANADA);
+    private static DateFormat stringDateFormat = new SimpleDateFormat("E, MMM dd yyyy HH:mm:ss", Locale.CANADA);
 
     private int pos;
     private String userName;
+    private int record_pos;
+    private boolean modifying = false;
     Collection<Concern> concerns;
     ArrayList<Concern> concernList;
+    Concern concernToModify;
+    ArrayList<Record> recordList;
+    Record recordToModify;
 
     ArrayList<Photograph> photos = new ArrayList<>();
     List<Bitmap> bits = new ArrayList<>();
@@ -83,15 +95,45 @@ public class NewRecordActivity extends AppCompatActivity {
         concerns = ConcernListController.getConcernList(userName).getConcernsList();
         concernList = new ArrayList<Concern>(concerns);
 
-        getCalendarInfo();
-        Date now = c.getTime();
+        try {
+            record_pos = fromModconcern.getInt("RECORD_POS");
+            modifying = true;
+            concernToModify = concernList.get(pos);
+            recordList = new ArrayList<>(concernToModify.getRecords());
+            recordToModify = recordList.get(record_pos);
+        } catch (Exception e) {
+            recordToModify = new Record();
+            record_pos = 0;
+        }
 
         final Button editDateButton = findViewById(R.id.dateField);
-        editDateButton.setText(dateFormat.format(now));
         final Button editTimeButton = findViewById(R.id.timeField);
-        editTimeButton.setText(timeFormat.format(now));
         Button addLocationButton = findViewById(R.id.addLocationButton);
         Button addBodyPartsButton = findViewById(R.id.addBodyPartsButton);
+
+        if (!modifying) {
+            getCalendarInfo();
+            Date now = c.getTime();
+            editDateButton.setText(dateFormat.format(now));
+            editTimeButton.setText(timeFormat.format(now));
+
+        } else {
+            try {
+                TextView titleView = findViewById(R.id.recordTitleText);
+                titleView.setText(recordToModify.getTitle());
+                Date recordTime = stringDateFormat.parse(recordToModify.getDate());
+                editDateButton.setText(dateFormat.format(recordTime));
+                editTimeButton.setText(timeFormat.format(recordTime));
+            } catch (Exception e) {
+                getCalendarInfo();
+                Date now = c.getTime();
+                editDateButton.setText(dateFormat.format(now));
+                editTimeButton.setText(timeFormat.format(now));
+            }
+        }
+
+        setBodyText(addBodyPartsButton);
+
 
         editDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,7 +172,17 @@ public class NewRecordActivity extends AppCompatActivity {
         addLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent;
+                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
 
+                try {
+                    intent = builder.build(NewRecordActivity.this);
+                    startActivityForResult(intent, 1);
+                } catch (GooglePlayServicesRepairableException e) {
+                    e.printStackTrace();
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -138,9 +190,13 @@ public class NewRecordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Return arraylist photos
+                photos = recordToModify.getPhoto();
                 //feature
                 Intent intent = new Intent(NewRecordActivity.this, PhotoRecordActivity.class);
                 intent.putExtra("USERNAMEOFRECORD",userName);
+
+                Log.d("Size of the photos ",photos.size()+"");
+
                 if (photos.size() != 0){
                     intent.putExtra("ISEDITMODE",true);
                     EncryptDecryptImageBitmap encryptor = new EncryptDecryptImageBitmap(userName);
@@ -167,6 +223,8 @@ public class NewRecordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                // TODO: change for offline mode
+                // TODO: change for modifying mode
                 Toast.makeText(NewRecordActivity.this,"Saving Record", Toast.LENGTH_SHORT).show();
 
                 EditText recordTitle = (EditText) findViewById(R.id.recordTitleText);
@@ -230,6 +288,42 @@ public class NewRecordActivity extends AppCompatActivity {
         c.set(year, month, day, hour, minute);
     }
 
+    public void setBodyText(Button butt){
+        //
+        if (photos.size() != 0){
+            String s = "";
+            String s3 = "";
+            String s2 = "";
+            for (int i = 0; i < bits.size(); i++){
+                Photograph p = photos.get(i);
+                Bitmap b = bits.get(i);
+                //
+                EncryptDecryptImageBitmap ed = new EncryptDecryptImageBitmap(recordToModify.getUserName());
+                ArrayList<String> bps = p.getBPs();
+                for (String bbb: bps){
+                    if (s3.indexOf(bbb) == -1){
+                        s3 = s3 + " " + bbb;
+                    }
+                }
+            }
+            if (photos.size() == 0){
+                s2 = "Photo: 0";
+            }else{
+                s2 = "Photo(s): "+photos.size();
+            }
+            if (s3.length() == 0){
+                s = "Body Parts: None";
+            }else{
+                s = "Body Parts: " + s3;
+            }
+
+            butt.setText(s2 + "; \n" +s);
+        }else{
+            butt.setText("ADD BODY PARTS");
+        }
+
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub
@@ -248,37 +342,34 @@ public class NewRecordActivity extends AppCompatActivity {
 
             Type type1 = new TypeToken<List<Bitmap>>(){}.getType();
             bits = gson.fromJson(jsonPhotos1, type1);
-            String s = "";
-            String s3 = "";
-            String s2 = "";
+
+            ArrayList<Photograph> rphoto = recordToModify.getPhoto();
+
+            for (int i = 0; i < rphoto.size(); i++){
+                recordToModify.removePhoto(i);
+            }
+
             for (int i = 0; i < bits.size(); i++){
                 Photograph p = photos.get(i);
                 Bitmap b = bits.get(i);
-                //
-                //Log.d("Yessir",i+"");
                 if (b != null){
                     p.setEncrypted(ed.encrypt(b));
                 }
-                ArrayList<String> bps = p.getBPs();
-                for (String bbb: bps){
-                    if (s3.indexOf(bbb) == -1){
-                        s3 = s3 + " " + bbb;
-                    }
-                }
+                recordToModify.addPhoto(p);
             }
-            if (photos.size() == 0){
-                s2 = "Photo: 0";
-            }else{
-                s2 = "Photo(s): "+photos.size();
-            }
-            if (s3.length() == 0){
-                s = "Body Parts: None";
-            }else{
-                s = "Body Parts: " + s3;
-            }
+
             Button addBodyPartsButton = findViewById(R.id.addBodyPartsButton);
-            addBodyPartsButton.setText(s2 + ";\n" + s);
+            setBodyText(addBodyPartsButton);
         }
+        int PLACE_PICKER_REQUEST = 1;
+        if (requestCode == PLACE_PICKER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlacePicker.getPlace(this, data);
+                Button addLocationButton = findViewById(R.id.addLocationButton);
+                addLocationButton.setText(place.getAddress());
+            }
+        }
+
     }
 
 }
