@@ -15,11 +15,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.TimeZone;
 import java.util.concurrent.ExecutionException;
 
@@ -49,6 +51,7 @@ public class RecordCommentFragment extends Fragment {
 
 //    private OnFragmentInteractionListener mListener;
 
+    private static DateFormat stringToDateFormat = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy", Locale.CANADA);
     private ArrayList<CareProviderComment> careProviderCommentList = new ArrayList<>();
     private ArrayAdapter<CareProviderComment> adapter;
 
@@ -107,7 +110,6 @@ public class RecordCommentFragment extends Fragment {
 
         record = recordList.get(RECORD_POS);
 
-        recordID = record.getDate();
         senderID = USERNAME;
         ElasticSearchClient.GetSinglePatient singlePatient = new ElasticSearchClient.GetSinglePatient();
         singlePatient.execute(USERNAME);
@@ -152,10 +154,18 @@ public class RecordCommentFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 cm.stopFetchLogsTimer();
-                SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss.SSS dd/MM/yyyy");
+                SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss.SSS dd/MM/yyyy", Locale.CANADA);
                 formatter.setTimeZone(TimeZone.getTimeZone("MST"));
                 date = new Date();
                 String msg = messageBox.getText().toString();
+
+                try {
+                    Date recordTime = stringToDateFormat.parse(record.getDate());
+                    recordID = formatter.format(recordTime);
+                } catch (Exception e) {
+                    // TODO:
+                    recordID = formatter.format(new Date());
+                }
                 if (msg.length() > 0) {
                     ChatManager.setSaveVars(recordID, senderID, receiverID, msg, formatter.format(date));
                     ChatManager.saveLogs();
