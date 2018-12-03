@@ -35,7 +35,7 @@ import java.util.Collection;
 
 /**
  * <p>
- *     Care Provider view of a record in two tabs.
+ *     Patient view of a record in two tabs.
  *     Details tab @see RecordDetailsFragment
  *     Comments tab @see RecordCommentFragment
  * </p>
@@ -43,9 +43,9 @@ import java.util.Collection;
 
 public class CareProviderViewRecordActivity extends AppCompatActivity {
 
-    private TabLayout cpTabLayout;
-    private ViewPager cpViewPager;
-    private Toolbar cpToolBar;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    private Toolbar toolbar;
     private TextView recordTitle;
 
     int CONCERN_POS;
@@ -55,7 +55,7 @@ public class CareProviderViewRecordActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_care_provider_view_record);
+        setContentView(R.layout.activity_view_record);
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -78,17 +78,17 @@ public class CareProviderViewRecordActivity extends AppCompatActivity {
 
         Record record = recordList.get(RECORD_POS);
 
-        cpToolBar = findViewById(R.id.cpToolbar);
-        setSupportActionBar(cpToolBar);
+  //      toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
 
         recordTitle = findViewById(R.id.viewRecordTitleText);
         recordTitle.setText(record.getTitle());
 
-        cpViewPager = findViewById(R.id.cpViewpager);
-        addTabs(cpViewPager);
+        viewPager = findViewById(R.id.viewpager);
+        addTabs(viewPager);
 
-        cpTabLayout = findViewById(R.id.cpTabs);
-        cpTabLayout.setupWithViewPager(cpViewPager);
+        tabLayout = findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     private void addTabs(ViewPager viewPager) {
@@ -125,10 +125,10 @@ public class CareProviderViewRecordActivity extends AppCompatActivity {
 
         switch(id) {
             case R.id.editOption:
-                Log.d("DEBUG", "edit option id is " + R.id.editOption);
-
+//                Log.d("DEBUG", "edit option id is " + R.id.editOption);
+//
 //                // TODO: edit a record; should load the current record information
-//                Intent editRecordIntent = new Intent(ViewRecordActivity.this, NewRecordActivity.class);
+//                Intent editRecordIntent = new Intent(CareProviderViewRecordActivity.this, NewRecordActivity.class);
 //
 //                Bundle extras = new Bundle();
 //                extras.putInt("RECORD_POS", RECORD_POS);
@@ -139,8 +139,8 @@ public class CareProviderViewRecordActivity extends AppCompatActivity {
 //                startActivity(editRecordIntent);
                 break;
             case R.id.deleteOption:
-                Log.d("DEBUG", "delete option id is " + R.id.deleteOption);
-
+//                Log.d("DEBUG", "delete option id is " + R.id.deleteOption);
+//
 //                // TODO: delete a record, pops up a dialog
 //                AlertDialog.Builder deleteAlert = new AlertDialog.Builder(ViewRecordActivity.this);
 //
