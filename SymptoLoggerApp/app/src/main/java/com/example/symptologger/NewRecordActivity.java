@@ -32,6 +32,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 /*
  *  Copyright 2018 Remi Arshad, Noni Hua, Jason Lee, Patrick Tamm, Kaiwen Zhang
@@ -103,7 +104,7 @@ public class NewRecordActivity extends AppCompatActivity {
             modifying = true;
             concernToModify = concernList.get(pos);
             recordList = new ArrayList<>(concernToModify.getRecords());
-            recordToModify = recordList.get(record_pos);
+            recordToModify = null;//recordList.get(record_pos);
         } catch (Exception e) {
             record_pos = 0;
         }
@@ -132,6 +133,11 @@ public class NewRecordActivity extends AppCompatActivity {
                 editDateButton.setText(dateFormat.format(now));
                 editTimeButton.setText(timeFormat.format(now));
             }
+        }
+        if (recordToModify != null){
+            Log.d("RECORD IS NOT NULL","NOT NULL");
+        }else{
+            Log.d("RECORD IS NULL","NULL");
         }
 
         setBodyText(addBodyPartsButton);
@@ -206,7 +212,7 @@ public class NewRecordActivity extends AppCompatActivity {
                 Intent intent = new Intent(NewRecordActivity.this, PhotoRecordActivity.class);
                 intent.putExtra("USERNAMEOFRECORD",userName);
 
-                Log.d("Size of the photos ",photos.size()+"");
+                //Log.d("Size of the photos ",photos.size()+"");
 
                 if (photos.size() != 0){
                     intent.putExtra("ISEDITMODE",true);
@@ -217,7 +223,6 @@ public class NewRecordActivity extends AppCompatActivity {
                     for (int u = 0; u < photos.size(); u++){
                         Photograph p = new Photograph(); //photos.get(u);
                         bitt.add(encryptor.decrypt(p.getEncrypted()));
-                        p.setURL(null);
                     }
 
                     String jsonPhotos = gson.toJson(bitt);
@@ -254,18 +259,36 @@ public class NewRecordActivity extends AppCompatActivity {
                     for (int u = 0; u < pkp.size(); u++){
                         recordToModify.addPhoto(pkp.get(u));
                     }
-                    //
+                    //Saving record class that contains photograph
+                    //However this is NOT a NEW record
+                    //So it just changes the previous record class that's given with the corresponding photographs
 
+                    //Idk who implemented this addRecord but would a modifying record be added?
+                    //Or just updated?
                     thisConcern.addRecord(recordToModify);
                 }else{
                     Record newRecord = new Record(c.getTime(),title,userName,thisConcern.getTitle());
 
                     //Adding the photograph classes to the record class
                     ArrayList<Photograph> pkp = photorec.getPhoto();
+
+                    String recordID = newRecord.getId();
+
                     for (int u = 0; u < pkp.size(); u++){
-                        newRecord.addPhoto(pkp.get(u));
+                        Photograph ppp = pkp.get(u);
+                        newRecord.addPhoto(ppp);
+                        //
+                        String BPs = "[" + ppp.getBPs().stream()
+                                .map(s -> "\"" + s + "\"")
+                                .collect(Collectors.joining(", ")) + "]";
+
+                        ElasticSearchClient.AddPhoto addPhoto = new ElasticSearchClient.AddPhoto();
+                        addPhoto.execute(BPs, ppp.getEncrypted(), ppp.getID(), ppp.getID(), userName);
+                        //
                     }
-                    //
+                    //Saving the record class that contains the Photographs
+                    //This is a newRecord not a modifying record
+
 
                     thisConcern.addRecord(newRecord);
                 }

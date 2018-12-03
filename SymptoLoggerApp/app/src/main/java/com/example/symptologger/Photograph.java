@@ -3,8 +3,10 @@ package com.example.symptologger;
 import android.media.Image;
 import android.net.Uri;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.TimeZone;
 
 /*
  *  Copyright 2018 Remi Arshad, Noni Hua, Jason Lee, Patrick Tamm, Kaiwen Zhang
@@ -26,16 +28,15 @@ import java.util.Date;
  * Photograph represents the photo objects that can be added to a record.
  *
  * @author Jason Lee
- * @see BodyModel
+ *
  */
 
-//https://stackoverflow.com/questions/29208007/what-is-the-data-type-for-images-in-java
-
 public class Photograph {
-    private Uri uri;
-    private Date date;
+    private String photoID;
     private String encrypted;
-    public ArrayList<String> BPs; //Instead of using BodyPart class I used String class since it only contains String anyways
+    private String recordID;
+
+    public ArrayList<String> bodyParts; //Instead of using BodyPart class I used String class since it only contains String anyways
 
 
     /**
@@ -43,51 +44,19 @@ public class Photograph {
      */
 
     Photograph(){
-        this.date = new Date();
+        setID();
         this.encrypted = "";
+        this.bodyParts = new ArrayList<>();
     }
 
-    /**
-     * Constructor for photograph object, enables setting the image.
-     * @param image the uri for the image
-     */
 
-    Photograph(Uri image){
-        this.date = new Date();
-        this.uri = image;
-        this.BPs = new ArrayList<>();
-        this.encrypted = "";
-    }
-
-    /**
-     * Another constructor, enabling setting the image as well as the date.
-     * @param image the uri for the image
-     * @param date the date
-     */
-
-    Photograph(Uri image, Date date){
-        this.date = date;
-        this.uri = image;
-        this.BPs = new ArrayList<>();
-        this.encrypted = "";
-    }
-
-    /**
-     * Sets the uri
-     * @param uri the uri for the image
-     */
-
-    public void setURL(Uri uri) {
-        this.uri = uri;
-    }
-
-    /**
-     * Gets the uri for the image
-     * @return uri
-     */
-
-    public Uri getURL(){
-        return this.uri;
+    public String setID(){
+        Date date;
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss.SSS dd/MM/yyyy");
+        formatter.setTimeZone(TimeZone.getTimeZone("MST"));
+        date = new Date();
+        photoID = formatter.format(date);
+        return photoID;
     }
 
     /**
@@ -95,18 +64,10 @@ public class Photograph {
      * @return
      */
 
-    public Date getDate() {
-        return this.date;
+    public String getID() {
+        return this.photoID;
     }
 
-    /**
-     * Sets the date for a particular image.
-     * @param date the date
-     */
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
 
     public void setEncrypted(String en){
         this.encrypted = en;
@@ -117,16 +78,19 @@ public class Photograph {
     }
 
     public void addBodyLocation(String bp){
-        BPs.add(bp);
+        bodyParts.add(bp);
     }
 
     public void removeBodyLocation(String bp){
-        BPs.remove(bp);
+        bodyParts.remove(bp);
     }
 
     public ArrayList<String> getBPs (){
-        return BPs;
+        return bodyParts;
     }
 
+    public String getRecordID(){
+        return recordID;
+    }
 }
 

@@ -444,7 +444,7 @@ public class PhotoRecordActivity extends Activity {
             EncryptDecryptImageBitmap ed = new EncryptDecryptImageBitmap(username);
             String encrypted = ed.encrypt(bitmap);
 
-            Photograph photograph = new Photograph(uri);
+            Photograph photograph = new Photograph();
             photograph.setEncrypted(encrypted);
             record.addPhoto(photograph);
             saveButton.setVisibility(View.VISIBLE);
@@ -489,7 +489,6 @@ public class PhotoRecordActivity extends Activity {
         for (Photograph p : photos){
             pps.add(encryptor.decrypt(p.getEncrypted()));
             p.setEncrypted("");
-            p.setURL(null);
         }
 
         String jsonPhotos = gson.toJson(pps);
