@@ -27,6 +27,12 @@ import java.util.concurrent.ExecutionException;
  *  limitations under the License.
  */
 
+
+/**
+ * GenShareCodeActivity generates the code used when the patient wants to share their profile
+ *
+ * @author Patrick Tamm
+ */
 public class GenShareCodeActivity extends AppCompatActivity {
 
     private String userName;

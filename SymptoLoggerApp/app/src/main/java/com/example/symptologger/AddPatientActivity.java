@@ -36,7 +36,6 @@ import java.util.concurrent.ExecutionException;
  *
  * @author Patrick Tamm
  */
-
 public class AddPatientActivity extends AppCompatActivity {
 
     String patientUName;

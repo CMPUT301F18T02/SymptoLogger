@@ -29,7 +29,6 @@ import java.util.concurrent.ExecutionException;
 /**
  * The activity that handles the sign in procedure.
  */
-
 public class SignInActivity extends AppCompatActivity {
 
     private String userName2;

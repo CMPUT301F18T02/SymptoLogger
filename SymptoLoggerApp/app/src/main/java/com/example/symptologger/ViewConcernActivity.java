@@ -35,7 +35,6 @@ import java.util.Collection;
 /**
  * The activity that handles viewing the concern.
  */
-
 public class ViewConcernActivity extends AppCompatActivity {
 
     Collection<Concern> concerns;

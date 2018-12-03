@@ -38,7 +38,6 @@ import java.util.Collection;
  *
  * @author Patrick Tamm
  */
-
 public class CareProviderViewConcernActivity extends AppCompatActivity {
 
     private String pUserName;

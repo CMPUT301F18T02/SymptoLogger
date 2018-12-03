@@ -40,11 +40,10 @@ import java.util.concurrent.ExecutionException;
  */
 
 /**
- * <p>
- *     Fragment to display list of Care Provider comments.
- * </p>
+ * Fragment to display list of Care Provider comments.
+ *
+ * @author Noni Hua, Remi Arshad
  */
-
 public class RecordCommentFragment extends Fragment {
 
 //    private OnFragmentInteractionListener mListener;

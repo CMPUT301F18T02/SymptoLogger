@@ -26,7 +26,6 @@ import java.util.ArrayList;
  * @author Jason Lee
  * @see BodyModel
  */
-
 public class BackBodyModel extends BodyModel {
     private Photograph bodyFrame;
     private User user;

@@ -26,7 +26,6 @@ import java.util.Date;
  * @author Jason Lee
  * @see BackBodyModel, FrontBodyModel
  */
-
 public class BodyModel {
     private Photograph BodyFrame;
     private User user;
@@ -38,7 +37,6 @@ public class BodyModel {
      * @param user which user is using the app
      * @param bodyPartId an id to be added to a collection of body parts
      */
-
     public BodyModel(User user, int bodyPartId){
         this.user = user;
         this.bodyPartsId = new ArrayList<>();
@@ -50,7 +48,6 @@ public class BodyModel {
      * @param bodyPartId which body part the photo represents
      * @return the photo associated with the specified body part
      */
-
     public Photograph getPhoto(int bodyPartId){
         //String url = "";
         Photograph photo = new Photograph();
@@ -62,7 +59,6 @@ public class BodyModel {
      * @param bodyPartId which body part does the photo represent
      * @param photo the photo of the concern
      */
-
     public void setPhoto(int bodyPartId, Photograph photo){
         return;
     }

@@ -26,12 +26,12 @@ import io.searchbox.annotations.JestId;
  *  limitations under the License.
  */
 
+
 /**
  * The Concern class. Models a medical concern that a patient has.
  * @author Patrick Tamm
  * @see ConcernList, Record
  */
-
 class Concern {
     private String title;
     private String date;
@@ -50,7 +50,6 @@ class Concern {
      * date, description and myRecords, an object of type RecordList.
      * @see RecordList
      */
-
     Concern(String userName){
         this.title = "No title given";
         this.date = new Date().toString();
@@ -67,7 +66,6 @@ class Concern {
      * @throws TitleTooLongException if the title exceeds 30 characters
      * @throws DescriptionTooLongException if the description exceeds 300 characters
      */
-
     Concern(String title, Date date, String description, String userName) throws TitleTooLongException, DescriptionTooLongException{
         if (title.length() <= 30){
             this.title = title;
@@ -93,7 +91,6 @@ class Concern {
      * @throws TitleTooLongException title exceeds 30 chars
      * @throws DescriptionTooLongException description exceeds 300 chars
      */
-
     Concern(String title, String description, String userName) throws TitleTooLongException, DescriptionTooLongException {
         if (title.length() > 30){
             throw new TitleTooLongException();
@@ -115,7 +112,6 @@ class Concern {
      * in a ListView.
      * @return concatenation of title, record count and date
      */
-
     public String toString(){
         return this.title+"\t\t\t\t\t"+findRecordCount()+"\n"+this.date;
     }
@@ -127,7 +123,6 @@ class Concern {
      * @param title title of concern
      * @throws TitleTooLongException title exceeds 30 chars
      */
-
     public void setTitle(String title) throws TitleTooLongException{
         if (title.length() <= 30){
             this.title = title;
@@ -140,7 +135,6 @@ class Concern {
      * gets the title of the concern.
      * @return title
      */
-
     public String getTitle() {
         return this.title;
     }
@@ -150,7 +144,6 @@ class Concern {
      *
      * @return date
      */
-
     public String getDate() {
         return this.date;
     }
@@ -159,7 +152,6 @@ class Concern {
      * enables patients to modify the date value associated with a previously entered concern.
      * @param date date of concern
      */
-
     public void setDate(Date date) {
         this.date = date.toString();
     }

@@ -39,7 +39,6 @@ import java.util.Collection;
  *
  * @author Patrick Tamm
  */
-
 public class CareProviderListPatientsActivity extends AppCompatActivity {
 
     private String cpUserName;

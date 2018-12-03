@@ -28,7 +28,6 @@ import java.io.FileNotFoundException;
 /**
  * Activity for viewing the photo.
  */
-
 public class ViewPhotoActivity extends Activity {
 
     @Override

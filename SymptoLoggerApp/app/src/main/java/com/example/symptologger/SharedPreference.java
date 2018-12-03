@@ -29,6 +29,12 @@ import java.util.List;
  *  limitations under the License.
  */
 
+
+/**
+ * Handles local storage.
+ *
+ * @author Kaiwen Zhang
+ */
 public class SharedPreference {
 
 //    private String PATIENTS = "Patients";

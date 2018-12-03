@@ -35,7 +35,6 @@ import java.util.Collection;
  *
  * @author Noni Hua, Patrick Tamm
  */
-
 public class CareProviderViewRecordActivity extends AppCompatActivity {
 
     private TabLayout cpTabLayout;

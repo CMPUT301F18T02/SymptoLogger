@@ -40,7 +40,6 @@ import java.util.Collection;
  *
  * @author Patrick Tamm
  */
-
 public class CareProviderViewPatientConcernsActivity extends AppCompatActivity {
 
     //https://developer.android.com/training/basics/firstapp/starting-activity#java

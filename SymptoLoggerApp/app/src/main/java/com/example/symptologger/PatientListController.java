@@ -16,6 +16,12 @@ package com.example.symptologger;
  *  limitations under the License.
  */
 
+
+/**
+ * The controller for the patient list.
+ *
+ * @author Patrick Tamm
+ */
 public class PatientListController {
     private static PatientList patientList;
 

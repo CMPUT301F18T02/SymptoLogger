@@ -29,7 +29,6 @@ import java.util.concurrent.ExecutionException;
 /**
  * The main activity that starts when the user opens the app.
  */
-
 public class MainActivity extends AppCompatActivity {
 
     @Override

@@ -54,7 +54,7 @@ public class ElasticSearchClient {
 
     /*
      * Initialize connection to server ...
-      */
+     */
     static { // need static here since initClient is static
         initClient();
     }
@@ -63,7 +63,6 @@ public class ElasticSearchClient {
      * initClient() initializes the connection to the ElasticSearch server, constructing a new Jest
      * client.
      */
-
     public static void initClient() {
         // Construct a new Jest client according to configuration via factory
         if (client == null) {
@@ -78,8 +77,6 @@ public class ElasticSearchClient {
      * Represents the object used to delete indices in the ElasticSearch server. Not used in prototype.
      * Takes as a parameter the string representation of the username to be deleted.
      */
-
-    //AVOID USING DeleteIndices FOR NOW!
     public static class DeleteIndices extends AsyncTask<String, Void, Void> { //use Void instead of void for AsyncTask as return type
         @Override
         protected Void doInBackground(String... indices) {
@@ -100,7 +97,6 @@ public class ElasticSearchClient {
     /**
      * Represents the object used to add a new table to the server.
      */
-
     public static class AddConcernsTable extends AsyncTask<String, Void, Void> { //use Void instead of void for AsyncTask as return type
         @Override
         protected Void doInBackground(String... indices) {
@@ -133,7 +129,6 @@ public class ElasticSearchClient {
      *
      * @author Remi Arshad
      */
-
     public static class AddUser extends AsyncTask<String, Void, Boolean> { //use Void instead of void for AsyncTask as return type
         @Override
         protected Boolean doInBackground(String... record) {
@@ -142,15 +137,13 @@ public class ElasticSearchClient {
             String source = String.format("{\"userID\": \"%s\"," +
                     " \"creationDate\": \"%s\", " +
                     "\"userRole\": \"%s\", " +
-                    "\"memberID\": %d, " +
                     "\"email\": \"%s\", " +
                     "\"phone\": \"%s\"}",
                     record[0],
                     record[1],
                     record[2],
-                    Integer.parseInt(record[3]),
-                    record[4],
-                    record[5]);
+                    record[3],
+                    record[4]);
 
             try {
                 JestResult result = client.execute( new Index.Builder(source).index(index).type(type).build() );
@@ -174,7 +167,6 @@ public class ElasticSearchClient {
      *
      * @author Remi Arshad
      */
-
     public static class SearchUser extends AsyncTask<String, Void, String>{
 
         @Override
@@ -210,6 +202,11 @@ public class ElasticSearchClient {
         }
     }
 
+    /**
+     * FetchChatLogs represents the object used to fetch the chat logs.
+     *
+     * @author Remi Arshad
+     */
     public static class FetchChatLogs extends AsyncTask<String, Void, Void>{
 
         @Override
@@ -246,6 +243,12 @@ public class ElasticSearchClient {
         }
     }
 
+
+    /**
+     * SaveChatLog represents the object used to save the chat log to the server
+     *
+     * @author Remi Arshad
+     */
     public static class SaveChatLog extends AsyncTask<String, Void, Void>{
 
         @Override
@@ -278,7 +281,6 @@ public class ElasticSearchClient {
      *
      * @author Remi Arshad
      */
-
     public static class SearchLargestMemberID extends AsyncTask<String, Void, Integer>{
 
         @Override
@@ -314,7 +316,6 @@ public class ElasticSearchClient {
      *
      * @author Patrick Tamm
      */
-
     public static class GetUserRole extends AsyncTask<String, Void, String> {
 
         @Override
@@ -347,7 +348,6 @@ public class ElasticSearchClient {
          *
          * @author Patrick Tamm
         */
-
         public static class AddConcern extends AsyncTask<String, Void, Boolean> { //use Void instead of void for AsyncTask as return type
             @Override
             protected Boolean doInBackground(String... record) {
@@ -372,8 +372,9 @@ public class ElasticSearchClient {
 
     /**
      * Represents the object used to get concerns from the server.
+     *
+     * @author Patrick Tamm
      */
-
     public static class GetConcerns extends AsyncTask<String, Void, ArrayList<Concern>> {
 
             @Override
@@ -406,7 +407,6 @@ public class ElasticSearchClient {
      *
      * @author Patrick Tamm
      */
-
     public static class AddRecord extends AsyncTask<String, Void, Boolean> { //use Void instead of void for AsyncTask as return type
             @Override
             protected Boolean doInBackground(String... record) {
@@ -433,8 +433,6 @@ public class ElasticSearchClient {
      *
      * @author Patrick Tamm
      */
-
-
     public static class GetRecords extends AsyncTask<String, Void, ArrayList<Record>> {
 
             @Override
@@ -471,7 +469,6 @@ public class ElasticSearchClient {
      *
      * @author Patrick Tamm
      */
-
     public static class DeleteRecord extends AsyncTask<String, Void, Boolean> {
             @Override
             protected Boolean doInBackground(String... search_parameters) {
@@ -501,7 +498,6 @@ public class ElasticSearchClient {
      *
      * @author Patrick Tamm
      */
-
     public static class DeleteConcern extends AsyncTask<String, Void, Boolean> {
             @Override
             protected Boolean doInBackground(String... search_parameters) {
@@ -556,7 +552,6 @@ public class ElasticSearchClient {
      *
      * @author Patrick Tamm
      */
-
     public static class AddPatient extends AsyncTask<String, Void, Boolean> { //use Void instead of void for AsyncTask as return type
         @Override
         protected Boolean doInBackground(String... record) {
@@ -584,7 +579,6 @@ public class ElasticSearchClient {
      *
      * @author Patrick Tamm
      */
-
     public static class GetSinglePatient extends AsyncTask<String, Void, Patient> {
 
         @Override
@@ -619,7 +613,6 @@ public class ElasticSearchClient {
      *
      * @author Patrick Tamm
      */
-
     public static class GetPatients extends AsyncTask<String, Void, ArrayList<Patient>> {
 
         @Override
@@ -652,7 +645,6 @@ public class ElasticSearchClient {
      *
      * @author Patrick Tamm
      */
-
     public static class DeletePatient extends AsyncTask<String, Void, Boolean> {
         @Override
         protected Boolean doInBackground(String... search_parameters) {
@@ -703,7 +695,6 @@ public class ElasticSearchClient {
      *
      * @author Patrick Tamm
      */
-
     public static class AddShareCode extends AsyncTask<String, Void, Boolean> { //use Void instead of void for AsyncTask as return type
         @Override
         protected Boolean doInBackground(String... record) {
@@ -763,7 +754,6 @@ public class ElasticSearchClient {
      *
      * @author Patrick Tamm
      */
-
     public static class GetShareCode extends AsyncTask<String, Void, String> {
 
         @Override
@@ -790,6 +780,7 @@ public class ElasticSearchClient {
             return "";
         }
     }
+
 
     public static class AddRecordTable extends AsyncTask<String, Void, Void> { //use Void instead of void for AsyncTask as return type
         @Override

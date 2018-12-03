@@ -21,7 +21,6 @@ package com.example.symptologger;
  *
  * @author Remi Arshad
  */
-
 public class SourceAsObjectListMap {
     private String userID;
     private Integer memberID;
@@ -32,22 +31,30 @@ public class SourceAsObjectListMap {
      * Gets the user id
      * @return userID
      */
-
     public String getUserID() { return userID; }
 
     /**
      * Gets the member id
      * @return memberID
      */
-
     public Integer getMemberID() {
         return memberID;
     }
 
+    /**
+     * Gets the role of a user.
+     * @return user role
+     */
     public String getRole(){
         return userRole;
     }
 
+    /**
+     * Gets the share code used for logging in with multiple devices or sharing patient profile with
+     * care providers.
+     *
+     * @return code
+     */
     public String getCode(){
         return this.code;
     }

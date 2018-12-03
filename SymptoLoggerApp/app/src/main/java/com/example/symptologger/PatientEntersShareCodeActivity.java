@@ -24,6 +24,11 @@ import android.widget.Toast;
  */
 
 
+/**
+ * The activity that starts if a patient is trying to login from multiple devices at once.
+ *
+ * @author Patrick Tamm
+ */
 public class PatientEntersShareCodeActivity extends AppCompatActivity {
 
     private String userName;

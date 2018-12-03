@@ -52,43 +52,6 @@ public class User {
         this.user_type = user_type;
     }
 
-    /**
-     * Set first name of current user
-     * @param first first name given by app user
-     */
-    //public void setFirstName(String first) {
-      //  this.firstName = first;
-    //}
-
-    /**
-     * Get first name
-     * @return first name
-     */
-    //public String getFirstName() {
-      //  return this.firstName;
-    //}
-
-    /**
-     * Set last name of current user
-     * @param last last name given by app user
-     */
-    //public void setLastName(String last) {
-//        this.lastName = last;
-  //  }
-
-    /**
-     * Get last name
-     * @return last name
-     */
-//    public String getLastName() {
-//        return this.lastName;
-//    }
-
-    /**
-     * Get full name
-     * @return first name + space + last name
-     */
-//    public String getFullName() { return this.firstName + " " + this.lastName; }
 
     public String toString(){
         return this.userID;
@@ -134,7 +97,6 @@ public class User {
      * Set email
      * @param email email address
      */
-    // TODO: email validator?
     public void setEmail(String email) {
         this.email = email;
     }
@@ -147,6 +109,10 @@ public class User {
         this.user_type = user_type;
     }
 
+    /**
+     * Gets the type of the user
+     * @return user_type
+     */
     public String getUser_type() {
         return this.user_type;
     }
@@ -155,7 +121,6 @@ public class User {
      * Set cell
      * @param cell north american phone number
      */
-    // TODO: cell validator?
     public void setCell(String cell) {
         this.cell = cell;
     }

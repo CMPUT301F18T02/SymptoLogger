@@ -27,17 +27,14 @@ import java.util.Date;
  * @author Jason Lee
  * @see BodyModel
  */
-
-//https://stackoverflow.com/questions/29208007/what-is-the-data-type-for-images-in-java
-
 public class Photograph {
     private Uri uri;
     private Date date;
+    //https://stackoverflow.com/questions/29208007/what-is-the-data-type-for-images-in-java
 
     /**
      * Empty constructor
      */
-
     Photograph(){
 
     }
@@ -46,7 +43,6 @@ public class Photograph {
      * Constructor for photograph object, enables setting the image.
      * @param image the uri for the image
      */
-
     Photograph(Uri image){
         this.date = new Date();
         this.uri = image;
@@ -57,7 +53,6 @@ public class Photograph {
      * @param image the uri for the image
      * @param date the date
      */
-
     Photograph(Uri image, Date date){
         this.date = date;
         this.uri = image;
@@ -67,7 +62,6 @@ public class Photograph {
      * Sets the uri
      * @param uri the uri for the image
      */
-
     public void setURL(Uri uri) {
         this.uri = uri;
     }
@@ -76,7 +70,6 @@ public class Photograph {
      * Gets the uri for the image
      * @return uri
      */
-
     public Uri getURL(){
         return this.uri;
     }
@@ -85,7 +78,6 @@ public class Photograph {
      * Gets the date associated with the image
      * @return
      */
-
     public Date getDate() {
         return this.date;
     }
@@ -94,7 +86,6 @@ public class Photograph {
      * Sets the date for a particular image.
      * @param date the date
      */
-
     public void setDate(Date date) {
         this.date = date;
     }
