@@ -59,9 +59,17 @@ public class ViewRecordActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        CONCERN_POS = extras.getInt("CONCERN");
-        RECORD_POS = extras.getInt("RECORD");
-        USERNAME = extras.getString("USERNAME");
+
+        try {
+            CONCERN_POS = extras.getInt("CONCERN");
+            RECORD_POS = extras.getInt("RECORD");
+            USERNAME = extras.getString("USERNAME");
+        } catch (Exception e) {
+            // TODO: this is for testing only
+            CONCERN_POS = 0;
+            RECORD_POS = 0;
+            USERNAME = "12345678";
+        }
 
         Collection<Concern> concerns = ConcernListController.getConcernList(USERNAME).getConcernsList();
         ArrayList<Concern> concernList = new ArrayList<Concern>(concerns);
