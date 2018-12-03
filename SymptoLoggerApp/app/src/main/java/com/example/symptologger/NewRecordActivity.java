@@ -53,7 +53,7 @@ public class NewRecordActivity extends AppCompatActivity {
 
     private static DateFormat dateFormat = new SimpleDateFormat("EEEE, MMM dd", Locale.CANADA);
     private static DateFormat timeFormat = new SimpleDateFormat("h:mm a", Locale.CANADA);
-    private static DateFormat stringDateFormat = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy", Locale.CANADA);
+    private static DateFormat stringDateFormat = new SimpleDateFormat("E MMM dd HH:mm:ss.SSS z yyyy", Locale.CANADA);
 
     private int pos;
     private String userName;

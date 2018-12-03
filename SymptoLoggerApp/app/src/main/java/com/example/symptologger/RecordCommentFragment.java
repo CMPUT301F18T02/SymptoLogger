@@ -51,7 +51,7 @@ public class RecordCommentFragment extends Fragment {
 
 //    private OnFragmentInteractionListener mListener;
 
-    private static DateFormat stringToDateFormat = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy", Locale.CANADA);
+    private static DateFormat stringToDateFormat = new SimpleDateFormat("E MMM dd HH:mm:ss.SSS z yyyy", Locale.CANADA);
     private ArrayList<CareProviderComment> careProviderCommentList = new ArrayList<>();
     private ArrayAdapter<CareProviderComment> adapter;
 
@@ -159,14 +159,14 @@ public class RecordCommentFragment extends Fragment {
                 date = new Date();
                 String msg = messageBox.getText().toString();
 
-                try {
-                    Date recordTime = stringToDateFormat.parse(record.getDate());
-                    recordID = formatter.format(recordTime);
-                } catch (Exception e) {
-                    // TODO:
-                    recordID = formatter.format(new Date());
-                }
                 if (msg.length() > 0) {
+                    try {
+                        Date recordTime = stringToDateFormat.parse(record.getDate());
+                        recordID = formatter.format(recordTime);
+                    } catch (Exception e) {
+                        // TODO:
+                        recordID = formatter.format(new Date());
+                    }
                     ChatManager.setSaveVars(recordID, senderID, receiverID, msg, formatter.format(date));
                     ChatManager.saveLogs();
                     cm.restartTimer();
