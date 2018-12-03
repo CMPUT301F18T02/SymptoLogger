@@ -45,11 +45,11 @@ public class ListConcernActivity extends AppCompatActivity {
 //    public static final String EXTRA_MESSAGE = "com.example.symptologger.MESSAGE";
 
     ListView concernListView;
-    ArrayList<Concern> concernList;
-    ArrayAdapter<Concern> concernListAdapter;
-    Collection<Concern> concerns;
+    static ArrayList<Concern> concernList;
+    static ArrayAdapter<Concern> concernListAdapter;
+    static Collection<Concern> concerns;
 
-    String userName;
+    static String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,9 +133,6 @@ public class ListConcernActivity extends AppCompatActivity {
                         } else if (which == 1){
                             Toast.makeText(ListConcernActivity.this,"Delete",Toast.LENGTH_SHORT).show();
                             ConcernListController.getConcernList(userName).deleteConcern(concernList.get(pos));
-                            Intent restart = new Intent(ListConcernActivity.this,ListConcernActivity.class);
-                            restart.putExtra("userName",userName);
-                            startActivity(restart);
 //                            concerns = ConcernListController.getConcernList(userName).getConcernsList();
 //                            concernList = new ArrayList<Concern>(concerns);
 //                            concernListAdapter.notifyDataSetChanged();
@@ -164,5 +161,11 @@ public class ListConcernActivity extends AppCompatActivity {
         Intent intent = new Intent(ListConcernActivity.this,GenShareCodeActivity.class);
         intent.putExtra("userName",userName);
         startActivity(intent);
+    }
+
+    public static void fetchConcerns(){
+        concerns = ConcernListController.getConcernList(userName).getConcernsList();
+        concernList = new ArrayList<Concern>(concerns);
+        concernListAdapter.notifyDataSetChanged();
     }
 }

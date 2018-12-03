@@ -205,7 +205,7 @@ class Concern {
     public void addRecord(Record record) {
         //this.myRecords.add(record);
         ElasticSearchClient.AddRecord addNewRecord = new ElasticSearchClient.AddRecord();
-        addNewRecord.execute(record.getTitle(),record.getDate(),record.getConcernTitle(),record.getUserName(),new Date().toString());
+        addNewRecord.execute(record.getTitle(),record.getDate(),record.getConcernTitle(),record.getUserName());
     }
 
     /**
@@ -256,7 +256,7 @@ class Concern {
 
     public int findRecordCount() {
         //return this.myRecords.findCount();
-        //this.getRecords();
+        this.getRecords();
         if (this.myRecords==null){
             return 0;
         } else {

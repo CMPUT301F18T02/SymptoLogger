@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //new ElasticSearchClient.AddRecordTable().execute();
-        //new ElasticSearchClient.DeleteIndices().execute("Concerns");
-        new ElasticSearchClient.AddConcernsTable().execute();
+        //new ElasticSearchClient.DeleteIndices().execute("Records");
+        //new ElasticSearchClient.AddRecordTable().execute();
         Button button_sign_up = (Button) findViewById(R.id.button_sign_up);
         //Button button_add_geo_location = (Button) findViewById(R.id.button_geo_location);
 

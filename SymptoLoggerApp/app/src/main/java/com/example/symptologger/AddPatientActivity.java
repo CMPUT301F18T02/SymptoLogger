@@ -86,6 +86,9 @@ public class AddPatientActivity extends AppCompatActivity {
 
                     Toast.makeText(AddPatientActivity.this,"Saving "+patientUName, Toast.LENGTH_SHORT).show();
 
+                    ElasticSearchClient.DeleteShareCode deleteShareCode = new ElasticSearchClient.DeleteShareCode();
+                    deleteShareCode.execute(patientUName,getShareCode());
+
                     Intent savePatient = new Intent(AddPatientActivity.this,CareProviderListPatientsActivity.class);
                     savePatient.putExtra("UNAME",patientUName);
                     startActivity(savePatient);

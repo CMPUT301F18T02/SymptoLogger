@@ -53,7 +53,7 @@ public class NewRecordActivity extends AppCompatActivity {
 
     private static DateFormat dateFormat = new SimpleDateFormat("EEEE, MMM dd", Locale.CANADA);
     private static DateFormat timeFormat = new SimpleDateFormat("h:mm a", Locale.CANADA);
-    private static DateFormat stringDateFormat = new SimpleDateFormat("E, MMM dd yyyy HH:mm:ss", Locale.CANADA);
+    private static DateFormat stringDateFormat = new SimpleDateFormat("E, MMM dd yyyy HH:mm:ss:SSS", Locale.CANADA);
 
     private int pos;
     private String userName;
@@ -195,7 +195,7 @@ public class NewRecordActivity extends AppCompatActivity {
                 String title = recordTitle.getText().toString();
 
                 Concern thisConcern = concernList.get(pos);
-                Record newRecord = new Record(c.getTime(),title,userName,thisConcern.getTitle());
+                Record newRecord = new Record(stringDateFormat.format(c.getTime()),title,userName,thisConcern.getTitle());
                 thisConcern.addRecord(newRecord);
 
                 Intent doneIntent = new Intent(NewRecordActivity.this, ViewConcernActivity.class);
