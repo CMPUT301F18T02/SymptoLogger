@@ -309,6 +309,12 @@ public class ElasticSearchClient {
         }
     }
 
+    /**
+     * GetUserRole represents the object used to find the role of a particular user on sign in.
+     *
+     * @author Patrick Tamm
+     */
+
     public static class GetUserRole extends AsyncTask<String, Void, String> {
 
         @Override
@@ -336,6 +342,12 @@ public class ElasticSearchClient {
         }
     }
 
+        /**
+        * Represents the object used to add a concern to ElasticSearch
+         *
+         * @author Patrick Tamm
+        */
+
         public static class AddConcern extends AsyncTask<String, Void, Boolean> { //use Void instead of void for AsyncTask as return type
             @Override
             protected Boolean doInBackground(String... record) {
@@ -358,7 +370,11 @@ public class ElasticSearchClient {
             }
         }
 
-        public static class GetConcerns extends AsyncTask<String, Void, ArrayList<Concern>> {
+    /**
+     * Represents the object used to get concerns from the server.
+     */
+
+    public static class GetConcerns extends AsyncTask<String, Void, ArrayList<Concern>> {
 
             @Override
             protected ArrayList<Concern> doInBackground(String... search_parameters) {
@@ -385,7 +401,13 @@ public class ElasticSearchClient {
             }
         }
 
-        public static class AddRecord extends AsyncTask<String, Void, Boolean> { //use Void instead of void for AsyncTask as return type
+    /**
+     * Represents the object used to add records to the server.
+     *
+     * @author Patrick Tamm
+     */
+
+    public static class AddRecord extends AsyncTask<String, Void, Boolean> { //use Void instead of void for AsyncTask as return type
             @Override
             protected Boolean doInBackground(String... record) {
 
@@ -406,8 +428,14 @@ public class ElasticSearchClient {
             }
         }
 
+    /**
+     * GetRecords represents the object used to get records from the server.
+     *
+     * @author Patrick Tamm
+     */
 
-        public static class GetRecords extends AsyncTask<String, Void, ArrayList<Record>> {
+
+    public static class GetRecords extends AsyncTask<String, Void, ArrayList<Record>> {
 
             @Override
             protected ArrayList<Record> doInBackground(String... search_parameters) {
@@ -438,7 +466,13 @@ public class ElasticSearchClient {
             }
         }
 
-        public static class DeleteRecord extends AsyncTask<String, Void, Boolean> {
+    /**
+     * DeleteRecord represents the object used to remove a record from the server.
+     *
+     * @author Patrick Tamm
+     */
+
+    public static class DeleteRecord extends AsyncTask<String, Void, Boolean> {
             @Override
             protected Boolean doInBackground(String... search_parameters) {
 
@@ -462,7 +496,13 @@ public class ElasticSearchClient {
             }
         }
 
-        public static class DeleteConcern extends AsyncTask<String, Void, Boolean> {
+    /**
+     * DeleteConcern represents the object used to remove a concern from the server.
+     *
+     * @author Patrick Tamm
+     */
+
+    public static class DeleteConcern extends AsyncTask<String, Void, Boolean> {
             @Override
             protected Boolean doInBackground(String... search_parameters) {
                 String type = "Concerns";
@@ -484,6 +524,7 @@ public class ElasticSearchClient {
                 return Boolean.FALSE;
             }
         }
+
 
     public static class AddPatientsTable extends AsyncTask<String, Void, Void> { //use Void instead of void for AsyncTask as return type
         @Override
@@ -510,6 +551,12 @@ public class ElasticSearchClient {
         }
     }
 
+    /**
+     * AddPatient represents the object used to add a patient to the server.
+     *
+     * @author Patrick Tamm
+     */
+
     public static class AddPatient extends AsyncTask<String, Void, Boolean> { //use Void instead of void for AsyncTask as return type
         @Override
         protected Boolean doInBackground(String... record) {
@@ -531,6 +578,12 @@ public class ElasticSearchClient {
             return Boolean.FALSE;
         }
     }
+
+    /**
+     * GetSinglePatient represents the object that gets a SINGLE patient from the server.
+     *
+     * @author Patrick Tamm
+     */
 
     public static class GetSinglePatient extends AsyncTask<String, Void, Patient> {
 
@@ -561,6 +614,12 @@ public class ElasticSearchClient {
     }
 
 
+    /**
+     * GetPatients represents the object used to get a list of patients from the server.
+     *
+     * @author Patrick Tamm
+     */
+
     public static class GetPatients extends AsyncTask<String, Void, ArrayList<Patient>> {
 
         @Override
@@ -587,6 +646,12 @@ public class ElasticSearchClient {
             return foundPatients;
         }
     }
+
+    /**
+     * DeletePatient represents the object used to delete a patient from the server.
+     *
+     * @author Patrick Tamm
+     */
 
     public static class DeletePatient extends AsyncTask<String, Void, Boolean> {
         @Override
@@ -632,6 +697,13 @@ public class ElasticSearchClient {
         }
     }
 
+    /**
+     * AddShareCode represents the object used to add a share code to the server. This will be used
+     * when the patient is sharing their profile.
+     *
+     * @author Patrick Tamm
+     */
+
     public static class AddShareCode extends AsyncTask<String, Void, Boolean> { //use Void instead of void for AsyncTask as return type
         @Override
         protected Boolean doInBackground(String... record) {
@@ -653,6 +725,14 @@ public class ElasticSearchClient {
             return Boolean.FALSE;
         }
     }
+
+    /**
+     * DeleteShareCode represents the object used to delete a share code from the share code table.
+     * This will be done after successful login on the new device, as well as when the patient clicks
+     * done in the generate code activity.
+     *
+     * @author Patrick Tamm
+     */
 
     public static class DeleteShareCode extends AsyncTask<String, Void, Boolean> {
         @Override
@@ -676,6 +756,13 @@ public class ElasticSearchClient {
             return Boolean.FALSE;
         }
     }
+
+    /**
+     * GetShareCode represents the object used to get a share code from the server. This is done when
+     * sharing patient profiles.
+     *
+     * @author Patrick Tamm
+     */
 
     public static class GetShareCode extends AsyncTask<String, Void, String> {
 
