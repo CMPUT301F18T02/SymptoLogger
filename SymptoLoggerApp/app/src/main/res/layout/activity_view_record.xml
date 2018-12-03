@@ -16,7 +16,8 @@
             android:id="@+id/toolbar"
             android:layout_width="68dp"
             android:layout_height="match_parent"
-            android:background="?attr/colorPrimary" />
+            android:background="?attr/colorPrimary"
+            android:layout_gravity="end" />
 
         <TextView
             android:id="@+id/viewRecordTitleText"

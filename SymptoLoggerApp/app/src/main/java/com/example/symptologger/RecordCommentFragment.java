@@ -62,6 +62,7 @@ public class RecordCommentFragment extends Fragment {
     private EditText messageBox;
     private Button sendButton;
 
+    private String recordID;
     private String senderID;
     private String receiverID;
     private String message;
@@ -106,6 +107,7 @@ public class RecordCommentFragment extends Fragment {
 
         record = recordList.get(RECORD_POS);
 
+        recordID = record.getDate();
         senderID = USERNAME;
         ElasticSearchClient.GetSinglePatient singlePatient = new ElasticSearchClient.GetSinglePatient();
         singlePatient.execute(USERNAME);
@@ -155,7 +157,7 @@ public class RecordCommentFragment extends Fragment {
                 date = new Date();
                 String msg = messageBox.getText().toString();
                 if (msg.length() > 0) {
-                    ChatManager.setSaveVars(senderID, receiverID, msg, formatter.format(date));
+                    ChatManager.setSaveVars(recordID, senderID, receiverID, msg, formatter.format(date));
                     ChatManager.saveLogs();
                     cm.restartTimer();
                     messageBox.setText("");
