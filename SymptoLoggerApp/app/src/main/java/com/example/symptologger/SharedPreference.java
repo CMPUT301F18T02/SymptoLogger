@@ -122,23 +122,28 @@ public class SharedPreference {
         return concerns;
     }
 
+    ArrayList<Record> loadRecords(Context context, String concernTitle) {
+        ArrayList<Record> records = new ArrayList<Record>();
+        concerns = this.loadConcerns(context);
+        for (Concern c: concerns) {
+            if (c.getTitle().equals(concernTitle)) {
+                records = (ArrayList<Record>) c.getRecords();
+            }
+        }
 
+        return records;
+    }
 
-//    public void saveRecords(Context context, ArrayList<Record> records, int pos) {
-//        concerns = this.loadConcerns(context);
-//        Concern c = concerns.get(pos);
-//        for (Record r: records) {
-//            c.addRecord(r);
-//        }
-//
-//        this.saveConcerns(context, concerns);
-//    }
-//
-//
-//    public ArrayList<Record> loadRecords(Context context, int pos) {
-//        concerns = this.loadConcerns(context);
-//        Concern c = concerns.get(pos);
-//        return (ArrayList<Record>) c.getRecords();
-//    }
+    void saveRecords(Context context, ArrayList<Record> records, String concernTitle) {
+        concerns = this.loadConcerns(context);
+        for (Concern c: concerns) {
+            if (c.getTitle().equals(concernTitle)) {
+                c.setRecords(records);
+            }
+        }
+
+        this.saveConcerns(context, concerns);
+    }
+
 
 }

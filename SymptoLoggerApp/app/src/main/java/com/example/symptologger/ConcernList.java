@@ -65,6 +65,7 @@ class ConcernList {
             myConcerns = sp.loadConcerns(context);
 //            Log.d("offline, from sp", String.valueOf(myConcerns));
         }
+//        Log.d("CONTEXT", String.valueOf(context));
         this.concernListeners = new ArrayList<ConcernListener>();
     }
 
