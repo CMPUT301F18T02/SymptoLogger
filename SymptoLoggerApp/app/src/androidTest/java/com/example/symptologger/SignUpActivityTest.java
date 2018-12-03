@@ -17,8 +17,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
@@ -26,33 +26,33 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class NewRecordActivityAddLocationTest {
+public class SignUpActivityTest {
 
     @Rule
-    public ActivityTestRule<NewRecordActivity> mActivityTestRule = new ActivityTestRule<>(NewRecordActivity.class);
+    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void newRecordActivityAddLocationTest() {
+    public void signUpActivityTest() {
         ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.addLocationButton), withText("Add location"),
+                allOf(withId(R.id.button_sign_up), withText("Sign Up"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
                                         0),
-                                6),
+                                2),
                         isDisplayed()));
         appCompatButton.perform(click());
 
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        pressBack();
+        ViewInteraction button = onView(
+                allOf(withId(R.id.button_sign_up),
+                        childAtPosition(
+                                allOf(withId(R.id.view_create_profile),
+                                        childAtPosition(
+                                                withId(android.R.id.content),
+                                                0)),
+                                5),
+                        isDisplayed()));
+        button.check(matches(isDisplayed()));
 
     }
 

@@ -36,31 +36,41 @@ public class RecordTest {
     @Test
     public void testGetDate(){
         Date date = new Date();
-        Record record = new Record(date, "title");
-        assertEquals(date,record.getDate());
+        Record record = new Record();
+        assertEquals(date.toString(),record.getDate());
     }
 
     @Test
-    public void testSetDate(){
-        Record myRecord = new Record(new Date(), "title");
+    public void testSetDate() {
+        Record myRecord = new Record();
 
         Date myDate = new Date();
 
         myRecord.setDate(myDate);
 
-        Date testDate = myRecord.getDate();
+        String testDate = myRecord.getDate();
 
-        assertEquals(testDate,myDate);
+        assertEquals(testDate, myDate.toString());
     }
 
     @Test
-    public void testAddPhoto(){
-        //When photo functionality is established
+    public void testGetUserName(){
+        String user = "UNIT_TEST";
+        Record record = new Record(new Date(), "UNIT_TESTING", user,"UNIT_TEST_CONCERN");
+
+        String usr = record.getUserName();
+
+        assertEquals(user,usr);
     }
 
     @Test
-    public void testAddGeoLocation(){
-        //When location services are established
+    public void testGetConcernTitle(){
+        String concern = "UNIT_TEST";
+        Record record = new Record(new Date(), "UNIT_TEST", "UNIT_TESTER",concern);
+
+        String c = record.getConcernTitle();
+
+        assertEquals(concern,c);
     }
 
 }

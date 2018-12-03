@@ -69,6 +69,6 @@ public class UserList {
      * @return selected user
      */
     public User getUserByPos(int pos) {
-        return new User();
+        return this.userList.get(pos);
     }
 }

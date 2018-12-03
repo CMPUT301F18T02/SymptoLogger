@@ -69,6 +69,10 @@ class ConcernList {
         this.concernListeners = new ArrayList<ConcernListener>();
     }
 
+    ConcernList(){
+        this.myConcerns = new ArrayList<Concern>();
+    }
+
     /**
      * returns the list of concerns
      * @return myConcerns a list of concerns
@@ -96,6 +100,11 @@ class ConcernList {
         sp.saveOneConcern(context, concern);
 
         notifyListeners();
+    }
+
+
+    public void addConcern(Concern concern){
+        this.myConcerns.add(concern);
     }
 
     /**

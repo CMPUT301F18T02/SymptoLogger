@@ -111,6 +111,7 @@ public class CareProviderViewPatientConcernsActivity extends AppCompatActivity {
                             Bundle viewBundle = new Bundle();
                             viewBundle.putInt("pos", pos);
                             viewBundle.putString("pUserName", pUserName);
+                            viewBundle.putString("CP_USERNAME",cpName);
                             viewIntent.putExtras(viewBundle);
                             startActivity(viewIntent);
                         } else {

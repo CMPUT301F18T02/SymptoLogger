@@ -1,13 +1,18 @@
 package com.example.symptologger;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -37,56 +42,72 @@ import java.util.Collection;
  */
 public class CareProviderViewRecordActivity extends AppCompatActivity {
 
-    private TabLayout cpTabLayout;
-    private ViewPager cpViewPager;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    private String CP_USERNAME;
     private Toolbar toolbar;
+    private TextView recordTitle;
 
-    Collection<Concern> patientConcerns;
-    ArrayList<Concern> patientConcernList;
-    ArrayList<Record> cpRecordList;
-
-    int CP_CONCERN_POS;
-    int CP_RECORD_POS;
-
-    private String pUserName;
-
-    Record cpRecordToView;
+    int CONCERN_POS;
+    int RECORD_POS;
+    String USERNAME;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_care_provider_view_record);
+        setContentView(R.layout.activity_view_record);
 
-//        Intent intent = getIntent();
-//        Bundle extras = intent.getExtras();
-//        CP_CONCERN_POS = extras.getInt("CP_CONCERN");
-//        CP_RECORD_POS = extras.getInt("CP_RECORD");
-//        pUserName = extras.getString("pUserName");
-//
-//        patientConcerns = ConcernListController.getConcernList(pUserName).getConcernsList();
-//        patientConcernList = new ArrayList<Concern>(patientConcerns);
-//
-//        Concern concernToView = patientConcernList.get(CP_CONCERN_POS);
-//        cpRecordList = new ArrayList<Record>(concernToView.getRecords());
-//
-//        cpRecordToView = cpRecordList.get(CP_RECORD_POS);
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
 
-//        toolbar = findViewById(R.id.cpToolbar);
+        try {
+            CONCERN_POS = extras.getInt("CONCERN");
+            RECORD_POS = extras.getInt("RECORD");
+            USERNAME = extras.getString("USERNAME");
+            CP_USERNAME = extras.getString("CP_USERNAME");
+        } catch (Exception e) {
+            // TODO: this is for testing only
+            CONCERN_POS = 0;
+            RECORD_POS = 0;
+            USERNAME = "12345678";
+        }
+
+        Collection<Concern> concerns = ConcernListController.getConcernList(USERNAME).getConcernsList();
+        ArrayList<Concern> concernList = new ArrayList<Concern>(concerns);
+        Concern concernToView = concernList.get(CONCERN_POS);
+        ArrayList<Record> recordList = new ArrayList<Record>(concernToView.getRecords());
+
+        Record record = recordList.get(RECORD_POS);
+
+  //      toolbar = findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 
-        cpViewPager = findViewById(R.id.cpViewpager);
-        addTabs(cpViewPager);
+        recordTitle = findViewById(R.id.viewRecordTitleText);
+        recordTitle.setText(record.getTitle());
 
-        cpTabLayout = findViewById(R.id.cpTabs);
-        cpTabLayout.setupWithViewPager(cpViewPager);
+        viewPager = findViewById(R.id.viewpager);
+        addTabs(viewPager);
 
-
+        tabLayout = findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     private void addTabs(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new RecordDetailsFragment(), "DETAILS");
-        adapter.addFrag(new RecordCommentFragment(), "COMMENTS");
+        Bundle bundle = new Bundle();
+        bundle.putInt("RECORD_POS", RECORD_POS);
+        bundle.putInt("CONCERN_POS", CONCERN_POS);
+        bundle.putString("USERNAME", USERNAME);
+        bundle.putString("CP_USERNAME",CP_USERNAME);
+
+        RecordDetailsFragment detailsFragment = new RecordDetailsFragment();
+        CareProviderRecordCommentFragment commentFragment = new CareProviderRecordCommentFragment();
+
+        detailsFragment.setArguments(bundle);
+        commentFragment.setArguments(bundle);
+
+        adapter.addFrag(detailsFragment, "DETAILS");
+        adapter.addFrag(commentFragment, "COMMENTS");
         viewPager.setAdapter(adapter);
     }
 
@@ -106,9 +127,46 @@ public class CareProviderViewRecordActivity extends AppCompatActivity {
 
         switch(id) {
             case R.id.editOption:
-                // TODO: edit a record
+//                Log.d("DEBUG", "edit option id is " + R.id.editOption);
+//
+//                // TODO: edit a record; should load the current record information
+//                Intent editRecordIntent = new Intent(CareProviderViewRecordActivity.this, NewRecordActivity.class);
+//
+//                Bundle extras = new Bundle();
+//                extras.putInt("RECORD_POS", RECORD_POS);
+//                extras.putInt("CONCERN_POS", CONCERN_POS);
+//                extras.putString("USERNAME", USERNAME);
+//                editRecordIntent.putExtras(extras);
+//
+//                startActivity(editRecordIntent);
+                break;
             case R.id.deleteOption:
-                // TODO: delete a record, pops up a dialog
+//                Log.d("DEBUG", "delete option id is " + R.id.deleteOption);
+//
+//                // TODO: delete a record, pops up a dialog
+//                AlertDialog.Builder deleteAlert = new AlertDialog.Builder(ViewRecordActivity.this);
+//
+//                deleteAlert.setTitle("Delete this record?");
+//                deleteAlert.setCancelable(true);
+//
+//                CharSequence[] options = {"Yes", "Cancel"};
+//
+//                deleteAlert.setItems(options, new DialogInterface.OnClickListener(){
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which){
+//                        if (which == 0){
+//                            // TODO: update shared preference
+//                            Toast.makeText(ViewRecordActivity.this, "Record deleted",Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            Toast.makeText(ViewRecordActivity.this,"Cancelled",Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
+//                deleteAlert.show();
+                break;
+
+            default:
+                break;
         }
 
         return super.onOptionsItemSelected(item);

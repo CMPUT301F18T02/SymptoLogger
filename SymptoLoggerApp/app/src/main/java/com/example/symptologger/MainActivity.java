@@ -39,7 +39,9 @@ public class MainActivity extends AppCompatActivity {
         Integer status = sp.getLogInStatus(getApplicationContext());
         String userName = sp.loadUserName(getApplicationContext());
 
-        CheckServerAvailability.startIsAvailableTimer();
+        if (!CheckServerAvailability.getTimerStart()) {
+            CheckServerAvailability.startIsAvailableTimer();
+        }
 
         if (status == 1) {
             Intent intent = new Intent(MainActivity.this, ListConcernActivity.class);

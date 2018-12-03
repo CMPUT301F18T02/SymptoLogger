@@ -4,22 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CareProviderViewRecordActivity">
+    tools:context=".ViewRecordActivity">
 
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/cpAppBarLayout"
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/cpToolbar"
+            android:id="@+id/toolbar"
             android:layout_width="68dp"
             android:layout_height="match_parent"
             android:background="?attr/colorPrimary" />
 
+        <TextView
+            android:id="@+id/viewRecordTitleText"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:layout_marginTop="8dp"
+            android:paddingLeft="40dp"
+            android:text="TextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintBottom_toTopOf="@+id/viewpager"
+            app:layout_constraintEnd_toStartOf="@+id/viewpager"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <android.support.design.widget.TabLayout
-            android:id="@+id/cpTabs"
+            android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabGravity="fill"
@@ -29,7 +43,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/cpViewpager"
+        android:id="@+id/viewpager"
         android:layout_width="365dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
@@ -38,8 +52,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cpAppBarLayout"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        app:layout_constraintVertical_bias="0.0" >
+
+    </android.support.v4.view.ViewPager>
 
 
 </android.support.constraint.ConstraintLayout>

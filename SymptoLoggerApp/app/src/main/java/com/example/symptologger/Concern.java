@@ -53,8 +53,12 @@ class Concern {
      * date, description and myRecords, an object of type RecordList.
      * @see RecordList
      */
-    Concern(String userName){
-        this.title = "No title given";
+    Concern(String userName, String title) throws TitleTooLongException{
+        if (title.length() <= 30){
+            this.title = title;
+        } else {
+            throw new TitleTooLongException();
+        }
         this.date = new Date().toString();
         this.description = "No description given";
         this.myRecords = new ArrayList<Record>();
