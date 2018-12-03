@@ -91,32 +91,21 @@ public class NewRecordActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle fromModconcern = intent.getExtras();
-        pos = fromModconcern.getInt("pos",0);
+        pos = fromModconcern.getInt("CONCERN_POS",0);
         userName = fromModconcern.getString("USERNAME");
-        modifying = fromModconcern.getBoolean("modifying");
-
-        Log.d("MODIFYING?",modifying+"");
-        Log.d("POS?",pos+"");
-        Log.d("USERNAME?",userName);
 
         concerns = ConcernListController.getConcernList(userName).getConcernsList();
         concernList = new ArrayList<Concern>(concerns);
         concernToModify = concernList.get(pos);
 
-        if (!modifying){
-            //Log.d("Record to Modify is not found so yeet","321234gfdwe234");
-            photorec = new Record(new Date(),"",userName,"");
-        } else {
+        try {
             record_pos = fromModconcern.getInt("RECORD_POS");
+            modifying = true;
+            concernToModify = concernList.get(pos);
             recordList = new ArrayList<>(concernToModify.getRecords());
             recordToModify = recordList.get(record_pos);
-            //Log.d("Record to Modify is found","213124");
-        }
-
-        if (recordToModify == null){
-            Log.d("Record is null","423");
-        }else{
-            Log.d("Record is found","23");
+        } catch (Exception e) {
+            record_pos = 0;
         }
 
         final Button editDateButton = findViewById(R.id.dateField);
