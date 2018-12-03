@@ -205,7 +205,7 @@ class Concern {
     public void addRecord(Record record) {
         //this.myRecords.add(record);
         ElasticSearchClient.AddRecord addNewRecord = new ElasticSearchClient.AddRecord();
-        addNewRecord.execute(record.getTitle(),record.getDate(),record.getConcernTitle(),record.getUserName(),new Date().toString());
+        addNewRecord.execute(record.getTitle(),record.getDate(),record.getConcernTitle(),record.getUserName());
     }
 
     /**

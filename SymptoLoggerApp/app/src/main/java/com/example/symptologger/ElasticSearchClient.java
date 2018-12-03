@@ -325,7 +325,7 @@ public class ElasticSearchClient {
             protected Boolean doInBackground(String... record) {
 
                 String type = "Records";
-                String source = String.format("{\"title\": \"%s\", \"date\": \"%s\", \"concernTitle\": \"%s\", \"userName\": \"%s\", \"created\": \"%s\"}", record[0], record[1], record[2], record[3], record[4]);
+                String source = String.format("{\"title\": \"%s\", \"date\": \"%s\", \"concernTitle\": \"%s\", \"userName\": \"%s\"}", record[0], record[1], record[2], record[3]);
 
                 try {
                     JestResult result = client.execute(new Index.Builder(source).index(index).type(type).build());
@@ -649,8 +649,7 @@ public class ElasticSearchClient {
                     "{\"title\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
                     "\"date\": {\"type\" : \"date\",\"format\":\"HH:mm:ss.SSS dd/MM/yyyy\"}, " +
                     "\"concernTitle\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
-                    "\"userName\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
-                    "\"created\": {\"type\" : \"date\"}," +
+                    "\"userName\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}" +
                     "}}}";
 
             try {
