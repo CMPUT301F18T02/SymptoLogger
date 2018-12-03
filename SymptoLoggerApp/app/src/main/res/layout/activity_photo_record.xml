@@ -59,7 +59,7 @@
         app:layout_constraintVertical_bias="0.12" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/chatbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -227,7 +227,7 @@
         android:onClick="BodySelected"
         android:text="Front Right Shoulder"
         android:textSize="0sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/chatbox"
         app:layout_constraintEnd_toEndOf="@+id/front"
         app:layout_constraintHorizontal_bias="0.186"
         app:layout_constraintStart_toStartOf="@+id/front"

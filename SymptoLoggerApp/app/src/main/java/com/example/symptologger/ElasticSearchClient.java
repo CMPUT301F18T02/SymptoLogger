@@ -11,11 +11,14 @@ import java.util.List;
 
 import javax.xml.transform.Source;
 
+import java.util.stream.Collectors;
+
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
 import io.searchbox.core.DeleteByQuery;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
+import io.searchbox.core.SearchResult;
 import io.searchbox.indices.DeleteIndex;
 import io.searchbox.indices.mapping.PutMapping;
 
@@ -204,6 +207,69 @@ public class ElasticSearchClient {
                 val = "There was an issue with communicating with the server; it may be offline. Try again.";
             }
             return val;
+        }
+    }
+
+    public static class FetchChatLogs extends AsyncTask<String, Void, Void>{
+
+        @Override
+        protected Void doInBackground(String... search_parameters){
+
+            String type = "chatLogs";
+            String query =  String.format("{\"query\":{\"bool\":{\"must\":[{\"match\":{\"participantsID\":\"%s\"}},{\"match\":{\"participantsID\":\"%s\"}}]}},\"sort\":{\"timestamp\":\"asc\"},\"size\":1000}", search_parameters[0], search_parameters[1]);
+            try {
+                List<SearchResult.Hit<ChatLogs,Void>> hits = client.execute(  new Search.Builder(query).addIndex(index).addType(type).build() ).getHits(ChatLogs.class);
+
+                if (hits.size() != 0){
+                    RecordCommentFragment.chatLogs.add(hits.stream()
+                            .map(result -> new ChatLogs(result.source.getParticipantsID(), result.source.getMessage(), result.source.getTimestamp()))
+                            .collect(Collectors.toList()));
+                    System.out.println("FETCHING DONE!");
+                    RecordCommentFragment.updateLogsReady = true;
+                    System.out.println("UPDATING VIEW DONE!");
+
+                    try {
+                        ChatManager.callViewUpdate();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    return null;
+                }
+                else{
+                    return null;
+                }
+            } catch (Exception e){
+                Log.i("Error","Something went wrong when we tried to communicate with the elasticsearch server.");
+            }
+            return null;
+        }
+    }
+
+    public static class SaveChatLog extends AsyncTask<String, Void, Void>{
+
+        @Override
+        protected Void doInBackground(String... save_parameters){
+
+
+            String type = "chatLogs";
+            String source = String.format("{\"participantsID\":[\"%s\",\"%s\"],\"message\":\"%s\",\"timestamp\":\"%s\"}", save_parameters[0], save_parameters[1], save_parameters[2], save_parameters[3]);
+            System.out.println(source);
+
+            try {
+                JestResult result = client.execute( new Index.Builder(source).index(index).type(type).build() );
+
+                if (result.isSucceeded()) {
+                    System.out.println("SAVING DONE!");
+                    return null;
+                }
+                else{
+                    return null;
+                }
+            } catch (Exception e) {
+                Log.i("Error", "The application failed - reason: AddChatLog.");
+            }
+            return null;
         }
     }
 
