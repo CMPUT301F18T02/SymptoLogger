@@ -92,9 +92,9 @@ public class CareProviderViewConcernActivity extends AppCompatActivity {
                             Toast.makeText(CareProviderViewConcernActivity.this,cpRecordList.get(recPos).getTitle(),Toast.LENGTH_SHORT).show();
                             Intent viewIntent = new Intent(CareProviderViewConcernActivity.this, CareProviderViewRecordActivity.class);
                             Bundle extras = new Bundle();
-                            extras.putInt("CP_CONCERN",pos);
-                            extras.putInt("CP_RECORD",recPos);
-                            extras.putString("pUserName",pUserName);
+                            extras.putInt("CONCERN",pos);
+                            extras.putInt("RECORD",recPos);
+                            extras.putString("USERNAME",pUserName);
                             viewIntent.putExtras(extras);
                             startActivity(viewIntent);
                         } else {
