@@ -178,10 +178,10 @@ public class NewConcernActivity extends AppCompatActivity {
         }
 
         // save new concern to sharedPreference
-        SharedPreference sharedPreference = new SharedPreference();
-        ArrayList<Concern> concerns = sharedPreference.readConcerns(getApplicationContext());
-        concerns.add(newConcern);
-        sharedPreference.updateConcerns(this.getApplicationContext(), concerns);
+        //SharedPreference sharedPreference = new SharedPreference();
+        //ArrayList<Concern> concerns = sharedPreference.readConcerns(getApplicationContext());
+        //concerns.add(newConcern);
+        //sharedPreference.updateConcerns(this.getApplicationContext(), concerns);
         clc.addConcern(newConcern, userName);
 
         Intent doneIntent = new Intent(NewConcernActivity.this, ListConcernActivity.class);

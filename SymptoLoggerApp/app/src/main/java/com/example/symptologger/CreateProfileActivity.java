@@ -114,28 +114,13 @@ public class CreateProfileActivity extends AppCompatActivity{
             userList.addUser(care_provider);
         }
 
-        // Log.d("user", String.valueOf(userList.getUserList().get(0)));e
-
-        Integer existingLargestID = -1;
-        ElasticSearchClient.SearchLargestMemberID SearchLargestMemberID = new ElasticSearchClient.SearchLargestMemberID();
-        SearchLargestMemberID.execute();
-
-        try {
-            existingLargestID = SearchLargestMemberID.get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        //if existingLargestID == -1 ---> some ERROR occured
 
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
         formatter.setTimeZone(TimeZone.getTimeZone("MST"));
         Date date = new Date();
 
 
-        Boolean isInUse = Boolean.FALSE;
+        String isInUse = "";
         ElasticSearchClient.SearchUser searchUser = new ElasticSearchClient.SearchUser();
         searchUser.execute(user_id);
         try {
@@ -146,11 +131,11 @@ public class CreateProfileActivity extends AppCompatActivity{
             e.printStackTrace();
         }
 
-        if (!isInUse) {
+        if (!isInUse.equals("")) {
 
             Boolean val = Boolean.FALSE;
             ElasticSearchClient.AddUser addUser = new ElasticSearchClient.AddUser();
-            addUser.execute(user_id, formatter.format(date), user_type, Integer.toString(existingLargestID + 1), email, phone);
+            addUser.execute(user_id, formatter.format(date), user_type, email, phone);
 
             try {
                 val = addUser.get();

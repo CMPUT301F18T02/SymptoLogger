@@ -22,7 +22,6 @@ public class PatientEntersShareCodeActivity extends AppCompatActivity {
         Bundle extras = intent.getExtras();
         userName = extras.getString("userName");
         checkCode = extras.getString("checkCode");
-        Toast.makeText(this,"Check code: "+checkCode,Toast.LENGTH_SHORT).show();
 
     }
 
@@ -42,6 +41,9 @@ public class PatientEntersShareCodeActivity extends AppCompatActivity {
             Toast.makeText(this, "Please enter share code. You won't be able to login otherwise.", Toast.LENGTH_SHORT).show();
         } else {
             if (verifyShareCode()){
+                ElasticSearchClient.DeleteShareCode deleteShareCode = new ElasticSearchClient.DeleteShareCode();
+                deleteShareCode.execute(userName,code); //delete code after successful login
+
                 Intent passedIntent = new Intent(PatientEntersShareCodeActivity.this,ListConcernActivity.class);
                 passedIntent.putExtra("userName",userName);
                 startActivity(passedIntent);

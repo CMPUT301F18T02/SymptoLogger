@@ -40,7 +40,7 @@ public class AddPatientActivity extends AppCompatActivity {
                 EditText shareCodeText = (EditText) findViewById(R.id.enterShareCodeText);
                 String shareCode = shareCodeText.getText().toString();
 
-                Boolean val = Boolean.FALSE;
+                String val = "";
 
                 ElasticSearchClient.SearchUser searchUser = new ElasticSearchClient.SearchUser();
                 searchUser.execute(patientUName);
@@ -53,7 +53,7 @@ public class AddPatientActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                if (!val){
+                if (!val.equals("")){
                     Toast.makeText(AddPatientActivity.this,"Username does not exist. Please enter valid username.",Toast.LENGTH_SHORT).show();
                 } else {
                     if (shareCode.equals("")){
