@@ -11,9 +11,8 @@ import static org.junit.Assert.assertTrue;
 public class PatientListTest {
     @Test
     public void testAddPatient() {
-        PatientList patientList = new PatientList();
-        Patient p = new Patient("testCarePatient", "First", "Last",
-                "test@test.com", "123456789", "patient");
+        PatientList patientList = new PatientList("CP_UNIT_TEST");
+        Patient p = new Patient("P_UNIT_TEST1","test@test.com", "123456789", "patient");
 
         assertFalse(patientList.getPatients().contains(p));
 
@@ -23,9 +22,8 @@ public class PatientListTest {
 
     @Test
     public void testRemovePatient() {
-        PatientList patientList = new PatientList();
-        Patient p = new Patient("testCarePatient", "First", "Last",
-                "test@test.com", "123456789", "patient");
+        PatientList patientList = new PatientList("CP_UNIT_TEST");
+        Patient p = new Patient("P_UNIT_TEST2","test@test.com", "123456789", "Patient");
 
         patientList.addPatient(p);
         assertTrue(patientList.getPatients().contains(p));
@@ -37,11 +35,9 @@ public class PatientListTest {
 
     @Test
     public void testGetPatientList() {
-        PatientList patientList = new PatientList();
-        Patient p1 = new Patient("testCarePatient1", "First", "Last",
-                "test@test.com", "123456789", "patient");
-        Patient p2 = new Patient("testCarePatient2", "First", "Last",
-                "test@test.com", "123456789", "patient");
+        PatientList patientList = new PatientList("CP_UNIT_TEST");
+        Patient p1 = new Patient("P_UNIT_TEST3","test@test.com", "123456789", "Patient");
+        Patient p2 = new Patient("P_UNIT_TEST4","test@test.com", "123456789", "Patient");
 
         patientList.addPatient(p1);
         patientList.addPatient(p2);
@@ -55,11 +51,9 @@ public class PatientListTest {
 
     @Test
     public void testGetPatientSCount() {
-        PatientList patientList = new PatientList();
-        Patient p1 = new Patient("testCarePatient1", "First", "Last",
-                "test@test.com", "123456789", "patient");
-        Patient p2 = new Patient("testCarePatient2", "First", "Last",
-                "test@test.com", "123456789", "patient");
+        PatientList patientList = new PatientList("CP_UNIT_TEST");
+        Patient p1 = new Patient("P_UNIT_TEST5","test@test.com", "123456789", "Patient");
+        Patient p2 = new Patient("P_UNIT_TEST6","test@test.com", "123456789", "Patient");
 
         patientList.addPatient(p1);
         patientList.addPatient(p2);

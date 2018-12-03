@@ -26,6 +26,7 @@ import io.searchbox.annotations.JestId;
  *  limitations under the License.
  */
 
+
 /**
  * The Concern class. Models a medical concern that a patient has.
  * @author Patrick Tamm
@@ -51,8 +52,12 @@ class Concern {
      * @see RecordList
      */
 
-    Concern(String userName){
-        this.title = "No title given";
+    Concern(String userName, String title) throws TitleTooLongException{
+        if (title.length() <= 30){
+            this.title = title;
+        } else {
+            throw new TitleTooLongException();
+        }
         this.date = new Date().toString();
         this.description = "No description given";
         this.myRecords = new ArrayList<Record>();

@@ -11,9 +11,9 @@ import static org.junit.Assert.assertTrue;
 public class CareProviderTest {
     @Test
     public void testGetAssignedPatients() {
-        CareProvider careProvider = new CareProvider("testCareProvider","test@test.com", "123456789", "cp");
-        Patient patient1 = new Patient("testPatient1","test@test.com", "123456789", "cp");
-        Patient patient2 = new Patient("testPatient2","test@test.com", "123456789", "cp");
+        CareProvider careProvider = new CareProvider("CP_UNITTEST","test@test.com", "123456789", "Care Provider");
+        Patient patient1 = new Patient("testPatient1","test@test.com", "123456789", "Patient");
+        Patient patient2 = new Patient("testPatient2","test@test.com", "123456789", "Patient");
 
         careProvider.addPatient(patient1);
         careProvider.addPatient(patient2);
@@ -22,21 +22,5 @@ public class CareProviderTest {
         expected.add(patient1);
         expected.add(patient2);
         assertEquals(expected, careProvider.getAssignedPatients());
-    }
-
-    @Test
-    public void testSearchConcerns() {
-        CareProvider careProvider = new CareProvider("testCareProvider","test@test.com", "123456789", "cp");
-        ArrayList<Concern> concerns = new ArrayList<>();
-        Concern concern1 = new Concern("username");
-
-        try {
-            concern1.setTitle("Testing");
-        } catch(TitleTooLongException e){
-            assertTrue(false);
-        }
-        concerns.add(concern1);
-
-        assertEquals(concerns, careProvider.searchConcerns("Testing"));
     }
 }

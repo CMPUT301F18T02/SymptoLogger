@@ -38,6 +38,9 @@ public class PatientList {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        if (this.patients == null){
+            this.patients = new ArrayList<Patient>();
+        }
     }
 
     /**

@@ -56,6 +56,10 @@ class ConcernList {
         this.concernListeners = new ArrayList<ConcernListener>();
     }
 
+    ConcernList(){
+        this.myConcerns = new ArrayList<Concern>();
+    }
+
     /**
      * returns the list of concerns
      * @return myConcerns a list of concerns
@@ -81,6 +85,11 @@ class ConcernList {
         this.myConcerns.add(concern);
         notifyListeners();
         this.concernListeners.size();
+    }
+
+
+    public void addConcern(Concern concern){
+        this.myConcerns.add(concern);
     }
 
     /**
