@@ -40,7 +40,9 @@ public class MainActivity extends AppCompatActivity {
         Integer status = sp.getLogInStatus(getApplicationContext());
         String userName = sp.loadUserName(getApplicationContext());
 
-        CheckServerAvailability.startIsAvailableTimer();
+        if (!CheckServerAvailability.getTimerStart()) {
+            CheckServerAvailability.startIsAvailableTimer();
+        }
 
         if (status == 1) {
             Intent intent = new Intent(MainActivity.this, ListConcernActivity.class);
@@ -59,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
             button_sign_up.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(MainActivity.this, CreateProfileActivity.class));
+                    Intent signUpIntent = new Intent(MainActivity.this, CreateProfileActivity.class);
+                    startActivity(signUpIntent);
                 }
             });
         }
