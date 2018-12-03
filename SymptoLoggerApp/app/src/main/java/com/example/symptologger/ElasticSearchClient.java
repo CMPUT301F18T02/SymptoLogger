@@ -758,7 +758,7 @@ public class ElasticSearchClient {
 
             ArrayList<Photograph> foundPhotos = new ArrayList<>();
             String type = "Photos";
-            String query =  String.format("{\"query\":{\"bool\":{\"must\":[{\"match\":{\"recordID\":\"%s\"}},{\"match\":{\"userID\":\"%s\"}}]}}}", search_parameters[0], search_parameters[1]);
+            String query =  String.format("{\"query\":{\"bool\":{\"must\":[{\"match\":{\"recordID\":\"%s \"}},{\"match\":{\"userID\":\"%s\"}}]}}}", search_parameters[0], search_parameters[1]);
             try {
                 JestResult result = client.execute(new Search.Builder(query).addIndex(index).addType(type).build());
                 if (result.isSucceeded()) {
