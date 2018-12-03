@@ -55,8 +55,8 @@ public class ViewConcernActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        pos = extras.getInt("pos");
-        userName = extras.getString("userName");
+        pos = extras.getInt("pos",0);
+        userName = extras.getString("USERNAME");
 
         //Intent intent = getIntent();
 
@@ -69,7 +69,6 @@ public class ViewConcernActivity extends AppCompatActivity {
         */
 
         //pos = intent.getIntExtra("pos",0);
-
 
         concerns = ConcernListController.getConcernList(userName).getConcernsList();
         concernList = new ArrayList<Concern>(concerns);
@@ -158,7 +157,7 @@ public class ViewConcernActivity extends AppCompatActivity {
     public void back() {
         Toast.makeText(this, "Back ...", Toast.LENGTH_SHORT).show();
         Intent backIntent = new Intent(ViewConcernActivity.this, ListConcernActivity.class);
-        backIntent.putExtra("userName",userName);
+        backIntent.putExtra("USERNAME",userName);
         startActivity(backIntent);
     }
 
@@ -167,7 +166,7 @@ public class ViewConcernActivity extends AppCompatActivity {
         Intent intent = new Intent(ViewConcernActivity.this, ModifyConcernActivity.class);
         Bundle modifyExtras = new Bundle();
         modifyExtras.putInt("pos",pos);
-        modifyExtras.putString("userName",userName);
+        modifyExtras.putString("USERNAME",userName);
         intent.putExtras(modifyExtras);
         startActivity(intent);
     }
