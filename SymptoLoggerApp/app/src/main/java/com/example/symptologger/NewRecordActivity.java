@@ -26,6 +26,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 /*
  *  Copyright 2018 Remi Arshad, Noni Hua, Jason Lee, Patrick Tamm, Kaiwen Zhang
@@ -53,7 +54,9 @@ public class NewRecordActivity extends AppCompatActivity {
 
     private static DateFormat dateFormat = new SimpleDateFormat("EEEE, MMM dd", Locale.CANADA);
     private static DateFormat timeFormat = new SimpleDateFormat("h:mm a", Locale.CANADA);
-    private static DateFormat stringDateFormat = new SimpleDateFormat("E, MMM dd yyyy HH:mm:ss:SSS", Locale.CANADA);
+    //private static DateFormat stringDateFormat = new SimpleDateFormat("E, MMM dd yyyy HH:mm:ss:SSS", Locale.CANADA);
+    private static SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss.SSS dd/MM/yyyy");
+
 
     private int pos;
     private String userName;
@@ -83,6 +86,8 @@ public class NewRecordActivity extends AppCompatActivity {
         pos = fromModconcern.getInt("pos",0);
         userName = fromModconcern.getString("userName");
 
+        formatter.setTimeZone(TimeZone.getTimeZone("MST"));
+
         concerns = ConcernListController.getConcernList(userName).getConcernsList();
         concernList = new ArrayList<Concern>(concerns);
 
@@ -111,7 +116,7 @@ public class NewRecordActivity extends AppCompatActivity {
             try {
                 TextView titleView = findViewById(R.id.recordTitleText);
                 titleView.setText(recordToModify.getTitle());
-                Date recordTime = stringDateFormat.parse(recordToModify.getDate());
+                Date recordTime = formatter.parse(recordToModify.getDate());
                 editDateButton.setText(dateFormat.format(recordTime));
                 editTimeButton.setText(timeFormat.format(recordTime));
             } catch (Exception e) {
@@ -195,7 +200,7 @@ public class NewRecordActivity extends AppCompatActivity {
                 String title = recordTitle.getText().toString();
 
                 Concern thisConcern = concernList.get(pos);
-                Record newRecord = new Record(stringDateFormat.format(c.getTime()),title,userName,thisConcern.getTitle());
+                Record newRecord = new Record(formatter.format(c.getTime()),title,userName,thisConcern.getTitle());
                 thisConcern.addRecord(newRecord);
 
                 Intent doneIntent = new Intent(NewRecordActivity.this, ViewConcernActivity.class);
