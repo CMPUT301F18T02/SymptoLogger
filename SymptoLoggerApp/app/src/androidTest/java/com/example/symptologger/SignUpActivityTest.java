@@ -26,13 +26,13 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class SingupActivityTest {
+public class SignUpActivityTest {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void singupActivityTest() {
+    public void signUpActivityTest() {
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.button_sign_up), withText("Sign Up"),
                         childAtPosition(
