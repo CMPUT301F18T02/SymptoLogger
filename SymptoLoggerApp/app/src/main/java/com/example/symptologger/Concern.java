@@ -1,8 +1,6 @@
 package com.example.symptologger;
 
 import android.content.Context;
-import android.util.Log;
-import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -208,7 +206,7 @@ class Concern {
      */
 
     public void addRecord(Record record) {
-        this.myRecords.add(record);
+//        this.myRecords.add(record);
         ElasticSearchClient.AddRecord addNewRecord = new ElasticSearchClient.AddRecord();
         addNewRecord.execute(record.getTitle(),record.getDate(),record.getConcernTitle(),record.getUserName(),new Date().toString());
 
@@ -239,15 +237,15 @@ class Concern {
             e.printStackTrace();
         }
 
-        context = ListConcernActivity.getContextOfApplication();
-        SharedPreference sp = new SharedPreference();
-        if (CheckServerAvailability.getConnectionStatus()) {
-            sp.saveRecords(context, myRecords, this.title);
-            Log.d("Online", "Saved records to sp");
-        } else {
-            Toast.makeText(context, "Offline, unable to load records",
-                    Toast.LENGTH_SHORT).show();
-        }
+//        context = ListConcernActivity.getContextOfApplication();
+//        SharedPreference sp = new SharedPreference();
+//        if (CheckServerAvailability.getConnectionStatus()) {
+//            sp.saveRecords(context, myRecords, this.title);
+//            Log.d("Online", "Saved records to sp");
+//        } else {
+//            Toast.makeText(context, "Offline, unable to load records",
+//                    Toast.LENGTH_SHORT).show();
+//        }
 
         return this.myRecords;
     }

@@ -49,11 +49,11 @@ public class ListConcernActivity extends AppCompatActivity {
     public static Context contextOfApplication;
 
     ListView concernListView;
-    ArrayList<Concern> concernList;
-    ArrayAdapter<Concern> concernListAdapter;
-    Collection<Concern> concerns;
+    static ArrayList<Concern> concernList;
+    static ArrayAdapter<Concern> concernListAdapter;
+    static Collection<Concern> concerns;
 
-    String userName;
+    static String userName;
 
     public static Context getContextOfApplication(){
         return contextOfApplication;
@@ -155,7 +155,6 @@ public class ListConcernActivity extends AppCompatActivity {
                     }
                 });
                 modifyAlert.show();
-
                 return false;
             }
         });
@@ -177,13 +176,9 @@ public class ListConcernActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
+    public static void fetchConcerns(){
+        concerns = ConcernListController.getConcernList(userName).getConcernsList();
+        concernList = new ArrayList<Concern>(concerns);
+        concernListAdapter.notifyDataSetChanged();
     }
 }

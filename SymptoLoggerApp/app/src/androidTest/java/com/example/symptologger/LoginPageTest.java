@@ -34,7 +34,7 @@ public class LoginPageTest {
     @Test
     public void loginPageTest2() {
         ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.button), withText("Sign In"),
+                allOf(withId(R.id.sendCommentButton), withText("Sign In"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
