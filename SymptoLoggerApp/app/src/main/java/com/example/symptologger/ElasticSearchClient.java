@@ -8,9 +8,6 @@ import com.searchly.jestdroid.JestClientFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.transform.Source;
-
 import java.util.stream.Collectors;
 
 import io.searchbox.client.JestClient;
@@ -142,15 +139,13 @@ public class ElasticSearchClient {
             String source = String.format("{\"userID\": \"%s\"," +
                     " \"creationDate\": \"%s\", " +
                     "\"userRole\": \"%s\", " +
-                    "\"memberID\": %d, " +
                     "\"email\": \"%s\", " +
                     "\"phone\": \"%s\"}",
                     record[0],
                     record[1],
                     record[2],
-                    Integer.parseInt(record[3]),
-                    record[4],
-                    record[5]);
+                    record[3],
+                    record[4]);
 
             try {
                 JestResult result = client.execute( new Index.Builder(source).index(index).type(type).build() );
@@ -216,13 +211,14 @@ public class ElasticSearchClient {
         protected Void doInBackground(String... search_parameters){
 
             String type = "chatLogs";
-            String query =  String.format("{\"query\":{\"bool\":{\"must\":[{\"match\":{\"participantsID\":\"%s\"}},{\"match\":{\"participantsID\":\"%s\"}}]}},\"sort\":{\"timestamp\":\"asc\"},\"size\":1000}", search_parameters[0], search_parameters[1]);
+            String query =  String.format("{\"query\":{\"bool\":{\"must\":[{\"match\":{\"recordID\":\"%s\"}}, {\"match\":{\"participantsID\":\"%s\"}},{\"match\":{\"participantsID\":\"%s\"}}]}},\"sort\":{\"timestamp\":\"asc\"},\"size\":1000}", search_parameters[0], search_parameters[1], search_parameters[2]);
             try {
                 List<SearchResult.Hit<ChatLogs,Void>> hits = client.execute(  new Search.Builder(query).addIndex(index).addType(type).build() ).getHits(ChatLogs.class);
 
                 if (hits.size() != 0){
+                    Log.d("DEBUG", "Hit size is: " + hits.size());
                     RecordCommentFragment.chatLogs.add(hits.stream()
-                            .map(result -> new ChatLogs(result.source.getParticipantsID(), result.source.getMessage(), result.source.getTimestamp()))
+                            .map(result -> new ChatLogs(result.source.getRecordID(), result.source.getParticipantsID(), result.source.getMessage(), result.source.getTimestamp()))
                             .collect(Collectors.toList()));
                     System.out.println("FETCHING DONE!");
                     RecordCommentFragment.updateLogsReady = true;
@@ -253,7 +249,7 @@ public class ElasticSearchClient {
 
 
             String type = "chatLogs";
-            String source = String.format("{\"participantsID\":[\"%s\",\"%s\"],\"message\":\"%s\",\"timestamp\":\"%s\"}", save_parameters[0], save_parameters[1], save_parameters[2], save_parameters[3]);
+            String source = String.format("{\"recordID\":\"%s\",\"participantsID\":[\"%s\",\"%s\"],\"message\":\"%s\",\"timestamp\":\"%s\"}", save_parameters[0], save_parameters[1], save_parameters[2], save_parameters[3], save_parameters[4]);
             System.out.println(source);
 
             try {
@@ -270,42 +266,6 @@ public class ElasticSearchClient {
                 Log.i("Error", "The application failed - reason: AddChatLog.");
             }
             return null;
-        }
-    }
-
-    /**
-     * Represents the object used to find the largest member id.
-     *
-     * @author Remi Arshad
-     */
-
-    public static class SearchLargestMemberID extends AsyncTask<String, Void, Integer>{
-
-        @Override
-        protected Integer doInBackground(String... search_parameters){
-
-            String type = "usersLogin";
-            String query =  "{\"query\": {\"match_all\": {}},\"sort\": {\"memberID\": \"desc\"},\"size\": 1}";
-            try {
-                JestResult result = client.execute(  new Search.Builder(query).addIndex(index).addType(type).build() );
-
-                if (result.isSucceeded()){
-                    List<SourceAsObjectListMap> res = result.getSourceAsObjectList(SourceAsObjectListMap.class);
-                    if (res.size() != 0){
-                        return res.get(0).getMemberID();
-                    }
-                    else{
-                        return -1;
-                    }
-
-
-                } else {
-                    Log.e("Error","Some issues with query.");
-                }
-            } catch (Exception e){
-                Log.i("Error","Something went wrong when we tried to communicate with the elasticsearch server.");
-            }
-            return -1;
         }
     }
 
@@ -347,6 +307,7 @@ public class ElasticSearchClient {
                     JestResult result = client.execute(new Index.Builder(source).index(index).type(type).build());
 
                     if (result.isSucceeded()) {
+                        //ListConcernActivity.fetchConcerns();
                         return Boolean.TRUE;
                     } else {
                         return Boolean.FALSE;
@@ -390,7 +351,7 @@ public class ElasticSearchClient {
             protected Boolean doInBackground(String... record) {
 
                 String type = "Records";
-                String source = String.format("{\"title\": \"%s\", \"date\": \"%s\", \"concernTitle\": \"%s\", \"userName\": \"%s\", \"created\": \"%s\"}", record[0], record[1], record[2], record[3], record[4]);
+                String source = String.format("{\"title\": \"%s\", \"date\": \"%s\", \"concernTitle\": \"%s\", \"userName\": \"%s\"}", record[0], record[1], record[2], record[3]);
 
                 try {
                     JestResult result = client.execute(new Index.Builder(source).index(index).type(type).build());
@@ -432,7 +393,8 @@ public class ElasticSearchClient {
                         Log.e("Error", "Some issues with query.");
                     }
                 } catch (Exception e) {
-                    Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server.");
+                    Log.i("Error", "000000000Something went wrong when we tried to communicate with the elasticsearch server.");
+                    return foundRecords;
                 }
                 return foundRecords;
             }
@@ -509,6 +471,7 @@ public class ElasticSearchClient {
             return null; //Void requires return, (it's not void)
         }
     }
+
 
     public static class AddPatient extends AsyncTask<String, Void, Boolean> { //use Void instead of void for AsyncTask as return type
         @Override
@@ -704,17 +667,24 @@ public class ElasticSearchClient {
         }
     }
 
+
     public static class AddRecordTable extends AsyncTask<String, Void, Void> { //use Void instead of void for AsyncTask as return type
         @Override
         protected Void doInBackground(String... indices) {
 
             String type = "Records";
+//            String source = "{\"Records\" : {\"properties\" : " +
+//                    "{\"title\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
+//                    "\"date\": {\"type\" : \"date\",\"format\":\"HH:mm:ss.SSS dd/MM/yyyy\"}, " +
+//                    "\"concernTitle\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
+//                    "\"userName\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}" +
+//                    "}}}";
+
             String source = "{\"Records\" : {\"properties\" : " +
                     "{\"title\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
-                    "\"date\": {\"type\" : \"date\"}, " +
+                    "\"date\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
                     "\"concernTitle\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
-                    "\"userName\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
-                    "\"created\": {\"type\" : \"date\"}," +
+                    "\"userName\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}" +
                     "}}}";
 
             try {

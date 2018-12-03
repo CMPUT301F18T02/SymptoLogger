@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +16,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.TimeZone;
 import java.util.concurrent.ExecutionException;
 
@@ -49,6 +52,7 @@ public class RecordCommentFragment extends Fragment {
 
 //    private OnFragmentInteractionListener mListener;
 
+    private static DateFormat stringToDateFormat = new SimpleDateFormat("E MMM dd HH:mm:ss.SSS z yyyy", Locale.CANADA);
     private ArrayList<CareProviderComment> careProviderCommentList = new ArrayList<>();
     private ArrayAdapter<CareProviderComment> adapter;
 
@@ -62,6 +66,7 @@ public class RecordCommentFragment extends Fragment {
     private EditText messageBox;
     private Button sendButton;
 
+    private String recordID;
     private String senderID;
     private String receiverID;
     private String message;
@@ -117,6 +122,7 @@ public class RecordCommentFragment extends Fragment {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        recordID = record.getDate();
 
         messageBox = view.findViewById(R.id.addComment);
         textBox = view.findViewById(R.id.chatbox);
@@ -124,6 +130,7 @@ public class RecordCommentFragment extends Fragment {
 
         if (patient != null) {
             // Set receiver ID if there is a care provider added
+            Log.d("DEBUG", "Patient doesn't have a care provider assigned");
             receiverID = patient.getCpUserName();
 
             recyclerView = view.findViewById(R.id.chatlogs_holder);
@@ -133,6 +140,7 @@ public class RecordCommentFragment extends Fragment {
             recyclerView.setAdapter(mAdapter);
 
             cm = new ChatManager(getActivity());
+            cm.setFetchInfo(recordID, senderID, receiverID);
             cm.startFetchLogsTimer();
         }
         else {
@@ -150,12 +158,19 @@ public class RecordCommentFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 cm.stopFetchLogsTimer();
-                SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss.SSS dd/MM/yyyy");
+                SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss.SSS dd/MM/yyyy", Locale.CANADA);
                 formatter.setTimeZone(TimeZone.getTimeZone("MST"));
                 date = new Date();
                 String msg = messageBox.getText().toString();
+
                 if (msg.length() > 0) {
-                    ChatManager.setSaveVars(senderID, receiverID, msg, formatter.format(date));
+//                    try {
+//                        Date recordTime = stringToDateFormat.parse(record.getDate());
+//                        recordID = formatter.format(recordTime);
+//                    } catch (Exception e) {
+//                        recordID = formatter.format(new Date());
+//                    }
+                    ChatManager.setSaveVars(recordID, senderID, receiverID, msg, formatter.format(date));
                     ChatManager.saveLogs();
                     cm.restartTimer();
                     messageBox.setText("");

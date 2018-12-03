@@ -1,5 +1,7 @@
 package com.example.symptologger;
 
+import android.util.Log;
+
 import java.net.Socket;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -15,6 +17,7 @@ public class CheckServerAvailability {
         public void run() {
             isAvailable();
             //DO SOMETHING
+            Log.d("SERVER", String.valueOf(connectionStatus));
         }
     };
 
@@ -31,5 +34,9 @@ public class CheckServerAvailability {
         } catch (Exception e) {
             connectionStatus = false;
         }
+    }
+
+    public static boolean getConnectionStatus() {
+        return connectionStatus;
     }
 }
