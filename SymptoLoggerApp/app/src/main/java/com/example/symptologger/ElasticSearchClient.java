@@ -647,7 +647,7 @@ public class ElasticSearchClient {
             String type = "Records";
             String source = "{\"Records\" : {\"properties\" : " +
                     "{\"title\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
-                    "\"date\": {\"type\" : \"date\"}, " +
+                    "\"date\": {\"type\" : \"date\",\"format\":\"HH:mm:ss.SSS dd/MM/yyyy\"}, " +
                     "\"concernTitle\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
                     "\"userName\": {\"type\" : \"string\", \"index\": \"not_analyzed\"}," +
                     "\"created\": {\"type\" : \"date\"}," +
