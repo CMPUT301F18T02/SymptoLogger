@@ -84,14 +84,6 @@ class Record {
         return id;
     }
 
-    //public String getComment() {
-      //  return this.comment;
-    //}
-
-    //public void setComment(String comment) {
-      //  this.comment = comment;
-    //}
-
     /**
      * returns the title of the record
      * @return title

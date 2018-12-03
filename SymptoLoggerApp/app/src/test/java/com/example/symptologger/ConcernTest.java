@@ -129,6 +129,21 @@ public class ConcernTest {
         assertEquals(description,newDes);
     }
 
+    @Test
+    public void testGetUserName(){
+        Concern concern = null;
+        String user = "UNIT_TEST";
+        try {
+            concern = new Concern(user,"");
+        } catch (TitleTooLongException e) {
+            e.printStackTrace();
+        }
+
+        String usr = concern.getUserName();
+
+        assertEquals(user,usr);
+    }
+
 
 //    @Test
 //    public void testAddRecord(){
