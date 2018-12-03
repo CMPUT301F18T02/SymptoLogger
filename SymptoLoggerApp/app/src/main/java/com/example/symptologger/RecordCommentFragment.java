@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -128,6 +129,7 @@ public class RecordCommentFragment extends Fragment {
 
         if (patient != null) {
             // Set receiver ID if there is a care provider added
+            Log.d("DEBUG", "Patient doesn't have a care provider assigned");
             receiverID = patient.getCpUserName();
 
             recyclerView = view.findViewById(R.id.chatlogs_holder);
@@ -164,7 +166,6 @@ public class RecordCommentFragment extends Fragment {
                         Date recordTime = stringToDateFormat.parse(record.getDate());
                         recordID = formatter.format(recordTime);
                     } catch (Exception e) {
-                        // TODO:
                         recordID = formatter.format(new Date());
                     }
                     ChatManager.setSaveVars(recordID, senderID, receiverID, msg, formatter.format(date));
