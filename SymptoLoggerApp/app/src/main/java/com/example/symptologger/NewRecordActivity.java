@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -33,6 +32,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
+import java.util.TimeZone;
 
 /*
  *  Copyright 2018 Remi Arshad, Noni Hua, Jason Lee, Patrick Tamm, Kaiwen Zhang
@@ -60,17 +60,19 @@ public class NewRecordActivity extends AppCompatActivity {
 
     private static DateFormat dateFormat = new SimpleDateFormat("EEEE, MMM dd", Locale.CANADA);
     private static DateFormat timeFormat = new SimpleDateFormat("h:mm a", Locale.CANADA);
-    private static DateFormat stringDateFormat = new SimpleDateFormat("E, MMM dd yyyy HH:mm:ss", Locale.CANADA);
+    //private static DateFormat stringDateFormat = new SimpleDateFormat("E, MMM dd yyyy HH:mm:ss:SSS", Locale.CANADA);
+    private static SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss.SSS dd/MM/yyyy");
+
 
     private int pos;
     private String userName;
     private int record_pos;
-    private boolean modifying = false;
     Collection<Concern> concerns;
     ArrayList<Concern> concernList;
     Concern concernToModify;
     ArrayList<Record> recordList;
     Record recordToModify;
+    Place place;
 
     Record photorec;
 
@@ -92,55 +94,50 @@ public class NewRecordActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle fromModconcern = intent.getExtras();
-        pos = fromModconcern.getInt("CONCERN_POS",0);
-        userName = fromModconcern.getString("USERNAME");
+        pos = fromModconcern.getInt("pos",0);
+        userName = fromModconcern.getString("userName");
+
+        formatter.setTimeZone(TimeZone.getTimeZone("MST"));
 
         concerns = ConcernListController.getConcernList(userName).getConcernsList();
         concernList = new ArrayList<Concern>(concerns);
-        concernToModify = concernList.get(pos);
 
-        try {
-            record_pos = fromModconcern.getInt("RECORD_POS");
-            modifying = true;
-            concernToModify = concernList.get(pos);
-            recordList = new ArrayList<>(concernToModify.getRecords());
-            recordToModify = null;//recordList.get(record_pos);
-        } catch (Exception e) {
-            record_pos = 0;
-        }
+//        try {
+//            record_pos = fromModconcern.getInt("RECORD_POS");
+//            modifying = true;
+//            concernToModify = concernList.get(pos);
+//            recordList = new ArrayList<>(concernToModify.getRecords());
+//            recordToModify = recordList.get(record_pos);
+//        } catch (Exception e) {
+//            record_pos = 0;
+//        }
 
         final Button editDateButton = findViewById(R.id.dateField);
         final Button editTimeButton = findViewById(R.id.timeField);
         Button addLocationButton = findViewById(R.id.addLocationButton);
         Button addBodyPartsButton = findViewById(R.id.addBodyPartsButton);
 
-        if (!modifying) {
-            getCalendarInfo();
-            Date now = c.getTime();
-            editDateButton.setText(dateFormat.format(now));
-            editTimeButton.setText(timeFormat.format(now));
-
-        } else {
-            try {
-                TextView titleView = findViewById(R.id.recordTitleText);
-                titleView.setText(recordToModify.getTitle());
-                Date recordTime = stringDateFormat.parse(recordToModify.getDate());
-                editDateButton.setText(dateFormat.format(recordTime));
-                editTimeButton.setText(timeFormat.format(recordTime));
-            } catch (Exception e) {
-                getCalendarInfo();
-                Date now = c.getTime();
-                editDateButton.setText(dateFormat.format(now));
-                editTimeButton.setText(timeFormat.format(now));
-            }
-        }
-        if (recordToModify != null){
-            Log.d("RECORD IS NOT NULL","NOT NULL");
-        }else{
-            Log.d("RECORD IS NULL","NULL");
-        }
-
         setBodyText(addBodyPartsButton);
+//        if (!modifying) {
+        getCalendarInfo();
+        Date now = c.getTime();
+        editDateButton.setText(dateFormat.format(now));
+        editTimeButton.setText(timeFormat.format(now));
+
+//        } else {
+//            try {
+//                TextView titleView = findViewById(R.id.recordTitleText);
+//                titleView.setText(recordToModify.getTitle());
+//                Date recordTime = formatter.parse(recordToModify.getDate());
+//                editDateButton.setText(dateFormat.format(recordTime));
+//                editTimeButton.setText(timeFormat.format(recordTime));
+//            } catch (Exception e) {
+//                getCalendarInfo();
+//                Date now = c.getTime();
+//                editDateButton.setText(dateFormat.format(now));
+//                editTimeButton.setText(timeFormat.format(now));
+//            }
+//        }
 
 
         editDateButton.setOnClickListener(new View.OnClickListener() {
@@ -246,52 +243,78 @@ public class NewRecordActivity extends AppCompatActivity {
                 EditText recordTitle = (EditText) findViewById(R.id.recordTitleText);
                 String title = recordTitle.getText().toString();
 
+                Log.d("DEBUG", "Concern pos is " + pos);
                 Concern thisConcern = concernList.get(pos);
 
-                if (recordToModify != null){
+//                if (recordToModify != null){
+//
+//                    //Adding the photograph classes to the record class
+//                    ArrayList<Photograph> pkp = recordToModify.getPhoto();
+//                    for (int u = 0; u < pkp.size(); u++){
+//                        recordToModify.removePhoto(u);
+//                    }
+//                    pkp = photorec.getPhoto();
+//                    for (int u = 0; u < pkp.size(); u++){
+//                        recordToModify.addPhoto(pkp.get(u));
+//                    }
+//                    //Saving record class that contains photograph
+//                    //However this is NOT a NEW record
+//                    //So it just changes the previous record class that's given with the corresponding photographs
+//
+//                    //Idk who implemented this addRecord but would a modifying record be added?
+//                    //Or just updated?
+//                    thisConcern.addRecord(recordToModify);
+//                }else{
+//                    Record newRecord = new Record(c.getTime(),title,userName,thisConcern.getTitle());
+//                    //Adding the photograph classes to the record class
+//                    ArrayList<Photograph> pkp = photorec.getPhoto();
+//
+//                    String recordID = newRecord.getId();
+//
+//                    for (int u = 0; u < pkp.size(); u++){
+//                        Photograph ppp = pkp.get(u);
+//                        newRecord.addPhoto(ppp);
+//                        //
+//                        String BPs = "[" + ppp.getBPs().stream()
+//                                .map(s -> "\"" + s + "\"")
+//                                .collect(Collectors.joining(", ")) + "]";
+//
+//                        ElasticSearchClient.AddPhoto addPhoto = new ElasticSearchClient.AddPhoto();
+//                        addPhoto.execute(BPs, ppp.getEncrypted(), ppp.getID(), ppp.getID(), userName);
+//                        //
+//                    }
+//                    //Saving the record class that contains the Photographs
+//                    //This is a newRecord not a modifying record
+//
+//
+//                    thisConcern.addRecord(newRecord);
+//
+//                }
+                getCalendarInfo();
+                Record newRecord = new Record(formatter.format(c.getTime()),title,userName,thisConcern.getTitle());
 
-                    //Adding the photograph classes to the record class
-                    ArrayList<Photograph> pkp = recordToModify.getPhoto();
-                    for (int u = 0; u < pkp.size(); u++){
-                        recordToModify.removePhoto(u);
-                    }
-                    pkp = photorec.getPhoto();
-                    for (int u = 0; u < pkp.size(); u++){
-                        recordToModify.addPhoto(pkp.get(u));
-                    }
-                    //Saving record class that contains photograph
-                    //However this is NOT a NEW record
-                    //So it just changes the previous record class that's given with the corresponding photographs
+                //Adding the photograph classes to the record class
+                ArrayList<Photograph> pkp = photorec.getPhoto();
 
-                    //Idk who implemented this addRecord but would a modifying record be added?
-                    //Or just updated?
-                    thisConcern.addRecord(recordToModify);
-                }else{
-                    Record newRecord = new Record(c.getTime(),title,userName,thisConcern.getTitle());
+                String recordID = newRecord.getId();
 
-                    //Adding the photograph classes to the record class
-                    ArrayList<Photograph> pkp = photorec.getPhoto();
+                for (int u = 0; u < pkp.size(); u++){
+                    Photograph ppp = pkp.get(u);
+                    newRecord.addPhoto(ppp);
+                    //
+                    String BPs = "[" + ppp.getBPs().stream()
+                            .map(s -> "\"" + s + "\"")
+                            .collect(Collectors.joining(", ")) + "]";
 
-                    String recordID = newRecord.getId();
-
-                    for (int u = 0; u < pkp.size(); u++){
-                        Photograph ppp = pkp.get(u);
-                        newRecord.addPhoto(ppp);
-                        //
-                        String BPs = "[" + ppp.getBPs().stream()
-                                .map(s -> "\"" + s + "\"")
-                                .collect(Collectors.joining(", ")) + "]";
-
-                        ElasticSearchClient.AddPhoto addPhoto = new ElasticSearchClient.AddPhoto();
-                        addPhoto.execute(BPs, ppp.getEncrypted(), ppp.getID(), ppp.getID(), userName);
-                        //
-                    }
-                    //Saving the record class that contains the Photographs
-                    //This is a newRecord not a modifying record
-
-
-                    thisConcern.addRecord(newRecord);
+                    ElasticSearchClient.AddPhoto addPhoto = new ElasticSearchClient.AddPhoto();
+                    addPhoto.execute(BPs, ppp.getEncrypted(), ppp.getID(), ppp.getID(), userName);
+                    //
                 }
+                //Saving the record class that contains the Photographs
+                //This is a newRecord not a modifying record
+
+                thisConcern.addRecord(newRecord);
+
 
                 Intent doneIntent = new Intent(NewRecordActivity.this, ViewConcernActivity.class);
                 Bundle doneBundle = new Bundle();
@@ -423,7 +446,7 @@ public class NewRecordActivity extends AppCompatActivity {
         int PLACE_PICKER_REQUEST = 1;
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
-                Place place = PlacePicker.getPlace(this, data);
+                place = PlacePicker.getPlace(this, data);
                 Button addLocationButton = findViewById(R.id.addLocationButton);
                 addLocationButton.setText(place.getAddress());
             }

@@ -26,13 +26,13 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class LoginPageTest {
+public class LoginActivityTest {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void loginPageTest2() {
+    public void loginActivityTest() {
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.sendCommentButton), withText("Sign In"),
                         childAtPosition(
@@ -52,6 +52,16 @@ public class LoginPageTest {
                                 1),
                         isDisplayed()));
         button.check(matches(isDisplayed()));
+
+//        ViewInteraction editText = onView(
+//                allOf(withId(R.id.typedUserName), withText("Username"),
+//                        childAtPosition(
+//                                childAtPosition(
+//                                        withId(android.R.id.content),
+//                                        0),
+//                                0),
+//                        isDisplayed()));
+//        editText.check(matches(isDisplayed()));
 
     }
 

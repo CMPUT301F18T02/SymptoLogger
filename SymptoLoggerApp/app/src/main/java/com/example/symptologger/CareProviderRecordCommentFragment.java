@@ -48,7 +48,7 @@ import java.util.concurrent.ExecutionException;
  * </p>
  */
 
-public class RecordCommentFragment extends Fragment {
+public class CareProviderRecordCommentFragment extends Fragment {
 
 //    private OnFragmentInteractionListener mListener;
 
@@ -59,6 +59,7 @@ public class RecordCommentFragment extends Fragment {
     int RECORD_POS;
     int CONCERN_POS;
     String USERNAME;
+    private String CP_USERNAME;
 
     Record record;
 
@@ -79,7 +80,7 @@ public class RecordCommentFragment extends Fragment {
     private ChatManager cm;
     private static ChatViewAdapter mAdapter;
 
-    public RecordCommentFragment() {
+    public CareProviderRecordCommentFragment() {
         // Required empty public constructor
     }
 
@@ -100,6 +101,7 @@ public class RecordCommentFragment extends Fragment {
             RECORD_POS = bundle.getInt("RECORD_POS");
             CONCERN_POS = bundle.getInt("CONCERN_POS");
             USERNAME = bundle.getString("USERNAME");
+            CP_USERNAME = bundle.getString("CP_USERNAME");
         } catch (Exception e) {
             // TODO: offline mode
         }
@@ -111,48 +113,35 @@ public class RecordCommentFragment extends Fragment {
 
         record = recordList.get(RECORD_POS);
 
-        senderID = USERNAME;
-        ElasticSearchClient.GetSinglePatient singlePatient = new ElasticSearchClient.GetSinglePatient();
-        singlePatient.execute(USERNAME);
-        Patient patient = null;
-        try {
-            patient = singlePatient.get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        senderID = CP_USERNAME;
         recordID = record.getDate();
 
         messageBox = view.findViewById(R.id.addComment);
         textBox = view.findViewById(R.id.chatbox);
         sendButton = view.findViewById(R.id.sendCommentButton);
 
-        if (patient != null) {
-            // Set receiver ID if there is a care provider added
-            Log.d("DEBUG", "Patient doesn't have a care provider assigned");
-            receiverID = patient.getCpUserName();
+        receiverID = USERNAME;
 
-            recyclerView = view.findViewById(R.id.chatlogs_holder);
-            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
-            recyclerView.setLayoutManager(mLayoutManager);
-            mAdapter = new ChatViewAdapter(chatLogs);
-            recyclerView.setAdapter(mAdapter);
+        recyclerView = view.findViewById(R.id.chatlogs_holder);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new ChatViewAdapter(chatLogs);
+        recyclerView.setAdapter(mAdapter);
 
-            cm = new ChatManager(getActivity());
-            cm.setFetchInfo(recordID, senderID, receiverID);
-            cm.startFetchLogsTimer();
-        }
-        else {
-            careProviderCommentList = record.getCareProviderComment();
-
-            adapter = new ArrayAdapter<CareProviderComment>(
-                getContext(),
-                R.layout.list_layout,
-                careProviderCommentList);
-            ListView careProviderCommentsListView = view.findViewById(R.id.chatlogs_holder);
-            careProviderCommentsListView.setAdapter(adapter);
-        }
+        cm = new ChatManager(getActivity());
+        cm.setFetchInfo(recordID, senderID, receiverID);
+        cm.startFetchLogsTimer();
+//        }
+//        else {
+//            careProviderCommentList = record.getCareProviderComment();
+//
+//            adapter = new ArrayAdapter<CareProviderComment>(
+//                getContext(),
+//                R.layout.list_layout,
+//                careProviderCommentList);
+//            ListView careProviderCommentsListView = view.findViewById(R.id.chatlogs_holder);
+//            careProviderCommentsListView.setAdapter(adapter);
+//        }
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override

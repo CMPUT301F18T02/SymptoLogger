@@ -22,11 +22,13 @@ import java.util.ArrayList;
  * Care Provider model. Extending User class.
  */
 public class CareProvider extends User {
-    private PatientList patients;
+    //private PatientList patientList;
+    private ArrayList<Patient> patients;
     private int assigneeCount;
 
     public CareProvider(String id, String email, String cell, String user_type) {
         super(id, email, cell, user_type);
+        this.patients = new ArrayList<Patient>();
     }
 
     /**
@@ -34,7 +36,7 @@ public class CareProvider extends User {
      * @return patients
      */
 
-    public PatientList getAssignedPatients() {
+    public ArrayList<Patient> getAssignedPatients() {
         return this.patients;
     }
 
@@ -44,19 +46,8 @@ public class CareProvider extends User {
      */
 
     public void addPatient(Patient p) {
-        this.patients.addPatient(p);
+        this.patients.add(p);
     }
 
-    /**
-     * Allows care providers to search through a patient's concerns.
-     * @param typed the search criteria.
-     * @return ArrayList<Concern> a list of the concerns matching the search criteria.
-     */
-
-    //NOT IN VERSION 1
-
-    public ArrayList<Concern> searchConcerns(String typed) {
-        return new ArrayList<Concern>();
-    }
 }
 

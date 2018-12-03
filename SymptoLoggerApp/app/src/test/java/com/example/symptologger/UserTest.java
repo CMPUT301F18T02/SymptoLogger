@@ -5,66 +5,32 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class UserTest {
-    @Test
-    public void testSetFirstName() {
-        Patient patient = new Patient("testCarePatient", "First", "Last",
-                "test@test.com", "123456789", "user");
-        String expectedName = "FisrtName";
-        patient.setFirstName(expectedName);
-
-        assertEquals(expectedName, patient.getFirstName());
-    }
-
-    @Test
-    public void testSetLastName() {
-        Patient patient = new Patient("testCarePatient", "First", "Last",
-                "test@test.com", "123456789", "user");
-        String expectedName = "LastName";
-        patient.setLastName(expectedName);
-
-        assertEquals(expectedName, patient.getLastName());
-    }
-
-    @Test
-    public void testGetFirstName() {
-        Patient patient = new Patient("testCarePatient", "First", "Last",
-                "test@test.com", "123456789", "user");
-        String expectedName = "FisrtName";
-        patient.setFirstName(expectedName);
-        String result = patient.getFirstName();
-
-        assertEquals(expectedName, result);
-    }
-
-    @Test
-    public void testGetLastName() {
-        Patient patient = new Patient("testCarePatient", "First", "Last",
-                "test@test.com", "123456789", "user");
-        String expectedName = "LastName";
-        patient.setLastName(expectedName);
-        String result = patient.getLastName();
-
-        assertEquals(expectedName, result);
-    }
 
     @Test
     public void testSetID() {
-        Patient patient = new Patient("testCarePatient", "First", "Last",
-                "test@test.com", "123456789", "user");
-        String expected = "validID";
-        patient.setId(expected);
+        User user = new User("UNIT_TESTER","test@test.com", "123456789", "user");
+        String expected = "UNIT_TESTER!!!";
+        try {
+            user.setUserID(expected);
+        } catch (UserIDTooShortException e) {
+            e.printStackTrace();
+        }
 
-        assertEquals(expected, patient.getId());
+        assertEquals(expected, user.getUserID());
     }
 
     @Test
     public void testGetId(){
         User user = new User();
 
-        String id = "9999";
-        user.setId(id);
+        String id = "UNIT_TESTER";
+        try {
+            user.setUserID(id);
+        } catch (UserIDTooShortException e) {
+            e.printStackTrace();
+        }
 
-        assertEquals(user.getId(), id);
+        assertEquals(user.getUserID(), id);
     }
 
     @Test

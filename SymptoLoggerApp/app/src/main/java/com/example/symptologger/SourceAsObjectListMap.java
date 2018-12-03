@@ -17,7 +17,7 @@ package com.example.symptologger;
  */
 
 /**
- * Used for mapping values fro ElasticSearch
+ * Used for mapping values for ElasticSearch
  *
  * @author Remi Arshad
  */
