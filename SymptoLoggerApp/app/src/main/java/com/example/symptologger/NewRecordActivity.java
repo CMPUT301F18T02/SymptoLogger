@@ -71,6 +71,8 @@ public class NewRecordActivity extends AppCompatActivity {
     ArrayList<Record> recordList;
     Record recordToModify;
 
+    Record photorec;
+
     ArrayList<Photograph> photos = new ArrayList<>();
     List<Bitmap> bits = new ArrayList<>();
 
@@ -102,8 +104,8 @@ public class NewRecordActivity extends AppCompatActivity {
             recordList = new ArrayList<>(concernToModify.getRecords());
             recordToModify = recordList.get(record_pos);
         } catch (Exception e) {
-            recordToModify = new Record();
             record_pos = 0;
+            photorec = new Record(new Date(),"",userName,"");
         }
 
         final Button editDateButton = findViewById(R.id.dateField);
@@ -190,7 +192,12 @@ public class NewRecordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Return arraylist photos
-                photos = recordToModify.getPhoto();
+                if (photorec != null){
+                    photos = photorec.getPhoto();
+                }else{
+                    photos = new ArrayList<>();
+                }
+
                 //feature
                 Intent intent = new Intent(NewRecordActivity.this, PhotoRecordActivity.class);
                 intent.putExtra("USERNAMEOFRECORD",userName);
@@ -231,8 +238,37 @@ public class NewRecordActivity extends AppCompatActivity {
                 String title = recordTitle.getText().toString();
 
                 Concern thisConcern = concernList.get(pos);
-                Record newRecord = new Record(c.getTime(),title,userName,thisConcern.getTitle());
-                thisConcern.addRecord(newRecord);
+
+                if (recordToModify != null){
+
+                    //Adding the photograph classes to the record class
+                    ArrayList<Photograph> pkp = recordToModify.getPhoto();
+                    for (int u = 0; u < pkp.size(); u++){
+                        recordToModify.removePhoto(u);
+                    }
+                    pkp = photorec.getPhoto();
+                    for (int u = 0; u < pkp.size(); u++){
+                        recordToModify.addPhoto(pkp.get(u));
+                    }
+                    //
+
+                    thisConcern.addRecord(recordToModify);
+                }else{
+                    Record newRecord = new Record(c.getTime(),title,userName,thisConcern.getTitle());
+
+                    //Adding the photograph classes to the record class
+                    ArrayList<Photograph> pkp = photorec.getPhoto();
+                    for (int u = 0; u < pkp.size(); u++){
+                        newRecord.addPhoto(pkp.get(u));
+                    }
+                    //
+
+                    thisConcern.addRecord(newRecord);
+                }
+
+
+
+
 
                 Intent doneIntent = new Intent(NewRecordActivity.this, ViewConcernActivity.class);
                 Bundle doneBundle = new Bundle();
@@ -298,7 +334,7 @@ public class NewRecordActivity extends AppCompatActivity {
                 Photograph p = photos.get(i);
                 Bitmap b = bits.get(i);
                 //
-                EncryptDecryptImageBitmap ed = new EncryptDecryptImageBitmap(recordToModify.getUserName());
+                EncryptDecryptImageBitmap ed = new EncryptDecryptImageBitmap(photorec.getUserName());
                 ArrayList<String> bps = p.getBPs();
                 for (String bbb: bps){
                     if (s3.indexOf(bbb) == -1){
@@ -343,10 +379,10 @@ public class NewRecordActivity extends AppCompatActivity {
             Type type1 = new TypeToken<List<Bitmap>>(){}.getType();
             bits = gson.fromJson(jsonPhotos1, type1);
 
-            ArrayList<Photograph> rphoto = recordToModify.getPhoto();
+            ArrayList<Photograph> rphoto = photorec.getPhoto();
 
             for (int i = 0; i < rphoto.size(); i++){
-                recordToModify.removePhoto(i);
+                photorec.removePhoto(i);
             }
 
             for (int i = 0; i < bits.size(); i++){
@@ -355,7 +391,7 @@ public class NewRecordActivity extends AppCompatActivity {
                 if (b != null){
                     p.setEncrypted(ed.encrypt(b));
                 }
-                recordToModify.addPhoto(p);
+                photorec.addPhoto(p);
             }
 
             Button addBodyPartsButton = findViewById(R.id.addBodyPartsButton);
