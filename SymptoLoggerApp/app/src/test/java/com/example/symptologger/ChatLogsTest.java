@@ -11,7 +11,7 @@ public class ChatLogsTest {
     @Test
     public void testGetParticipantsID() {
         String[] users = {"UNIT_TESTER1", "UNIT_TESTER2"};
-        ChatLogs logs = new ChatLogs(users, "UNIT TESTING", new Date().toString());
+        ChatLogs logs = new ChatLogs("RECORD_ID", users, "UNIT TESTING", new Date().toString());
 
         String[] ids = logs.getParticipantsID();
 
@@ -22,7 +22,7 @@ public class ChatLogsTest {
     public void testGetMessage() {
         String[] users = {"UNIT_TESTER1", "UNIT_TESTER2"};
         String message = "UNIT_TESTING";
-        ChatLogs logs = new ChatLogs(users, message, new Date().toString());
+        ChatLogs logs = new ChatLogs("RECORD_ID", users, message, new Date().toString());
 
         String msg = logs.getMessage();
 
@@ -33,7 +33,7 @@ public class ChatLogsTest {
     public void testGetTimestamp() {
         String[] users = {"UNIT_TESTER1", "UNIT_TESTER2"};
         String stamp = new Date().toString();
-        ChatLogs logs = new ChatLogs(users, "UNIT TESTING", stamp);
+        ChatLogs logs = new ChatLogs("RECORD_ID", users, "UNIT TESTING", stamp);
 
         String stmp = logs.getTimestamp();
 
@@ -43,7 +43,7 @@ public class ChatLogsTest {
     @Test
     public void testGetSender() {
         String[] users = {"UNIT_TESTER1", "UNIT_TESTER2"};
-        ChatLogs logs = new ChatLogs(users, "UNIT TESTING", new Date().toString());
+        ChatLogs logs = new ChatLogs("RECORD_ID", users, "UNIT TESTING", new Date().toString());
 
         String sender = logs.getSender();
 
