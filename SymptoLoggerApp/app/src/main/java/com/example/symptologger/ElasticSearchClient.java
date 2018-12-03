@@ -139,15 +139,13 @@ public class ElasticSearchClient {
             String source = String.format("{\"userID\": \"%s\"," +
                     " \"creationDate\": \"%s\", " +
                     "\"userRole\": \"%s\", " +
-                    "\"memberID\": %d, " +
                     "\"email\": \"%s\", " +
                     "\"phone\": \"%s\"}",
                     record[0],
                     record[1],
                     record[2],
-                    Integer.parseInt(record[3]),
-                    record[4],
-                    record[5]);
+                    record[3],
+                    record[4]);
 
             try {
                 JestResult result = client.execute( new Index.Builder(source).index(index).type(type).build() );
