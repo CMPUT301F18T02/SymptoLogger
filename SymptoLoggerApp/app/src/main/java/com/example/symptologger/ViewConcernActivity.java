@@ -161,7 +161,7 @@ public class ViewConcernActivity extends AppCompatActivity {
     public void back() {
         Toast.makeText(this, "Back ...", Toast.LENGTH_SHORT).show();
         Intent backIntent = new Intent(ViewConcernActivity.this, ListConcernActivity.class);
-        backIntent.putExtra("userName",userName);
+        backIntent.putExtra("USERNAME",userName);
         startActivity(backIntent);
     }
 

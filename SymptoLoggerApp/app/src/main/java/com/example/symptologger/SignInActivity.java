@@ -101,7 +101,7 @@ public class SignInActivity extends AppCompatActivity {
                 sp.updateLogInStatus(getApplicationContext(), 1);
                 if (checkCode.equals("")){
                     Intent intent = new Intent(SignInActivity.this, ListConcernActivity.class);
-                    intent.putExtra("userName",userName2);
+                    intent.putExtra("USERNAME",userName2);
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(SignInActivity.this, PatientEntersShareCodeActivity.class);

@@ -1,14 +1,10 @@
 package com.example.symptologger;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-
-import java.util.Date;
-import java.util.concurrent.ExecutionException;
 
 /*
  *  Copyright 2018 Remi Arshad, Noni Hua, Jason Lee, Patrick Tamm, Kaiwen Zhang
@@ -45,11 +41,11 @@ public class MainActivity extends AppCompatActivity {
 
         if (status == 1) {
             Intent intent = new Intent(MainActivity.this, ListConcernActivity.class);
-            intent.putExtra("userName",userName);
+            intent.putExtra("USERNAME",userName);
             startActivity(intent);
         } else if ((status == 2)){
             Intent intent = new Intent(MainActivity.this, CareProviderListPatientsActivity.class);
-            intent.putExtra("userName",userName);
+            intent.putExtra("USERNAME",userName);
             startActivity(intent);
         } else {
             setContentView(R.layout.activity_main);
