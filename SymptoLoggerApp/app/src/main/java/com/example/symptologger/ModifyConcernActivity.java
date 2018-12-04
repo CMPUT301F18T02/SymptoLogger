@@ -75,7 +75,7 @@ public class ModifyConcernActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         pos = extras.getInt("pos");
-        userName = extras.getString("userName");
+        userName = extras.getString("USERNAME");
 
         concerns = ConcernListController.getConcernList(userName).getConcernsList();
         concernList = new ArrayList<Concern>(concerns);
@@ -116,7 +116,7 @@ public class ModifyConcernActivity extends AppCompatActivity {
                 Toast.makeText(ModifyConcernActivity.this,"Cancel ...", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ModifyConcernActivity.this, ViewConcernActivity.class);
                 Bundle cancelMod = new Bundle();
-                cancelMod.putString("userName",userName);
+                cancelMod.putString("USERNAME",userName);
                 cancelMod.putInt("pos",pos);
                 intent.putExtras(cancelMod);
                 startActivity(intent);
@@ -214,7 +214,7 @@ public class ModifyConcernActivity extends AppCompatActivity {
         Intent intent = new Intent(ModifyConcernActivity.this,ViewConcernActivity.class);
         Bundle doneMod = new Bundle();
         doneMod.putInt("pos",pos);
-        doneMod.putString("userName",userName);
+        doneMod.putString("USERNAME",userName);
         intent.putExtras(doneMod);
         startActivity(intent);
     }
@@ -225,6 +225,7 @@ public class ModifyConcernActivity extends AppCompatActivity {
         Bundle addRecordBundle = new Bundle();
         addRecordBundle.putInt("pos",pos);
         addRecordBundle.putString("userName",userName);
+        addRecordBundle.putBoolean("modifying", false);
         intent.putExtras(addRecordBundle);
         startActivity(intent);
     }

@@ -3,9 +3,6 @@ package com.example.symptologger;
 
 import android.location.Location;
 
-import com.google.android.gms.maps.GoogleMap;
-
-
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -212,7 +209,6 @@ class Record {
 
         return new ArrayList<>();
     }
-
 
     /**
      * adding a geolocation to a record

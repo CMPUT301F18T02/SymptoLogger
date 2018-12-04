@@ -133,6 +133,7 @@ public class ViewRecordActivity extends AppCompatActivity {
                 extras.putInt("RECORD_POS", RECORD_POS);
                 extras.putInt("CONCERN_POS", CONCERN_POS);
                 extras.putString("USERNAME", USERNAME);
+                extras.putBoolean("modifying", true);
                 editRecordIntent.putExtras(extras);
 
                 startActivity(editRecordIntent);

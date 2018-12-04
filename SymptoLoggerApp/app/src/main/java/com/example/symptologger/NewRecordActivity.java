@@ -3,6 +3,7 @@ package com.example.symptologger;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -18,14 +19,19 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 import java.util.TimeZone;
 
 /*
@@ -68,6 +74,11 @@ public class NewRecordActivity extends AppCompatActivity {
     Record recordToModify;
     Place place;
 
+    Record photorec;
+
+    ArrayList<Photograph> photos = new ArrayList<>();
+    List<Bitmap> bits = new ArrayList<>();
+
     Calendar c;
 
     int year;
@@ -88,6 +99,7 @@ public class NewRecordActivity extends AppCompatActivity {
 
         formatter.setTimeZone(TimeZone.getTimeZone("MST"));
 
+        Log.d("DEBUG", "Concern pos for this new record is " + pos);
         concerns = ConcernListController.getConcernList(userName).getConcernsList();
         concernList = new ArrayList<Concern>(concerns);
 
@@ -106,6 +118,7 @@ public class NewRecordActivity extends AppCompatActivity {
         Button addLocationButton = findViewById(R.id.addLocationButton);
         Button addBodyPartsButton = findViewById(R.id.addBodyPartsButton);
 
+        setBodyText(addBodyPartsButton);
 //        if (!modifying) {
         getCalendarInfo();
         Date now = c.getTime();
@@ -163,27 +176,60 @@ public class NewRecordActivity extends AppCompatActivity {
         });
 
         addLocationButton.setOnClickListener(new View.OnClickListener() {
-                                                     @Override
-                                                     public void onClick(View v) {
-                                                         Intent intent;
-                                                         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+            @Override
+            public void onClick(View v) {
+                Intent intent;
+                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
 
-                                                         try {
-                                                             intent = builder.build(NewRecordActivity.this);
-                                                             startActivityForResult(intent, 1);
-                                                         } catch (GooglePlayServicesRepairableException e) {
-                                                             e.printStackTrace();
-                                                         } catch (GooglePlayServicesNotAvailableException e) {
-                                                             e.printStackTrace();
-                                                         }
-                                                     }
+                try {
+                    intent = builder.build(NewRecordActivity.this);
+                    startActivityForResult(intent, 1);
+                } catch (GooglePlayServicesRepairableException e) {
+                    e.printStackTrace();
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    e.printStackTrace();
+                }
+            }
         });
 
         addBodyPartsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bodyPartsIntent = new Intent(NewRecordActivity.this, PhotoRecordActivity.class);
-                startActivity(bodyPartsIntent);
+                //Return arraylist photos
+//                if (photorec != null){
+//
+//                }else{
+//                    if (recordToModify != null){
+//                        photorec = recordToModify;
+//                    }else{
+//                        photorec = new Record(new Date(), "", userName, "");
+//                    }
+//                }
+                photorec = new Record(new Date(), "", userName, "");
+                photos = photorec.getPhoto();
+                //feature
+                Intent intent = new Intent(NewRecordActivity.this, PhotoRecordActivity.class);
+                intent.putExtra("USERNAMEOFRECORD",userName);
+
+                //Log.d("Size of the photos ",photos.size()+"");
+
+                if (photos.size() != 0){
+                    intent.putExtra("ISEDITMODE",true);
+                    EncryptDecryptImageBitmap encryptor = new EncryptDecryptImageBitmap(userName);
+                    Gson gson = new Gson();
+
+                    ArrayList<Bitmap> bitt = new ArrayList<>();
+                    for (int u = 0; u < photos.size(); u++){
+                        Photograph p = new Photograph(); //photos.get(u);
+                        bitt.add(encryptor.decrypt(p.getEncrypted()));
+                    }
+
+                    String jsonPhotos = gson.toJson(bitt);
+                    String jsonPhotos2 = gson.toJson(photos);
+                    intent.putExtra("BITMAPS", jsonPhotos);
+                    intent.putExtra("PHOTOCLASSES",jsonPhotos2);
+                }
+                startActivityForResult(intent, 666);
             }
         });
 
@@ -201,8 +247,74 @@ public class NewRecordActivity extends AppCompatActivity {
 
                 Log.d("DEBUG", "Concern pos is " + pos);
                 Concern thisConcern = concernList.get(pos);
+
+//                if (recordToModify != null){
+//
+//                    //Adding the photograph classes to the record class
+//                    ArrayList<Photograph> pkp = recordToModify.getPhoto();
+//                    for (int u = 0; u < pkp.size(); u++){
+//                        recordToModify.removePhoto(u);
+//                    }
+//                    pkp = photorec.getPhoto();
+//                    for (int u = 0; u < pkp.size(); u++){
+//                        recordToModify.addPhoto(pkp.get(u));
+//                    }
+//                    //Saving record class that contains photograph
+//                    //However this is NOT a NEW record
+//                    //So it just changes the previous record class that's given with the corresponding photographs
+//
+//                    //Idk who implemented this addRecord but would a modifying record be added?
+//                    //Or just updated?
+//                    thisConcern.addRecord(recordToModify);
+//                }else{
+//                    Record newRecord = new Record(c.getTime(),title,userName,thisConcern.getTitle());
+//                    //Adding the photograph classes to the record class
+//                    ArrayList<Photograph> pkp = photorec.getPhoto();
+//
+//                    String recordID = newRecord.getId();
+//
+//                    for (int u = 0; u < pkp.size(); u++){
+//                        Photograph ppp = pkp.get(u);
+//                        newRecord.addPhoto(ppp);
+//                        //
+//                        String BPs = "[" + ppp.getBPs().stream()
+//                                .map(s -> "\"" + s + "\"")
+//                                .collect(Collectors.joining(", ")) + "]";
+//
+//                        ElasticSearchClient.AddPhoto addPhoto = new ElasticSearchClient.AddPhoto();
+//                        addPhoto.execute(BPs, ppp.getEncrypted(), ppp.getID(), ppp.getID(), userName);
+//                        //
+//                    }
+//                    //Saving the record class that contains the Photographs
+//                    //This is a newRecord not a modifying record
+//
+//
+//                    thisConcern.addRecord(newRecord);
+//
+//                }
                 getCalendarInfo();
                 Record newRecord = new Record(formatter.format(c.getTime()),title,userName,thisConcern.getTitle());
+
+                //Adding the photograph classes to the record class
+                ArrayList<Photograph> pkp = photorec.getPhoto();
+
+                String recordID = newRecord.getId();
+
+                for (int u = 0; u < pkp.size(); u++){
+                    Photograph ppp = pkp.get(u);
+                    newRecord.addPhoto(ppp);
+                    //
+                    String BPs = "[" + ppp.getBPs().stream()
+                            .map(s -> "\"" + s + "\"")
+                            .collect(Collectors.joining(", ")) + "]";
+
+                    ElasticSearchClient.AddPhoto addPhoto = new ElasticSearchClient.AddPhoto();
+                    addPhoto.execute(BPs, ppp.getEncrypted(), ppp.getID(), ppp.getID(), userName);
+                    //
+                }
+                //Saving the record class that contains the Photographs
+                //This is a newRecord not a modifying record
+
                 thisConcern.addRecord(newRecord);
 
 
@@ -260,8 +372,79 @@ public class NewRecordActivity extends AppCompatActivity {
         c.set(year, month, day, hour, minute);
     }
 
-    // called when location is selected
+    public void setBodyText(Button butt){
+        //
+        if (photos.size() != 0){
+            String s = "";
+            String s3 = "";
+            String s2 = "";
+            for (int i = 0; i < bits.size(); i++){
+                Photograph p = photos.get(i);
+                Bitmap b = bits.get(i);
+                //
+                EncryptDecryptImageBitmap ed = new EncryptDecryptImageBitmap(photorec.getUserName());
+                ArrayList<String> bps = p.getBPs();
+                for (String bbb: bps){
+                    if (s3.indexOf(bbb) == -1){
+                        s3 = s3 + " " + bbb;
+                    }
+                }
+            }
+            if (photos.size() == 0){
+                s2 = "Photo: 0";
+            }else{
+                s2 = "Photo(s): "+photos.size();
+            }
+            if (s3.length() == 0){
+                s = "Body Parts: None";
+            }else{
+                s = "Body Parts: " + s3;
+            }
+
+            butt.setText(s2 + "; \n" +s);
+        }else{
+            butt.setText("ADD BODY PARTS");
+        }
+
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO Auto-generated method stub
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 666 && resultCode == RESULT_OK && data != null) {
+            //When delete prompt is returned
+            String jsonPhotos1 = data.getStringExtra("BITMAPS");
+            String jsonPhotos2 = data.getStringExtra("PHOTOCLASSES");
+            String username = data.getStringExtra("THEUSERNAME");
+
+            Gson gson = new Gson();
+            Type type = new TypeToken<List<Photograph>>(){}.getType();
+            photos = gson.fromJson(jsonPhotos2, type);
+
+            EncryptDecryptImageBitmap ed = new EncryptDecryptImageBitmap(username);
+
+            Type type1 = new TypeToken<List<Bitmap>>(){}.getType();
+            bits = gson.fromJson(jsonPhotos1, type1);
+
+            ArrayList<Photograph> rphoto = photorec.getPhoto();
+
+            for (int i = 0; i < rphoto.size(); i++){
+                photorec.removePhoto(i);
+            }
+
+            for (int i = 0; i < bits.size(); i++){
+                Photograph p = photos.get(i);
+                Bitmap b = bits.get(i);
+                if (b != null){
+                    p.setEncrypted(ed.encrypt(b));
+                }
+                photorec.addPhoto(p);
+            }
+
+            Button addBodyPartsButton = findViewById(R.id.addBodyPartsButton);
+            setBodyText(addBodyPartsButton);
+        }
         int PLACE_PICKER_REQUEST = 1;
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
@@ -270,6 +453,7 @@ public class NewRecordActivity extends AppCompatActivity {
                 addLocationButton.setText(place.getAddress());
             }
         }
+
     }
 
 }

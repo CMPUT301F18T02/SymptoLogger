@@ -812,4 +812,53 @@ public class ElasticSearchClient {
             return null; //Void requires return, (it's not void)
         }
     }
+
+    public static class AddPhoto extends AsyncTask<String, Void, Boolean> { //use Void instead of void for AsyncTask as return type
+        @Override
+        protected Boolean doInBackground(String... record) {
+
+            String type = "Photos";
+            String source = String.format("{\"bodyParts\": %s, \"encrypted\": \"%s\", \"photoID\": \"%s\", \"recordID\": \"%s\", \"userID\": \"%s\"}", record[0], record[1], record[2], record[3], record[4]);
+            System.out.println(source);
+            try {
+                JestResult result = client.execute(new Index.Builder(source).index(index).type(type).build());
+                if (result.isSucceeded()) {
+                    Log.d("Success","data sent");
+                    return Boolean.TRUE;
+                } else {
+                    Log.d("Failed","data not sent");
+                    return Boolean.FALSE;
+                }
+            } catch (Exception e) {
+                Log.i("Error", "The application failed - reason: AddPhotos.");
+            }
+            return Boolean.FALSE;
+        }
+    }
+
+    public static class GetPhotos extends AsyncTask<String, Void, Void> { //use Void instead of void for AsyncTask as return type
+        @Override
+        protected Void doInBackground(String... search_parameters){
+
+            ArrayList<Photograph> foundPhotos = new ArrayList<>();
+            String type = "Photos";
+            String query =  String.format("{\"query\":{\"bool\":{\"must\":[{\"match\":{\"recordID\":\"%s \"}},{\"match\":{\"userID\":\"%s\"}}]}}}", search_parameters[0], search_parameters[1]);
+            try {
+                JestResult result = client.execute(new Search.Builder(query).addIndex(index).addType(type).build());
+                if (result.isSucceeded()) {
+                    List<Photograph> res = result.getSourceAsObjectList(Photograph.class);
+                    if (res.size() != 0) {
+                        foundPhotos.addAll(res);
+                    } else {
+                        Log.e("Error", "nothing found.");
+                    }
+                } else {
+                    Log.e("Error", "Some issues with the photos query");
+                }
+            } catch (Exception e){
+                Log.i("Error","Something went wrong when we tried to communicate with the elasticsearch server.");
+            }
+            return null;
+        }
+    }
 }

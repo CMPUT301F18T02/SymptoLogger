@@ -1,9 +1,11 @@
 package com.example.symptologger;
 
-import android.media.Image;
 import android.net.Uri;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.TimeZone;
 
 /*
  *  Copyright 2018 Remi Arshad, Noni Hua, Jason Lee, Patrick Tamm, Kaiwen Zhang
@@ -25,20 +27,40 @@ import java.util.Date;
  * Photograph represents the photo objects that can be added to a record.
  *
  * @author Jason Lee
- * @see BodyModel
+ *
  */
 public class Photograph {
+    private String photoID;
+    private String encrypted;
+    private String recordID;
+
+    public ArrayList<String> bodyParts; //Instead of using BodyPart class I used String class since it only contains String anyways
+
     private Uri uri;
     private Date date;
     //https://stackoverflow.com/questions/29208007/what-is-the-data-type-for-images-in-java
-
     /**
      * Empty constructor
      */
     Photograph(){
-
+        setID();
+        this.encrypted = "";
+        this.bodyParts = new ArrayList<>();
     }
 
+    Photograph(Uri image, Date date){
+        this.date = date;
+        this.uri = image;
+    }
+
+    public String setID() {
+        Date date;
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss.SSS dd/MM/yyyy");
+        formatter.setTimeZone(TimeZone.getTimeZone("MST"));
+        date = new Date();
+        photoID = formatter.format(date);
+        return photoID;
+    }
     /**
      * Constructor for photograph object, enables setting the image.
      * @param image the uri for the image
@@ -49,13 +71,32 @@ public class Photograph {
     }
 
     /**
-     * Another constructor, enabling setting the image as well as the date.
-     * @param image the uri for the image
-     * @param date the date
+     * Gets the date associated with the image
+     * @return
      */
-    Photograph(Uri image, Date date){
-        this.date = date;
-        this.uri = image;
+    public String getID() {
+        return this.photoID;
+    }
+
+
+    public void setEncrypted(String en){
+        this.encrypted = en;
+    }
+
+    public String getEncrypted(){
+        return encrypted;
+    }
+
+    public void addBodyLocation(String bp){
+        bodyParts.add(bp);
+    }
+
+    public void removeBodyLocation(String bp){
+        bodyParts.remove(bp);
+    }
+
+    public ArrayList<String> getBPs () {
+        return bodyParts;
     }
 
     /**
@@ -90,5 +131,8 @@ public class Photograph {
         this.date = date;
     }
 
+    public String getRecordID(){
+        return recordID;
+    }
 }
 

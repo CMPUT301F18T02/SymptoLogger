@@ -1,11 +1,9 @@
 package com.example.symptologger;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
 /*

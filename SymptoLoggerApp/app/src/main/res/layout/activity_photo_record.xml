@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PhotoRecordActivity">
@@ -97,10 +98,10 @@
         android:id="@+id/headf"
         android:layout_width="23dp"
         android:layout_height="24dp"
-        android:background="@android:color/transparent"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="208dp"
+        android:background="@android:color/transparent"
         android:onClick="BodySelected"
         android:text="Front Head"
         android:textSize="0sp"
@@ -175,9 +176,9 @@
         android:layout_width="18dp"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
         android:onClick="BodySelected"
         android:text="Front Left Shoulder"
-        android:background="@android:color/transparent"
         android:textSize="0sp"
         app:layout_constraintBottom_toBottomOf="@+id/front"
         app:layout_constraintEnd_toEndOf="@+id/front"
@@ -190,9 +191,9 @@
         android:id="@+id/rightupperarmb"
         android:layout_width="18dp"
         android:layout_height="48dp"
+        android:background="@android:color/transparent"
         android:onClick="BodySelected"
         android:text="Back Right Shoulder"
-        android:background="@android:color/transparent"
         android:textSize="0sp"
         app:layout_constraintBottom_toBottomOf="@+id/back"
         app:layout_constraintEnd_toEndOf="@+id/back"
@@ -205,9 +206,9 @@
         android:id="@+id/leftupperarmb"
         android:layout_width="18dp"
         android:layout_height="48dp"
+        android:background="@android:color/transparent"
         android:onClick="BodySelected"
         android:text="Back Left Shoulder"
-        android:background="@android:color/transparent"
         android:textSize="0sp"
         app:layout_constraintBottom_toBottomOf="@+id/back"
         app:layout_constraintEnd_toEndOf="@+id/back"
@@ -220,9 +221,9 @@
         android:id="@+id/rightupperarmf"
         android:layout_width="18dp"
         android:layout_height="48dp"
-        android:background="@android:color/transparent"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:background="@android:color/transparent"
         android:onClick="BodySelected"
         android:text="Front Right Shoulder"
         android:textSize="0sp"
@@ -237,9 +238,9 @@
         android:id="@+id/rightlowerarmf"
         android:layout_width="18dp"
         android:layout_height="28dp"
+        android:background="@android:color/transparent"
         android:onClick="BodySelected"
         android:text="Front Right Arm"
-        android:background="@android:color/transparent"
         android:textSize="0sp"
         app:layout_constraintBottom_toBottomOf="@+id/front"
         app:layout_constraintEnd_toEndOf="@+id/front"
@@ -254,8 +255,8 @@
         android:layout_height="28dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:onClick="BodySelected"
         android:background="@android:color/transparent"
+        android:onClick="BodySelected"
         android:text="Right Palm"
         android:textSize="0sp"
         app:layout_constraintBottom_toBottomOf="@+id/front"
@@ -269,10 +270,10 @@
         android:id="@+id/lefthandf"
         android:layout_width="17dp"
         android:layout_height="28dp"
+        android:background="@android:color/transparent"
         android:onClick="BodySelected"
         android:text="Left Palm"
         android:textSize="0sp"
-        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="@+id/front"
         app:layout_constraintEnd_toEndOf="@+id/front"
         app:layout_constraintHorizontal_bias="1.0"
@@ -284,9 +285,9 @@
         android:id="@+id/righthandb"
         android:layout_width="17dp"
         android:layout_height="28dp"
+        android:background="@android:color/transparent"
         android:onClick="BodySelected"
         android:text="Right Wrist"
-        android:background="@android:color/transparent"
         android:textSize="0sp"
         app:layout_constraintBottom_toBottomOf="@+id/back"
         app:layout_constraintEnd_toEndOf="@+id/back"
@@ -299,8 +300,8 @@
         android:id="@+id/righthandb3"
         android:layout_width="17dp"
         android:layout_height="28dp"
-        android:onClick="BodySelected"
         android:background="@android:color/transparent"
+        android:onClick="BodySelected"
         android:text="Left Wrist"
         android:textSize="0sp"
         app:layout_constraintBottom_toBottomOf="@+id/back"
@@ -346,9 +347,9 @@
         android:id="@+id/rightlowerarmb"
         android:layout_width="18dp"
         android:layout_height="28dp"
-        android:background="@android:color/transparent"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:background="@android:color/transparent"
         android:onClick="BodySelected"
         android:text="Right Elbow"
         android:textSize="0sp"
@@ -362,10 +363,10 @@
     <Button
         android:id="@+id/lowerchest"
         android:layout_width="35dp"
-        android:background="@android:color/transparent"
         android:layout_height="33dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:background="@android:color/transparent"
         android:onClick="BodySelected"
         android:text="Lower Chest"
         android:textSize="0sp"
@@ -382,9 +383,9 @@
         android:layout_height="33dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:background="@android:color/transparent"
         android:onClick="BodySelected"
         android:text="Lower Back"
-        android:background="@android:color/transparent"
         android:textSize="0sp"
         app:layout_constraintBottom_toBottomOf="@+id/back"
         app:layout_constraintEnd_toEndOf="@+id/back"
@@ -397,9 +398,9 @@
         android:id="@+id/rightupperlegf"
         android:layout_width="22dp"
         android:layout_height="47dp"
+        android:background="@android:color/transparent"
         android:onClick="BodySelected"
         android:text="Front Right Upper Leg"
-        android:background="@android:color/transparent"
         android:textSize="0sp"
         app:layout_constraintBottom_toBottomOf="@+id/front"
         app:layout_constraintEnd_toEndOf="@+id/front"
@@ -412,9 +413,9 @@
         android:id="@+id/rightupperlegf2"
         android:layout_width="22dp"
         android:layout_height="47dp"
+        android:background="@android:color/transparent"
         android:onClick="BodySelected"
         android:text="Back Left Upper Leg"
-        android:background="@android:color/transparent"
         android:textSize="0sp"
         app:layout_constraintBottom_toBottomOf="@+id/back"
         app:layout_constraintEnd_toEndOf="@+id/back"
@@ -427,10 +428,10 @@
         android:id="@+id/rightupperlegb"
         android:layout_width="22dp"
         android:layout_height="47dp"
+        android:background="@android:color/transparent"
         android:onClick="BodySelected"
         android:text="Back Right Upper Leg"
         android:textSize="0sp"
-        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="@+id/back"
         app:layout_constraintEnd_toEndOf="@+id/back"
         app:layout_constraintHorizontal_bias="0.695"
@@ -443,8 +444,8 @@
         android:layout_width="22dp"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
-        android:onClick="BodySelected"
         android:background="@android:color/transparent"
+        android:onClick="BodySelected"
         android:text="Front Left Upper Leg"
         android:textSize="0sp"
         app:layout_constraintBottom_toBottomOf="@+id/front"
@@ -490,8 +491,8 @@
         android:id="@+id/rightlowerlegb"
         android:layout_width="22dp"
         android:layout_height="45dp"
-        android:onClick="BodySelected"
         android:background="@android:color/transparent"
+        android:onClick="BodySelected"
         android:text="Back Right Lower Leg"
         android:textSize="0sp"
         app:layout_constraintBottom_toBottomOf="@+id/back"
@@ -568,8 +569,8 @@
         android:layout_height="45dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:onClick="BodySelected"
         android:background="@android:color/transparent"
+        android:onClick="BodySelected"
         android:text="Front Right Lower Leg"
         android:textSize="0sp"
         app:layout_constraintBottom_toBottomOf="@+id/rightfootf"
@@ -634,13 +635,14 @@
 
     <Button
         android:id="@+id/addp"
-        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:text="addphoto"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -683,14 +685,13 @@
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
             app:cardBackgroundColor="@android:color/transparent"
-            app:cardElevation="0dp"
-            >
+            app:cardElevation="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="1dp"
+                android:layout_margin="3.5dp"
                 android:orientation="vertical">
 
                 <ImageButton
@@ -698,7 +699,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"
-                    android:onClick="ViewImage" />
+                    android:onClick="selectImage" />
 
             </LinearLayout>
 
@@ -715,23 +716,22 @@
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
             app:cardBackgroundColor="@android:color/transparent"
-            app:cardElevation="0dp"
-            >
+            app:cardElevation="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="1dp"
+                android:layout_margin="3.5dp"
                 android:orientation="vertical">
 
                 <ImageButton
                     android:id="@+id/targetimage2"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
-                    android:onClick="ViewImage" />
+                    android:background="@android:color/transparent"
+                    android:onClick="selectImage" />
 
             </LinearLayout>
 
@@ -748,23 +748,22 @@
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
             app:cardBackgroundColor="@android:color/transparent"
-            app:cardElevation="0dp"
-            >
+            app:cardElevation="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="1dp"
+                android:layout_margin="3.5dp"
                 android:orientation="vertical">
 
                 <ImageButton
                     android:id="@+id/targetimage3"
                     android:layout_width="match_parent"
-                    android:background="@android:color/transparent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
-                    android:onClick="ViewImage" />
+                    android:background="@android:color/transparent"
+                    android:onClick="selectImage" />
 
             </LinearLayout>
 
@@ -781,23 +780,22 @@
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
             app:cardBackgroundColor="@android:color/transparent"
-            app:cardElevation="0dp"
-            >
+            app:cardElevation="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="1dp"
+                android:layout_margin="3.5dp"
                 android:orientation="vertical">
 
                 <ImageButton
                     android:id="@+id/targetimage4"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
-                    android:onClick="ViewImage" />
+                    android:background="@android:color/transparent"
+                    android:onClick="selectImage" />
 
             </LinearLayout>
 
@@ -814,23 +812,22 @@
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
             app:cardBackgroundColor="@android:color/transparent"
-            app:cardElevation="0dp"
-            >
+            app:cardElevation="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="1dp"
+                android:layout_margin="3.5dp"
                 android:orientation="vertical">
 
                 <ImageButton
                     android:id="@+id/targetimage5"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
-                    android:onClick="ViewImage" />
+                    android:background="@android:color/transparent"
+                    android:onClick="selectImage" />
 
             </LinearLayout>
 
@@ -851,23 +848,22 @@
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
             app:cardBackgroundColor="@android:color/transparent"
-            app:cardElevation="0dp"
-            >
+            app:cardElevation="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="1dp"
+                android:layout_margin="3.5dp"
                 android:orientation="vertical">
 
                 <ImageButton
                     android:id="@+id/targetimage6"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
-                    android:onClick="ViewImage" />
+                    android:background="@android:color/transparent"
+                    android:onClick="selectImage" />
 
             </LinearLayout>
 
@@ -884,23 +880,22 @@
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
             app:cardBackgroundColor="@android:color/transparent"
-            app:cardElevation="0dp"
-            >
+            app:cardElevation="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="1dp"
+                android:layout_margin="3.5dp"
                 android:orientation="vertical">
 
                 <ImageButton
                     android:id="@+id/targetimage7"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
-                    android:onClick="ViewImage" />
+                    android:background="@android:color/transparent"
+                    android:onClick="selectImage" />
 
             </LinearLayout>
 
@@ -917,14 +912,13 @@
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
             app:cardBackgroundColor="@android:color/transparent"
-            app:cardElevation="0dp"
-            >
+            app:cardElevation="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="1dp"
+                android:layout_margin="3.5dp"
                 android:orientation="vertical">
 
                 <ImageButton
@@ -933,7 +927,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:background="@android:color/transparent"
-                    android:onClick="ViewImage" />
+                    android:onClick="selectImage" />
 
             </LinearLayout>
 
@@ -950,23 +944,22 @@
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
             app:cardBackgroundColor="@android:color/transparent"
-            app:cardElevation="0dp"
-            >
+            app:cardElevation="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="1dp"
+                android:layout_margin="3.5dp"
                 android:orientation="vertical">
 
                 <ImageButton
                     android:id="@+id/targetimage9"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@android:color/transparent"
                     android:layout_gravity="center_horizontal"
-                    android:onClick="ViewImage" />
+                    android:background="@android:color/transparent"
+                    android:onClick="selectImage" />
 
             </LinearLayout>
 
@@ -982,29 +975,51 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
-            app:cardElevation="0dp"
             app:cardBackgroundColor="@android:color/transparent"
-            >
+            app:cardElevation="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="1dp"
+                android:layout_margin="3.5dp"
                 android:orientation="vertical">
 
                 <ImageButton
                     android:id="@+id/targetimage10"
                     android:layout_width="match_parent"
-                    android:background="@android:color/transparent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
-                    android:onClick="ViewImage" />
+                    android:background="@android:color/transparent"
+                    android:onClick="selectImage" />
 
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
 
     </GridLayout>
+
+    <Button
+        android:id="@+id/saveButtonPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="34dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="saveAllPhotos"
+        android:text="Save"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>
