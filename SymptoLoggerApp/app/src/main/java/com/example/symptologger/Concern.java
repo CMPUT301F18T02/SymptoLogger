@@ -1,6 +1,8 @@
 package com.example.symptologger;
 
 import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -206,9 +208,9 @@ class Concern {
         ElasticSearchClient.AddRecord addNewRecord = new ElasticSearchClient.AddRecord();
         addNewRecord.execute(record.getTitle(),record.getDate(),record.getConcernTitle(),record.getUserName(),new Date().toString());
 
-        context = ListConcernActivity.getContextOfApplication();
-        SharedPreference sp = new SharedPreference();
-        sp.saveRecords(context, myRecords, this.title);
+//        context = ListConcernActivity.getContextOfApplication();
+//        SharedPreference sp = new SharedPreference();
+//        sp.saveRecords(context, myRecords, this.title);
     }
 
 
@@ -233,15 +235,12 @@ class Concern {
             e.printStackTrace();
         }
 
-//        context = ListConcernActivity.getContextOfApplication();
+        context = ListConcernActivity.getContextOfApplication();
 //        SharedPreference sp = new SharedPreference();
-//        if (CheckServerAvailability.getConnectionStatus()) {
-//            sp.saveRecords(context, myRecords, this.title);
-//            Log.d("Online", "Saved records to sp");
-//        } else {
-//            Toast.makeText(context, "Offline, unable to load records",
-//                    Toast.LENGTH_SHORT).show();
-//        }
+        if (!CheckServerAvailability.getConnectionStatus()) {
+            Toast.makeText(context, "Offline, unable to load records",
+                    Toast.LENGTH_SHORT).show();
+        }
 
         return this.myRecords;
     }
@@ -265,9 +264,9 @@ class Concern {
         ElasticSearchClient.DeleteRecord delRecord = new ElasticSearchClient.DeleteRecord();
         delRecord.execute(record.getTitle(),this.title);
         this.myRecords.remove(record);
-        context = ListConcernActivity.getContextOfApplication();
-        SharedPreference sp = new SharedPreference();
-        sp.saveRecords(context, myRecords, this.title);
+//        context = ListConcernActivity.getContextOfApplication();
+//        SharedPreference sp = new SharedPreference();
+//        sp.saveRecords(context, myRecords, this.title);
     }
 
     /**
