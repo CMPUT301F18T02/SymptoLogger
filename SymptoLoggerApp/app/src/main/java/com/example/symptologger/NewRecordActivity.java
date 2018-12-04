@@ -95,7 +95,7 @@ public class NewRecordActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle fromModconcern = intent.getExtras();
         pos = fromModconcern.getInt("pos",0);
-        userName = fromModconcern.getString("userName");
+        userName = fromModconcern.getString("USERNAME");
 
         formatter.setTimeZone(TimeZone.getTimeZone("MST"));
 
@@ -321,7 +321,7 @@ public class NewRecordActivity extends AppCompatActivity {
                 Intent doneIntent = new Intent(NewRecordActivity.this, ViewConcernActivity.class);
                 Bundle doneBundle = new Bundle();
                 doneBundle.putInt("pos",pos);
-                doneBundle.putString("userName",userName);
+                doneBundle.putString("USERNAME",userName);
                 doneIntent.putExtras(doneBundle);
                 startActivity(doneIntent);
             }
@@ -334,7 +334,7 @@ public class NewRecordActivity extends AppCompatActivity {
                 Intent cancelIntent = new Intent(NewRecordActivity.this, ViewConcernActivity.class);
                 Bundle cancelBundle = new Bundle();
                 cancelBundle.putInt("pos",pos);
-                cancelBundle.putString("userName",userName);
+                cancelBundle.putString("USERNAME",userName);
                 cancelIntent.putExtras(cancelBundle);
                 startActivity(cancelIntent);
             }

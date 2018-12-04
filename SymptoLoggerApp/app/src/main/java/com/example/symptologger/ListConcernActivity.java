@@ -68,7 +68,7 @@ public class ListConcernActivity extends AppCompatActivity {
         contextOfApplication = getApplicationContext();
 
         Intent fromSignIn = getIntent();
-        userName = fromSignIn.getStringExtra("userName");
+        userName = fromSignIn.getStringExtra("USERNAME");
 
         TextView userTextView = findViewById(R.id.userNameTextView);
         userTextView.setText(userName);
@@ -81,7 +81,7 @@ public class ListConcernActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(ListConcernActivity.this,"Add New Concern", Toast.LENGTH_SHORT).show();
                 Intent newConcernIntent = new Intent(ListConcernActivity.this,NewConcernActivity.class);
-                newConcernIntent.putExtra("userName",userName);
+                newConcernIntent.putExtra("USERNAME",userName);
                 startActivity(newConcernIntent);
             }
         });
@@ -138,14 +138,14 @@ public class ListConcernActivity extends AppCompatActivity {
                             Intent viewIntent = new Intent(ListConcernActivity.this, ViewConcernActivity.class);
                             Bundle viewBundle = new Bundle();
                             viewBundle.putInt("pos",pos);
-                            viewBundle.putString("userName",userName);
+                            viewBundle.putString("USERNAME",userName);
                             viewIntent.putExtras(viewBundle);
                             startActivity(viewIntent);
                         } else if (which == 1){
                             Toast.makeText(ListConcernActivity.this,"Delete",Toast.LENGTH_SHORT).show();
                             ConcernListController.getConcernList(userName).deleteConcern(concernList.get(pos), pos);
                             Intent restart = new Intent(ListConcernActivity.this,ListConcernActivity.class);
-                            restart.putExtra("userName",userName);
+                            restart.putExtra("USERNAME",userName);
                             startActivity(restart);
 //                            concerns = ConcernListController.getConcernList(userName).getConcernsList();
 //                            concernList = new ArrayList<Concern>(concerns);
@@ -173,7 +173,7 @@ public class ListConcernActivity extends AppCompatActivity {
     public void shareProfile(View view){
         Toast.makeText(this,"Generating share code ...",Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(ListConcernActivity.this,GenShareCodeActivity.class);
-        intent.putExtra("userName",userName);
+        intent.putExtra("USERNAME",userName);
         startActivity(intent);
     }
 

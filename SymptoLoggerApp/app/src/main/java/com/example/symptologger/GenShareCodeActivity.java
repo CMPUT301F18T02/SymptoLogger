@@ -46,7 +46,7 @@ public class GenShareCodeActivity extends AppCompatActivity {
         TextView codeView = findViewById(R.id.codeTextView);
 
         Intent intent = getIntent();
-        userName = intent.getStringExtra("userName");
+        userName = intent.getStringExtra("USERNAME");
 
         code = genRandNumString();
         codeView.setText(code);
@@ -90,7 +90,7 @@ public class GenShareCodeActivity extends AppCompatActivity {
         deleteShareCode.execute(userName,code);
 
         Intent intent = new Intent(GenShareCodeActivity.this, ListConcernActivity.class);
-        intent.putExtra("userName",userName);
+        intent.putExtra("USERNAME",userName);
         startActivity(intent);
     }
 }

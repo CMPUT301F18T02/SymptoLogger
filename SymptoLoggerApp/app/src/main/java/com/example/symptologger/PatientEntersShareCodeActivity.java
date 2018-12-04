@@ -42,8 +42,8 @@ public class PatientEntersShareCodeActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        userName = extras.getString("userName");
-        checkCode = extras.getString("checkCode");
+        userName = extras.getString("USERNAME");
+        checkCode = extras.getString("CHECKCODE");
 
     }
 
@@ -67,7 +67,7 @@ public class PatientEntersShareCodeActivity extends AppCompatActivity {
                 deleteShareCode.execute(userName,code); //delete code after successful login
 
                 Intent passedIntent = new Intent(PatientEntersShareCodeActivity.this,ListConcernActivity.class);
-                passedIntent.putExtra("userName",userName);
+                passedIntent.putExtra("USERNAME",userName);
                 startActivity(passedIntent);
             } else {
                 Toast.makeText(this,"Share code does not match. Regenerate code on first device.",Toast.LENGTH_SHORT).show();
