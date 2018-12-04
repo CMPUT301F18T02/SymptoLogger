@@ -1,6 +1,7 @@
 package com.example.symptologger;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,7 +36,8 @@ class ConcernList {
     private ArrayList<ConcernListener> concernListeners;
 
     private SharedPreference sp = new SharedPreference();
-    private Context context = ListConcernActivity.getContextOfApplication();
+    private Context context;
+
 
 
     /**
@@ -53,7 +55,10 @@ class ConcernList {
             e.printStackTrace();
         }
 
+       context = MainActivity.getContextOfApplication();
+
         if (CheckServerAvailability.getConnectionStatus()) {
+            Log.d("CONTEXT", String.valueOf(context));
             sp.saveConcerns(context, myConcerns);
 //            Log.d("online, sync concerns", String.valueOf(myConcerns));
         } else {

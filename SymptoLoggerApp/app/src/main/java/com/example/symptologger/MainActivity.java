@@ -1,5 +1,6 @@
 package com.example.symptologger;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -27,9 +28,13 @@ import android.widget.Button;
  */
 public class MainActivity extends AppCompatActivity {
 
+    public static Context contextOfApplication;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        contextOfApplication = getApplicationContext();
 
         SharedPreference sp = new SharedPreference();
         Integer status = sp.getLogInStatus(getApplicationContext());
@@ -61,6 +66,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    public static Context getContextOfApplication(){
+        return contextOfApplication;
     }
 
     public void SignIn(View v) {
