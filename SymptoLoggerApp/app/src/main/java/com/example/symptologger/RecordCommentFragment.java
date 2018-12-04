@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,6 +57,7 @@ public class RecordCommentFragment extends Fragment {
     int RECORD_POS;
     int CONCERN_POS;
     String USERNAME;
+    private String CP_USERNAME;
 
     Record record;
 
@@ -99,6 +99,7 @@ public class RecordCommentFragment extends Fragment {
             RECORD_POS = bundle.getInt("RECORD_POS");
             CONCERN_POS = bundle.getInt("CONCERN_POS");
             USERNAME = bundle.getString("USERNAME");
+            CP_USERNAME = bundle.getString("CP_USERNAME");
         } catch (Exception e) {
             // TODO: offline mode
         }
@@ -110,24 +111,34 @@ public class RecordCommentFragment extends Fragment {
 
         record = recordList.get(RECORD_POS);
 
-        senderID = USERNAME;
-        ElasticSearchClient.GetSinglePatient singlePatient = new ElasticSearchClient.GetSinglePatient();
-        singlePatient.execute(USERNAME);
-        Patient patient = null;
-        try {
-            patient = singlePatient.get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         recordID = record.getDate();
 
         messageBox = view.findViewById(R.id.addComment);
         textBox = view.findViewById(R.id.chatbox);
         sendButton = view.findViewById(R.id.sendCommentButton);
 
-        if (patient != null) {
+        Patient patient = null;
+        if (CP_USERNAME == null) {
+            senderID = USERNAME;
+
+            ElasticSearchClient.GetSinglePatient singlePatient = new ElasticSearchClient.GetSinglePatient();
+            singlePatient.execute(USERNAME);
+
+            try {
+                patient = singlePatient.get();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            // logged in user is care provider
+            senderID = CP_USERNAME;
+            receiverID = USERNAME;
+        }
+
+        if (CP_USERNAME == null && patient != null) {
             // Set receiver ID if there is a care provider added
             Log.d("DEBUG", "Patient doesn't have a care provider assigned");
             receiverID = patient.getCpUserName();
@@ -141,16 +152,27 @@ public class RecordCommentFragment extends Fragment {
             cm = new ChatManager(getActivity());
             cm.setFetchInfo(recordID, senderID, receiverID);
             cm.startFetchLogsTimer();
-        }
-        else {
+        } else if (CP_USERNAME != null && patient == null) {
+            Log.d("DEBUG", "Patient doesn't have a care provider assigned");
+
+            recyclerView = view.findViewById(R.id.chatlogs_holder);
+            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+            recyclerView.setLayoutManager(mLayoutManager);
+            mAdapter = new ChatViewAdapter(chatLogs);
+            recyclerView.setAdapter(mAdapter);
+
+            cm = new ChatManager(getActivity());
+            cm.setFetchInfo(recordID, senderID, receiverID);
+            cm.startFetchLogsTimer();
+        } else {
             careProviderCommentList = record.getCareProviderComment();
 
             adapter = new ArrayAdapter<CareProviderComment>(
-                getContext(),
-                R.layout.list_layout,
-                careProviderCommentList);
-            ListView careProviderCommentsListView = view.findViewById(R.id.chatlogs_holder);
-            careProviderCommentsListView.setAdapter(adapter);
+                    getContext(),
+                    R.layout.list_layout,
+                    careProviderCommentList);
+//            ListView careProviderCommentsListView = view.findViewById(R.id.chatlogs_holder);
+//            careProviderCommentsListView.setAdapter(adapter);
         }
 
         sendButton.setOnClickListener(new View.OnClickListener() {
