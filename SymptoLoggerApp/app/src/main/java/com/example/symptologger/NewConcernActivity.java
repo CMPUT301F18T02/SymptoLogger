@@ -74,7 +74,7 @@ public class NewConcernActivity extends AppCompatActivity {
         Date now = c.getTime();
 
         Intent fromListConcerns = getIntent();
-        userName = fromListConcerns.getStringExtra("userName");
+        userName = fromListConcerns.getStringExtra("USERNAME");
 
         final Button editDateButton = findViewById(R.id.newConcernDateField);
         editDateButton.setText(dateFormat.format(now));
@@ -99,7 +99,7 @@ public class NewConcernActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(NewConcernActivity.this,"Cancel ...", Toast.LENGTH_SHORT).show();
                 Intent cancelIntent = new Intent(NewConcernActivity.this,ListConcernActivity.class);
-                cancelIntent.putExtra("userName",userName);
+                cancelIntent.putExtra("USERNAME",userName);
                 startActivity(cancelIntent);
             }
         });
@@ -184,7 +184,7 @@ public class NewConcernActivity extends AppCompatActivity {
         clc.addConcern(newConcern, userName);
 
         Intent doneIntent = new Intent(NewConcernActivity.this, ListConcernActivity.class);
-        doneIntent.putExtra("userName",userName);
+        doneIntent.putExtra("USERNAME",userName);
         startActivity(doneIntent);
     }
 

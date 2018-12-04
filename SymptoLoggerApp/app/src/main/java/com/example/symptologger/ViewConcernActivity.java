@@ -56,7 +56,7 @@ public class ViewConcernActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         pos = extras.getInt("pos",0);
-        userName = extras.getString("userName");
+        userName = extras.getString("USERNAME");
 
         //Intent intent = getIntent();
 

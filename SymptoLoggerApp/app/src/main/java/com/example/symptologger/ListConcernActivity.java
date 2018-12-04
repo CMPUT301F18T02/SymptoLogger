@@ -134,7 +134,7 @@ public class ListConcernActivity extends AppCompatActivity {
                         if (which == 0){
                             Intent viewIntent = new Intent(ListConcernActivity.this, ViewConcernActivity.class);
                             Bundle viewBundle = new Bundle();
-                            viewBundle.putInt("POS",pos);
+                            viewBundle.putInt("pos",pos);
                             viewBundle.putString("USERNAME",userName);
                             viewIntent.putExtras(viewBundle);
                             startActivity(viewIntent);
