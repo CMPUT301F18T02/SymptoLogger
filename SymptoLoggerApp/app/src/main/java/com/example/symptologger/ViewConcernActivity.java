@@ -90,7 +90,6 @@ public class ViewConcernActivity extends AppCompatActivity {
                 back();
             }
         });
-
     }
 
     @Override
@@ -155,12 +154,14 @@ public class ViewConcernActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        recordListAdapter.notifyDataSetChanged();
     }
 
     public void back() {
         Toast.makeText(this, "Back ...", Toast.LENGTH_SHORT).show();
         Intent backIntent = new Intent(ViewConcernActivity.this, ListConcernActivity.class);
-        backIntent.putExtra("USERNAME",userName);
+        backIntent.putExtra("userName",userName);
         startActivity(backIntent);
     }
 

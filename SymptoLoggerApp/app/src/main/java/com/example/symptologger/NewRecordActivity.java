@@ -295,22 +295,22 @@ public class NewRecordActivity extends AppCompatActivity {
                 getCalendarInfo();
                 Record newRecord = new Record(formatter.format(c.getTime()),title,userName,thisConcern.getTitle());
 
-                //Adding the photograph classes to the record class
-                ArrayList<Photograph> pkp = photorec.getPhoto();
+                if (photorec != null) {
+                    //Adding the photograph classes to the record class
+                    ArrayList<Photograph> pkp = photorec.getPhoto();
 
-                String recordID = newRecord.getId();
+                    for (int u = 0; u < pkp.size(); u++) {
+                        Photograph ppp = pkp.get(u);
+                        newRecord.addPhoto(ppp);
+                        //
+                        String BPs = "[" + ppp.getBPs().stream()
+                                .map(s -> "\"" + s + "\"")
+                                .collect(Collectors.joining(", ")) + "]";
 
-                for (int u = 0; u < pkp.size(); u++){
-                    Photograph ppp = pkp.get(u);
-                    newRecord.addPhoto(ppp);
-                    //
-                    String BPs = "[" + ppp.getBPs().stream()
-                            .map(s -> "\"" + s + "\"")
-                            .collect(Collectors.joining(", ")) + "]";
-
-                    ElasticSearchClient.AddPhoto addPhoto = new ElasticSearchClient.AddPhoto();
-                    addPhoto.execute(BPs, ppp.getEncrypted(), ppp.getID(), ppp.getID(), userName);
-                    //
+                        ElasticSearchClient.AddPhoto addPhoto = new ElasticSearchClient.AddPhoto();
+                        addPhoto.execute(BPs, ppp.getEncrypted(), ppp.getID(), ppp.getID(), userName);
+                        //
+                    }
                 }
                 //Saving the record class that contains the Photographs
                 //This is a newRecord not a modifying record
