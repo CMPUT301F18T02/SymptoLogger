@@ -72,7 +72,7 @@ public class CareProviderViewConcernActivity extends AppCompatActivity {
                 Toast.makeText(CareProviderViewConcernActivity.this, "Back ...", Toast.LENGTH_SHORT).show();
                 Intent backIntent = new Intent(CareProviderViewConcernActivity.this, CareProviderViewPatientConcernsActivity.class);
                 backIntent.putExtra("pUserName",pUserName);
-                backIntent.putExtra("cpNAme",CP_USERNAME);
+                backIntent.putExtra("cpName",CP_USERNAME);
                 startActivity(backIntent);
             }
         });

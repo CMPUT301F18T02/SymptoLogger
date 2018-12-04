@@ -115,11 +115,23 @@ public class AddPatientActivity extends AppCompatActivity {
                     deleteShareCode.execute(patientUName,getShareCode());
 
                     Intent savePatient = new Intent(AddPatientActivity.this,CareProviderListPatientsActivity.class);
-                    savePatient.putExtra("UNAME",patientUName);
+                    savePatient.putExtra("USERNAME",cpUserName);
                     startActivity(savePatient);
                 }
 
 
+            }
+        });
+
+        FloatingActionButton backToPatientListFAB = findViewById(R.id.cancelNewPatientFAB);
+        backToPatientListFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                Toast.makeText(AddPatientActivity.this,"Cancel",Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(AddPatientActivity.this, CareProviderListPatientsActivity.class);
+                intent.putExtra("USERNAME",cpUserName);
+                startActivity(intent);
             }
         });
     }
