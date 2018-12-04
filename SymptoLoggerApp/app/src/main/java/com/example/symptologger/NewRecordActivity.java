@@ -99,6 +99,7 @@ public class NewRecordActivity extends AppCompatActivity {
 
         formatter.setTimeZone(TimeZone.getTimeZone("MST"));
 
+        Log.d("DEBUG", "Concern pos for this new record is " + pos);
         concerns = ConcernListController.getConcernList(userName).getConcernsList();
         concernList = new ArrayList<Concern>(concerns);
 
@@ -195,15 +196,16 @@ public class NewRecordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Return arraylist photos
-                if (photorec != null){
-
-                }else{
-                    if (recordToModify != null){
-                        photorec = recordToModify;
-                    }else{
-                        photorec = new Record(new Date(), "", userName, "");
-                    }
-                }
+//                if (photorec != null){
+//
+//                }else{
+//                    if (recordToModify != null){
+//                        photorec = recordToModify;
+//                    }else{
+//                        photorec = new Record(new Date(), "", userName, "");
+//                    }
+//                }
+                photorec = new Record(new Date(), "", userName, "");
                 photos = photorec.getPhoto();
                 //feature
                 Intent intent = new Intent(NewRecordActivity.this, PhotoRecordActivity.class);

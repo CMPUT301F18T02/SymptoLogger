@@ -224,7 +224,7 @@ public class ModifyConcernActivity extends AppCompatActivity {
         Intent intent = new Intent(ModifyConcernActivity.this, NewRecordActivity.class);
         Bundle addRecordBundle = new Bundle();
         addRecordBundle.putInt("pos",pos);
-        addRecordBundle.putString("USERNAME",userName);
+        addRecordBundle.putString("userName",userName);
         addRecordBundle.putBoolean("modifying", false);
         intent.putExtras(addRecordBundle);
         startActivity(intent);

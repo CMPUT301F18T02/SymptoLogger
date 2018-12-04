@@ -3,9 +3,6 @@ package com.example.symptologger;
 
 import android.location.Location;
 
-import com.google.android.gms.maps.GoogleMap;
-
-
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -207,15 +204,11 @@ class Record {
      * gets the photos associated with a record.
      * @return list of photos
      */
-<<<<<<< HEAD
-=======
     public ArrayList<Photograph> getPhotos() {
         //When photo functionality established
 
         return new ArrayList<>();
     }
->>>>>>> c60c1f411bbdbe2efbfdf18a829dc0db2a597ef2
-
 
     /**
      * adding a geolocation to a record

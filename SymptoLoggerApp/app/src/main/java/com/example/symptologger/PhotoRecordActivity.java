@@ -3,13 +3,11 @@ package com.example.symptologger;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -21,7 +19,6 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.FileNotFoundException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,8 +72,8 @@ public class PhotoRecordActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_record);
 
-        username = getIntent().getStringExtra("USERNAMEOFRECORD");
-        editmode = getIntent().getBooleanExtra("ISEDITMODE", false);
+        username = getIntent().getExtras().getString("USERNAMEOFRECORD");
+        editmode = getIntent().getExtras().getBoolean("ISEDITMODE", false);
 
         encryptor = new EncryptDecryptImageBitmap(username);
 
@@ -440,7 +437,6 @@ public class PhotoRecordActivity extends Activity {
 
             ScaleCompressImage sci = new ScaleCompressImage(this, uri);
             Bitmap bitmap = sci.scaleAndCompress();
-
 
             EncryptDecryptImageBitmap ed = new EncryptDecryptImageBitmap(username);
             String encrypted = ed.encrypt(bitmap);

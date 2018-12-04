@@ -1,6 +1,5 @@
 package com.example.symptologger;
 
-import android.media.Image;
 import android.net.Uri;
 
 import java.text.SimpleDateFormat;
@@ -30,8 +29,6 @@ import java.util.TimeZone;
  * @author Jason Lee
  *
  */
-<<<<<<< HEAD
-
 public class Photograph {
     private String photoID;
     private String encrypted;
@@ -39,13 +36,9 @@ public class Photograph {
 
     public ArrayList<String> bodyParts; //Instead of using BodyPart class I used String class since it only contains String anyways
 
-=======
-public class Photograph {
     private Uri uri;
     private Date date;
     //https://stackoverflow.com/questions/29208007/what-is-the-data-type-for-images-in-java
->>>>>>> c60c1f411bbdbe2efbfdf18a829dc0db2a597ef2
-
     /**
      * Empty constructor
      */
@@ -55,16 +48,19 @@ public class Photograph {
         this.bodyParts = new ArrayList<>();
     }
 
-<<<<<<< HEAD
+    Photograph(Uri image, Date date){
+        this.date = date;
+        this.uri = image;
+    }
 
-    public String setID(){
+    public String setID() {
         Date date;
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss.SSS dd/MM/yyyy");
         formatter.setTimeZone(TimeZone.getTimeZone("MST"));
         date = new Date();
         photoID = formatter.format(date);
         return photoID;
-=======
+    }
     /**
      * Constructor for photograph object, enables setting the image.
      * @param image the uri for the image
@@ -72,15 +68,12 @@ public class Photograph {
     Photograph(Uri image){
         this.date = new Date();
         this.uri = image;
->>>>>>> c60c1f411bbdbe2efbfdf18a829dc0db2a597ef2
     }
 
     /**
      * Gets the date associated with the image
      * @return
      */
-<<<<<<< HEAD
-
     public String getID() {
         return this.photoID;
     }
@@ -102,12 +95,8 @@ public class Photograph {
         bodyParts.remove(bp);
     }
 
-    public ArrayList<String> getBPs (){
+    public ArrayList<String> getBPs () {
         return bodyParts;
-=======
-    Photograph(Uri image, Date date){
-        this.date = date;
-        this.uri = image;
     }
 
     /**
@@ -140,7 +129,6 @@ public class Photograph {
      */
     public void setDate(Date date) {
         this.date = date;
->>>>>>> c60c1f411bbdbe2efbfdf18a829dc0db2a597ef2
     }
 
     public String getRecordID(){
