@@ -46,4 +46,6 @@ public class RecordListController {
     public int findCount(){
         return getRecordList().findCount();
     }
+
+
 }

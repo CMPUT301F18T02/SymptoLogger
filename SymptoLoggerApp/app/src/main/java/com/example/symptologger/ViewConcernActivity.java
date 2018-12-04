@@ -110,6 +110,7 @@ public class ViewConcernActivity extends AppCompatActivity {
         recordList = new ArrayList<Record>(concernList.get(pos).getRecords());
 
         Log.d("record list", String.valueOf(recordList));
+        Log.d("DEBUG", "Number of records: " + recordList.size());
 
         recordListAdapter = new ArrayAdapter<Record>(this,android.R.layout.simple_list_item_1,recordList);
         recordListView.setAdapter(recordListAdapter);

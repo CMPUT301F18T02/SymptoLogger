@@ -3,6 +3,7 @@ package com.example.symptologger;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -120,6 +121,7 @@ public class RecordDetailsFragment extends Fragment {
         ArrayList<Photograph> photographs = record.getPhoto();
         if (photographs.size() != 0) {
             // TODO: load the pictures
+            Log.d("DEBUG", "Okay I've got some pictures");
         } else {
             TextView t = view.findViewById(R.id.recordPictureText);
             t.setText("No pictures record.");
