@@ -32,7 +32,7 @@ import java.util.TimerTask;
  */
 public class ChatManager {
     private Timer timer = new Timer();
-    private final int period = 15000;
+    private final int period = 7000;
 
     private static String recordID;
     private static String receiverID;
